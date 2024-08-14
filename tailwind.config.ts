@@ -106,6 +106,13 @@ const config = {
         outline_border: {
           100: "#AEAEAE",
         },
+        grey: {
+          50: "#D9D9D9",
+          100: "#C2C2C2",
+        },
+        back_blue: {
+          50: "#73ADFF",
+        },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
