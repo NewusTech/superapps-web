@@ -24,7 +24,9 @@ jobs:
       run: npm install
     - name : Run build
       run: npm run build --if-present
-    - name : restart app
-      run : |
-            pm2 list
-            pm2 restart ramatranz.newus.id --update-env
+    - name: Check PM2 Status
+      run: pm2 list
+    - name: Restart PM2 Application
+      run: |
+        pm2 delete ramatranz.newus.id || true
+        pm2 start ramatranz.newus.id --name ramatranz.newus.id
