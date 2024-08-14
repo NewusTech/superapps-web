@@ -152,19 +152,15 @@ export const travelCars = [
     desc: "Rama Trans menyediakan mobil rental dengan layanan prima, armada berkualitas, harga kompetitif, serta kenyamanan dan keamanan perjalanan yang terjamin.",
     icons: [
       {
-        icon: firstIconTravelCar,
         iconName: "Heatback",
       },
       {
-        icon: secondIconTravelCar,
         iconName: "Diesel",
       },
       {
-        icon: thirdIconTravelCar,
         iconName: "16 Kursi",
       },
       {
-        icon: fourthIconTravelCar,
         iconName: "Manual",
       },
     ],
@@ -198,17 +194,17 @@ export const travelCars = [
 export const routes = [
   {
     id: 1,
-    Image: firstRoute,
+    image: firstRoute,
     location: "Bandar Lampung",
   },
   {
     id: 2,
-    Image: secondRoute,
+    image: secondRoute,
     location: "Palembang",
   },
   {
     id: 3,
-    Image: thirdRoute,
+    image: thirdRoute,
     location: "Jakarta",
   },
 ];
@@ -254,7 +250,7 @@ export const destinations = [
   },
   {
     id: 1,
-    image: firstDestination,
+    image: secondDestination,
     title: "Rio Beach Beach",
     subTitle: "Snorkling & Explore",
     desc: "Nikmati perjalanan nyaman dari Bandar Lampung ke wisata Tegal Mas Island dengan keindahan di wisata Tegal Mas Island.",
@@ -262,7 +258,7 @@ export const destinations = [
   },
   {
     id: 1,
-    image: firstDestination,
+    image: thirdDestination,
     title: "Lembah Hijau",
     subTitle: "Explore",
     desc: "Nikmati perjalanan nyaman dari Bandar Lampung ke wisata Tegal Mas Island dengan keindahan di wisata Tegal Mas Island.",
@@ -274,7 +270,7 @@ export const travelMaps = [
   {
     id: 1,
     location: "Bandar Lampung",
-    map: "Jl. Salim Batubara No.118, Kupang Teba, Kec. Tlk. Betung Utara, Kota Bandar Lampung, Lampung 35212",
+    map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.8333259987476!2d105.26985647507213!3d-5.442262654291578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40dbd15418dcc1%3A0x11cadd700e0e0339!2sJl.%20Salim%20Batubara%20No.118%2C%20Kupang%20Teba%2C%20Kec.%20Tlk.%20Betung%20Utara%2C%20Kota%20Bandar%20Lampung%2C%20Lampung%2035212!5e0!3m2!1sid!2sid!4v1723621727730!5m2!1sid!2sid",
     address:
       "Jl. Salim Batubara No.118, Kupang Teba, Kec. Tlk. Betung Utara, Kota Bandar Lampung, Lampung 35212",
     subImages: [
@@ -291,8 +287,26 @@ export const travelMaps = [
   },
   {
     id: 2,
+    location: "Palembang",
+    map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.8333259987476!2d105.26985647507213!3d-5.442262654291578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40dbd15418dcc1%3A0x11cadd700e0e0339!2sJl.%20Salim%20Batubara%20No.118%2C%20Kupang%20Teba%2C%20Kec.%20Tlk.%20Betung%20Utara%2C%20Kota%20Bandar%20Lampung%2C%20Lampung%2035212!5e0!3m2!1sid!2sid!4v1723621595117!5m2!1sid!2sid",
+    address:
+      "Jl. Salim Batubara No.118, Kupang Teba, Kec. Tlk. Betung Utara, Kota Bandar Lampung, Lampung 35212",
+    subImages: [
+      {
+        image: firstMap,
+      },
+      {
+        image: secondMap,
+      },
+      {
+        image: thirdMap,
+      },
+    ],
+  },
+  {
+    id: 3,
     location: "Jakarta",
-    map: "Jl. Salim Batubara No.118, Kupang Teba, Kec. Tlk. Betung Utara, Kota Bandar Lampung, Lampung 35212",
+    map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.8333259987476!2d105.26985647507213!3d-5.442262654291578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40dbd15418dcc1%3A0x11cadd700e0e0339!2sJl.%20Salim%20Batubara%20No.118%2C%20Kupang%20Teba%2C%20Kec.%20Tlk.%20Betung%20Utara%2C%20Kota%20Bandar%20Lampung%2C%20Lampung%2035212!5e0!3m2!1sid!2sid!4v1723621595117!5m2!1sid!2sid",
     address:
       "Jl. Salim Batubara No.118, Kupang Teba, Kec. Tlk. Betung Utara, Kota Bandar Lampung, Lampung 35212",
     subImages: [
@@ -342,6 +356,27 @@ export const testimonies = [
   },
   {
     id: 2,
+    image: firstProfile,
+    name: "Aldi Haheng",
+    job: "Software Engineer",
+    desc: "Perjalanan saya dengan Rama Tranz sangat menyenangkan! Kendaraan bersih dan nyaman, dan layanan pelanggan mereka luar biasa. Saya pasti akan menggunakan layanan mereka lagi!",
+  },
+  {
+    id: 3,
+    image: firstProfile,
+    name: "Aldi Haheng",
+    job: "Software Engineer",
+    desc: "Perjalanan saya dengan Rama Tranz sangat menyenangkan! Kendaraan bersih dan nyaman, dan layanan pelanggan mereka luar biasa. Saya pasti akan menggunakan layanan mereka lagi!",
+  },
+  {
+    id: 4,
+    image: firstProfile,
+    name: "Aldi Haheng",
+    job: "Software Engineer",
+    desc: "Perjalanan saya dengan Rama Tranz sangat menyenangkan! Kendaraan bersih dan nyaman, dan layanan pelanggan mereka luar biasa. Saya pasti akan menggunakan layanan mereka lagi!",
+  },
+  {
+    id: 5,
     image: firstProfile,
     name: "Aldi Haheng",
     job: "Software Engineer",

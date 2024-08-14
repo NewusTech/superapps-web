@@ -13,13 +13,9 @@
 
 .background-blend {
   background:
-    linear-gradient(
-      to bottom,
-      rgba(37, 103, 203, 0.35),
-      rgba(1, 23, 53, 0.934)
-    ),
-    url("../../public/assets/images/neededs/hero-background.png") no-repeat
-      center;
+    linear-gradient(to bottom, rgba(10, 57, 122, 0.75), rgba(1, 23, 53, 0.681)),
+    url("../../public/assets/images/neededs//background-hero-kiluan.jpg")
+      no-repeat center;
   background-size: cover;
   background-blend-mode: overlay;
   /* background-position: center; */
@@ -35,7 +31,24 @@
 .background-facility {
   background: url("../../public/assets//images/neededs/backround-line.png")
     no-repeat top center;
-  background-position-y: 80px;
+  background-position-y: 150px;
+  background-color: rgba(115, 173, 255, 0.2);
+}
+
+.background-travel-route {
+  background-color: rgba(115, 173, 255, 0.2);
+}
+
+.background-destination {
+  background-color: rgba(243, 180, 60, 0.2);
+}
+
+.background-testimoni {
+  background-color: rgba(115, 173, 255, 0.2);
+}
+
+.background-footer {
+  background-color: rgba(115, 173, 255, 0.2);
 }
 
 .background-superior {
@@ -47,7 +60,7 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: black !important;
+  color: #0000ff !important;
   width: 35px !important;
   height: 35px !important;
   position: relative !important;

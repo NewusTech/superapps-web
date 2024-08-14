@@ -21,7 +21,7 @@ export default function PromotionScreen() {
         </h2>
       </div>
 
-      <div className="w-10/12 flex flex-row items-center justify-center self-center gap-x-5 mt-20">
+      <div className="w-full px-16 flex flex-row items-center justify-center self-center gap-x-5 mt-20">
         <Swiper
           modules={[Navigation, Pagination, Grid, Autoplay]}
           autoplay={{ delay: 3000 }}

@@ -1,56 +1,104 @@
-const ramatranz = require("@/../../public/assets/images/neededs/ramatranz-2.png");
+import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
+import playStore from "@/../../public/assets/images/neededs/goolgle-play.png";
+import FollowFooter from "@/components/pages/footer";
+import { followes } from "@/constants/main";
 import { Instagram, MapPinned, Phone } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
 export default function Footer() {
   return (
-    <div className="flex flex-col w-full bg-primary-700 pt-8">
-      <div className="w-10/12 flex flex-row justify-center items-center self-center gap-x-48">
-        <div className="w-3/12">
-          <Image
-            src={ramatranz}
-            alt="Ramatranz"
-            width={200}
-            height={200}
-            className="w-full h-full object-cover"
-          />
+    <div className="w-full flex flex-col gap-y-5">
+      <div className="flex flex-row w-full border-t border-grey-100 pt-6 px-16 gap-x-5">
+        <div className="w-8/12 flex flex-col gap-y-5">
+          <div className="w-4/12">
+            <Image
+              src={ramatranz}
+              alt="Ramatranz"
+              width={200}
+              height={200}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <p className="text-neutral-700 pr-10">
+            Rama Trans adalah perusahaan transportasi yang menyediakan layanan
+            bus travel berkualitas. Kami menawarkan kenyamanan dan keamanan
+            dalam setiap perjalanan Anda.
+          </p>
+
+          <div className="w-full flex flex-col gap-y-2">
+            <p>Ikuti kami di:</p>
+
+            <div className="flex flex-row w-full gap-x-3">
+              {followes?.map((item: any, i: number) => {
+                return <FollowFooter key={i} item={item} />;
+              })}
+            </div>
+          </div>
         </div>
 
-        <div className="w-full flex flex-col gap-y-5">
-          <h3 className="text-neutral-50 font-bold text-[26px]">Kontak</h3>
+        <div className="w-full grid grid-cols-3">
+          <div className="w-full flex flex-col gap-y-5">
+            <h4 className="font-semibold text-[16px] text-neutral-700">
+              Tentang Kami
+            </h4>
 
-          <div className="w-full grid grid-rows-3 gap-y-6">
-            <div className="flex flex-row gap-x-3">
-              <MapPinned className="w-5 h-5 text-neutral-50" />
+            <div className="w-full grid grid-rows-2 gap-y-3">
+              <p>Sejarah</p>
 
-              <p className="text-neutral-50 font-normal text-[14px]">
-                Jl. Salim Batubara No.118, Kupang Teba, Kec. Tlk. Betung Utara,
-                Kota Bandar Lampung, Lampung 35212
-              </p>
+              <p>Visi Misi</p>
             </div>
+          </div>
 
-            <div className="flex flex-row gap-x-3">
-              <Phone className="w-5 h-5 text-neutral-50" />
+          <div className="w-full flex flex-col gap-y-5">
+            <h4 className="font-semibold text-[16px] text-neutral-700">
+              Product
+            </h4>
 
-              <p className="text-neutral-50 font-normal text-[14px]">
-                0813-7389-5558
-              </p>
+            <div className="w-full grid grid-rows-3 gap-y-3">
+              <p>Travel</p>
+
+              <p>Paket</p>
+
+              <p>Rental</p>
             </div>
+          </div>
 
-            <div className="flex flex-row gap-x-3">
-              <Instagram className="w-5 h-5 text-neutral-50" />
+          <div className="w-full flex flex-col gap-y-5">
+            <h4 className="font-semibold text-[16px] text-neutral-700">
+              Informasi
+            </h4>
 
-              <p className="text-neutral-50 font-normal text-[14px]">
-                Ramatranz
-              </p>
+            <div className="w-full grid grid-rows-3 gap-y-3">
+              <p>Blog</p>
+
+              <p>FAQ</p>
+
+              <p>Term & Condition</p>
             </div>
+          </div>
+        </div>
+
+        <div className="w-6/12 flex flex-col gap-y-5">
+          <h4 className="font-semibold text-[16px] text-neutral-700">
+            Download Rama Tranz App
+          </h4>
+
+          <div className="w-8/12">
+            <Image
+              src={playStore}
+              alt="Play Store"
+              width={100}
+              height={100}
+              className="w-full h-full rounded-lg"
+            />
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-end w-full px-[49px] my-[29px] text-center">
-        <p className="text-[12px] text-white font-normal">
+      <div className="flex flex-col md:flex-row items-center background-footer justify-start w-full px-16 py-6 text-center">
+        <p className="text-[14px] text-neutral-700 font-normal">
           Copyright &copy; 2024
           <span className="text-[12px] font-bold"> Rama Tranz</span>. All rights
           reserved
