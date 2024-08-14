@@ -1,6 +1,5 @@
 import Image from "next/image";
 import React from "react";
-import { Images } from "../../../../public/assets/images";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -10,7 +9,7 @@ export default function NavigationBar() {
       <div className="w-10/12 flex flex-row justify-between items-center">
         <div className="min-w-7 min-h-7">
           <Image
-            src={Images.ramatranz_logos.first_logo}
+            src={"/hello.png"}
             alt="Ramatranz"
             width={300}
             height={300}

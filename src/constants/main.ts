@@ -1,7 +1,3 @@
-import firstIconHero from "@/../../public/assets/icons/neededs/icon-bus.svg";
-import secondIconHero from "../../public/assets/icons/neededs/icon-package.svg";
-import thirdIconHero from "../../public/assets/icons/neededs/icon-bus.svg";
-import fourthIconHero from "../../public/assets/icons/neededs/icon-handbag.svg";
 import firstPromo from "../../public/assets/images/neededs/banner-promo-1.png";
 import secondPromo from "../../public/assets/images/neededs/banner-promo-2.png";
 import thirdPromo from "../../public/assets/images/neededs/banner-promo-3.png";
@@ -73,11 +69,27 @@ export const promos = [
   },
   {
     id: 2,
-    image: secondPromo,
+    image: firstPromo,
   },
   {
     id: 3,
-    image: thirdPromo,
+    image: firstPromo,
+  },
+  {
+    id: 4,
+    image: firstPromo,
+  },
+  {
+    id: 5,
+    image: firstPromo,
+  },
+  {
+    id: 6,
+    image: firstPromo,
+  },
+  {
+    id: 7,
+    image: firstPromo,
   },
 ];
 
@@ -105,7 +117,7 @@ export const unggulans = [
   },
 ];
 
-export const fasilities = [
+export const facilities = [
   {
     id: 1,
     image: firstFasility,

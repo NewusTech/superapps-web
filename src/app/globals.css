@@ -2,27 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   background: url("../../public/assets/images/neededs/route-background.png")
     no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
+} */
 
 .background-blend {
   background:
-    linear-gradient(to bottom, rgba(1, 37, 91, 0.608), rgba(1, 31, 74, 0.559)),
+    linear-gradient(
+      to bottom,
+      rgba(37, 103, 203, 0.35),
+      rgba(1, 23, 53, 0.934)
+    ),
     url("../../public/assets/images/neededs/hero-background.png") no-repeat
       center;
+  background-size: cover;
+  background-blend-mode: overlay;
+  /* background-position: center; */
+  background-position-x: left;
+}
+
+.background-promotion {
+  background: url("../../public/assets//images/neededs/backround-line.png")
+    no-repeat top center;
+  background-position-y: 60px;
+}
+
+.background-facility {
+  background: url("../../public/assets//images/neededs/backround-line.png")
+    no-repeat top center;
+  background-position-y: 80px;
+}
+
+.background-superior {
+  background: url("../../public/assets/images/neededs/service-unggulan-background.png")
+    no-repeat center;
   background-size: cover;
   background-blend-mode: overlay;
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: white !important;
+  color: black !important;
   width: 35px !important;
   height: 35px !important;
+  position: relative !important;
+}
+
+.swiper-pagination-bullet {
+  display: none !important;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5; /* Sesuaikan dengan warna latar belakang */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sesuaikan dengan shadow */
+  width: 6rem; /* Sesuaikan ukuran */
+  height: 6rem; /* Sesuaikan ukuran */
+  border-radius: 50%;
 }
