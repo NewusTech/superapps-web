@@ -1,4 +1,4 @@
-name: ramatranz.newus.id CI
+name: ramatranz.newus.id ci/cd process
 
 on:
   push:
