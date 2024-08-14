@@ -12,3 +12,8 @@ type BearActions = {
 
 // Combine state and actions
 export type BearStore = BearState & BearActions;
+
+export type LoginType = {
+  nik: string;
+  password: string;
+};

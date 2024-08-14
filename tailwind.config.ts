@@ -1,13 +1,13 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -19,44 +19,97 @@ const config = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          50: "#FBFBFF",
+          100: "#EFEFFF",
+          200: "#DBDBFF",
+          300: "#BFBFFF",
+          400: "#9B9BFF",
+          500: "#7070FF",
+          600: "#3C3CFF",
+          700: "#0000FF",
+          // 800: "#1D3A6C",
+          // 900: "#101F39",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          50: "#FFFBFC",
+          100: "#FEF1F1",
+          200: "#FDDFE0",
+          300: "#FBC6C9",
+          400: "#F8A6AA",
+          500: "#F57F85",
+          600: "#F25159",
+          700: "#EE1B26",
+          // 800: "#AB4D00",
+          // 900: "#512400",
         },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+        thirtiary: {
+          50: "#FFFDFB",
+          100: "#FEF7F1",
+          200: "#FEEDDF",
+          300: "#FCDFC7",
+          400: "#FBCDA7",
+          500: "#F9B781",
+          600: "#F79D53",
+          700: "#F47F1F",
+          // 800: "#AB4D00",
+          // 900: "#512400",
         },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+        neutral: {
+          50: "#FBFBFB",
+          100: "#F0F0F0",
+          200: "#DDDDDD",
+          300: "#C2C2C2",
+          400: "#A0A0A0",
+          500: "#777777",
+          600: "#464646",
+          700: "#0D0D0D",
+          // 800: "#656565",
+          // 900: "#2C2C2C",
         },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+        success: {
+          50: "#FBFEFD",
+          100: "#F1FCF7",
+          200: "#DFF8EE",
+          300: "#C6F3E0",
+          400: "#A6EDCF",
+          500: "#7EE5BA",
+          600: "#50DBA1",
+          700: "#28C382",
+          // 800: "#176E4A",
+          // 900: "#0C3B28",
+        },
+        warning: {
+          50: "#FFFEFB",
+          100: "#FFFCEF",
+          200: "#FFF7DB",
+          300: "#FFF1BF",
+          400: "#FFE99B",
+          500: "#FFE070",
+          600: "#FFD53C",
+          700: "#FFC800",
+          // 800: "#9E520B",
+          // 900: "#4B2705",
+        },
+        error: {
+          50: "#FFFCFD",
+          100: "#FEF3F5",
+          200: "#FDE4E9",
+          300: "#FBCFD8",
+          400: "#F8B4C2",
+          500: "#F693A7",
+          600: "#F26C87",
+          700: "#EE3F62",
+          // 800: "#950D28",
+          // 900: "#480614",
+        },
+        outline_border: {
+          100: "#AEAEAE",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-      },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
         "accordion-down": {
@@ -75,6 +128,6 @@ const config = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;

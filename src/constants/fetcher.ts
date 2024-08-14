@@ -2,7 +2,7 @@
 
 import Cookies from "js-cookie";
 
-export const fetcher = (url: string) => {
+export const fetcher = async (url: string) => {
   const token = Cookies.get("token");
   // Atau ambil dari state/context
   return fetch(url, {

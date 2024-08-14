@@ -2,13 +2,14 @@
 
 import useSWR from "swr";
 import { fetcher, fetcherWithoutAuth } from "@/constants/fetcher";
+import { LoginType } from "@/types/types";
 
 // get
 
 export function useCarousel() {
   const { data, isLoading } = useSWR(
     `${process.env.EXPO_PUBLIC_API_URL}/carousel/get`,
-    fetcher,
+    fetcher
   );
 
   return {
