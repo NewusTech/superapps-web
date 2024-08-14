@@ -25,4 +25,6 @@ jobs:
     - name : Run build
       run: npm run build --if-present
     - name : restart app
-      run : pm2 restart ramatranz.newus.id --update-env
+      run : |
+            pm2 list
+            pm2 restart ramatranz.newus.id --update-env
