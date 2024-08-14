@@ -26,7 +26,21 @@ jobs:
       run: npm run build --if-present
     - name: Check PM2 Status
       run: pm2 list
-    - name: Restart PM2 Application
-      run: |
-        pm2 delete ramatranz.newus.id || true
-        pm2 start ramatranz.newus.id --name ramatranz.newus.id
+    - name : change repo
+      run : cd /home/newus-ramatranz-web/htdocs/ramatranz.newus.id/actions-runner/_work/superapps-web/superapps-web
+    - name : restart PM2
+      run : |
+          APP_NAME="ramatranz.newus.id"
+          APP_ID="19"
+
+          if pm2 restart $APP_NAME; then
+            echo "Successfully restarted app with name $APP_NAME"
+          else
+            echo "Failed to restart app with name $APP_NAME, trying with ID $APP_ID"
+            if pm2 restart $APP_ID; then
+              echo "Successfully restarted app with ID $APP_ID"
+            else
+              echo "Failed to restart app with both name and ID"
+              exit 1
+            fi
+          fi
