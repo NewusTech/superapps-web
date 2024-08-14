@@ -35,6 +35,11 @@
   background-color: rgba(115, 173, 255, 0.2);
 }
 
+.background-footer {
+  background: url("../../public/assets//images/neededs/footer-background.png")
+    no-repeat top center;
+}
+
 .background-travel-route {
   background-color: rgba(115, 173, 255, 0.2);
 }
@@ -47,7 +52,7 @@
   background-color: rgba(115, 173, 255, 0.2);
 }
 
-.background-footer {
+.background-footers {
   background-color: rgba(115, 173, 255, 0.2);
 }
 

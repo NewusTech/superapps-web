@@ -275,10 +275,10 @@ export default function Home() {
       </div>
 
       {/* Footer End */}
-      <div className="w-11/12 flex flex-row mt-16 gap-x-8 mb-[450px]">
+      <div className="w-full px-16 flex flex-row pt-20 gap-x-8 background-footer mb-[440px]">
         <div className="w-full flex flex-col gap-y-8">
           <h2 className="text-primary-700 font-bold text-[26px]">
-            Aplikasi Rama Tranz
+            Download Aplikasi Rama Tranz
           </h2>
 
           <div className="w-full flex flex-col gap-y-4">
@@ -295,7 +295,7 @@ export default function Home() {
 
           <Link
             href={"/"}
-            className="w-4/12 flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-2 rounded-lg gap-x-5">
+            className="w-4/12 flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5">
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">

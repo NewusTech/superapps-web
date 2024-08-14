@@ -97,7 +97,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center background-footer justify-start w-full px-16 py-6 text-center">
+      <div className="flex flex-col md:flex-row items-center background-footers justify-start w-full px-16 py-6 text-center">
         <p className="text-[14px] text-neutral-700 font-normal">
           Copyright &copy; 2024
           <span className="text-[12px] font-bold"> Rama Tranz</span>. All rights
