@@ -20,6 +20,10 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
+    - name: Git pull
+      run: |
+          cd /home/newus-ramatranz-web/htdocs/ramatranz.newus.id
+          git pull
     - name : Run NPM
       run: npm install
     - name : Run build
