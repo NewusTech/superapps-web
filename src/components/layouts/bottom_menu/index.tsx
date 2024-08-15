@@ -7,7 +7,7 @@ export default function BottomMenu() {
   const pathName = usePathname();
 
   return (
-    <section className="grid grid-cols-5 place-items-center w-full px-2 py-4">
+    <section className="grid grid-cols-5 rounded-t-xl border border-grey-100 place-items-center w-full px-2 py-4">
       <Link
         href={"/"}
         className={`${

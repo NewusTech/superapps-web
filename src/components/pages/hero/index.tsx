@@ -30,7 +30,7 @@ export default function HeroScreen({ data }: any) {
 
   return (
     <section className="md:w-full md:h-screen justify-center items-center flex flex-col relative top-32 md:top-10 gap-y-24">
-      <div className="w-11/12 md:w-7/12 flex flex-col justify-center items-center bg-neutral-50 bg-opacity-15 py-3 px-4 rounded-md border border-neutral-50">
+      <div className="w-11/12 md:w-7/12 flex flex-col justify-center items-center bg-neutral-50 bg-opacity-15 py-3 px-1 md:px-4 rounded-md border border-neutral-50">
         <div className="grid grid-cols-5 gap-x-2 mb-4">
           {data?.map((item: any, i: number) => {
             let icon;
@@ -50,7 +50,7 @@ export default function HeroScreen({ data }: any) {
               <div key={i} className="grid grid-rows-2 w-full gap-y-3">
                 <div
                   className={`${item?.soon !== true ? "hidden" : "flex"} items-center text-primary-700`}>
-                  <div className="bg-neutral-50 border border-neutral-50 px-3 py-2 rounded-md bg-opacity-70">
+                  <div className="bg-neutral-50 border border-neutral-50 md:px-3 md:py-2 rounded-md bg-opacity-70">
                     <p className="text-[12px] md:text-[14px] text-center">
                       Coming Soon
                     </p>
