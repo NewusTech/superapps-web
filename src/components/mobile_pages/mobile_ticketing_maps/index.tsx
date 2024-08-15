@@ -43,7 +43,7 @@ export default function MobileTicketingMaps() {
         {travelMaps.map((item: any, i: number) => {
           return (
             <SwiperSlide key={i}>
-              <div className="w-full flex flex-col justify-center items-center gap-y-6 p-5 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
+              <div className="w-full flex flex-col justify-center items-center gap-y-4 p-3 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
                 <div className="w-full h-full">
                   <iframe
                     src={item?.map}
@@ -66,7 +66,9 @@ export default function MobileTicketingMaps() {
                 </div>
 
                 <div className="w-full">
-                  <p>{item?.address}</p>
+                  <p className="font-normal text-neutral-700 text-[14px] md:text-[16px]">
+                    {item?.address}
+                  </p>
                 </div>
               </div>
             </SwiperSlide>

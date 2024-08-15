@@ -41,6 +41,7 @@ import MobileDestinationScreen from "@/components/mobile_pages/mobile_destinatio
 import MobileTicketingMaps from "@/components/mobile_pages/mobile_ticketing_maps";
 import MobileTestimoniScreen from "@/components/mobile_pages/mobile_testimoni";
 import Footer from "@/components/layouts/footer";
+import MobileRouteTravelCar from "@/components/mobile_pages/mobile_route_travel_car";
 
 export default function Home() {
   const now = new Date();
@@ -125,7 +126,7 @@ export default function Home() {
 
       {/* Facilities Section */}
       <div className="md:hidden w-full flex flex-col gap-y-8 background-mobile-facility py-8 pb-16 md:pb-24">
-        <div className="w-full flex flex-row justify-center">
+        <div className="w-full flex flex-row px-8 md:px-0 justify-center">
           <h2 className="text-neutral-700 text-center font-semibold text-[26px] md:text-[36px]">
             Nikmati perjalanan anda dengan nyaman
             {!isMobile && <br />}
@@ -196,7 +197,50 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 place-items-center gap-y-4 md:gap-y-0 md:gap-x-4 px-8 md:px-16">
+        {/* <div className="travel-car-rows">
+          <div className="destination-travel-car-lists">
+            {routes.map((item: any, i: number) => {
+              return (
+                <RouteTravelCar
+                  key={i}
+                  item={item}
+                  isActive={i === activeIndex}
+                  onClick={() => setActiveIndex(i)}
+                />
+              );
+            })}
+          </div>
+        </div> */}
+
+        {isMobile ? (
+          <div className="mobile-travel-car-rows">
+            <div className="mobile-destination-travel-car-lists">
+              {routes.map((item, i) => (
+                <MobileRouteTravelCar
+                  key={i}
+                  item={item}
+                  isActive={i === activeIndex}
+                  onClick={() => setActiveIndex(i)}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div className="travel-car-rows">
+            <div className="destination-travel-car-lists">
+              {routes.map((item, i) => (
+                <RouteTravelCar
+                  key={i}
+                  item={item}
+                  isActive={i === activeIndex}
+                  onClick={() => setActiveIndex(i)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* <div className="grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 place-items-center gap-y-4 md:gap-y-0 md:gap-x-4 px-8 md:px-16">
           {routes.map((item: any, i: number) => {
             return (
               <RouteTravelCar
@@ -207,7 +251,7 @@ export default function Home() {
               />
             );
           })}
-        </div>
+        </div> */}
       </div>
 
       {/* Travel Route Section */}
@@ -223,14 +267,14 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-row w-full md:mt-4 gap-x-4 md:gap-x-8 px-8 md:px-16">
-          <Button className="bg-neutral-50 border border-neutral-700 py-6">
+        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16">
+          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Bandar Lampung
           </Button>
-          <Button className="bg-neutral-50 border border-neutral-700 py-6">
+          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Palembang
           </Button>
-          <Button className="bg-neutral-50 border border-neutral-700 py-6">
+          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Jakarta
           </Button>
         </div>
@@ -260,14 +304,14 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-row w-full md:mt-4 gap-x-4 md:gap-x-8 px-8 md:px-16">
-          <Button className="bg-neutral-50 border border-neutral-700 py-6">
+        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16">
+          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Bandar Lampung
           </Button>
-          <Button className="bg-neutral-50 border border-neutral-700 py-6">
+          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Palembang
           </Button>
-          <Button className="bg-neutral-50 border border-neutral-700 py-6">
+          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Jakarta
           </Button>
         </div>
@@ -328,7 +372,7 @@ export default function Home() {
       </div>
 
       {/* Footer End */}
-      <div className="w-full px-8 md:px-16 flex flex-col md:flex-row pt-8 pb-8 md:pb-0 md:pt-20 gap-y-8 md:gap-y-0 md:gap-x-8 background-footer md:mb-[530px]">
+      <div className="w-full px-8 md:px-16 flex flex-col md:flex-row pt-8 pb-8 md:pb-0 md:pt-20 gap-y-8 md:gap-y-0 md:gap-x-8 background-footer md:mb-[290px]">
         <div className="w-full flex flex-col gap-y-4 md:gap-y-8">
           <h2 className="text-primary-700 font-bold text-[26px]">
             Download Aplikasi Rama Tranz

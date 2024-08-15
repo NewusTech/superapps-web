@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function RouteTravelCar({ item, isActive, onClick }: any) {
+export default function MobileRouteTravelCar({ item, isActive, onClick }: any) {
   return (
     // <div
     //   onClick={onClick}
@@ -29,7 +29,7 @@ export default function RouteTravelCar({ item, isActive, onClick }: any) {
     // </div>
     <div
       onClick={onClick}
-      className={`destination-travel-car-lists-wrap ${
+      className={`mobile-destination-travel-car-lists-wrap ${
         isActive ? "active" : ""
       }`}>
       {/* <img src={item?.image} alt={item.location} /> */}
@@ -44,7 +44,9 @@ export default function RouteTravelCar({ item, isActive, onClick }: any) {
         //           : "w-full h-full object-cover"
         //       }`}
       />
-      {isActive && <div className="location-overlay">{item.location}</div>}
+      {isActive && (
+        <div className="mobile-location-overlay">{item.location}</div>
+      )}
     </div>
   );
 }

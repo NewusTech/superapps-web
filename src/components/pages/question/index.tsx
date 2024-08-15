@@ -28,7 +28,7 @@ export default function QuestionAnswer() {
                   <AccordionTrigger className="text-[14px] md:text-[16px] text-start h-[50px] md:h-full">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="md:text-start text-justify w-full h-full md:px-[70px]">
+                  <AccordionContent className="md:text-start text-justify w-full h-full">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>

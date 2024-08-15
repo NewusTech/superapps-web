@@ -5,13 +5,13 @@ import Footer from "@/components/layouts/footer";
 import HamburgerMenu from "@/components/layouts/hamburger_menu";
 import HomeNavigationBar from "@/components/layouts/home_navbar";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { Nunito_Sans } from "next/font/google";
+import { Nunito } from "next/font/google";
 import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 
-const nunito = Nunito_Sans({
+const nunito = Nunito({
   subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900", "1000"],
 });
 
 export default function HomeLayout({
@@ -70,7 +70,7 @@ export default function HomeLayout({
           {/* <div className="w-full absolute bottom-0 bg-primary-50">
             <Footer />
           </div> */}
-          <div className="bottom-0 z-50 fixed w-full bg-primary-100 rounded-t-xl shadow-md">
+          <div className="bottom-0 z-50 fixed w-full bg-neutral-50 rounded-t-xl shadow-md">
             <BottomMenu />
           </div>
         </div>
