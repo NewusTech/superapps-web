@@ -29,8 +29,8 @@ export default function HeroScreen({ data }: any) {
   const [returnDate, setReturnDate] = useState<Date | undefined>(undefined);
 
   return (
-    <section className="w-full justify-center items-center flex flex-col relative top-56 gap-y-24">
-      <div className="w-7/12 flex flex-col justify-center items-center bg-neutral-50 bg-opacity-15 py-3 px-4 rounded-md border border-neutral-50">
+    <section className="md:w-full md:h-screen justify-center items-center flex flex-col relative top-32 md:top-10 gap-y-24">
+      <div className="w-11/12 md:w-7/12 flex flex-col justify-center items-center bg-neutral-50 bg-opacity-15 py-3 px-4 rounded-md border border-neutral-50">
         <div className="grid grid-cols-5 gap-x-2 mb-4">
           {data?.map((item: any, i: number) => {
             let icon;
@@ -51,7 +51,9 @@ export default function HeroScreen({ data }: any) {
                 <div
                   className={`${item?.soon !== true ? "hidden" : "flex"} items-center text-primary-700`}>
                   <div className="bg-neutral-50 border border-neutral-50 px-3 py-2 rounded-md bg-opacity-70">
-                    <p className="text-[14px text-center">Coming Soon</p>
+                    <p className="text-[12px] md:text-[14px] text-center">
+                      Coming Soon
+                    </p>
                   </div>
                 </div>
                 <div
@@ -60,7 +62,9 @@ export default function HeroScreen({ data }: any) {
                     {icon}
                   </div>
 
-                  <p className="text-neutral-50">{item?.title}</p>
+                  <p className="text-neutral-50 text-[12px] md:text-[14px]">
+                    {item?.title}
+                  </p>
                 </div>
               </div>
             );
@@ -68,7 +72,7 @@ export default function HeroScreen({ data }: any) {
         </div>
       </div>
 
-      <div className="w-10/12 flex flex-row gap-x-5 p-5">
+      <div className="hidden md:w-10/12 md:flex md:flex-row gap-x-5 p-5">
         <div className="w-full flex flex-row">
           <div className="flex flex-row w-full gap-y-3">
             <div className="flex flex-col w-full gap-y-3">

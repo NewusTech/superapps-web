@@ -5,8 +5,8 @@ export default function RouteTravelCar({ item, isActive, onClick }: any) {
   return (
     <div
       onClick={onClick}
-      className={`flex self-center w-full h-full relative cursor-pointer transition-all duration-500 rounded-xl ${
-        isActive ? "flex-grow" : "flex-shrink-0 w-8/12"
+      className={`flex self-center w-full md:h-full relative cursor-pointer transition-all duration-500 rounded-xl ${
+        isActive ? "flex-grow" : "flex-shrink-0 md:w-[60%] h-[50%]"
       }`}>
       <Image
         src={item?.image}

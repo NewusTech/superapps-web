@@ -12,7 +12,7 @@ export default function TravelCarScreen({ item }: any) {
           alt="Travel Car"
           width={200}
           height={200}
-          className="w-full h-full object-cover rounded-xl"
+          className="w-full h-full object-cover md:rounded-xl"
         />
       </div>
 

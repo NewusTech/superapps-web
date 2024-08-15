@@ -21,8 +21,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
           ? "bg-neutral-50 shadow-md w-full"
           : "bg-transparent w-full border-b-[0.5px] border-neutral-50"
       } py-2 fixed z-50 transition-all duration-1000`}>
-      <div className="w-10/12 flex flex-row justify-between items-center">
-        <div className="min-w-7 min-h-7">
+      <div className="w-full px-16 flex flex-row justify-between items-center">
+        <div className="max-w-[250px] h-full">
           <Image
             src={ramatranz}
             alt="Ramatranz"

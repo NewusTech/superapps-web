@@ -8,7 +8,7 @@ import React from "react";
 export default function SuperiorServiceScreen({ item }: any) {
   return (
     <div className="w-full h-full relative flex flex-col bg-neutral-50 rounded-xl shadow-md gap-y-8">
-      <div className="w-full max-h-[230px]">
+      <div className="w-full h-full">
         <Image
           src={item?.image}
           alt="Superior Service"
