@@ -28,10 +28,26 @@
   background-position-y: 60px;
 }
 
+.background-mobile-promotion {
+  background: url("../../public/assets//images/neededs/backround-line.png")
+    no-repeat top center;
+  background-position-y: 40px;
+  background-size: 40%;
+}
+
 .background-facility {
   background: url("../../public/assets//images/neededs/backround-line.png")
     no-repeat top center;
   background-position-y: 150px;
+  background-color: rgba(115, 173, 255, 0.2);
+  background-size: 30%;
+}
+
+.background-mobile-facility {
+  background: url("../../public/assets//images/neededs/backround-line.png")
+    no-repeat top center;
+  background-position-y: 150px;
+  background-size: 60%;
   background-color: rgba(115, 173, 255, 0.2);
 }
 

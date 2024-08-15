@@ -12,7 +12,7 @@ export default function DestinationScreen({ item }: any) {
           alt={item?.from}
           width={400}
           height={400}
-          className="w-full h-full rounded-xl"
+          className="w-full h-full rounded-t-xl"
         />
 
         <div className="absolute top-0 bg-primary-700 rounded-tl-xl rounded-br-xl px-5 py-3">
