@@ -1,3 +1,5 @@
+"use client";
+
 import { Bus, Hotel, Package, Search } from "lucide-react";
 import {
   Calendar as CalendarIcons,
@@ -20,6 +22,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function HeroScreen({ data }: any) {
   const [returnDateEnabled, setReturnDateEnabled] = useState(false);
@@ -34,16 +37,22 @@ export default function HeroScreen({ data }: any) {
         <div className="grid grid-cols-5 gap-x-2 mb-4">
           {data?.map((item: any, i: number) => {
             let icon;
+            let link;
             if (item?.title === "Travel") {
               icon = <Bus className="w-5 h-5 text-primary-700" />;
+              link = "/travel";
             } else if (item?.title === "Paket") {
               icon = <Package className="w-5 h-5 text-primary-700" />;
+              link = "/paket";
             } else if (item?.title === "Rental") {
               icon = <Bus className="w-5 h-5 text-primary-700" />;
+              link = "/rental";
             } else if (item?.title === "Oleh-oleh") {
               icon = <Handbag className="w-5 h-5 text-primary-700" />;
+              link = "/oleh-oleh";
             } else {
               icon = <Hotel className="w-5 h-5 text-primary-700" />;
+              link = "/hotel";
             }
 
             return (
@@ -56,7 +65,8 @@ export default function HeroScreen({ data }: any) {
                     </p>
                   </div>
                 </div>
-                <div
+                <Link
+                  href={link}
                   className={`${item?.soon !== true ? "justify-end row-span-2" : "justify-center"} flex flex-col items-center gap-y-2`}>
                   <div className="bg-neutral-50 rounded-full w-12 h-12 flex flex-row justify-center items-center">
                     {icon}
@@ -65,7 +75,7 @@ export default function HeroScreen({ data }: any) {
                   <p className="text-neutral-50 text-[12px] md:text-[14px]">
                     {item?.title}
                   </p>
-                </div>
+                </Link>
               </div>
             );
           })}

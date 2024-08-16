@@ -12,6 +12,7 @@ import {
   destinations,
   facilities,
   heroIcons,
+  hotels,
   routes,
   travelCars,
   travelMaps,
@@ -42,6 +43,8 @@ import MobileTicketingMaps from "@/components/mobile_pages/mobile_ticketing_maps
 import MobileTestimoniScreen from "@/components/mobile_pages/mobile_testimoni";
 import Footer from "@/components/layouts/footer";
 import MobileRouteTravelCar from "@/components/mobile_pages/mobile_route_travel_car";
+import ApartementScreen from "@/components/pages/apartements";
+import MobileApartementScreen from "@/components/mobile_pages/mobile_apartement";
 
 export default function Home() {
   const now = new Date();
@@ -333,6 +336,30 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Hotel Section */}
+      <div className="w-full flex flex-col gap-y-8 background-apartement py-8 pb-8 md:pb-24">
+        <div className="w-full flex flex-col items-start px-8 md:px-16 gap-y-4">
+          <h2 className="text-neutral-700 font-semibold text-[26px] md:text-[36px]">
+            Temukan Penginapan Ideal Bersama Kami
+          </h2>
+
+          <p className="font-normal text-start text-neutral-700 text-[14px]">
+            Nikmati pengalaman menginap yang tak terlupakan di berbagai lokasi
+            pilihan
+          </p>
+        </div>
+
+        <div className="hidden md:grid md:grid-cols-3 mt-6 gap-5 px-16">
+          {hotels.map((item: any, i: number) => {
+            return <ApartementScreen key={i} item={item} />;
+          })}
+        </div>
+
+        <div className="md:hidden grid grid-cols-1 md:mt-6 gap-5 pl-8 md:px-16">
+          <MobileApartementScreen />
+        </div>
+      </div>
+
       {/* Ticketing Maps Section */}
       <div className="w-full flex flex-col gap-y-8 py-8 pb-8 md:pb-24">
         <div className="w-full flex flex-col md:items-center px-8 md:px-16 gap-y-4">
@@ -372,7 +399,7 @@ export default function Home() {
       </div>
 
       {/* Footer End */}
-      <div className="w-full px-8 md:px-16 flex flex-col md:flex-row pt-8 pb-8 md:pb-0 md:pt-20 gap-y-8 md:gap-y-0 md:gap-x-8 background-footer md:mb-[290px]">
+      <div className="w-full px-8 md:px-16 flex flex-col md:flex-row pt-8 pb-8 md:pb-0 md:pt-20 gap-y-8 md:gap-y-0 md:gap-x-8 background-footer">
         <div className="w-full flex flex-col gap-y-4 md:gap-y-8">
           <h2 className="text-primary-700 font-bold text-[26px]">
             Download Aplikasi Rama Tranz
