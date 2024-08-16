@@ -1,6 +1,4 @@
 import firstPromo from "../../public/assets/images/neededs/banner-promo-1.png";
-import secondPromo from "../../public/assets/images/neededs/banner-promo-2.png";
-import thirdPromo from "../../public/assets/images/neededs/banner-promo-3.png";
 import firstUnggulan from "../../public/assets/images/neededs/service-unggulan-1.png";
 import secondUnggulan from "../../public/assets/images/neededs/service-unggulan-2.png";
 import thirdUnggulan from "../../public/assets/images/neededs/service-unggulan-3.png";
@@ -33,6 +31,13 @@ import firstFollow from "../../public/assets/icons/neededs/icon-youtube.svg";
 import secondFollow from "../../public/assets/icons/neededs/icon-instagram.svg";
 import thirdFollow from "../../public/assets/icons/neededs/icon-facebook.svg";
 import fourthFollow from "../../public/assets/icons/neededs/icon-x-twitter.svg";
+import firstHotel from "../../public/assets/images/neededs/hotel-1.png";
+import firstProfit from "../../public/assets/images/neededs/ticket-round.png";
+import secondProfit from "../../public/assets/images/neededs/price-round.png";
+import thirdProfit from "../../public/assets/images/neededs/trophy-round.png";
+import fourthProfit from "../../public/assets/images/neededs/driver-round.png";
+import firstRequirement from "../../public/assets/images/neededs/completed-task-1.png";
+import secondRequirement from "../../public/assets/images/neededs/compliant-1.png";
 
 export const heroIcons = [
   {
@@ -266,6 +271,42 @@ export const destinations = [
   },
 ];
 
+export const hotels = [
+  {
+    id: 1,
+    image: firstHotel,
+    title: "Podomoro Golf View",
+    subTitle: "Depok, Jawa Barat",
+    rooms: "2 Kamar",
+    sizes: "25 meter persegi",
+    desc: "Nikmati perjalanan nyaman dari Bandar Lampung ke wisata Tegal Mas Island dengan keindahan di wisata Tegal Mas Island.",
+    location: "Apartement",
+    price: "Rp. 350.000",
+  },
+  {
+    id: 2,
+    image: firstHotel,
+    title: "Dave Apartement",
+    subTitle: "Depok, Jawa Barat",
+    rooms: "2 Kamar",
+    sizes: "25 meter persegi",
+    desc: "Nikmati perjalanan nyaman dari Bandar Lampung ke wisata Tegal Mas Island dengan keindahan di wisata Tegal Mas Island.",
+    location: "Apartement",
+    price: "Rp. 350.000",
+  },
+  {
+    id: 3,
+    image: firstHotel,
+    title: "Podomoro Golf View",
+    subTitle: "Depok, Jawa Barat",
+    rooms: "2 Kamar",
+    sizes: "25 meter persegi",
+    desc: "Nikmati perjalanan nyaman dari Bandar Lampung ke wisata Tegal Mas Island dengan keindahan di wisata Tegal Mas Island.",
+    location: "Apartement",
+    price: "Rp. 350.000",
+  },
+];
+
 export const travelMaps = [
   {
     id: 1,
@@ -400,5 +441,83 @@ export const followes = [
   {
     id: 4,
     icon: fourthFollow,
+  },
+];
+
+export const profits = [
+  {
+    id: 1,
+    title: "Pasti dapat kursi",
+    desc: "Bisa langsung berangkat dengan nyaman, bebas khawatir.",
+    image: firstProfit,
+  },
+  {
+    id: 2,
+    title: "Layanan kelas satu",
+    desc: "Bisa langsung berangkat dengan nyaman, bebas khawatir.",
+    image: secondProfit,
+  },
+  {
+    id: 3,
+    title: "Harga Kompetitif",
+    desc: "Bisa langsung berangkat dengan nyaman, bebas khawatir.",
+    image: thirdProfit,
+  },
+  {
+    id: 4,
+    title: "Layanan Antar Jemput",
+    desc: "Bisa langsung berangkat dengan nyaman, bebas khawatir.",
+    image: fourthProfit,
+  },
+];
+
+export const requirements = [
+  {
+    id: 1,
+    image: firstRequirement,
+    title: "Cara Memesan Tiket",
+    desc: "Mari, cari tau mudahnya memesan tiket Travel di Rama Tranz dengan cepat dan nyaman.",
+  },
+  {
+    id: 2,
+    image: secondRequirement,
+    title: "Persyaratan Perjalanan",
+    desc: "Check persyaratan yang telah disepakati oleh Rama Tranz untuk kenyamanan bersama.",
+  },
+];
+
+export const travel_tickets = [
+  {
+    id: 1,
+    title: "Pesan dari Mana Sana",
+    desc: "Anda dapat membeli tiket dari mana saja dan kapan saja, tanpa harus mengunjungi loket atau agen perjalanan. Ini memberi Anda fleksibilitas untuk merencanakan perjalanan dengan mudah dari rumah, kantor, atau bahkan saat bepergian.",
+  },
+  {
+    id: 2,
+    title: "Pilihan Rute dan Mobil Lengkap",
+    desc: "Anda dapat membeli tiket dari mana saja dan kapan saja, tanpa harus mengunjungi loket atau agen perjalanan. Ini memberi Anda fleksibilitas untuk merencanakan perjalanan dengan mudah dari rumah, kantor, atau bahkan saat bepergian.",
+  },
+  {
+    id: 3,
+    title: "Harga Murah",
+    desc: "Dapatkan tiket dengan harga yang terjangkau tanpa mengorbankan kualitas perjalanan. Kami berkomitmen memberikan nilai terbaik dengan tarif yang kompetitif, memungkinkan Anda untuk menikmati perjalanan yang nyaman dengan biaya yang efisien.",
+  },
+  {
+    id: 4,
+    title: "Layanan Customer Service 24 Jam",
+    desc: "Rama Tranz menawarkan layanan customer service 24 jam untuk memastikan Anda mendapatkan bantuan kapan saja. Tim kami siap menjawab pertanyaan, menangani masalah, dan memberikan solusi dengan cepat. Dengan dukungan yang selalu tersedia, Anda dapat merasa tenang dan nyaman selama perjalanan, mengetahui bahwa bantuan selalu dekat.",
+  },
+];
+
+export const introductions = [
+  {
+    id: 1,
+    title: "Toyata Hiace Premio",
+    desc: "Kelas ini menawarkan mobil Toyota Hiace Premio yang dirancang untuk memberikan kenyamanan maksimal. Dengan ruang yang luas, kursi yang nyaman, dan fasilitas premium, Toyota Hiace Premio ideal untuk perjalanan panjang atau grup besar yang mengutamakan kemewahan dan kualitas.",
+  },
+  {
+    id: 2,
+    title: "Toyata Hiace Commuter",
+    desc: "Untuk pilihan yang lebih ekonomis namun tetap nyaman, Toyota Hiace Commuter adalah opsi yang tepat. Kelas ini menyediakan ruang yang cukup untuk penumpang dengan fitur yang memadai, membuatnya cocok untuk perjalanan sehari-hari atau perjalanan jarak menengah dengan efisiensi biaya.",
   },
 ];

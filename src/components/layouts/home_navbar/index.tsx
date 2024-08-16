@@ -22,7 +22,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
           : "bg-transparent w-full border-b-[0.5px] border-neutral-50"
       } py-2 fixed z-50 transition-all duration-1000`}>
       <div className="w-full px-16 flex flex-row justify-between items-center">
-        <div className="max-w-[250px] h-full">
+        <Link href={"/"} className="w-1/12 h-full">
           <Image
             src={ramatranz}
             alt="Ramatranz"
@@ -30,7 +30,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
             height={300}
             className="w-full h-full object-contain"
           />
-        </div>
+        </Link>
 
         <div className="w-full flex flex-row gap-x-16">
           <div className="w-full flex flex-row justify-end items-center gap-x-8">
@@ -50,12 +50,13 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
             </DropdownMenu>
 
             <Link
-              href="/"
+              href="/travel"
               className={`${
                 isScrolledPast ? "text-neutral-600" : "text-neutral-50"
               } font-normal text-[16px] hover:underline`}>
               Travel
             </Link>
+
             <Link
               href="/"
               className={`${
@@ -63,6 +64,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
               } font-normal text-[16px] hover:underline`}>
               Paket
             </Link>
+
             <Link
               href="/"
               className={`${
