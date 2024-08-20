@@ -15,6 +15,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -32,50 +38,82 @@ export default function HeroScreen({ data }: any) {
   const [returnDate, setReturnDate] = useState<Date | undefined>(undefined);
 
   return (
-    <section className="md:w-full md:h-screen justify-center items-center flex flex-col relative top-32 md:top-10 gap-y-24">
-      <div className="w-11/12 md:w-7/12 flex flex-col justify-center items-center bg-neutral-50 bg-opacity-15 py-3 px-1 md:px-4 rounded-md border border-neutral-50">
-        <div className="grid grid-cols-5 gap-x-2 mb-4">
+    <section className="md:w-full md:h-screen justify-center items-center flex flex-col relative top-28 md:top-10 gap-y-24">
+      <div className="w-full md:w-6/12 flex flex-col justify-center items-center bg-neutral-50 bg-opacity-15 py-3 md:py-8 px-3 md:px-4 rounded-md border border-neutral-50">
+        <div className="grid grid-cols-5 gap-x-2 md:gap-x-12 mb-4 md:mb-0">
           {data?.map((item: any, i: number) => {
             let icon;
             let link;
-            if (item?.title === "Travel") {
-              icon = <Bus className="w-5 h-5 text-primary-700" />;
-              link = "/travel";
-            } else if (item?.title === "Paket") {
-              icon = <Package className="w-5 h-5 text-primary-700" />;
-              link = "/paket";
-            } else if (item?.title === "Rental") {
-              icon = <Bus className="w-5 h-5 text-primary-700" />;
-              link = "/rental";
-            } else if (item?.title === "Oleh-oleh") {
-              icon = <Handbag className="w-5 h-5 text-primary-700" />;
-              link = "/oleh-oleh";
+            if (item?.soon === false) {
+              if (item?.title === "Travel") {
+                icon = <Bus className="w-5 h-5 text-primary-700" />;
+                link = "/travel";
+              } else if (item?.title === "Paket") {
+                icon = <Package className="w-5 h-5 text-primary-700" />;
+                link = "/package";
+              } else if (item?.title === "Rental") {
+                icon = <Bus className="w-5 h-5 text-primary-700" />;
+                link = "/rent";
+              } else if (item?.title === "Hotel") {
+                icon = <Hotel className="w-5 h-5 text-primary-700" />;
+                link = "/hotel";
+              } else {
+                icon = <Handbag className="w-5 h-5 text-primary-700" />;
+                link = "/oleh-oleh";
+              }
             } else {
-              icon = <Hotel className="w-5 h-5 text-primary-700" />;
-              link = "/hotel";
+              if (item?.title === "Travel") {
+                icon = <Bus className="w-5 h-5 text-neutral-200" />;
+                link = "/travel";
+              } else if (item?.title === "Paket") {
+                icon = <Package className="w-5 h-5 text-neutral-200" />;
+                link = "/package";
+              } else if (item?.title === "Rental") {
+                icon = <Bus className="w-5 h-5 text-neutral-200" />;
+                link = "/rent";
+              } else if (item?.title === "Hotel") {
+                icon = <Hotel className="w-5 h-5 text-neutral-200" />;
+                link = "/hotel";
+              } else {
+                icon = <Handbag className="w-5 h-5 text-neutral-200" />;
+                link = "/oleh-oleh";
+              }
             }
 
             return (
-              <div key={i} className="grid grid-rows-2 w-full gap-y-3">
-                <div
-                  className={`${item?.soon !== true ? "hidden" : "flex"} items-center text-primary-700`}>
-                  <div className="bg-neutral-50 border border-neutral-50 md:px-3 md:py-2 rounded-md bg-opacity-70">
-                    <p className="text-[12px] md:text-[14px] text-center">
-                      Coming Soon
+              <div
+                key={i}
+                className="grid grid-rows-1 md:justify-center w-full gap-y-3">
+                {item?.soon === false ? (
+                  <Link
+                    href={link}
+                    className={`flex flex-col items-center gap-y-2`}>
+                    <div className="bg-neutral-50 rounded-full w-12 h-12 flex flex-row justify-center items-center">
+                      {icon}
+                    </div>
+
+                    <p className="text-neutral-50 text-[12px] md:text-[14px]">
+                      {item?.title}
+                    </p>
+                  </Link>
+                ) : (
+                  <div className={`flex flex-col items-center gap-y-2`}>
+                    <div className="bg-neutral-50 rounded-full w-12 h-12 flex flex-row justify-center items-center">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger>{icon}</TooltipTrigger>
+                          <TooltipContent className="mb-7 bg-neutral-50 bg-opacity-70">
+                            <p className="text-primary-700">Coming Soon</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    </div>
+
+                    <p className="text-neutral-50 text-[12px] md:text-[14px]">
+                      {item?.title}
                     </p>
                   </div>
-                </div>
-                <Link
-                  href={link}
-                  className={`${item?.soon !== true ? "justify-end row-span-2" : "justify-center"} flex flex-col items-center gap-y-2`}>
-                  <div className="bg-neutral-50 rounded-full w-12 h-12 flex flex-row justify-center items-center">
-                    {icon}
-                  </div>
-
-                  <p className="text-neutral-50 text-[12px] md:text-[14px]">
-                    {item?.title}
-                  </p>
-                </Link>
+                )}
               </div>
             );
           })}

@@ -52,17 +52,21 @@ export default function HomeLayout({
     <main
       className={`${nunito.className} w-full relative flex flex-col min-h-screen`}>
       {!isMobile ? (
-        <div className="w-full relative flex flex-col h-full">
+        // <div className="w-full relative flex flex-col h-full">
+        <>
           <HomeNavigationBar
             isScrolledPast={isScrolledPast && isDelayComplete}
           />
-          <div className="w-full mb-72">{children}</div>
+          <div className="flex-1 overflow-y-auto bg-primary-100">
+            {children}
+          </div>
           <Toaster position="bottom-right" />
           <div className="w-full absolute bottom-0 bg-primary-50">
             <Footer />
           </div>
-        </div>
+        </>
       ) : (
+        // </div>
         <div className="w-full relative flex flex-col min-h-screen">
           <HamburgerMenu />
           {children}
