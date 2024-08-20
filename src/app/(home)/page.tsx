@@ -51,7 +51,7 @@ export default function Home() {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const [startDate, setStartDate] = useState<Date | undefined>(firstDayOfMonth);
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const startDateFormatted = startDate
     ? formatDate(new Date(startDate))
@@ -61,7 +61,7 @@ export default function Home() {
     <main className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 mb-24">
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-between relative background-blend w-screen min-h-96 md:min-h-screen">
-        <div className="md:w-full relative flex self-center justify-center items-center">
+        <div className="w-full md:w-full relative flex self-center justify-center items-center">
           <HeroScreen data={heroIcons} />
         </div>
       </div>
@@ -71,8 +71,8 @@ export default function Home() {
         <ProfileScreen />
       </div>
 
-      <div className="w-full min-h-[320px] absolute top-[360px] rounded-t-xl flex flex-row md:hidden justify-center bg-gradient-to-r from-[#CA1D76] from-[-100%] to-[#082167] to-[100%]">
-        <div className="flex flex-row px-8 pt-8 items-start gap-x-5">
+      <div className="w-full min-h-[320px] absolute top-[250px] rounded-t-xl flex flex-row md:hidden justify-center bg-gradient-to-r from-[#CA1D76] from-[-100%] to-[#082167] to-[100%]">
+        <div className="flex flex-row px-8 pt-6 items-start gap-x-5">
           <div className="w-4/12">
             <Image
               src={ticket}
@@ -93,7 +93,7 @@ export default function Home() {
         <RoundTripForm />
       </div>
 
-      <div className="w-full flex gap-8 md:hidden mt-[650px]">
+      <div className="w-full flex gap-8 md:hidden mt-[480px]">
         <MobileProfileScreen />
       </div>
 
@@ -399,7 +399,7 @@ export default function Home() {
       </div>
 
       {/* Footer End */}
-      <div className="w-full px-8 md:px-16 flex flex-col md:flex-row pt-8 pb-8 md:pb-0 md:pt-20 gap-y-8 md:gap-y-0 md:gap-x-8 background-footer">
+      <div className="w-full px-8 md:mb-72 md:px-16 flex flex-col md:flex-row pt-8 pb-8 md:pb-0 md:pt-20 gap-y-8 md:gap-y-0 md:gap-x-8 background-footer">
         <div className="w-full flex flex-col gap-y-4 md:gap-y-8">
           <h2 className="text-primary-700 font-bold text-[26px]">
             Download Aplikasi Rama Tranz

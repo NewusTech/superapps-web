@@ -38,6 +38,7 @@ import thirdProfit from "../../public/assets/images/neededs/trophy-round.png";
 import fourthProfit from "../../public/assets/images/neededs/driver-round.png";
 import firstRequirement from "../../public/assets/images/neededs/completed-task-1.png";
 import secondRequirement from "../../public/assets/images/neededs/compliant-1.png";
+import kiluan from "../../public/assets/images/neededs/background-hero-kiluan.jpg";
 
 export const heroIcons = [
   {
@@ -57,12 +58,12 @@ export const heroIcons = [
   },
   {
     id: 4,
-    title: "Oleh-oleh",
-    soon: true,
+    title: "Hotel",
+    soon: false,
   },
   {
     id: 5,
-    title: "Hotel",
+    title: "Oleh-oleh",
     soon: true,
   },
 ];
@@ -477,12 +478,14 @@ export const requirements = [
     image: firstRequirement,
     title: "Cara Memesan Tiket",
     desc: "Mari, cari tau mudahnya memesan tiket Travel di Rama Tranz dengan cepat dan nyaman.",
+    slug: "how-to-booking-travel-ticketing",
   },
   {
     id: 2,
     image: secondRequirement,
     title: "Persyaratan Perjalanan",
     desc: "Check persyaratan yang telah disepakati oleh Rama Tranz untuk kenyamanan bersama.",
+    slug: "What-is-conditions-to-do-travelling",
   },
 ];
 
@@ -519,5 +522,68 @@ export const introductions = [
     id: 2,
     title: "Toyata Hiace Commuter",
     desc: "Untuk pilihan yang lebih ekonomis namun tetap nyaman, Toyota Hiace Commuter adalah opsi yang tepat. Kelas ini menyediakan ruang yang cukup untuk penumpang dengan fitur yang memadai, membuatnya cocok untuk perjalanan sehari-hari atau perjalanan jarak menengah dengan efisiensi biaya.",
+  },
+];
+
+export const howBookingStepSteps = [
+  {
+    id: 1,
+    image: kiluan,
+    title: "1. Buka Aplikasi ramatranz.co.id",
+    desc: "Pilih Bus & Travel di homepage. Lalu, pilih tiket untuk sekali jalan atau pulang pergi.",
+  },
+  {
+    id: 2,
+    image: kiluan,
+    title: "2. Isi detail perjalanan",
+    desc: "Pilih Bus & Travel di homepage. Lalu, pilih tiket untuk sekali jalan atau pulang pergi.",
+  },
+  {
+    id: 3,
+    image: kiluan,
+    title: "3. Pilih travel",
+    desc: "Pilih Bus & Travel di homepage. Lalu, pilih tiket untuk sekali jalan atau pulang pergi.",
+  },
+  {
+    id: 4,
+    image: kiluan,
+    title: "4. Check foto, fasilitas dan rute",
+    desc: "Pilih Bus & Travel di homepage. Lalu, pilih tiket untuk sekali jalan atau pulang pergi.",
+  },
+  {
+    id: 5,
+    image: kiluan,
+    title: "5. Isi detail pemesanan",
+    desc: "Pilih Bus & Travel di homepage. Lalu, pilih tiket untuk sekali jalan atau pulang pergi.",
+  },
+  {
+    id: 6,
+    image: kiluan,
+    title: "6. Lanjut ke pembayaran",
+    desc: "Pilih Bus & Travel di homepage. Lalu, pilih tiket untuk sekali jalan atau pulang pergi.",
+  },
+];
+
+export const TravelConditionDatas = [
+  {
+    id: 1,
+    question: "Keberangkatan",
+    answer:
+      "Penumpang sudah siap setidaknya 60 menit sebelum keberangkatan di titik keberangkatan yang telah ditentukan oleh agen. Keterlambatan penumpang dapat menyebabkan tiket dibatalkan secara sepihak dan tidak mendapatkan pengembalian dana. Pelanggan diwajibkan untuk menunjukkan e-tiket dan identitas yang berlaku (KTP/ Paspor/ SIM). Waktu keberangkatan yang tertera di aplikasi adalah waktu lokal di titik keberangkatan.",
+    keys: "bus",
+  },
+  {
+    id: 2,
+    question: "Barang Bawaan",
+    answer:
+      "Penumpang sudah siap setidaknya 60 menit sebelum keberangkatan di titik keberangkatan yang telah ditentukan oleh agen. Keterlambatan penumpang dapat menyebabkan tiket dibatalkan secara sepihak dan tidak mendapatkan pengembalian dana. Pelanggan diwajibkan untuk menunjukkan e-tiket dan identitas yang berlaku (KTP/ Paspor/ SIM). Waktu keberangkatan yang tertera di aplikasi adalah waktu lokal di titik keberangkatan.",
+    keys: "suitcase",
+  },
+  {
+    id: 3,
+    question: "Himbauan",
+    answer:
+      "Himbauan ini diberikan oleh agen dan tidak ditanggung oleh pelanggan.",
+    keys: "exclamationmark",
   },
 ];

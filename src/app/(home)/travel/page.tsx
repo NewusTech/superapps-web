@@ -14,7 +14,7 @@ import React from "react";
 
 export default function TravelPage() {
   return (
-    <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 mb-24">
+    <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-80">
       <div className="flex flex-col items-center justify-between relative background-blend w-screen min-h-96 md:min-h-screen">
         <div className="md:w-full relative flex self-center justify-center items-center">
           <HeroScreen data={heroIcons} />
