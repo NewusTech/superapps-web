@@ -39,6 +39,17 @@ import fourthProfit from "../../public/assets/images/neededs/driver-round.png";
 import firstRequirement from "../../public/assets/images/neededs/completed-task-1.png";
 import secondRequirement from "../../public/assets/images/neededs/compliant-1.png";
 import kiluan from "../../public/assets/images/neededs/background-hero-kiluan.jpg";
+import firstAbout from "../../public/assets/images/neededs/about-image-1.png";
+import secondAbout from "../../public/assets/images/neededs/about-image-2.png";
+import thirdAbout from "../../public/assets/images/neededs/about-image-3.png";
+import firstAboutNumber from "../../public/assets/images/neededs/about-one-1.png";
+import secondAboutNumber from "../../public/assets/images/neededs/about-one-2.png";
+import thirdAboutNumber from "../../public/assets/images/neededs/about-one-3.png";
+import firstAboutContent from "../../public/assets/images/neededs/about-picture-2.png";
+import secondAboutContent from "../../public/assets/images/neededs/about-picture-1.png";
+import thirdAboutContent from "../../public/assets/images/neededs/about-picture-3.png";
+import fourthAboutContent from "../../public/assets/images/neededs/about-picture-4.png";
+import { title } from "process";
 
 export const heroIcons = [
   {
@@ -587,3 +598,65 @@ export const TravelConditionDatas = [
     keys: "exclamationmark",
   },
 ];
+
+export const AboutImages = [
+  {
+    id: 1,
+    image: firstAbout,
+  },
+  {
+    id: 2,
+    image: secondAbout,
+  },
+  {
+    id: 3,
+    image: thirdAbout,
+  },
+];
+
+export const AboutNumbers = [
+  {
+    id: 1,
+    image: firstAboutNumber,
+    desc: "Mengoptimalkan nilai perusahaan melalui bisnis yang berkembang dengan sumber daya terbaik dan mengakomodir gagasan - gagasan yang kekinian",
+  },
+  {
+    id: 2,
+    image: secondAboutNumber,
+    desc: "Mengoptimalkan nilai perusahaan melalui bisnis yang berkembang dengan sumber daya terbaik dan mengakomodir gagasan - gagasan yang kekinian",
+  },
+  {
+    id: 3,
+    image: thirdAboutNumber,
+    desc: "Mengoptimalkan nilai per businesses melalui bisnis yang berkembang dengan sumber daya terbaik dan mengakomodir gagasan - gagasan yang kekinian",
+  },
+];
+
+export const aboutContents = {
+  isRight: {
+    value: true,
+    firstContent: {
+      image: firstAboutContent,
+      title: "Mudah dan Cepat",
+      desc: "Beli tiket Travel kapan saja dan di mana saja dengan Rama Tranz. Tak perlu lagi membuang waktu untuk pergi ke terminal atau kantor agen, kini Anda dapat membeli tiket dari rumah.",
+    },
+    thirdContent: {
+      image: thirdAboutContent,
+      title: "Info Lengkap",
+      desc: "Dari jadwal travel, rute, titik keberangkatan dan kedatangan, harga tiket, hingga foto dan fasilitasnya, semuanya dapat Anda temukan di Rama Tranz. Kami menyediakan info lengkap untuk membantu menentukan Travel Anda.",
+    },
+  },
+  isLeft: {
+    value: true,
+    secondContent: {
+      image: secondAboutContent,
+      title: "Layanan Pelanggan 24 Jam",
+      desc: "Kami menyediakan Layanan Pelanggan 24 jam. Jadi, kapan pun Anda memiliki masalah atau pertanyaan, hubungi kami melalui telepon, chat, atau kirim pesan dari Aplikasi Traveloka Anda. Kami akan selalu siap membantu.",
+    },
+    fourthContent: {
+      image: fourthAboutContent,
+      title: "Pembayaran Mudah",
+      desc: "Baik Anda ingin membayar melalui transfer bank, kartu kredit, atau tunai di, kami siap membantu Anda.",
+    },
+  },
+};

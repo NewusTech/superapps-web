@@ -36,7 +36,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
 
   return (
     <>
-      {pathname === "/register" ? (
+      {pathname === "/register" || pathname === `/about-us` ? (
         <section
           className={`flex flex-row justify-center items-center self-center bg-neutral-50 shadow-md w-full py-2 fixed z-50 transition-all duration-1000`}>
           <div className="w-full px-16 flex flex-row justify-between items-center">

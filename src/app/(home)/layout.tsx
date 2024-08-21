@@ -57,9 +57,7 @@ export default function HomeLayout({
           <HomeNavigationBar
             isScrolledPast={isScrolledPast && isDelayComplete}
           />
-          <div className="flex-1 overflow-y-auto bg-primary-100">
-            {children}
-          </div>
+          <div className="flex-1 overflow-y-auto bg-primary-50">{children}</div>
           <Toaster position="bottom-right" />
           <div className="w-full absolute bottom-0 bg-primary-50">
             <Footer />
