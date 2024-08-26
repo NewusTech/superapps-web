@@ -1,7 +1,7 @@
 "use client";
 
 import FollowFooter from "@/components/pages/footer";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -49,7 +49,8 @@ export default function RegisterScreen() {
                   <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                     <Label
                       htmlFor="name"
-                      className="focus-within:text-primary-700">
+                      className="focus-within:text-primary-700"
+                    >
                       Nama Lengkap
                     </Label>
 
@@ -65,7 +66,8 @@ export default function RegisterScreen() {
                   <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                     <Label
                       htmlFor="email"
-                      className="focus-within:text-primary-700">
+                      className="focus-within:text-primary-700"
+                    >
                       Email
                     </Label>
 
@@ -81,7 +83,8 @@ export default function RegisterScreen() {
                   <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                     <Label
                       htmlFor="password"
-                      className="focus-within:text-primary-700">
+                      className="focus-within:text-primary-700"
+                    >
                       Kata Sandi
                     </Label>
 
@@ -96,7 +99,8 @@ export default function RegisterScreen() {
 
                       <div
                         onClick={() => setSeen(!seen)}
-                        className="p-2 cursor-pointer">
+                        className="p-2 cursor-pointer"
+                      >
                         {seen ? (
                           <EyeOff className="text-neutral-400 w-[20px] h-[20px]" />
                         ) : (
@@ -168,7 +172,8 @@ export default function RegisterScreen() {
                           <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                             <Label
                               htmlFor="name"
-                              className="focus-within:text-primary-700">
+                              className="focus-within:text-primary-700"
+                            >
                               Nama Lengkap
                             </Label>
 
@@ -184,7 +189,8 @@ export default function RegisterScreen() {
                           <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                             <Label
                               htmlFor="password"
-                              className="focus-within:text-primary-700">
+                              className="focus-within:text-primary-700"
+                            >
                               Kata Sandi
                             </Label>
 
@@ -199,7 +205,8 @@ export default function RegisterScreen() {
 
                               <div
                                 onClick={() => setSeen(!seen)}
-                                className="p-2 cursor-pointer">
+                                className="p-2 cursor-pointer"
+                              >
                                 {seen ? (
                                   <EyeOff className="text-neutral-400 w-[20px] h-[20px]" />
                                 ) : (

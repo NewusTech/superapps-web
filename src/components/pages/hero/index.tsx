@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 
 export default function HeroScreen({ data }: any) {
@@ -83,11 +83,13 @@ export default function HeroScreen({ data }: any) {
             return (
               <div
                 key={i}
-                className="grid grid-rows-1 md:justify-center w-full gap-y-3">
+                className="grid grid-rows-1 md:justify-center w-full gap-y-3"
+              >
                 {item?.soon === false ? (
                   <Link
                     href={link}
-                    className={`flex flex-col items-center gap-y-2`}>
+                    className={`flex flex-col items-center gap-y-2`}
+                  >
                     <div className="bg-neutral-50 rounded-full w-12 h-12 flex flex-row justify-center items-center">
                       {icon}
                     </div>
@@ -237,7 +239,8 @@ export default function HeroScreen({ data }: any) {
               </div>
 
               <div
-                className={`flex flex-row items-center w-full bg-neutral-50 border-r border-y border-outline_border-100 rounded-r-full py-2 px-3 ${!returnDateEnabled ? "opacity-50" : ""}`}>
+                className={`flex flex-row items-center w-full bg-neutral-50 border-r border-y border-outline_border-100 rounded-r-full py-2 px-3 ${!returnDateEnabled ? "opacity-50" : ""}`}
+              >
                 <CalendarIcons
                   className={`w-6 h-6 ${returnDateEnabled ? "text-primary-700" : "text-outline_border-100"}`}
                 />
@@ -246,7 +249,8 @@ export default function HeroScreen({ data }: any) {
                   <PopoverTrigger asChild>
                     <Button
                       className="w-full justify-start text-left text-[14px]"
-                      disabled={!returnDateEnabled}>
+                      disabled={!returnDateEnabled}
+                    >
                       {returnDate ? format(returnDate, "PPP") : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
@@ -275,7 +279,8 @@ export default function HeroScreen({ data }: any) {
           <div className="flex flex-row items-end">
             <Button
               type="submit"
-              className="rounded-2xl bg-neutral-50 px-6 py-7 border border-outline_border-100">
+              className="rounded-2xl bg-neutral-50 px-6 py-7 border border-outline_border-100"
+            >
               <Search className="text-primary-700" />
             </Button>
           </div>

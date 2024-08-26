@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import React, { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -31,7 +31,8 @@ export default function MobileTravelCarScreen() {
         className="mySwiper"
         loop={true}
         pagination={{ clickable: true }}
-        ref={swiperRef}>
+        ref={swiperRef}
+      >
         {travelCars.map((item: any, i: number) => {
           return (
             <SwiperSlide key={i}>

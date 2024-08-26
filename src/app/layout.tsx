@@ -1,10 +1,18 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Nunito, Manrope } from "next/font/google";
 import "./globals.css";
+import { twMerge } from "tailwind-merge";
 
 const nunito = Nunito({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800", "900", "1000"],
+  variable: "--font-nunito",
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  variable: "--font-manrope",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={nunito.className}>{children}</body>
+      <body className={twMerge(nunito.variable, manrope.variable)}>
+        {children}
+      </body>
     </html>
   );
 }

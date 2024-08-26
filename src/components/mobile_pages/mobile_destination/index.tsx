@@ -2,7 +2,7 @@
 
 import { Calendar } from "@phosphor-icons/react";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import React, { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -33,7 +33,8 @@ export default function MobileDestinationScreen() {
         className="mySwiper"
         loop={true}
         pagination={{ clickable: true }}
-        ref={swiperRef}>
+        ref={swiperRef}
+      >
         {destinations.map((item: any, i: number) => {
           return (
             <SwiperSlide key={i}>
