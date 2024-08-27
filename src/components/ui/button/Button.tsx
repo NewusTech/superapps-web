@@ -13,7 +13,7 @@ export default function Button(props: myButtonProps) {
     <button
       {...rest}
       className={twMerge([
-        "pl-5 pr-5 pt-3 pb-3 rounded-md duration-300 text-white",
+        "py-2 px-2 sm:py-3 sm:px-5 rounded-md duration-300 text-white text-base",
         rest.className,
         `${variant === "primary" ? "bg-primary-700 hover:bg-primary-600" : "text-primary-700 border border-primary-700 hover:border-primary-600 hover:bg-primary-700 hover:text-white"}`,
       ])}

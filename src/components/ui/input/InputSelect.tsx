@@ -7,6 +7,8 @@ export type InputProps = {
   leadIcon?: React.ReactNode;
   data: { label: string; id: string }[];
   placeholder?: string;
+  value: string;
+  prefix?: string;
 } & React.SelectHTMLAttributes<any>;
 
 export default function InputSelect(props: InputProps) {
@@ -17,6 +19,7 @@ export default function InputSelect(props: InputProps) {
     label,
     leadIcon,
     placeholder,
+    prefix,
     ...rest
   } = props;
   const refInput = useRef(null);
@@ -32,13 +35,13 @@ export default function InputSelect(props: InputProps) {
           onChange={onChange}
           value={value}
         >
-          <option id="" disabled>
+          <option id="" hidden selected>
             {placeholder ?? "---Select---"}
           </option>
           {data &&
             data.map((d) => (
               <option key={d.id} id={d.id}>
-                {d.label}
+                {d.label} {prefix}
               </option>
             ))}
         </select>
