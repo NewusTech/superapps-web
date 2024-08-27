@@ -1,15 +1,13 @@
-import Button from "@/components/ui/button/Button";
+import Button from "@/components/ui/buttonCustom/ButtonCustom";
 import Card from "@/components/ui/card/Card";
-import { Input } from "@/components/ui/input";
 import InputText from "@/components/ui/input/InputText";
-import { Label } from "@/components/ui/label";
+import { stepItem } from "@/constants/rental";
 import { useTravelActions, useTravelStepPayloadPayload } from "@/store/useTravelStore";
 import { Minus } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaChevronUp } from "react-icons/fa6";
-import { stepItem } from "../page";
 
 export type DataDiriPenumpang = {};
 

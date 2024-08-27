@@ -3,34 +3,16 @@
 import Stepper from "@/components/stepper/Stepper";
 
 import React, { useEffect } from "react";
-import PilihTiket from "./partials/PilihTiket";
 import {
   useTravelActions,
   useTravelStepPayloadPayload,
 } from "@/store/useTravelStore";
-import DataDiriPenumpang from "./partials/DataDiriPenumpang";
-import Bayar from "./partials/Bayar";
-import StatusPembayaran from "./partials/StatusPembayaran";
-import { useSearchParams } from "next/navigation";
 
-export const stepItem = [
-  {
-    id: 1,
-    label: "Pilih Tiket",
-  },
-  {
-    id: 2,
-    label: "Isi Data",
-  },
-  {
-    id: 3,
-    label: "Bayar",
-  },
-  {
-    id: 4,
-    label: "Selesai",
-  },
-];
+import { stepItem } from "@/constants/rental";
+import PilihTiket from "@/components/pages/avaliable-schedule/partials/PilihTiket";
+import Bayar from "@/components/pages/avaliable-schedule/partials/Bayar";
+import StatusPembayaran from "@/components/pages/avaliable-schedule/partials/StatusPembayaran";
+import DataDiriPenumpang from "@/components/pages/avaliable-schedule/partials/DataDiriPenumpang"
 
 export default function AvaliableSchedule() {
   const { setStepTravelPayload } = useTravelActions();
