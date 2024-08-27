@@ -1,4 +1,4 @@
-import Button from "@/components/ui/button/Button";
+import Button from "@/components/ui/buttonCustom/ButtonCustom";
 import Card from "@/components/ui/card/Card";
 import { Download } from "lucide-react";
 import React from "react";

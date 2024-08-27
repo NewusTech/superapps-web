@@ -6,7 +6,7 @@ export type myButtonProps = {
   variant?: "primary" | "secondary";
 } & React.ButtonHTMLAttributes<any>;
 
-export default function Button(props: myButtonProps) {
+export default function ButtonCustom(props: myButtonProps) {
   const { children, variant = "primary", ...rest } = props;
   const getVariant = () => {};
   return (

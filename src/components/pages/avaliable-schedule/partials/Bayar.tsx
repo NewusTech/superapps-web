@@ -2,9 +2,9 @@ import Card from "@/components/ui/card/Card";
 import { FaCheckCircle } from "react-icons/fa";
 import React from "react";
 import { Banknote } from "lucide-react";
-import Button from "@/components/ui/button/Button";
+import Button from "@/components/ui/buttonCustom/ButtonCustom";
 import { useTravelActions, useTravelStepPayloadPayload } from "@/store/useTravelStore";
-import { stepItem } from "../page";
+import { stepItem } from "@/constants/rental";
 
 export default function Bayar() {
 

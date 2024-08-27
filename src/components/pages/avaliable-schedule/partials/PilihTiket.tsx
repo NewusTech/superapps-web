@@ -1,15 +1,15 @@
 import DateInput from '@/components/dateInnput/DateInput';
 import MobilePencarianTiket from '@/components/pages/avaliable-schedule/MobilePencarianTiket';
-import Button from '@/components/ui/button/Button'
+import Button from '@/components/ui/buttonCustom/ButtonCustom'
 import Card from '@/components/ui/card/Card'
 import InputSelect from '@/components/ui/input/InputSelect';
+import { stepItem } from '@/constants/rental';
 import { useTravelActions, useTravelStepPayloadPayload } from '@/store/useTravelStore';
 import { Seat } from '@phosphor-icons/react';
 import { Bus, Dot, Minus, Search } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react'
 import { FaArrowRight } from 'react-icons/fa6'
-import { stepItem } from '../page';
 
   const dataDummy = [
     {
