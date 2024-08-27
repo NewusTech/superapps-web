@@ -33,8 +33,11 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname } from "next/navigation";
 
 export default function HamburgerMenu() {
+  const pathname = usePathname();
+
   return (
     <section className="flex flex-row top-8 px-8 justify-between bg-transparent w-full z-50 absolute">
       <div className="w-3/12">
@@ -51,7 +54,11 @@ export default function HamburgerMenu() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="border-none outline-none ring-0">
-              <Menu className="text-neutral-50 w-6 h-6" />
+              {pathname === "/hotel" ? (
+                <Menu className="text-neutral-50 w-6 h-6" />
+              ) : (
+                <Menu className="text-neutral-700 w-6 h-6" />
+              )}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
