@@ -34,7 +34,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
   const pathname = usePathname();
   const [seen, setSeen] = useState(true);
 
-  const path = ["/travel/available-schedule", "/about-us", "/register"];
+  const path = ["/travel/available-schedule", "/about-us", "/register",`/article`];
 
   const navWhite = () => {
     return path.some((p) => pathname.startsWith(p));

@@ -49,7 +49,7 @@ import firstAboutContent from "../../public/assets/images/neededs/about-picture-
 import secondAboutContent from "../../public/assets/images/neededs/about-picture-1.png";
 import thirdAboutContent from "../../public/assets/images/neededs/about-picture-3.png";
 import fourthAboutContent from "../../public/assets/images/neededs/about-picture-4.png";
-import { title } from "process";
+import firstArticleContent from "../../public/assets/images/neededs/article-image-1.png";
 
 export const heroIcons = [
   {
@@ -266,7 +266,7 @@ export const destinations = [
     location: "Pasawaran",
   },
   {
-    id: 1,
+    id: 2,
     image: secondDestination,
     title: "Rio Beach Beach",
     subTitle: "Snorkling & Explore",
@@ -274,7 +274,7 @@ export const destinations = [
     location: "Kalianda",
   },
   {
-    id: 1,
+    id: 3,
     image: thirdDestination,
     title: "Lembah Hijau",
     subTitle: "Explore",
@@ -660,3 +660,69 @@ export const aboutContents = {
     },
   },
 };
+
+export const articles = [
+  {
+    id: 1,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+  {
+    id: 2,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+  {
+    id: 3,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+  {
+    id: 4,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+  {
+    id: 5,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+  {
+    id: 6,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+  {
+    id: 7,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+  {
+    id: 8,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+  {
+    id: 9,
+    image: firstArticleContent,
+    title: "Rama Tranz Hadirkan Rute Baru Antar Kota untuk Anda",
+    dateTime: "Rabu, 13 Januari 2024",
+    desc: "Rama Tranz, penyedia layanan bus travel terkemuka, memperkenalkan rute baru yang menghubungkan Jakarta dengan Lampung dan ...",
+  },
+];
