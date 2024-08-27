@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function HeroScreen({ data }: any) {

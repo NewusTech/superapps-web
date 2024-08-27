@@ -1,7 +1,7 @@
 "use client";
 
 import FollowFooter from "@/components/pages/footer";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,

@@ -22,7 +22,7 @@ import {
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { ChevronDown, Eye, EyeOff, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Label } from "@/components/ui/label";

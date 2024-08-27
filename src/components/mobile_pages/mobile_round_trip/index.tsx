@@ -13,7 +13,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { Seat, Van, Calendar as CalendarIcons } from "@phosphor-icons/react";
 

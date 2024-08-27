@@ -1,4 +1,4 @@
-import Button from "@/components/ui/buttonCustom/ButtonCustom";
+import Button from "@/components/buttonCustom/ButtonCustom";
 import Card from "@/components/ui/card/Card";
 import InputText from "@/components/ui/input/InputText";
 import { stepItem } from "@/constants/rental";

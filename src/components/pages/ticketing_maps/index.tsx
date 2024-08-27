@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import BranchLocation from "./branch";
 
 export default function TicketingMaps({ item }: any) {

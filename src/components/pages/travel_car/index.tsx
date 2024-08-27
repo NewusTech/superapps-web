@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import FeatureTravelCar from "./feature";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 
 export default function TravelCarScreen({ item }: any) {
   return (
