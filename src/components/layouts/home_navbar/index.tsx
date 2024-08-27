@@ -22,7 +22,7 @@ import {
 import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { ChevronDown, Eye, EyeOff, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Label } from "@/components/ui/label";
@@ -34,13 +34,18 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
   const pathname = usePathname();
   const [seen, setSeen] = useState(true);
 
+  const path = ["/travel/available-schedule", "/about-us", "/register",`/article`];
+
+  const navWhite = () => {
+    return path.some((p) => pathname.startsWith(p));
+  };
+
   return (
     <>
-      {pathname === "/register" ||
-      pathname === `/about-us` ||
-      pathname === `/article` ? (
+      {navWhite() ? (
         <section
-          className={`flex flex-row justify-center items-center self-center bg-neutral-50 shadow-md w-full py-2 fixed z-50 transition-all duration-1000`}>
+          className={`flex flex-row justify-center items-center self-center bg-neutral-50 shadow-md w-full py-2 fixed z-50 transition-all duration-1000`}
+        >
           <div className="w-full px-16 flex flex-row justify-between items-center">
             <Link href={"/"} className="w-1/12 h-full">
               <Image
@@ -70,37 +75,43 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                 </DropdownMenu> */}
                 <Link
                   href="/about-us"
-                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}
+                >
                   Tentang Kami
                 </Link>
 
                 <Link
                   href="/travel"
-                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}
+                >
                   Travel
                 </Link>
 
                 <Link
                   href="/rent"
-                  className={`text-neutral-600 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-600 font-normal text-[16px] hover:underline`}
+                >
                   Rental
                 </Link>
 
                 <Link
                   href="/hotel"
-                  className={`text-neutral-600 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-600 font-normal text-[16px] hover:underline`}
+                >
                   Hotel
                 </Link>
 
                 <Link
                   href="/package"
-                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}
+                >
                   Paket
                 </Link>
 
                 <Link
                   href="/article"
-                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}
+                >
                   Artikel
                 </Link>
 
@@ -127,7 +138,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                       isScrolledPast
                         ? "bg-primary-700 text-neutral-50"
                         : "bg-primary-700 border border-neutral-50 text-neutral-50"
-                    }  px-8 py-4 w-full rounded-md`}>
+                    }  px-8 py-4 w-full rounded-md`}
+                  >
                     Daftar
                   </Button>
                 </Link>
@@ -135,7 +147,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                 <AlertDialog>
                   <AlertDialogTrigger>
                     <div
-                      className={`border border-primary-700 text-primary-700 px-8 py-1.5 w-full rounded-md`}>
+                      className={`border border-primary-700 text-primary-700 px-8 py-1.5 w-full rounded-md`}
+                    >
                       Masuk
                     </div>
                   </AlertDialogTrigger>
@@ -163,7 +176,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                           <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                             <Label
                               htmlFor="name"
-                              className="focus-within:text-primary-700">
+                              className="focus-within:text-primary-700"
+                            >
                               Nama Lengkap
                             </Label>
 
@@ -179,7 +193,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                           <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                             <Label
                               htmlFor="password"
-                              className="focus-within:text-primary-700">
+                              className="focus-within:text-primary-700"
+                            >
                               Kata Sandi
                             </Label>
 
@@ -194,7 +209,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
 
                               <div
                                 onClick={() => setSeen(!seen)}
-                                className="p-2 cursor-pointer">
+                                className="p-2 cursor-pointer"
+                              >
                                 {seen ? (
                                   <EyeOff className="text-neutral-400 w-[20px] h-[20px]" />
                                 ) : (
@@ -257,7 +273,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
             isScrolledPast
               ? "bg-neutral-50 shadow-md w-full"
               : "bg-transparent w-full border-b-[0.5px] border-neutral-50"
-          } py-2 fixed z-50 transition-all duration-1000`}>
+          } py-2 fixed z-50 transition-all duration-1000`}
+        >
           <div className="w-full px-16 flex flex-row justify-between items-center">
             <Link href={"/"} className="w-1/12 h-full">
               <Image
@@ -290,7 +307,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/about-us"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:underline`}
+                >
                   Tentang Kami
                 </Link>
 
@@ -298,7 +316,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/travel"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:underline`}
+                >
                   Travel
                 </Link>
 
@@ -306,7 +325,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/rent"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:underline`}
+                >
                   Rental
                 </Link>
 
@@ -314,7 +334,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/hotel"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:underline`}
+                >
                   Hotel
                 </Link>
 
@@ -322,7 +343,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/package"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:underline`}
+                >
                   Paket
                 </Link>
 
@@ -330,7 +352,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/article"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:underline`}
+                >
                   Artikel
                 </Link>
 
@@ -357,7 +380,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                       isScrolledPast
                         ? "bg-primary-700 text-neutral-50"
                         : "bg-primary-700 border border-neutral-50 text-neutral-50"
-                    }  px-8 py-4 w-full rounded-md`}>
+                    }  px-8 py-4 w-full rounded-md`}
+                  >
                     Daftar
                   </Button>
                 </Link>
@@ -365,7 +389,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                 <AlertDialog>
                   <AlertDialogTrigger>
                     <div
-                      className={`${isScrolledPast ? "border border-primary-700 text-primary-700" : "border border-neutral-50 text-neutral-50"} px-8 py-1.5 w-full rounded-md`}>
+                      className={`${isScrolledPast ? "border border-primary-700 text-primary-700" : "border border-neutral-50 text-neutral-50"} px-8 py-1.5 w-full rounded-md`}
+                    >
                       Masuk
                     </div>
                   </AlertDialogTrigger>
@@ -393,7 +418,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                           <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                             <Label
                               htmlFor="name"
-                              className="focus-within:text-primary-700">
+                              className="focus-within:text-primary-700"
+                            >
                               Nama Lengkap
                             </Label>
 
@@ -409,7 +435,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                           <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                             <Label
                               htmlFor="password"
-                              className="focus-within:text-primary-700">
+                              className="focus-within:text-primary-700"
+                            >
                               Kata Sandi
                             </Label>
 
@@ -424,7 +451,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
 
                               <div
                                 onClick={() => setSeen(!seen)}
-                                className="p-2 cursor-pointer">
+                                className="p-2 cursor-pointer"
+                              >
                                 {seen ? (
                                   <EyeOff className="text-neutral-400 w-[20px] h-[20px]" />
                                 ) : (

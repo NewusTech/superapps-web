@@ -7,7 +7,7 @@ import { useState } from "react";
 import { formatDate } from "@/helpers/index";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import {
   destinations,
   facilities,
@@ -419,7 +419,8 @@ export default function Home() {
 
           <Link
             href={"/"}
-            className="hidden w-4/12 md:flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5">
+            className="hidden w-4/12 md:flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5"
+          >
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">
@@ -441,7 +442,8 @@ export default function Home() {
         <div className="md:hidden">
           <Link
             href={"/"}
-            className="w-full flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-3 rounded-lg gap-x-5">
+            className="w-full flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-3 rounded-lg gap-x-5"
+          >
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">

@@ -2,7 +2,7 @@
 
 import { Calendar } from "@phosphor-icons/react";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import React, { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -39,7 +39,8 @@ export default function MobileTicketingMaps() {
         className="mySwiper"
         loop={true}
         pagination={{ clickable: true }}
-        ref={swiperRef}>
+        ref={swiperRef}
+      >
         {travelMaps.map((item: any, i: number) => {
           return (
             <SwiperSlide key={i}>
@@ -50,7 +51,8 @@ export default function MobileTicketingMaps() {
                     className="border-none w-full h-full"
                     allowFullScreen
                     loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
 
                 <div className="flex flex-col w-full gap-y-4">

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import BranchLocation from "./branch";
 
 export default function TicketingMaps({ item }: any) {
@@ -12,7 +12,8 @@ export default function TicketingMaps({ item }: any) {
           className="border-none w-full h-full"
           allowFullScreen
           loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"></iframe>
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
       </div>
 
       <div className="flex flex-col w-full gap-y-4">

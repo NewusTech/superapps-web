@@ -13,7 +13,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { format } from "date-fns";
 import { Seat, Van, Calendar as CalendarIcons } from "@phosphor-icons/react";
 
@@ -27,23 +27,27 @@ export default function RoundTripForm() {
       <div>
         <Tabs
           defaultValue="Sekali Jalan"
-          className="w-full flex flex-col justify-center self-center items-center">
+          className="w-full flex flex-col justify-center self-center items-center"
+        >
           <TabsList className="w-11/12 flex flex-row px-5 py-6 mt-4 border-b border-grey-100 pb-10 rounded-none">
             <TabsTrigger
               className="data-[state=active]:bg-primary-700 data-[state=active]:text-neutral-50 w-full py-3"
-              value="Sekali Jalan">
+              value="Sekali Jalan"
+            >
               Sekali Jalan
             </TabsTrigger>
             <TabsTrigger
               className="data-[state=active]:bg-primary-700 data-[state=active]:text-neutral-50 w-full py-3"
-              value="Pulang Pergi">
+              value="Pulang Pergi"
+            >
               Pulang Pergi
             </TabsTrigger>
           </TabsList>
 
           <TabsContent
             className="flex flex-col w-full px-4 gap-y-10 mt-8"
-            value="Sekali Jalan">
+            value="Sekali Jalan"
+          >
             <div className="w-full flex flex-col gap-y-3">
               <div className="w-full flex flex-col border-b border-grey-100">
                 <h6>Keberangkatan</h6>
@@ -155,7 +159,8 @@ export default function RoundTripForm() {
 
           <TabsContent
             value="Pulang Pergi"
-            className="flex flex-col w-full px-4 gap-y-10 mt-0">
+            className="flex flex-col w-full px-4 gap-y-10 mt-0"
+          >
             <div className="w-full flex flex-col gap-y-3">
               <div className="w-full flex flex-col border-b border-grey-100">
                 <h6>Keberangkatan</h6>

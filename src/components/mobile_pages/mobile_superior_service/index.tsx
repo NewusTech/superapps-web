@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import React, { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -30,7 +30,8 @@ export default function MobileSuperiorServiceScreen() {
         className="mySwiper"
         loop={true}
         pagination={{ clickable: true }}
-        ref={swiperRef}>
+        ref={swiperRef}
+      >
         {unggulans.map((item: any, i: number) => {
           return (
             <SwiperSlide key={i}>
