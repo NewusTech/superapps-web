@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
-import { Button } from "../ui/Button";
+import { Button } from "../ui/button";
 import { ChevronDown } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 

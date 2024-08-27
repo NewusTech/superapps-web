@@ -1,7 +1,7 @@
 "use client";
 
 import profileImage from "@/../../public/assets/images/neededs/profile-ramatranz.png";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 

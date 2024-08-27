@@ -7,7 +7,7 @@ import { useState } from "react";
 import { formatDate } from "@/helpers/index";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import {
   destinations,
   facilities,

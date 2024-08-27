@@ -2,7 +2,7 @@ import Card from "@/components/ui/card/Card";
 import { FaCheckCircle } from "react-icons/fa";
 import React from "react";
 import { Banknote } from "lucide-react";
-import Button from "@/components/ui/buttonCustom/ButtonCustom";
+import Button from "@/components/buttonCustom/ButtonCustom";
 import { useTravelActions, useTravelStepPayloadPayload } from "@/store/useTravelStore";
 import { stepItem } from "@/constants/rental";
 

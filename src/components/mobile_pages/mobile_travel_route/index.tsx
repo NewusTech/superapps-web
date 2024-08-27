@@ -2,7 +2,7 @@
 
 import { Calendar } from "@phosphor-icons/react";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import React, { useEffect, useRef, useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";

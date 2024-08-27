@@ -1,6 +1,6 @@
 import DateInput from '@/components/dateInnput/DateInput';
 import MobilePencarianTiket from '@/components/pages/avaliable-schedule/MobilePencarianTiket';
-import Button from '@/components/ui/buttonCustom/ButtonCustom'
+import Button from '@/components/buttonCustom/ButtonCustom'
 import Card from '@/components/ui/card/Card'
 import InputSelect from '@/components/ui/input/InputSelect';
 import { stepItem } from '@/constants/rental';
