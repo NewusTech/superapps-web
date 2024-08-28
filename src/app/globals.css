@@ -100,6 +100,10 @@
   background-blend-mode: overlay;
 }
 
+.background-rental-armada {
+  background-color: rgb(237, 237, 237);
+}
+
 .swiper-button-next,
 .swiper-button-prev {
   color: #0000ff !important;
