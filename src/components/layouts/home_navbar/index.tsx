@@ -42,6 +42,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
     "/rent",
     "/package",
     "/hotel/detail",
+    '/travel/detail-travel'
   ];
 
   const navWhite = () => {
