@@ -29,6 +29,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function HeroScreen({ data }: any) {
   const [returnDateEnabled, setReturnDateEnabled] = useState(false);
@@ -36,6 +37,12 @@ export default function HeroScreen({ data }: any) {
     undefined
   );
   const [returnDate, setReturnDate] = useState<Date | undefined>(undefined);
+
+  const router = useRouter();
+
+  const handleToSeacrhTravel = ()=>{
+    router.push("/travel/available-schedule")
+  }
 
   return (
     <section className="md:w-full md:h-screen justify-center items-center flex flex-col relative top-28 md:top-10 gap-y-24">
@@ -277,8 +284,7 @@ export default function HeroScreen({ data }: any) {
           </div>
 
           <div className="flex flex-row items-end">
-            <Button
-              type="submit"
+            <Button onClick={handleToSeacrhTravel}
               className="rounded-2xl bg-neutral-50 px-6 py-7 border border-outline_border-100"
             >
               <Search className="text-primary-700" />

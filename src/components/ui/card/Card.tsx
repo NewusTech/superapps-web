@@ -10,7 +10,7 @@ export default function Card(props: CardProps) {
   return (
     <div
       className={twMerge([
-        "w-full border rounded-xl overflow-hidden",
+        "w-full border rounded-xl overflow-hidden bg-white",
         className,
       ])}
       {...rest}

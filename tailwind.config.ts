@@ -113,6 +113,8 @@ const config = {
         back_blue: {
           50: "#73ADFF",
         },
+        danger_base: "#EE3D60",
+        dange_light:"#FDE6EB",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",

@@ -24,10 +24,6 @@ export default function AvaliableSchedule() {
     setStepTravelPayload(stepTravel - 1);
   };
 
-  useEffect(() => {
-      setStepTravelPayload(1);
-  }, []);
-
   return (
     <section className="flex flex-col gap-5 md:w-full h-full md:mb-0 pb-80 px-1 md:px-[2rem] container">
       <div className="mt-32 w-full p-2">
