@@ -12,7 +12,7 @@ import { stepItem } from "@/constants/rental";
 import PilihTiket from "@/components/pages/avaliable-schedule/partials/PilihTiket";
 import Bayar from "@/components/pages/avaliable-schedule/partials/Bayar";
 import StatusPembayaran from "@/components/pages/avaliable-schedule/partials/StatusPembayaran";
-import DataDiriPenumpang from "@/components/pages/avaliable-schedule/partials/DataDiriPenumpang"
+import DataDiriPenumpang from "@/components/pages/avaliable-schedule/partials/DataDiriPenumpang";
 
 export default function AvaliableSchedule() {
   const { setStepTravelPayload } = useTravelActions();
@@ -25,7 +25,7 @@ export default function AvaliableSchedule() {
   };
 
   useEffect(() => {
-      setStepTravelPayload(1);
+    setStepTravelPayload(1);
   }, []);
 
   return (
@@ -38,7 +38,25 @@ export default function AvaliableSchedule() {
 
       {stepTravel === 2 && <DataDiriPenumpang />}
 
-      {stepTravel === 3 && <Bayar />}
+      {stepTravel === 3 && (
+        <Bayar
+          keys={false}
+          firstTitle="Jadwal Travel Keberangkatan"
+          secondTitle="Data Penumpang"
+          firstSubTitle={{
+            name: "Keberangkatan",
+            email: "Tujuan",
+            nomor: "Tanggal & Jam Berangkat",
+            etc: "Jumlah Penumpang",
+          }}
+          secondSubTitle={{
+            name: "Nama Penumpang",
+            email: "Email",
+            nomor: "Nomor Telepon",
+            etc: "Alamat",
+          }}
+        />
+      )}
 
       {stepTravel === 4 && <StatusPembayaran />}
     </section>
