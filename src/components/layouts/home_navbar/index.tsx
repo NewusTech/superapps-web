@@ -42,13 +42,10 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
     "/rent",
     "/package",
     "/hotel/detail",
-<<<<<<< HEAD
     "/hotel/order-hotel",
     "/hotel/payment-hotel-order",
     "/hotel/payment-status",
-=======
     '/travel/detail-travel'
->>>>>>> e715e83181c09473c8bee08c54f139626efe6c12
   ];
 
   const navWhite = () => {
