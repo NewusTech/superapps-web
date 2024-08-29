@@ -62,6 +62,7 @@ import firstDetailImageHotel from "../../public/assets/images/neededs/detail-hot
 import secondDetailImageHotel from "../../public/assets/images/neededs/detail-hotel-image-2.png";
 import thirdDetailImageHotel from "../../public/assets/images/neededs/detail-hotel-image-3.png";
 import fourthDetailImageHotel from "../../public/assets/images/neededs/detail-hotel-image-4.png";
+import firstIconsImageApatement from "../../public/assets/images/neededs/hotel-icon-image-apartement-1.png";
 
 export const heroIcons = [
   {
@@ -837,5 +838,8 @@ export const detailHotels = {
     lokasi:
       "Jl. K.H.Hasyim Ashari 29-31, Gambir, Petojo Utara, Jakarta, Indonesia, 10130",
     map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.8333259987476!2d105.26985647507213!3d-5.442262654291578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e40dbd15418dcc1%3A0x11cadd700e0e0339!2sJl.%20Salim%20Batubara%20No.118%2C%20Kupang%20Teba%2C%20Kec.%20Tlk.%20Betung%20Utara%2C%20Kota%20Bandar%20Lampung%2C%20Lampung%2035212!5e0!3m2!1sid!2sid!4v1723621727730!5m2!1sid!2sid",
+  },
+  iconsHotel: {
+    image: firstIconsImageApatement,
   },
 };
