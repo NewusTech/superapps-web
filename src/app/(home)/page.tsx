@@ -72,18 +72,18 @@ export default function Home() {
       </div>
 
       <div className="w-full min-h-[320px] absolute top-[250px] rounded-t-xl flex flex-row md:hidden justify-center bg-gradient-to-r from-[#CA1D76] from-[-100%] to-[#082167] to-[100%]">
-        <div className="flex flex-row px-8 pt-6 items-start gap-x-5">
-          <div className="w-4/12">
+        <div className="flex flex-row px-8 pt-6 items-start justify-start gap-x-5 ">
+          <div className="w-[5rem] h-[5rem]">
             <Image
               src={ticket}
               alt="Ticket"
               width={1000}
               height={1000}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain object-center"
             />
           </div>
 
-          <h4 className="font-semibold text-neutral-50 text-[16px] pt-3">
+          <h4 className="font-semibold text-neutral-50 text-[16px] pt-3 align-text-top">
             Partner Resmi dan Terpercaya. Tiket dijamin resmi, bebas khawatir!
           </h4>
         </div>

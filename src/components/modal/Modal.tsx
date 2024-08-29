@@ -1,27 +1,43 @@
 import React from "react";
-import Card from "../ui/card/Card";
-import { X } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "../ui/drawer";
 
 export type ModalProps = {
   children: React.ReactNode;
-  className: string;
+  className?: string;
   visible: boolean;
-  setVisible: (p: boolean) => void;
+  title?: string;
+  responsive?: boolean;
+  setVisible: (visible: boolean) => void;
 };
 
 export default function Modal(props: ModalProps) {
-  const { children, className, visible, setVisible } = props;
-  if (!visible) return;
+  const { children, className, visible, setVisible, title="", responsive } = props;
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  if (isDesktop) {
+    return (
+      <Dialog open={visible} onOpenChange={setVisible}>
+        <DialogContent className={cn("sm:max-w-md bg-white", className)}>
+          <DialogHeader className={title?"":"hidden"}>
+             <DialogTitle>{title}</DialogTitle>
+          </DialogHeader>
+          <div className="flex items-center justify-center space-x-2">
+            {children}
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
   return (
-    <div className="absolute top-0 w-full h-full flex flex-col justify-center items-center z-[99]">
-      <Card className={className}>
-        <div className="absolute h-fit flex flex-row">
-          <button className="flex justify-center items-center ml-auto" onClick={()=> setVisible(false)}>
-            <X />
-          </button>
-        </div>
+    <Drawer open={visible} onOpenChange={setVisible}>
+      <DrawerContent className={cn("bg-white pb-10", className)}>
+        <DrawerHeader className={cn("text-left",title?"":"hidden")}>
+           <DrawerTitle>{title}</DrawerTitle>
+        </DrawerHeader>
         {children}
-      </Card>
-    </div>
+      </DrawerContent>
+    </Drawer>
   );
 }

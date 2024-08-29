@@ -17,6 +17,7 @@ import CarSeat10 from "@/components/carSeat/CarSeat10";
 import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
 import Modal from "@/components/modal/Modal";
 import { useRouter } from "next/navigation";
+import ModalSelectSeat from "../ModalSelectSeat";
 
 const dataDummy = [
   {
@@ -55,12 +56,9 @@ export default function PilihTiket() {
 
   const { setStepTravelPayload } = useTravelActions();
 
-  const useTravelStep = useTravelStepPayloadPayload();
-
   const handleNextStep = () => {
-    if (useTravelStep > stepItem.length) return;
     setOpenModalKursi(false);
-    setStepTravelPayload(useTravelStep + 1);
+    setStepTravelPayload(2);
     window.scrollTo(0, 0);
   };
 
@@ -68,9 +66,9 @@ export default function PilihTiket() {
     setOpenModalKursi(true);
   };
 
-  const handleDetailTravel = ()=>{
-    router.push("/travel/detail-travel")
-  }
+  const handleDetailTravel = () => {
+    router.push("/travel/detail-travel");
+  };
 
   return (
     <section className="w-full mt-10">
@@ -171,7 +169,11 @@ export default function PilihTiket() {
                       <Dot /> Tersedia 5 Kursi
                     </span>
                   </div>
-                  <Button className="h-fit" variant="secondary" onClick={handleDetailTravel}>
+                  <Button
+                    className="h-fit"
+                    variant="secondary"
+                    onClick={handleDetailTravel}
+                  >
                     Detail Tiket
                   </Button>
                 </div>
@@ -250,51 +252,8 @@ export default function PilihTiket() {
           </Card>
         </div>
       </div>
-
-      <Modal
-        className="w-1/2"
-        visible={openModalKursi}
-        setVisible={setOpenModalKursi}
-      >
-        <div className="flex flex-col items-center justify-center gap-4">
-          <div className="flex flex-col items-center justify-center gap-2">
-            <Image
-              src={ramatranz}
-              alt="Ramatranz"
-              width={300}
-              height={300}
-              className="w-[5rem] h-[5rem] object-contain"
-            />
-            <span className="flex flex-row items-center gap-2 text-sm md:text-base">
-              Rama Tranz Type A <Minus className="" /> HIACE
-            </span>
-            <span className="flex flex-row items-center gap-2 text-sm md:text-base">
-              Senin, 23 Februari 2024 <Dot className="" /> 15:00 - 23:00
-            </span>
-            <div className="flex flex-row gap-5">
-              <div className="flex flex-row gap-2">
-                <div className="h-[1rem] w-[1rem] bg-primary-700 border border-primary-700" />
-                Dipilih
-              </div>
-              <div className="flex flex-row gap-2">
-                <div className="h-[1rem] w-[1rem] bg-white border border-gray-500" />
-                Tersedia
-              </div>
-              <div className="flex flex-row gap-2">
-                <div className="h-[1rem] w-[1rem] bg-gray-500 border-gray-500" />
-                Tidak Tersedia
-              </div>
-            </div>
-          </div>
-          <div className="bg-dange_light text-danger_base p-2">
-            WAJIB BELI UNTUK ANAK DIATAS USIA 7 TAHUN{" "}
-          </div>
-          <CarSeat10 />
-          <Button className="h-1/2" onClick={handleNextStep}>
-            Pilih Kursi
-          </Button>
-        </div>
-      </Modal>
+      {/* Modal Select Seat */}
+      <ModalSelectSeat visible={openModalKursi} setVisible={setOpenModalKursi} handleAfterSelectSeat={handleNextStep}/>
     </section>
   );
 }

@@ -1,6 +1,7 @@
+import { cn } from "@/lib/utils";
 import React, { useRef } from "react";
 import { FaChevronDown } from "react-icons/fa6";
-import { twMerge } from "tailwind-merge";
+
 
 export type InputProps = {
   label?: string;
@@ -20,13 +21,14 @@ export default function InputSelect(props: InputProps) {
     leadIcon,
     placeholder,
     prefix,
+    className,
     ...rest
   } = props;
   const refInput = useRef(null);
   return (
-    <label className={twMerge(["w-full flex flex-col gap-2", rest.className])}>
+    <label className={cn(["w-full flex flex-col gap-2"])}>
       {label && <span className="font-medium"> {label} </span>}
-      <div className="border border-outline_border-100 rounded-full flex flex-row items-center overflow-hidden bg-white pl-3 pr-3 gap-2 h-12">
+      <div className={cn("border border-outline_border-100 rounded-full flex flex-row items-center overflow-hidden bg-white pl-3 pr-3 gap-2 h-12",className)}>
         {leadIcon && leadIcon}
         <select
           id="select-1"

@@ -1,28 +1,23 @@
 "use client";
 
-import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
 import Modal from "@/components/modal/Modal";
 import Card from "@/components/ui/card/Card";
-import { ExclamationMark, Seat, Suitcase } from "@phosphor-icons/react";
-import { Bus, ChevronDown, Dot, Minus } from "lucide-react";
+import { Seat } from "@phosphor-icons/react";
+import { ChevronDown, Dot, Minus } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
-import CarSeat10 from "@/components/carSeat/CarSeat10";
-import {
-  useTravelActions,
-  useTravelStepPayloadPayload,
-} from "@/store/useTravelStore";
-import { stepItem } from "@/constants/rental";
+import { useTravelActions } from "@/store/useTravelStore";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
-import { TravelConditionDatas } from "@/constants/main";
+import { CgMenuGridO } from "react-icons/cg";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import ModalSelectSeat from "@/components/pages/avaliable-schedule/ModalSelectSeat";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function DetailTravel() {
   const dummyImage = [
@@ -69,55 +64,71 @@ export default function DetailTravel() {
   const [activeTab, setActiveTab] = useState(1);
 
   const [openModalKursi, setOpenModalKursi] = useState(false);
+  const [openModalDetailImage, setOpenModalDetailImage] = useState(false);
+  const [openModalViewAllImage, setOpenModalViewAllImage] = useState(false);
+  const [detailImageActive, setDetailImageActive] = useState(
+    "/assets/images/neededs/travel/travel-1.png"
+  );
 
   const router = useRouter();
 
+  const isDesktop = useMediaQuery("(min-width: 1020px)");
+
+  const displayCard = isDesktop ? 5 : 3;
+
   const { setStepTravelPayload } = useTravelActions();
 
-  const useTravelStep = useTravelStepPayloadPayload();
-
   const handleNextStep = () => {
-    if (useTravelStep > stepItem.length) return;
     setOpenModalKursi(false);
     router.push("/travel/available-schedule");
     setStepTravelPayload(2);
     window.scrollTo(0, 0);
   };
 
+  const handleOnClickIamge = (img: string) => {
+    setDetailImageActive(img);
+    setOpenModalDetailImage(true);
+  };
+
   return (
-    <section className="flex flex-col gap-5 md:w-full h-full md:mb-0 pb-80 px-1 md:px-[2rem] container">
+    <section className="flex flex-col gap-5 md:w-full h-full md:mb-0 pb-80 px-1 md:px-[2rem]">
       <div className="mt-32 w-full h-full min-h-svh p-2 flex flex-col">
         <div className="flex flex-row w-full h-[31rem] gap-4 overflow-hidden">
-          {/* <div className="absolute w-full z-10 flex bg-red-300">
-            <button className="flex flex-row items-center bg-white p-2 ml-auto h-fit w-fit">
-              Lihat Semua Foto
-            </button>
-          </div> */}
-          <div className="w-full md:w-1/2 h-[31rem]">
+          <div className="w-full md:w-1/2 h-[31rem] cursor-pointer ">
             <Image
               src={"/assets/images/neededs/travel/travel-1.png"}
               alt="Ramatranz"
               width={300}
               height={300}
               className="w-full h-full object-cover"
+              onClick={() => handleOnClickIamge(dummyImage[0].image)}
             />
           </div>
 
-          <div className=" w-1/2 h-auto hidden md:grid grid-cols-1 lg:grid-cols-2 gap-2 items-stretch justify-between">
-            {dummyImage.slice(0, -1).map((data) => (
+          <div className=" w-1/2 h-[100%] hidden md:grid grid-rows-2 grid-cols-1 lg:grid-cols-2 gap-2 items-center content-between justify-between">
+            {dummyImage.slice(1, displayCard).map((data) => (
               <div
                 key={data.image}
-                className="w-[20rem] h-[15rem] object-cover overflow-hidden "
+                className="w-[50%%] h-[100%] overflow-hidden cursor-pointer"
               >
                 <Image
                   src={data.image}
                   alt="Ramatranz"
                   width={300}
                   height={300}
-                  className="w-full h-full"
+                  className="w-full h-full object-cover"
+                  onClick={() => handleOnClickIamge(data.image)}
                 />
               </div>
             ))}
+          </div>
+          <div className="absolute w-[90%] h-[29rem] z-10 flex pointer-events-none">
+            <button
+              className="flex flex-row gap-2 items-center bg-white p-2 ml-auto mt-auto h-fit w-fit pointer-events-auto"
+              onClick={() => setOpenModalViewAllImage(true)}
+            >
+              <CgMenuGridO className="text-black" /> Lihat Semua Foto
+            </button>
           </div>
         </div>
         <Card className="mt-10">
@@ -285,49 +296,47 @@ export default function DetailTravel() {
         </div>
       </div>
 
-      {/* modals */}
-      <Modal
-        className="w-full md:w-1/2"
+      {/* modal pilih kursi */}
+      <ModalSelectSeat
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
+        handleAfterSelectSeat={handleNextStep}
+      />
+      {/* modal lihat foto */}
+      <Modal
+        visible={openModalDetailImage}
+        setVisible={setOpenModalDetailImage}
+        className="h-1/2 w-full"
       >
-        <div className="flex flex-col items-center justify-center gap-4">
-          <div className="flex flex-col items-center justify-center gap-2">
-            <Image
-              src={ramatranz}
-              alt="Ramatranz"
-              width={300}
-              height={300}
-              className="w-[5rem] h-[5rem] object-contain"
-            />
-            <span className="flex flex-row items-center gap-2 text-sm md:text-base">
-              Rama Tranz Type A <Minus className="" /> HIACE
-            </span>
-            <span className="flex flex-row items-center gap-2 text-sm md:text-base">
-              Senin, 23 Februari 2024 <Dot className="" /> 15:00 - 23:00
-            </span>
-            <div className="flex flex-row gap-5">
-              <div className="flex flex-row gap-2">
-                <div className="h-[1rem] w-[1rem] bg-primary-700 border border-primary-700" />
-                Dipilih
-              </div>
-              <div className="flex flex-row gap-2">
-                <div className="h-[1rem] w-[1rem] bg-white border border-gray-500" />
-                Tersedia
-              </div>
-              <div className="flex flex-row gap-2">
-                <div className="h-[1rem] w-[1rem] bg-gray-500 border-gray-500" />
-                Tidak Tersedia
-              </div>
+        <Image
+          src={detailImageActive}
+          alt="Ramatranz"
+          width={300}
+          height={300}
+          className="w-full h-full object-cover"
+        />
+      </Modal>
+      <Modal
+        visible={openModalViewAllImage}
+        setVisible={setOpenModalViewAllImage}
+        className="w-full h-full overflow-auto"
+      >
+        <div className="flex flex-col gap-2">
+          {dummyImage.map((data) => (
+            <div
+              key={data.image}
+              className="w-full h-[15rem] overflow-hidden cursor-pointer"
+            >
+              <Image
+                src={data.image}
+                alt="Ramatranz"
+                width={300}
+                height={300}
+                className="w-full h-full object-cover"
+                onClick={() => handleOnClickIamge(data.image)}
+              />
             </div>
-          </div>
-          <div className="bg-dange_light text-danger_base p-2">
-            WAJIB BELI UNTUK ANAK DIATAS USIA 7 TAHUN{" "}
-          </div>
-          <CarSeat10 />
-          <ButtonCustom className="h-1/2" onClick={handleNextStep}>
-            Pilih Kursi
-          </ButtonCustom>
+          ))}
         </div>
       </Modal>
     </section>
