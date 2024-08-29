@@ -34,7 +34,7 @@ export default function TravelCarRentScreen({ item }: any) {
       </div>
 
       <div className="w-full">
-        <Link href={"/rent"}>
+        <Link href={"/rent/form-rent"}>
           <Button className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
             Rental Mobil Sekarang
           </Button>

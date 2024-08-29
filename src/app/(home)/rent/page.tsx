@@ -7,11 +7,14 @@ import TravelCarRentScreen from "@/components/pages/travel-car-rents";
 import { rentals, travelCars } from "@/constants/main";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function RentPage() {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const [rents, setRents] = useState<any>();
+
+  const router = useRouter();
 
   useEffect(() => {
     setRents(rentals);

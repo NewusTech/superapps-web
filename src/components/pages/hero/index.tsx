@@ -40,13 +40,16 @@ export default function HeroScreen({ data }: any) {
 
   const router = useRouter();
 
-  const handleToSeacrhTravel = ()=>{
-    router.push("/travel/available-schedule")
-  }
+  const handleToSeacrhTravel = () => {
+    router.push("/travel/available-schedule");
+  };
 
   return (
     <section className="md:w-full md:h-screen justify-center items-center flex flex-col relative top-28 md:top-10 gap-y-24">
-      <div className="w-full md:w-6/12 flex flex-col justify-center items-center bg-neutral-50 bg-opacity-15 py-3 md:py-8 px-3 md:px-4 rounded-md border border-neutral-50">
+      <div
+        className="w-full md:w-6/12 flex flex-col justify-center items-center py-3 md:py-8 px-3 md:px-4 rounded-md border bg-white-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20border-gray-100
+ border-neutral-50"
+      >
         <div className="grid grid-cols-5 gap-x-2 md:gap-x-12 mb-4 md:mb-0">
           {data?.map((item: any, i: number) => {
             let icon;
@@ -284,7 +287,8 @@ export default function HeroScreen({ data }: any) {
           </div>
 
           <div className="flex flex-row items-end">
-            <Button onClick={handleToSeacrhTravel}
+            <Button
+              onClick={handleToSeacrhTravel}
               className="rounded-2xl bg-neutral-50 px-6 py-7 border border-outline_border-100"
             >
               <Search className="text-primary-700" />

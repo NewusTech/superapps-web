@@ -18,7 +18,7 @@ export default function Card(props: CardProps) {
       {typeof header !== "string" ? (
         header
       ) : (
-        <div className="px-6 py-4 border-b">{header}</div>
+        <div className="px-6 py-4 border-b font-semibold">{header}</div>
       )}
       <div className="p-6 w-full">{children}</div>
     </div>
