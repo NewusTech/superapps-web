@@ -12,27 +12,6 @@ import InputSelect from "@/components/ui/input/InputSelect";
 import DateInput from "@/components/dateInnput/DateInput";
 import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
 
-export const dummyImageRent = [
-  {
-    image: "/assets/images/neededs/about-image-1.png",
-  },
-  {
-    image: "/assets/images/neededs/about-image-2.png",
-  },
-  {
-    image: "/assets/images/neededs/about-image-3.png",
-  },
-  {
-    image: "/assets/images/neededs/about-image-1.png",
-  },
-  {
-    image: "/assets/images/neededs/about-image-2.png",
-  },
-  {
-    image: "/assets/images/neededs/about-image-3.png",
-  },
-];
-
 export default function FormRental() {
   const [detailImageActive, setDetailImageActive] = useState(
     "/assets/images/neededs/travel/travel-1.png"
@@ -40,6 +19,27 @@ export default function FormRental() {
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const [departureDate, setDepartureDate] = useState<Date>(new Date());
+
+  const dummyImageRent = [
+    {
+      image: "/assets/images/neededs/about-image-1.png",
+    },
+    {
+      image: "/assets/images/neededs/about-image-2.png",
+    },
+    {
+      image: "/assets/images/neededs/about-image-3.png",
+    },
+    {
+      image: "/assets/images/neededs/about-image-1.png",
+    },
+    {
+      image: "/assets/images/neededs/about-image-2.png",
+    },
+    {
+      image: "/assets/images/neededs/about-image-3.png",
+    },
+  ];
 
 //   const handleMouseDown = (event: React.MouseEvent) => {
 //     const slider = scrollRef.current;
