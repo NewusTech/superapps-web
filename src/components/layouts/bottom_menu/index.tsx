@@ -28,13 +28,13 @@ export default function BottomMenu() {
       </Link>
 
       <Link
-        href={"/mpp/tentang-mpp"}
+        href={"/travel"}
         className={`${
-          pathName === "/mpp/tentang-mpp" ? "bg-primary-700 rounded-xl" : ""
+          pathName === "/travel" ? "bg-primary-700 rounded-xl" : ""
         } grid grid-rows-2 place-items-center gap-y-2 w-full p-2`}>
         <Van
           className={`w-5 h-5 ${
-            pathName === "/mpp/tentang-mpp"
+            pathName === "/travel"
               ? "text-neutral-50"
               : "text-primary-700"
           }`}
@@ -42,7 +42,7 @@ export default function BottomMenu() {
 
         <p
           className={`${
-            pathName === "/mpp/tentang-mpp"
+            pathName === "/travel"
               ? "text-neutral-50"
               : "text-primary-700"
           } font-normal text-[12px]`}>
@@ -51,38 +51,38 @@ export default function BottomMenu() {
       </Link>
 
       <Link
-        href={"/instansi"}
+        href={"/package"}
         className={`${
-          pathName === "/instansi" ? "bg-primary-700 rounded-xl" : ""
+          pathName === "/package" ? "bg-primary-700 rounded-xl" : ""
         } grid grid-rows-2 place-items-center gap-y-2 w-full p-2`}>
         <Package
           className={`w-5 h-5 ${
-            pathName === "/instansi" ? "text-neutral-50" : "text-primary-700"
+            pathName === "/package" ? "text-neutral-50" : "text-primary-700"
           }`}
         />
 
         <p
           className={`${
-            pathName === "/instansi" ? "text-neutral-50" : "text-primary-700"
+            pathName === "/package" ? "text-neutral-50" : "text-primary-700"
           } font-normal text-[12px]`}>
           Paket
         </p>
       </Link>
 
       <Link
-        href={"/profile"}
+        href={"/rent"}
         className={`${
-          pathName === "/profile" ? "bg-primary-700 rounded-xl" : ""
+          pathName === "/rent" ? "bg-primary-700 rounded-xl" : ""
         } grid grid-rows-2 place-items-center gap-y-2 w-full p-2`}>
         <Van
           className={`w-5 h-5 ${
-            pathName === "/profile" ? "text-neutral-50" : "text-primary-700"
+            pathName === "/rent" ? "text-neutral-50" : "text-primary-700"
           }`}
         />
 
         <p
           className={`${
-            pathName === "/profile"
+            pathName === "/rent"
               ? "text-neutral-50 rounded-xl"
               : "text-primary-700"
           } font-normal text-[12px]`}>
