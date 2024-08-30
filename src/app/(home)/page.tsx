@@ -3,7 +3,7 @@
 import ticket from "@/../../public/assets/images/neededs/ticket-round.png";
 import mobileFooter from "@/../../public/assets/images/neededs/mobile-footer.png";
 import { Play } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDate } from "@/helpers/index";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,13 +45,34 @@ import Footer from "@/components/layouts/footer";
 import MobileRouteTravelCar from "@/components/mobile_pages/mobile_route_travel_car";
 import ApartementScreen from "@/components/pages/apartements";
 import MobileApartementScreen from "@/components/mobile_pages/mobile_apartement";
+import {
+  DataPariwisataInterface,
+  PariwitasaInterface,
+} from "@/types/interface";
+import { getAllPariwisata } from "@/services/api";
 
 export default function Home() {
   const now = new Date();
   const isMobile = useMediaQuery("(max-width: 767px)");
+  // const [destinationDatas, setDestinationDatas] =
+  //   useState<DataPariwisataInterface>();
   const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const [startDate, setStartDate] = useState<Date | undefined>(firstDayOfMonth);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  // const fetchAllPariwisata = async () => {
+  //   try {
+  //     const destination = await getAllPariwisata();
+
+  //     setDestinationDatas(destination?.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchAllPariwisata();
+  // }, []);
 
   const startDateFormatted = startDate
     ? formatDate(new Date(startDate))
@@ -419,8 +440,7 @@ export default function Home() {
 
           <Link
             href={"/"}
-            className="hidden w-4/12 md:flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5"
-          >
+            className="hidden w-4/12 md:flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5">
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">
@@ -442,8 +462,7 @@ export default function Home() {
         <div className="md:hidden">
           <Link
             href={"/"}
-            className="w-full flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-3 rounded-lg gap-x-5"
-          >
+            className="w-full flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-3 rounded-lg gap-x-5">
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">
