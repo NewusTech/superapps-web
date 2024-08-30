@@ -11,6 +11,7 @@ import InputArea from "@/components/ui/input/InputArea";
 import InputSelect from "@/components/ui/input/InputSelect";
 import DateInput from "@/components/dateInnput/DateInput";
 import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
+import Link from "next/link";
 
 export default function FormRental() {
   const [detailImageActive, setDetailImageActive] = useState(
@@ -244,9 +245,11 @@ export default function FormRental() {
                 Rp.200.000
               </p>
             </div>
+            <Link href={"/rent/payment"}>
             <ButtonCustom className="mt-4 w-full">
               Lanjut Pembayaran
             </ButtonCustom>
+            </Link>
           </div>
         </Card>
       </div>

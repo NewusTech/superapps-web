@@ -25,9 +25,9 @@ export default function RentPage() {
       <div className="w-full flex flex-col gap-y-20 pb-12">
         <div className="w-full flex flex-col items-center gap-y-10 mt-28 px-8 md:px-36">
           <div className="w-full flex flex-col items-center gap-y-1">
-            <div className="bg-neutral-200 rounded-md py-2 px-2 md:w-3/12">
+            <div className="bg-neutral-200 rounded-md py-2 px-2 md:w-3/12 mb-10 mt-5">
               <p className="text-neutral-700 text-center text-[18px]">
-                Berbagai Penginapan Kami
+              Mengapa Memilih Kami
               </p>
             </div>
 
