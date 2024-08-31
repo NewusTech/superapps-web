@@ -1,6 +1,8 @@
+"use client";
+
 import Card from "@/components/ui/card/Card";
 import { FaCheckCircle } from "react-icons/fa";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Banknote } from "lucide-react";
 import Button from "@/components/buttonCustom/ButtonCustom";
 import {
@@ -8,6 +10,12 @@ import {
   useTravelStepPayloadPayload,
 } from "@/store/useTravelStore";
 import { stepItem } from "@/constants/rental";
+import {
+  PaymentDetailInterface,
+  PaymentMenthodsInterface,
+} from "@/types/interface";
+import { getAllPaymentMethods } from "@/services/api";
+import PaymentMethods from "@/components/paymentMethod";
 
 export default function Bayar({
   firstTitle,
@@ -39,6 +47,33 @@ export default function Bayar({
   const { setStepTravelPayload } = useTravelActions();
 
   const useTravelStep = useTravelStepPayloadPayload();
+  const [payments, setPayments] = useState<PaymentMenthodsInterface>();
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<string>("");
+  const [data, setData] = useState({
+    metode_id: "",
+  });
+
+  const fetchPaymentMethods = async () => {
+    try {
+      const response = await getAllPaymentMethods();
+
+      setPayments(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPaymentMethods();
+  }, []);
+
+  console.log(payments, "ini paymant");
+
+  const handlePaymentMethodChange = (metode_id: number) => {
+    setSelectedPaymentMethod(metode_id.toString());
+    setData({ ...data, metode_id: metode_id.toString() });
+  };
 
   const handleNextStep = () => {
     if (useTravelStep > stepItem.length) return;
@@ -159,22 +194,18 @@ export default function Bayar({
       {/* 4 */}
       <div className="flex flex-col gap-y-2">
         <p className="text-xl">Metode Pembayaran</p>
-        <Card className="">
-          <label className="flex flex-row gap-2 border-b py-3">
-            <input type="radio" name="payment" id="payment" />
-            <span>Payment Gateway (gopay,Q-ris)</span>
-            <div className="ml-auto">
-              <Banknote />
-            </div>
-          </label>
-          <label className="flex flex-row gap-2 border-b py-3">
-            <input type="radio" name="payment" id="payment" />
-            <span>Transfrer BRI</span>
-            <div className="ml-auto">
-              <Banknote />
-            </div>
-          </label>
-        </Card>
+        <PaymentMethods
+          // payments={payments}
+          payments={
+            payments as {
+              payment_gateway?: PaymentDetailInterface[] | undefined;
+              bank_transfer?: PaymentDetailInterface[] | undefined;
+              cash?: PaymentDetailInterface[] | undefined;
+            }
+          }
+          selectedPaymentMethod={Number(selectedPaymentMethod)}
+          onPaymentMethodChange={handlePaymentMethodChange}
+        />
       </div>
       {/* 5 */}
       <div className="flex flex-col gap-y-2">

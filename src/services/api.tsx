@@ -134,6 +134,26 @@ export const getAllTravelCar = async () => {
   return await response.json();
 };
 
+// get all paymentMethods
+
+export const getAllPaymentMethods = async () => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/pembayaran/metode-pembayaran`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
 export const getScheduleByRoute = async (
   from: string,
   to: string,

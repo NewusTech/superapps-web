@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Grid, FreeMode } from "swiper/modules";
 import {
@@ -22,8 +22,12 @@ import FormInput from "@/components/formInput";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { areas } from "@/constants/main";
-import { Trash } from "@phosphor-icons/react";
+import { Check, Trash } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import DateFormInput from "@/components/dateFormInput/dateFormInput";
+import { PaymentMenthodsInterface } from "@/types/interface";
+import { getAllPaymentMethods } from "@/services/api";
 
 export default function FormRental() {
   const router = useRouter();
@@ -33,6 +37,7 @@ export default function FormRental() {
   const [imageSwafoto, setImageSwafoto] = useState<File | null>(null);
   const [previewImageKTP, setPreviewImageKTP] = useState<string>("");
   const [previewImageSwafoto, setPreviewImageSwafoto] = useState<string>("");
+  const [isChecked, setIsChecked] = useState(false);
   const [data, setData] = useState({
     nama: "",
     nik: "",
@@ -50,13 +55,14 @@ export default function FormRental() {
     catatan_sopir: "",
     image_ktp: "",
     image_swafoto: "",
-  });
+  } as { [key: string]: any });
+  const [payments, setPayments] = useState<PaymentMenthodsInterface>();
   const [detailImageActive, setDetailImageActive] = useState(
     "/assets/images/neededs/travel/travel-1.png"
   );
-
   const scrollRef = useRef<HTMLDivElement>(null);
   const [departureDate, setDepartureDate] = useState<Date>(new Date());
+  const [returnDate, setReturnDate] = useState<Date>(new Date());
 
   const dummyImageRent = [
     {
@@ -78,6 +84,12 @@ export default function FormRental() {
       image: "/assets/images/neededs/about-image-3.png",
     },
   ];
+
+  const handleCheckboxChange = () => {
+    const updateChecked = !isChecked;
+    setIsChecked(updateChecked);
+    setData({ ...data, all_in: updateChecked });
+  };
 
   const handleImageKTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -153,6 +165,18 @@ export default function FormRental() {
     setImageSwafoto(null);
     setPreviewImageSwafoto("");
     setData({ ...data, image_swafoto: "" });
+  };
+
+  const handleNewRent = () => {
+    Object.keys(data)?.forEach((key: string) => {
+      localStorage.setItem(key, data[key]);
+    });
+
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      router.push("/rent/payment-rent-order");
+    }, 2000);
   };
 
   return (
@@ -366,7 +390,7 @@ export default function FormRental() {
             <div className="flex flex-col w-full h-full">
               <Label className="w-full">Upload Kartu Tanda Penduduk</Label>
 
-              <div className="w-full">
+              <div className="w-full flex flex-row">
                 <div
                   ref={dropRef}
                   onDragOver={handleDragOver}
@@ -415,7 +439,7 @@ export default function FormRental() {
             <div className="flex flex-col w-full h-full">
               <Label className="w-full">Upload Swafoto atau Foto Selfie</Label>
 
-              <div className="w-full">
+              <div className="w-full flex flex-row">
                 <div
                   ref={dropRef}
                   onDragOver={handleDragOver}
@@ -429,14 +453,14 @@ export default function FormRental() {
                   <>
                     <input
                       type="file"
-                      id="file-input-foto"
+                      id="file-input-foto-swafoto"
                       name="foto"
                       accept="image/*"
                       onChange={handleImageSwafotoChange}
                       className="hidden"
                     />
                     <label
-                      htmlFor="file-input-foto"
+                      htmlFor="file-input-foto-swafoto"
                       className="text-[16px] text-center text-neutral-600 p-2 md:p-4 font-light cursor-pointer">
                       Drag and drop file here or click to select file
                     </label>
@@ -509,18 +533,24 @@ export default function FormRental() {
             </div>
 
             <div className="w-full grid grid-cols-2 gap-x-5">
-              <DateInput
+              <DateFormInput
                 value={departureDate}
                 setValue={setDepartureDate}
                 label="Tanggal Mulai Sewa"
                 className="w-full rounded-md"
+                onChange={(value) =>
+                  setData({ ...data, tanggal_mulai_sewa: value })
+                }
               />
-              <DateInput
-                value={departureDate}
-                setValue={setDepartureDate}
-                label="Tanggal Selesai Sewa"
+
+              <DateFormInput
+                value={returnDate}
+                setValue={setReturnDate}
+                label="Tanggal Mulai Sewa"
                 className="w-full rounded-md"
-                disabled
+                onChange={(value) =>
+                  setData({ ...data, tanggal_akhir_sewa: value })
+                }
               />
             </div>
 
@@ -563,6 +593,38 @@ export default function FormRental() {
                 </div>
               </div>
             </div>
+
+            <div className="flex flex-col justify-center w-full gap-y-3">
+              <input
+                type="checkbox"
+                id="all-in"
+                name="all-in"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+                className="hidden"
+              />
+              <label
+                htmlFor="all-in"
+                className="flex items-center cursor-pointer select-none">
+                <span
+                  className={`w-5 h-5 rounded-full inline-block mr-2 border ${data.all_in ? "bg-success-700 border-success-700 text-neutral-50 flex items-center justify-center" : "bg-neutral-300 border-neutral-300 flex items-center justify-center"}`}>
+                  {data.all_in ? (
+                    <Check
+                      size={16}
+                      strokeWidth={3}
+                      className="text-neutral-50"
+                    />
+                  ) : (
+                    <Check
+                      size={16}
+                      strokeWidth={3}
+                      className="text-neutral-50"
+                    />
+                  )}
+                </span>
+                <strong>All In</strong> (Biaya Tol, Kapal, dan BBM)
+              </label>
+            </div>
           </div>
         </Card>
         {/* Detail */}
@@ -589,9 +651,14 @@ export default function FormRental() {
                 Rp.200.000
               </p>
             </div>
-            <ButtonCustom className="mt-4 w-full">
-              Lanjut Pembayaran
-            </ButtonCustom>
+            <div className="w-full">
+              <Button
+                onClick={handleNewRent}
+                type="submit"
+                className="mt-4 w-full bg-primary-700 rounded-lg text-neutral-50">
+                Lanjut Pembayaran
+              </Button>
+            </div>
           </div>
         </Card>
       </div>
