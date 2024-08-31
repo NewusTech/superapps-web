@@ -112,3 +112,17 @@ export interface TravelCarInterface {
   biaya_all_in: string;
   bagasi: string;
 }
+
+export interface PaymentDetailInterface {
+  id: number;
+  nama: string;
+  keterangan: string;
+  kode: number;
+  img: string;
+}
+
+export interface PaymentMenthodsInterface {
+  payment_gateway: PaymentDetailInterface[];
+  bank_transfer: PaymentDetailInterface[];
+  cash: PaymentDetailInterface[];
+}
