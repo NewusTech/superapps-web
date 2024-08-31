@@ -30,8 +30,24 @@ import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { BranchesInterface, RouteInterface } from "@/types/interface";
+import { seatsTotal } from "@/constants/main";
+import { formatDate } from "@/helpers";
 
-export default function HeroScreen({ data }: any) {
+export default function HeroScreen({
+  data,
+  branches,
+}: {
+  branches: BranchesInterface[];
+  data: any;
+}) {
+  const [form, setForm] = useState({
+    from: "",
+    to: "",
+    jumlah_kursi: "",
+    departureDate: "",
+    returnDate: "",
+  });
   const [returnDateEnabled, setReturnDateEnabled] = useState(false);
   const [departureDate, setDepartureDate] = useState<Date | undefined>(
     undefined
@@ -40,16 +56,33 @@ export default function HeroScreen({ data }: any) {
 
   const router = useRouter();
 
-  const handleToSeacrhTravel = () => {
+  const saveToLocalStorage = (key: string, value: any) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const dateFormatDepartureDate = departureDate
+    ? formatDate(new Date(departureDate))
+    : undefined;
+
+  const handleToSearchTravel = () => {
+    saveToLocalStorage("from", form.from);
+    saveToLocalStorage("to", form.to);
+    saveToLocalStorage("jumlah_kursi", form.jumlah_kursi);
+    saveToLocalStorage(
+      "departureDate",
+      form.departureDate ? formatDate(new Date(form.departureDate)) : ""
+    );
+    saveToLocalStorage(
+      "returnDate",
+      form.returnDate ? formatDate(new Date(form.returnDate)) : ""
+    );
+
     router.push("/travel/available-schedule");
   };
 
   return (
     <section className="md:w-full md:h-screen justify-center items-center flex flex-col relative top-28 md:top-10 gap-y-24">
-      <div
-        className="w-full md:w-6/12 flex flex-col justify-center items-center py-3 md:py-8 px-3 md:px-4 rounded-md border bg-white-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20border-gray-100
- border-neutral-50"
-      >
+      <div className="w-full md:w-6/12 flex flex-col justify-center items-center py-3 md:py-8 px-3 md:px-4 rounded-md border bg-white-400 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20border-gray-100 border-neutral-50">
         <div className="grid grid-cols-5 gap-x-2 md:gap-x-12 mb-4 md:mb-0">
           {data?.map((item: any, i: number) => {
             let icon;
@@ -93,13 +126,11 @@ export default function HeroScreen({ data }: any) {
             return (
               <div
                 key={i}
-                className="grid grid-rows-1 md:justify-center w-full gap-y-3"
-              >
+                className="grid grid-rows-1 md:justify-center w-full gap-y-3">
                 {item?.soon === false ? (
                   <Link
                     href={link}
-                    className={`flex flex-col items-center gap-y-2`}
-                  >
+                    className={`flex flex-col items-center gap-y-2`}>
                     <div className="bg-neutral-50 rounded-full w-12 h-12 flex flex-row justify-center items-center">
                       {icon}
                     </div>
@@ -141,14 +172,19 @@ export default function HeroScreen({ data }: any) {
               <div className="flex flex-row items-center w-full bg-neutral-50 border-l border-y border-outline_border-100 rounded-l-full py-2 px-3">
                 <Bus className="w-6 h-6 text-primary-700" />
 
-                <Select>
+                <Select
+                  onValueChange={(value) => setForm({ ...form, from: value })}>
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    {branches.map((item: BranchesInterface, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.nama}>
+                          {item.nama}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
 
@@ -162,14 +198,19 @@ export default function HeroScreen({ data }: any) {
               <div className="flex flex-row items-center w-full bg-neutral-50 border-y border-outline_border-100 py-2 px-3">
                 <Bus className="w-6 h-6 text-primary-700" />
 
-                <Select>
+                <Select
+                  onValueChange={(value) => setForm({ ...form, to: value })}>
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    {branches.map((item: BranchesInterface, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.nama}>
+                          {item.nama}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
 
@@ -183,14 +224,26 @@ export default function HeroScreen({ data }: any) {
               <div className="flex flex-row items-center w-full bg-neutral-50 border-r border-y border-outline_border-100 rounded-r-full py-2 px-3">
                 <Seat className="w-6 h-6 text-primary-700" />
 
-                <Select>
+                <Select
+                  onValueChange={(value) =>
+                    setForm({ ...form, jumlah_kursi: value })
+                  }>
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    {seatsTotal.map(
+                      (
+                        item: { id: number; seat: string; jumlah: number },
+                        i: number
+                      ) => {
+                        return (
+                          <SelectItem key={i} value={item.jumlah.toString()}>
+                            {item.seat}
+                          </SelectItem>
+                        );
+                      }
+                    )}
                   </SelectContent>
                 </Select>
               </div>
@@ -227,7 +280,13 @@ export default function HeroScreen({ data }: any) {
                       }}
                       mode="single"
                       selected={departureDate}
-                      onSelect={setDepartureDate}
+                      onSelect={(date) => {
+                        setDepartureDate(date || undefined);
+                        setForm({
+                          ...form,
+                          departureDate: date ? format(date, "yyyy-MM-dd") : "",
+                        });
+                      }}
                       initialFocus
                     />
                   </PopoverContent>
@@ -249,8 +308,7 @@ export default function HeroScreen({ data }: any) {
               </div>
 
               <div
-                className={`flex flex-row items-center w-full bg-neutral-50 border-r border-y border-outline_border-100 rounded-r-full py-2 px-3 ${!returnDateEnabled ? "opacity-50" : ""}`}
-              >
+                className={`flex flex-row items-center w-full bg-neutral-50 border-r border-y border-outline_border-100 rounded-r-full py-2 px-3 ${!returnDateEnabled ? "opacity-50" : ""}`}>
                 <CalendarIcons
                   className={`w-6 h-6 ${returnDateEnabled ? "text-primary-700" : "text-outline_border-100"}`}
                 />
@@ -259,8 +317,7 @@ export default function HeroScreen({ data }: any) {
                   <PopoverTrigger asChild>
                     <Button
                       className="w-full justify-start text-left text-[14px]"
-                      disabled={!returnDateEnabled}
-                    >
+                      disabled={!returnDateEnabled}>
                       {returnDate ? format(returnDate, "PPP") : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
@@ -277,7 +334,13 @@ export default function HeroScreen({ data }: any) {
                       }}
                       mode="single"
                       selected={returnDate}
-                      onSelect={setReturnDate}
+                      onSelect={(date) => {
+                        setReturnDate(date || undefined);
+                        setForm({
+                          ...form,
+                          returnDate: date ? format(date, "yyyy-MM-dd") : "",
+                        });
+                      }}
                       initialFocus
                     />
                   </PopoverContent>
@@ -288,9 +351,8 @@ export default function HeroScreen({ data }: any) {
 
           <div className="flex flex-row items-end">
             <Button
-              onClick={handleToSeacrhTravel}
-              className="rounded-2xl bg-neutral-50 px-6 py-7 border border-outline_border-100"
-            >
+              onClick={handleToSearchTravel}
+              className="rounded-2xl bg-neutral-50 px-6 py-7 border border-outline_border-100">
               <Search className="text-primary-700" />
             </Button>
           </div>

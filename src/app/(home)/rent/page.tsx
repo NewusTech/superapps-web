@@ -6,15 +6,31 @@ import MobileSecondRentalScreen from "@/components/pages/rentals/secondRentalCar
 import TravelCarRentScreen from "@/components/pages/travel-car-rents";
 import { rentals, travelCars } from "@/constants/main";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { getAllTravelCar } from "@/services/api";
+import { TravelCarInterface } from "@/types/interface";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function RentPage() {
+  const router = useRouter();
   const isMobile = useMediaQuery("(max-width: 767px)");
   const [rents, setRents] = useState<any>();
+  const [travelCar, setTravelCar] = useState<TravelCarInterface[]>();
 
-  const router = useRouter();
+  const fetchAllTravelCars = async () => {
+    try {
+      const response = await getAllTravelCar();
+
+      setTravelCar(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllTravelCars();
+  }, []);
 
   useEffect(() => {
     setRents(rentals);
@@ -100,7 +116,7 @@ export default function RentPage() {
         </div>
 
         <div className="hidden md:grid md:grid-cols-2 gap-x-12 px-16">
-          {travelCars.map((item: any, i: number) => {
+          {travelCar?.map((item: TravelCarInterface, i: number) => {
             return <TravelCarRentScreen key={i} item={item} />;
           })}
         </div>
