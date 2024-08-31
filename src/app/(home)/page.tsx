@@ -46,33 +46,35 @@ import MobileRouteTravelCar from "@/components/mobile_pages/mobile_route_travel_
 import ApartementScreen from "@/components/pages/apartements";
 import MobileApartementScreen from "@/components/mobile_pages/mobile_apartement";
 import {
+  BranchesInterface,
   DataPariwisataInterface,
+  DataRouteInterface,
   PariwitasaInterface,
+  RouteInterface,
 } from "@/types/interface";
-import { getAllPariwisata } from "@/services/api";
+import { getAllBranches, getAllPariwisata, getAllRute } from "@/services/api";
 
 export default function Home() {
   const now = new Date();
   const isMobile = useMediaQuery("(max-width: 767px)");
-  // const [destinationDatas, setDestinationDatas] =
-  //   useState<DataPariwisataInterface>();
+  const [branches, setBranches] = useState<BranchesInterface[]>();
   const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const [startDate, setStartDate] = useState<Date | undefined>(firstDayOfMonth);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // const fetchAllPariwisata = async () => {
-  //   try {
-  //     const destination = await getAllPariwisata();
+  const fetchAllBranches = async () => {
+    try {
+      const response = await getAllBranches();
 
-  //     setDestinationDatas(destination?.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+      setBranches(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchAllPariwisata();
-  // }, []);
+  useEffect(() => {
+    fetchAllBranches();
+  }, []);
 
   const startDateFormatted = startDate
     ? formatDate(new Date(startDate))
@@ -83,7 +85,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="flex flex-col items-center justify-between relative background-blend w-screen min-h-96 md:min-h-screen">
         <div className="w-full md:w-full relative flex self-center justify-center items-center">
-          <HeroScreen data={heroIcons} />
+          {branches && <HeroScreen data={heroIcons} branches={branches} />}
         </div>
       </div>
 
