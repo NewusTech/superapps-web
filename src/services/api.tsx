@@ -194,3 +194,23 @@ export const getAllPariwisata = async () => {
 
   return await response.json();
 };
+
+// post rental
+export const createNewRent = async (data: any) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/rental/process-payment`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+      body: data,
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};

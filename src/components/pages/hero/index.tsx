@@ -178,13 +178,14 @@ export default function HeroScreen({
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    {branches.map((item: BranchesInterface, i: number) => {
-                      return (
-                        <SelectItem key={i} value={item.nama}>
-                          {item.nama}
-                        </SelectItem>
-                      );
-                    })}
+                    {branches &&
+                      branches.map((item: BranchesInterface, i: number) => {
+                        return (
+                          <SelectItem key={i} value={item.nama}>
+                            {item.nama}
+                          </SelectItem>
+                        );
+                      })}
                   </SelectContent>
                 </Select>
 

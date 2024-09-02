@@ -84,27 +84,39 @@ export default function ProfilePage() {
                     </Link>
 
                     <div className="w-full py-2 flex items-center justify-center">
-                      <div className="w-10/12 flex flex-row items-center gap-x-2">
-                        <Bus className="w-5 h-5 text-neutral-400" />
+                      <Link
+                        href={"/profile/order-histories-rental"}
+                        className="w-full py-2 flex items-center justify-center">
+                        <div className="w-10/12 flex flex-row items-center gap-x-2">
+                          <Bus className="w-5 h-5 text-neutral-400" />
 
-                        <p>Rental</p>
-                      </div>
+                          <p>Rental</p>
+                        </div>
+                      </Link>
                     </div>
 
                     <div className="w-full py-2 flex items-center justify-center">
-                      <div className="w-10/12 flex flex-row items-center gap-x-2">
-                        <Building className="w-5 h-5 text-neutral-400" />
+                      <Link
+                        href={"/profile/order-histories-hotel"}
+                        className="w-full py-2 flex items-center justify-center">
+                        <div className="w-10/12 flex flex-row items-center gap-x-2">
+                          <Building className="w-5 h-5 text-neutral-400" />
 
-                        <p>Hotel</p>
-                      </div>
+                          <p>Hotel</p>
+                        </div>
+                      </Link>
                     </div>
 
                     <div className="w-full py-2 flex items-center justify-center">
-                      <div className="w-10/12 flex flex-row items-center gap-x-2">
-                        <Package className="w-5 h-5 text-neutral-400" />
+                      <Link
+                        href={"/profile/order-histories-paket"}
+                        className="w-full py-2 flex items-center justify-center">
+                        <div className="w-10/12 flex flex-row items-center gap-x-2">
+                          <Package className="w-5 h-5 text-neutral-400" />
 
-                        <p>Paket</p>
-                      </div>
+                          <p>Paket</p>
+                        </div>
+                      </Link>
                     </div>
                   </div>
                 </AccordionContent>

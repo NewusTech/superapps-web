@@ -55,6 +55,7 @@ export default function FormRental() {
     catatan_sopir: "",
     image_ktp: "",
     image_swafoto: "",
+    jam_keberangkatan: "",
   } as { [key: string]: any });
   const [payments, setPayments] = useState<PaymentMenthodsInterface>();
   const [detailImageActive, setDetailImageActive] = useState(
@@ -419,11 +420,15 @@ export default function FormRental() {
                 {(previewImageKTP || data?.image_ktp) && (
                   <div className="relative md:ml-4 w-full mt-1">
                     <div className="border-2 border-dashed flex justify-center rounded-xl p-2">
-                      <img
-                        src={previewImageKTP || data?.image_ktp}
-                        alt="Preview"
-                        className="max-h-full rounded-xl p-4 md:p-4 max-w-full object-contain"
-                      />
+                      <div className="w-full h-full">
+                        <Image
+                          src={previewImageKTP || data?.image_ktp}
+                          alt="Preview"
+                          width={300}
+                          height={300}
+                          className="h-full rounded-xl p-4 md:p-4 w-full object-contain"
+                        />
+                      </div>
                       <button
                         type="button"
                         onClick={handleRemoveImageKTP}
@@ -470,11 +475,15 @@ export default function FormRental() {
                 {(previewImageSwafoto || data?.image_swafoto) && (
                   <div className="relative md:ml-4 w-full mt-1">
                     <div className="border-2 border-dashed flex justify-center rounded-xl p-2">
-                      <img
-                        src={previewImageSwafoto || data?.image_swafoto}
-                        alt="Preview"
-                        className="max-h-full rounded-xl p-4 md:p-4 max-w-full object-contain"
-                      />
+                      <div className="w-full h-full">
+                        <Image
+                          src={previewImageSwafoto || data?.image_swafoto}
+                          alt="Preview"
+                          width={300}
+                          height={300}
+                          className="h-full rounded-xl p-4 md:p-4 w-full object-contain"
+                        />
+                      </div>
                       <button
                         type="button"
                         onClick={handleRemoveImageSwafoto}
@@ -491,27 +500,44 @@ export default function FormRental() {
         {/* form Detail Sewa & Rental Mobil */}
         <Card className="w-full" header="Detail Sewa & Rental Mobil">
           <div className="flex flex-col gap-4 mt-4">
-            <div className="w-full flex flex-col">
-              <FormInput
-                name="durasi_sewa"
-                value={data.durasi_sewa}
-                onChange={(e) =>
-                  setData({ ...data, durasi_sewa: e.target.value })
-                }
-                id="durasi sewa"
-                htmlFor="durasi sewa"
-                label="Durasi Sewa"
-                placeholder="Durasi Sewa"
-                type="number"
-                className="w-full"
-                classLabel="text-neutral-700"
-              />
+            <div className="w-full grid grid-cols-2 gap-x-5">
+              <div className="w-full flex flex-col">
+                <FormInput
+                  name="durasi_sewa"
+                  value={data.durasi_sewa}
+                  onChange={(e) =>
+                    setData({ ...data, durasi_sewa: e.target.value })
+                  }
+                  id="durasi sewa"
+                  htmlFor="durasi sewa"
+                  label="Durasi Sewa"
+                  placeholder="Durasi Sewa"
+                  type="number"
+                  className="w-full"
+                  classLabel="text-neutral-700"
+                />
+              </div>
+
+              <div className="w-full flex flex-col">
+                <FormInput
+                  name="jam_keberangkatan"
+                  value={data.jam_keberangkatan}
+                  onChange={(e) =>
+                    setData({ ...data, jam_keberangkatan: e.target.value })
+                  }
+                  id="jam-keberangkatan"
+                  htmlFor="jam-keberangkatan"
+                  label="Jam Keberangkatan"
+                  placeholder="Jam Keberangkatan"
+                  type="time"
+                  className="w-full block"
+                  classLabel="text-neutral-700"
+                />
+              </div>
             </div>
 
             <div className="w-full flex flex-col gap-y-3">
-              <Label htmlFor="area-sewa" className="w-full">
-                Area Sewa
-              </Label>
+              <Label className="w-full">Area Sewa</Label>
 
               <Select
                 onValueChange={(value) => setData({ ...data, area: value })}>
@@ -556,7 +582,7 @@ export default function FormRental() {
 
             <div className="w-full grid grid-cols-2 gap-x-5">
               <div className="w-full flex flex-col gap-y-3">
-                <Label htmlFor="alamat" className="w-full">
+                <Label htmlFor="alamat-keberangkatan" className="w-full">
                   Alamat Penjemputan
                 </Label>
 
@@ -575,7 +601,7 @@ export default function FormRental() {
               </div>
 
               <div className="w-full flex flex-col gap-y-3">
-                <Label htmlFor="alamat" className="w-full">
+                <Label htmlFor="catatan-sopir" className="w-full">
                   Catatan Sopir
                 </Label>
 
