@@ -31,3 +31,28 @@ export const formatCurrency = (amount: number): string => {
 
   return formattedAmount.replace(/\s/g, "");
 };
+
+export const formatTanggalPanjang = (tanggalString: string) => {
+  const bulanIndonesia = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+
+  const tanggal = new Date(tanggalString);
+
+  const hari = tanggal.getDate();
+  const bulan = bulanIndonesia[tanggal.getMonth()];
+  const tahun = tanggal.getFullYear();
+
+  return `${hari} ${bulan} ${tahun}`;
+};

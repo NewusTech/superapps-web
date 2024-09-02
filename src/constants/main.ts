@@ -899,3 +899,18 @@ export const areas = [
     value: "Luar Kota",
   },
 ];
+
+export const statusFilters = [
+  {
+    id: 1,
+    value: "Sukses",
+  },
+  {
+    id: 2,
+    value: "Menunggu Pembayaran",
+  },
+  {
+    id: 3,
+    value: "Gagal",
+  },
+];

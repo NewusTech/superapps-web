@@ -2,7 +2,7 @@
 
 import stepper from "@/../../public/assets/icons/neededs/icon_donat_active.svg";
 import { Bus, Calendar, Notepad, Van } from "@phosphor-icons/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
@@ -13,8 +13,47 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { HistoryRentalInterface } from "@/types/interface";
+import { getOrderHistoryRental } from "@/services/api";
+import { statusFilters } from "@/constants/main";
+import OrderHistoryRentalCard from "@/components/pages/profile/card-history/rental";
+import OrderHistoryRentalStatusCard from "@/components/pages/profile/card-history/rental/dalamProses";
 
 export default function MyRentOrderHistories() {
+  const [status, setStatus] = useState<string>("");
+  const [rental, setRental] = useState<HistoryRentalInterface[]>();
+  const [waitingRent, setWaitingRent] = useState<HistoryRentalInterface[]>();
+
+  const fetchGetRentalHistory = async (status: string) => {
+    try {
+      const response = await getOrderHistoryRental(status);
+      setRental(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGetRentalHistory(status);
+  }, [status]);
+
+  const fetchGetRentalHistoryStatus = async (status: string) => {
+    try {
+      const response = await getOrderHistoryRental(status);
+      setWaitingRent(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGetRentalHistoryStatus("Menunggu Pembayaran");
+  }, []);
+
+  const handleStatusChange = (value: string) => {
+    setStatus(value);
+  };
+
   return (
     <section className="flex flex-col gap-y-5 md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
       <div className="w-full bg-white shadow-sm border px-5 py-3 border-grey-100 rounded-lg flex flex-row gap-x-3 mt-32">
@@ -39,194 +78,45 @@ export default function MyRentOrderHistories() {
               Dalam Proses
             </TabsTrigger>
             <div className="w-full">
-              <Select>
+              <Select onValueChange={handleStatusChange}>
                 <SelectTrigger className="w-full border-none py-6 outline-none text-[14px]">
                   <SelectValue placeholder="Filter Status" />
                 </SelectTrigger>
                 <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                  <SelectItem value="light">Light</SelectItem>
-                  <SelectItem value="dark">Dark</SelectItem>
-                  <SelectItem value="system">System</SelectItem>
+                  {statusFilters?.map(
+                    (item: { id: number; value: string }, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.value}>
+                          {item.value}
+                        </SelectItem>
+                      );
+                    }
+                  )}
                 </SelectContent>
               </Select>
             </div>
           </TabsList>
           <TabsContent value="riwayat-travel" className="w-full flex flex-col">
-            <div className="w-full flex flex-col gap-y-5 border border-grey-100 rounded-lg p-4">
-              <div className="w-full flex flex-row">
-                <div className="w-full flex flex-row gap-x-3">
-                  <div className="w-full flex flex-row items-center gap-x-2">
-                    <Notepad className="w-6 h-6 text-neutral-500" />
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      No Pemesan: 1314917131
-                    </p>
-                  </div>
-
-                  <div className="w-0.5 h-full bg-grey-100"></div>
-
-                  <div className="w-full flex flex-row items-center gap-x-2">
-                    <Calendar className="w-6 h-6 text-neutral-500" />
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Tanggal Pesan: 23 Januari 2024
-                    </p>
-                  </div>
-                </div>
-
-                <div className="w-4/12 rounded-lg flex items-center justify-center py-3 bg-success-300">
-                  <p className="text-success-700 text-center">
-                    Pembelian Sukses
-                  </p>
-                </div>
-              </div>
-
-              <div className="w-full h-[1px] bg-grey-100"></div>
-
-              <div className="w-full flex flex-col gap-y-4">
-                <div className="w-full flex flex-row items-center gap-x-3">
-                  <p className="text-primary-700 font-normal text-[20px]">
-                    Rental Rama Tranz
-                  </p>
-
-                  <Van className="w-6 h-6 text-primary-700" />
-                </div>
-
-                <div className="w-full grid grid-cols-5">
-                  <div className="w-full flex flex-col gap-y-1">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      Mobil
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Hiace Premio
-                    </p>
-                  </div>
-
-                  <div className="w-full col-span-2 flex flex-col gap-y-2">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      Tanggal Sewa
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      23 Februari 2024 - 24 Februari 2024
-                    </p>
-                  </div>
-
-                  <div className="w-full flex flex-col gap-y-2">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      Area Sewa
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Dalam Kota
-                    </p>
-                  </div>
-
-                  <div className="w-full">
-                    <Button className="w-full border border-primary-700 text-primary-700 py-6">
-                      Detail
-                    </Button>
-                  </div>
-                </div>
-              </div>
+            <div className="w-full h-screen overflow-y-auto scrollbar-hide flex flex-col gap-y-5">
+              {rental &&
+                rental
+                  ?.filter(
+                    (item: HistoryRentalInterface) =>
+                      item.status !== "Menunggu Pembayaran"
+                  )
+                  ?.map((item: HistoryRentalInterface, i: number) => {
+                    return <OrderHistoryRentalCard key={i} data={item} />;
+                  })}
             </div>
           </TabsContent>
           <TabsContent
             value="dalam-proses-travel"
             className="w-full flex flex-col">
-            <div className="w-full flex flex-col gap-y-5 border border-grey-100 rounded-lg p-4">
-              <div className="w-full flex flex-row">
-                <div className="w-full flex flex-row gap-x-3">
-                  <div className="w-full flex flex-row items-center gap-x-2">
-                    <Notepad className="w-6 h-6 text-neutral-500" />
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      No Pemesan: 1314917131
-                    </p>
-                  </div>
-
-                  <div className="w-0.5 h-full bg-grey-100"></div>
-
-                  <div className="w-full flex flex-row items-center gap-x-2">
-                    <Calendar className="w-6 h-6 text-neutral-500" />
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Tanggal Pesan: 23 Januari 2024
-                    </p>
-                  </div>
-                </div>
-
-                <div className="w-4/12 rounded-lg flex items-center justify-center py-3 bg-success-300">
-                  <p className="text-success-700 text-center">
-                    Pembelian Sukses
-                  </p>
-                </div>
-              </div>
-
-              <div className="w-full h-[1px] bg-grey-100"></div>
-
-              <div className="w-full flex flex-col gap-y-4">
-                <div className="w-full flex flex-row items-center gap-x-3">
-                  <p className="text-primary-700 font-normal text-[20px]">
-                    Travel Rama Tranz
-                  </p>
-
-                  <Van className="w-6 h-6 text-primary-700" />
-                </div>
-
-                <div className="w-full flex flex-row">
-                  <div className="w-full flex flex-col gap-y-1">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      23 Februari 2024
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Bandar Lampung
-                    </p>
-                  </div>
-
-                  <div className="w-full flex flex-row items-center">
-                    <div className="flex flex-row items-center gap-2">
-                      <div className="w-3 h-3">
-                        <Image
-                          src={stepper}
-                          alt="Rute"
-                          width={100}
-                          height={100}
-                          className="w-full h-full"
-                        />
-                      </div>
-                      <div className="border-b border-dashed w-16" />
-                      <div className="w-3 h-3">
-                        <Image
-                          src={stepper}
-                          alt="Rute"
-                          width={100}
-                          height={100}
-                          className="w-full h-full"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="w-full flex flex-col gap-y-2">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      23 Februari 2024
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Palembang
-                    </p>
-                  </div>
-
-                  <div className="w-full">
-                    <Button className="w-full border border-primary-700 text-primary-700 py-6">
-                      Detail
-                    </Button>
-                  </div>
-                </div>
-              </div>
+            <div className="w-full h-screen overflow-y-auto scrollbar-hide flex flex-col gap-y-5">
+              {waitingRent &&
+                waitingRent?.map((item: HistoryRentalInterface, i: number) => {
+                  return <OrderHistoryRentalStatusCard key={i} data={item} />;
+                })}
             </div>
           </TabsContent>
         </Tabs>
