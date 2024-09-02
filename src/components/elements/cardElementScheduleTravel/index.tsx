@@ -13,8 +13,10 @@ import React, { useState } from "react";
 
 export default function CardTravelScheduleOrder({
   data,
+  disable
 }: {
   data: TravelScheduleInterface;
+  disable?:boolean
 }) {
   console.log(data, "ini data ");
 
@@ -110,6 +112,10 @@ export default function CardTravelScheduleOrder({
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
         handleAfterSelectSeat={handleNextStep}
+        index={1}
+        passengerIndex={1}
+        selectAllSheats={true}
+        sheats={1}
       />
     </>
   );

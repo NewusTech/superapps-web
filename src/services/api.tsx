@@ -97,11 +97,11 @@ export const getAllBranches = async () => {
 };
 
 // api get all Titik Jemput
-export const getAllPointMasterJemput = async () => {
+export const getAllPointMasterJemput = async ({cabang}:{cabang:string}) => {
   const token = Cookies.get("Authorization");
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/titik_jemput/master_titik_jemput`,
+    `${process.env.NEXT_PUBLIC_API_URL}/titik_jemput/master_titik_jemput?cabang=${cabang}`,
     {
       method: "GET",
       headers: {

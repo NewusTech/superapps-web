@@ -2,88 +2,17 @@
 
 import Stepper from "@/components/stepper/Stepper";
 
-import React, { useEffect, useState } from "react";
-import {
-  useTravelActions,
-  useTravelStepPayloadPayload,
-} from "@/store/useTravelStore";
+import { useTravelStepPayloadPayload } from "@/store/useTravelStore";
 
 import { stepItem } from "@/constants/rental";
 import PilihTiket from "@/components/pages/avaliable-schedule/partials/PilihTiket";
 import Bayar from "@/components/pages/avaliable-schedule/partials/Bayar";
 import StatusPembayaran from "@/components/pages/avaliable-schedule/partials/StatusPembayaran";
 import DataDiriPenumpang from "@/components/pages/avaliable-schedule/partials/DataDiriPenumpang";
-import {
-  DataScheduleInterface,
-  TitikJemputInterface,
-  TravelScheduleInterface,
-} from "@/types/interface";
-import { getAllPointMasterJemput, getScheduleByRoute } from "@/services/api";
+import { TitikJemputInterface } from "@/types/interface";
 
 export default function AvaliableSchedule() {
-  const [schedules, setSchedules] = useState<TravelScheduleInterface[]>();
-  const [titikJemput, setTitikjemput] = useState<TitikJemputInterface[]>();
-  const [data, setData] = useState({
-    from: "",
-    to: "",
-    date: "",
-    seats: "",
-  });
-  const { setStepTravelPayload } = useTravelActions();
-
   const stepTravel = useTravelStepPayloadPayload();
-
-  useEffect(() => {
-    const from = localStorage.getItem("from");
-    const to = localStorage.getItem("to");
-    const date = localStorage.getItem("departureDate");
-    const seats = localStorage.getItem("jumlah_kursi");
-
-    setData({
-      from: from ? JSON.parse(from) : "",
-      to: to ? JSON.parse(to) : "",
-      date: date ? JSON.parse(date) : "",
-      seats: seats ? JSON.parse(seats) : "",
-    });
-  }, []);
-
-  const handlePrevStep = () => {
-    if (stepTravel < 2) return;
-    setStepTravelPayload(stepTravel - 1);
-  };
-
-  const fetchScheduleByRoute = async (
-    from: string,
-    to: string,
-    date: string,
-    seats: number
-  ) => {
-    try {
-      const response = await getScheduleByRoute(from, to, date, seats);
-
-      setSchedules(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const fetchTitikJemput = async () => {
-    try {
-      const response = await getAllPointMasterJemput();
-
-      setTitikjemput(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchScheduleByRoute(data.from, data.to, data.date, Number(data.seats));
-  }, [data.from, data.to, data.date, data.seats]);
-
-  useEffect(() => {
-    fetchTitikJemput();
-  }, []);
 
   return (
     <section className="flex flex-col gap-5 md:w-full h-full md:mb-0 pb-80 px-1 md:px-[2rem] container">
@@ -91,9 +20,7 @@ export default function AvaliableSchedule() {
         <Stepper position={stepTravel} item={stepItem} />
       </div>
 
-      {stepTravel === 1 && schedules && titikJemput && (
-        <PilihTiket schedules={schedules} points={titikJemput} />
-      )}
+      {stepTravel === 1 && <PilihTiket />}
 
       {stepTravel === 2 && <DataDiriPenumpang />}
 
