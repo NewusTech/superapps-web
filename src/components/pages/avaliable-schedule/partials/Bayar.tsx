@@ -14,8 +14,9 @@ import {
   PaymentDetailInterface,
   PaymentMenthodsInterface,
 } from "@/types/interface";
-import { getAllPaymentMethods } from "@/services/api";
+import { createNewRent, getAllPaymentMethods } from "@/services/api";
 import PaymentMethods from "@/components/paymentMethod";
+import { formattedDate } from "@/helpers";
 
 export default function Bayar({
   firstTitle,
@@ -46,6 +47,7 @@ export default function Bayar({
 }) {
   const { setStepTravelPayload } = useTravelActions();
 
+  const [isLoading, setIsLoading] = useState(false);
   const useTravelStep = useTravelStepPayloadPayload();
   const [payments, setPayments] = useState<PaymentMenthodsInterface>();
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
@@ -53,6 +55,61 @@ export default function Bayar({
   const [data, setData] = useState({
     metode_id: "",
   });
+  const [detail, setDetail] = useState<any>({
+    nama: "",
+    email: "",
+    nik: "",
+    no_telp: "",
+    alamat: "",
+    username_ig: "",
+    username_fb: "",
+    image_ktp: "",
+    image_swafoto: "",
+    area: "",
+    durasi_sewa: "",
+    alamat_keberangkatan: "",
+    tanggal_mulai_sewa: "",
+    tanggal_akhir_sewa: "",
+    catatan_sopir: "",
+    all_in: "",
+    jam_keberangkatan: "",
+  });
+
+  useEffect(() => {
+    let tgl_mulai_sewa;
+    if (localStorage.getItem("tanggal_mulai_sewa")) {
+      tgl_mulai_sewa = formattedDate(
+        localStorage?.getItem("tanggal_mulai_sewa") || ""
+      );
+    }
+
+    let tgl_akhir_sewa;
+    if (localStorage.getItem("tanggal_akhir_sewa")) {
+      tgl_akhir_sewa = formattedDate(
+        localStorage?.getItem("tanggal_akhir_sewa") || ""
+      );
+    }
+
+    setDetail({
+      nama: localStorage.getItem("nama"),
+      email: localStorage.getItem("email"),
+      nik: localStorage.getItem("nik"),
+      no_telp: localStorage.getItem("no_telp"),
+      alamat: localStorage.getItem("alamat"),
+      username_ig: localStorage.getItem("username_ig"),
+      username_fb: localStorage.getItem("username_fb"),
+      image_ktp: localStorage.getItem("image_ktp"),
+      image_swafoto: localStorage.getItem("image_swafoto"),
+      area: localStorage.getItem("area"),
+      durasi_sewa: localStorage.getItem("durasi_sewa"),
+      alamat_keberangkatan: localStorage.getItem("alamat_keberangkatan"),
+      tanggal_mulai_sewa: tgl_mulai_sewa,
+      tanggal_akhir_sewa: tgl_akhir_sewa,
+      catatan_sopir: localStorage.getItem("catatan_sopir"),
+      all_in: localStorage.getItem("all_in"),
+      jam_keberangkatan: localStorage.getItem("jam_keberangkatan"),
+    });
+  }, []);
 
   const fetchPaymentMethods = async () => {
     try {
@@ -68,8 +125,6 @@ export default function Bayar({
     fetchPaymentMethods();
   }, []);
 
-  console.log(payments, "ini paymant");
-
   const handlePaymentMethodChange = (metode_id: number) => {
     setSelectedPaymentMethod(metode_id.toString());
     setData({ ...data, metode_id: metode_id.toString() });
@@ -79,6 +134,61 @@ export default function Bayar({
     if (useTravelStep > stepItem.length) return;
     setStepTravelPayload(useTravelStep + 1);
     window.scrollTo(0, 0);
+  };
+
+  const handleNewRent = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    let isAllIn;
+    if (detail.all_in === "true") {
+      isAllIn = "1";
+    } else if (detail.all_in === "false") {
+      isAllIn = "0";
+    }
+
+    const formData = new FormData();
+
+    formData.append("nama", detail.nama);
+    formData.append("email", detail.email);
+    formData.append("nik", detail.nik);
+    formData.append("no_telp", detail.no_telp);
+    formData.append("alamat", detail.alamat);
+    formData.append("username_ig", detail.username_ig);
+    formData.append("username_fb", detail.username_fb);
+    formData.append("image_ktp", detail.image_ktp);
+    formData.append("image_swafoto", detail.image_swafoto);
+    formData.append("area", detail.area);
+    formData.append("durasi_sewa", detail.durasi_sewa);
+    formData.append("alamat_keberangkatan", detail.alamat_keberangkatan);
+    formData.append("tanggal_mulai_sewa", detail.tanggal_mulai_sewa);
+    formData.append("tanggal_akhir_sewa", detail.tanggal_akhir_sewa);
+    formData.append("catatan_sopir", detail.catatan_sopir);
+    if (detail.all_in) {
+      formData.append("all_in", String(isAllIn));
+    }
+    formData.append("jam_keberangkatan", detail.jam_keberangkatan);
+    formData.append("metode_id", data.metode_id);
+    formData.append("mobil_rental_id", "1");
+
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+
+    try {
+      const response = await createNewRent(formData);
+
+      console.log(response, "ini response");
+
+      // if(response.success === true) {
+
+      // }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -195,7 +305,6 @@ export default function Bayar({
       <div className="flex flex-col gap-y-2">
         <p className="text-xl">Metode Pembayaran</p>
         <PaymentMethods
-          // payments={payments}
           payments={
             payments as {
               payment_gateway?: PaymentDetailInterface[] | undefined;
@@ -223,9 +332,9 @@ export default function Bayar({
             <p>Total Harga</p>
             <p className="text-primary-700 text-xl font-semibold">Rp.200.000</p>
           </div>
-          <Button className="mt-4 w-full" onClick={handleNextStep}>
-            Lanjut Pembayaran
-          </Button>
+          <form onSubmit={handleNewRent}>
+            <Button className="mt-4 w-full">Lanjut Pembayaran</Button>
+          </form>
         </Card>
       </div>
     </section>

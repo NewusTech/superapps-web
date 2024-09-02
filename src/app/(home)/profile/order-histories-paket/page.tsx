@@ -1,7 +1,7 @@
 "use client";
 
 import stepper from "@/../../public/assets/icons/neededs/icon_donat_active.svg";
-import { Bus, Calendar, Notepad, Van } from "@phosphor-icons/react";
+import { Building, Bus, Calendar, Notepad, Van } from "@phosphor-icons/react";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -14,7 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
-export default function MyTrevelOrderHistories() {
+export default function MyPackageOrderHistories() {
   return (
     <section className="flex flex-col gap-y-5 md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
       <div className="w-full bg-white shadow-sm border px-5 py-3 border-grey-100 rounded-lg flex flex-row gap-x-3 mt-32">
@@ -86,54 +86,40 @@ export default function MyTrevelOrderHistories() {
               <div className="w-full flex flex-col gap-y-4">
                 <div className="w-full flex flex-row items-center gap-x-3">
                   <p className="text-primary-700 font-normal text-[20px]">
-                    Travel Rama Tranz
+                    Paket Rama Tranz
                   </p>
 
-                  <Van className="w-6 h-6 text-primary-700" />
+                  <Building className="w-6 h-6 text-primary-700" />
                 </div>
 
-                <div className="w-full flex flex-row">
+                <div className="w-full grid grid-cols-4">
                   <div className="w-full flex flex-col gap-y-1">
                     <p className="text-neutral-500 font-normal text-[14px]">
-                      23 Februari 2024
+                      Paket
                     </p>
 
                     <p className="text-neutral-500 font-normal text-[16px]">
-                      Bandar Lampung
+                      Televisi
                     </p>
-                  </div>
-
-                  <div className="w-full flex flex-row items-center">
-                    <div className="flex flex-row items-center gap-2">
-                      <div className="w-3 h-3">
-                        <Image
-                          src={stepper}
-                          alt="Rute"
-                          width={100}
-                          height={100}
-                          className="w-full h-full"
-                        />
-                      </div>
-                      <div className="border-b border-dashed w-16" />
-                      <div className="w-3 h-3">
-                        <Image
-                          src={stepper}
-                          alt="Rute"
-                          width={100}
-                          height={100}
-                          className="w-full h-full"
-                        />
-                      </div>
-                    </div>
                   </div>
 
                   <div className="w-full flex flex-col gap-y-2">
                     <p className="text-neutral-500 font-normal text-[14px]">
-                      23 Februari 2024
+                      Tanggal Kirim
                     </p>
 
                     <p className="text-neutral-500 font-normal text-[16px]">
-                      Palembang
+                      23 Februari 2024
+                    </p>
+                  </div>
+
+                  <div className="w-full flex flex-col gap-y-2">
+                    <p className="text-neutral-500 font-normal text-[14px]">
+                      Tanggal Diterima
+                    </p>
+
+                    <p className="text-neutral-500 font-normal text-[16px]">
+                      24 Februari 2024
                     </p>
                   </div>
 
