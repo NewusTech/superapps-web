@@ -1,7 +1,9 @@
 "use client";
 
 import Bayar from "@/components/pages/avaliable-schedule/partials/Bayar";
-import React from "react";
+import { getAllPaymentMethods } from "@/services/api";
+import { PaymentMenthodsInterface } from "@/types/interface";
+import React, { useEffect, useState } from "react";
 
 export default function PaymentRentOrderPage() {
   return (

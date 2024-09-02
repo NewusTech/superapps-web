@@ -8,7 +8,14 @@ import {
   useTravelActions,
   useTravelStepPayloadPayload,
 } from "@/store/useTravelStore";
-import { Seat } from "@phosphor-icons/react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Seat, Van } from "@phosphor-icons/react";
 import { Bus, Dot, Minus, Search } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -18,6 +25,11 @@ import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
 import Modal from "@/components/modal/Modal";
 import { useRouter } from "next/navigation";
 import ModalSelectSeat from "../ModalSelectSeat";
+import {
+  TitikJemputInterface,
+  TravelScheduleInterface,
+} from "@/types/interface";
+import CardTravelScheduleOrder from "@/components/elements/cardElementScheduleTravel";
 
 const dataDummy = [
   {
@@ -38,7 +50,13 @@ const dataDummy = [
   },
 ];
 
-export default function PilihTiket() {
+export default function PilihTiket({
+  schedules,
+  points,
+}: {
+  schedules: TravelScheduleInterface[];
+  points: TitikJemputInterface[];
+}) {
   const maxChair = 8;
   const chairList = Array.from({ length: maxChair }, (v, i) => ({
     label: `${i + 1}`,
@@ -75,7 +93,7 @@ export default function PilihTiket() {
       <Card className="">
         <div className="flex flex-row font-manrope justify-between">
           <div className="flex flex-col gap-2">
-            <p className="flex flex-row gap-2 font-semibold">
+            <p className="flex flex-row items-center justify-center gap-2 font-semibold">
               Lampung <FaArrowRight /> Palembang
             </p>
             <p className="text-[12px] text-gray-500 ">
@@ -84,8 +102,7 @@ export default function PilihTiket() {
           </div>
           <Button
             className="bg-primary-700 hover:bg-primary-600 duration-300 text-white"
-            onClick={() => setUbahPencarian(!ubahPencarian)}
-          >
+            onClick={() => setUbahPencarian(!ubahPencarian)}>
             Ubah Pencarian
           </Button>
         </div>
@@ -157,72 +174,9 @@ export default function PilihTiket() {
       <div className="flex flex-row mt-10 gap-5">
         {/* left */}
         <div className="flex flex-col w-full md:w-[70%] gap-4">
-          {dataDummy.map((d) => (
-            <Card key={d.id}>
-              <div className="flex flex-col gap-5 text-sm md:text-base">
-                <div className="flex flex-row justify-between">
-                  <div className="flex flex-col">
-                    <span className="flex flex-row items-center gap-2 text-sm md:text-base">
-                      Rama Tranz Type A <Minus className="" /> HIACE
-                    </span>
-                    <span className="text-primary-700 flex flex-row items-center">
-                      <Dot /> Tersedia 5 Kursi
-                    </span>
-                  </div>
-                  <Button
-                    className="h-fit"
-                    variant="secondary"
-                    onClick={handleDetailTravel}
-                  >
-                    Detail Tiket
-                  </Button>
-                </div>
-                <hr />
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
-                  <div className="flex flex-row gap-4 w-full items-center justify-between">
-                    <p className="flex flex-col gap-2">
-                      Bandar Lampung
-                      <span className="text-gray-500">15:00</span>
-                    </p>
-                    <div className="flex flex-col items-center">
-                      <p className="text-primary-700">8 Jam</p>
-                      <div className="flex flex-row items-center gap-2">
-                        <Image
-                          src={`/assets/icons/neededs/icon_donat_active.svg`}
-                          height={18}
-                          width={18}
-                          alt="donat"
-                          className="z-[1]"
-                        />
-                        <div className="border-b border-dashed w-16" />
-                        <Image
-                          src={`/assets/icons/neededs/icon_donat_active.svg`}
-                          height={18}
-                          width={18}
-                          alt="donat"
-                          className="z-[1]"
-                        />
-                      </div>
-                    </div>
-                    <p className="flex flex-col gap-2">
-                      Bandar Lampung
-                      <span className="text-gray-500">15:00</span>
-                    </p>
-                  </div>
-                  <div className="w-[1px] h-16 border-r hidden lg:block" />
-                  <div className="flex flex-row gap-4 items-center justify-between w-full">
-                    <p className="text-primary-700 font-bold text-xl">
-                      Rp. 200.000{" "}
-                      <span className="font-normal text-black">/kursi</span>
-                    </p>
-                    <Button className="h-fit" onClick={handlePilihKursi}>
-                      Pilih Kursi
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
+          {schedules?.map((item: TravelScheduleInterface, i: number) => {
+            return <CardTravelScheduleOrder key={i} data={item} />;
+          })}
         </div>
         {/* right */}
         <div className="w-[100%] md:w-[30%] pr-2 md:px-0 bg-white z-[2] md:relative md:bottom-auto md:block fixed bottom-[6.5rem] md:right-auto ">
@@ -230,11 +184,10 @@ export default function PilihTiket() {
             className="bg-no-repeat bg-cover bg-left-bottom"
             style={{
               backgroundImage: `url('/assets/images/neededs/splash.jpg')`,
-            }}
-          >
+            }}>
             <div className="flex flex-col gap-4">
               <p className="font-semibold">Mau naik dan turun dari mana</p>
-              <InputSelect
+              {/* <InputSelect
                 data={dataDummy}
                 placeholder="Naik dari mana?"
                 leadIcon={<Bus />}
@@ -247,13 +200,60 @@ export default function PilihTiket() {
                 leadIcon={<Bus />}
                 className="w-full"
                 value={"-"}
-              />
+              /> */}
+              <div className="flex flex-row items-center w-full rounded-lg bg-neutral-50 py-2 px-3">
+                <Bus className="w-6 h-6 text-primary-700" />
+
+                <Select
+                  onValueChange={(value) =>
+                    localStorage.setItem("naik", value)
+                  }>
+                  <SelectTrigger className="w-full border-none outline-none text-[14px]">
+                    <SelectValue placeholder="Naik Dari Mana?" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
+                    {points.map((item: TitikJemputInterface, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.id.toString()}>
+                          {item.nama}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex flex-row items-center w-full bg-neutral-50 rounded-lg py-2 px-3">
+                <Bus className="w-6 h-6 text-primary-700" />
+
+                <Select
+                  onValueChange={(value) =>
+                    localStorage.setItem("turun", value)
+                  }>
+                  <SelectTrigger className="w-full border-none outline-none text-[14px]">
+                    <SelectValue placeholder="Turun Dimana?" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
+                    {points.map((item: TitikJemputInterface, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.id.toString()}>
+                          {item.nama}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </Card>
         </div>
       </div>
       {/* Modal Select Seat */}
-      <ModalSelectSeat visible={openModalKursi} setVisible={setOpenModalKursi} handleAfterSelectSeat={handleNextStep}/>
+      {/* <ModalSelectSeat
+        visible={openModalKursi}
+        setVisible={setOpenModalKursi}
+        handleAfterSelectSeat={handleNextStep}
+      /> */}
     </section>
   );
 }

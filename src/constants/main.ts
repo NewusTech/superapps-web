@@ -843,3 +843,59 @@ export const detailHotels = {
     image: firstIconsImageApatement,
   },
 };
+
+export const seatsTotal = [
+  {
+    id: 1,
+    seat: "1 Kursi",
+    jumlah: 1,
+  },
+  {
+    id: 2,
+    seat: "2 Kursi",
+    jumlah: 2,
+  },
+  {
+    id: 3,
+    seat: "3 Kursi",
+    jumlah: 3,
+  },
+  {
+    id: 4,
+    seat: "4 Kursi",
+    jumlah: 4,
+  },
+  {
+    id: 5,
+    seat: "5 Kursi",
+    jumlah: 5,
+  },
+  {
+    id: 6,
+    seat: "6 Kursi",
+    jumlah: 6,
+  },
+  {
+    id: 7,
+    seat: "7 Kursi",
+    jumlah: 7,
+  },
+  {
+    id: 8,
+    seat: "8 Kursi",
+    jumlah: 8,
+  },
+];
+
+export const areas = [
+  {
+    id: 1,
+    name: "dalam kota",
+    value: "Dalam Kota",
+  },
+  {
+    id: 2,
+    name: "luar kota",
+    value: "Luar Kota",
+  },
+];
