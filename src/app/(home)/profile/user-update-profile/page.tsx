@@ -4,24 +4,82 @@ import FormInput from "@/components/formInput";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { profileUser, updateProfileUser } from "@/services/api";
+import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 export default function UserUpdateProfilePage() {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     nama: "",
-    kota: "",
+    // kota: "",
     email: "",
     nik: "",
     no_telp: "",
     alamat: "",
   });
 
+  const fetchUserProfile = async () => {
+    try {
+      const response = await profileUser();
+
+      setForm(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
+
+  const handleUpdateUserProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    try {
+      const response = await updateProfileUser(form);
+
+      if (response.success === true) {
+        setForm({
+          nama: "",
+          email: "",
+          no_telp: "",
+          alamat: "",
+          nik: "",
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil memperbarui profil!",
+          timer: 2000,
+          showConfirmButton: false,
+          position: "center",
+        });
+        router.push("/profile");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: `${response.message} dan Gagal memperbarui profil!`,
+          timer: 2000,
+          showConfirmButton: false,
+          position: "center",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
       <div className="w-full bg-neutral-50 border px-5 py-5 border-grey-100 rounded-lg flex flex-col mt-32 gap-y-20 pb-12">
-        <form>
+        <form onSubmit={handleUpdateUserProfile}>
           <div className="w-full flex flex-col gap-y-3">
             <div className="w-full flex flex-col gap-y-2">
               <h4 className="text-neutral-700 font-normal text-[20px]">
@@ -57,7 +115,7 @@ export default function UserUpdateProfilePage() {
                   />
                 </div>
 
-                <div className="w-full flex flex-col">
+                {/* <div className="w-full flex flex-col">
                   <FormInput
                     name="kota"
                     value={form.kota}
@@ -70,7 +128,7 @@ export default function UserUpdateProfilePage() {
                     className="w-full"
                     classLabel="text-neutral-700"
                   />
-                </div>
+                </div> */}
 
                 <div className="w-full flex flex-col">
                   <FormInput
@@ -142,8 +200,15 @@ export default function UserUpdateProfilePage() {
             </div>
 
             <div className="w-3/12">
-              <Button className="bg-primary-700 py-4 px-2 w-full text-neutral-50">
-                Simpan Data
+              <Button
+                type="submit"
+                disabled={isLoading ? true : false}
+                className="bg-primary-700 py-4 px-2 w-full text-neutral-50">
+                {isLoading ? (
+                  <Loader className="animate-spin" />
+                ) : (
+                  "Simpan Data"
+                )}
               </Button>
             </div>
           </div>

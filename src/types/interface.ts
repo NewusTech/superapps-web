@@ -15,6 +15,52 @@ export interface LoginUserInterface {
   password: string;
 }
 
+export interface ProfileUserInterface {
+  id: number;
+  nama: string;
+  email: string;
+  no_telp: string;
+  image_url: string;
+  master_cabang_id: string;
+  role_id: number;
+  created_at: string;
+  nik: string;
+  alamat: string;
+}
+
+export interface UpdateProfileUser {
+  nama: string;
+  email: string;
+  no_telp: string;
+  alamat: string;
+  nik: string;
+}
+
+export interface HistoryTravelInterface {
+  created_at: string;
+  expired_at: string;
+  kode_pesanan: string;
+  kota_asal: string;
+  kota_tujuan: string;
+  tanggal: string;
+  jam: string;
+  status: string;
+}
+
+export interface HistoryRentalInterface {
+  nama: string;
+  durasi_sewa: number;
+  created_at: string;
+  expired_at: string;
+  kode_pembayaran: string;
+  mobil_type: string;
+  area: string;
+  tanggal_awal_sewa: string;
+  tanggal_akhir_sewa: string;
+  harga: number;
+  status: string;
+}
+
 export interface DataPariwisataInterface {
   success: boolean;
   message: string;
