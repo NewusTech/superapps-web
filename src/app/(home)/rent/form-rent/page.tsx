@@ -28,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import DateFormInput from "@/components/dateFormInput/dateFormInput";
 import { PaymentMenthodsInterface } from "@/types/interface";
 import { getAllPaymentMethods } from "@/services/api";
+import Link from "next/link";
 
 export default function FormRental() {
   const router = useRouter();
@@ -677,14 +678,9 @@ export default function FormRental() {
                 Rp.200.000
               </p>
             </div>
-            <div className="w-full">
-              <Button
-                onClick={handleNewRent}
-                type="submit"
-                className="mt-4 w-full bg-primary-700 rounded-lg text-neutral-50">
-                Lanjut Pembayaran
-              </Button>
-            </div>
+            <ButtonCustom className="mt-4 w-full">
+              Lanjut Pembayaran
+            </ButtonCustom>
           </div>
         </Card>
       </div>

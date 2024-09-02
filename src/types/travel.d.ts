@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 export type TravelScheduleResponseSuccess = {
     data: {
       id: number;
@@ -20,3 +22,11 @@ export type TravelScheduleResponseSuccess = {
     message: string;
     success: boolean;
   };
+
+  export const travelScheduleQuerySchema = z.object({
+    from: z.string(),
+    to: z.string(),
+    date: z.date(),
+    seats: z.number(),
+  });
+  export type TravelScheduleQuery = z.infer<typeof travelScheduleQuerySchema>;
