@@ -103,6 +103,9 @@ const config = {
           // 800: "#950D28",
           // 900: "#480614",
         },
+        profile_route: {
+          100: "#73ABFF",
+        },
         outline_border: {
           100: "#AEAEAE",
         },
@@ -114,7 +117,7 @@ const config = {
           50: "#73ADFF",
         },
         danger_base: "#EE3D60",
-        dange_light:"#FDE6EB",
+        dange_light: "#FDE6EB",
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",

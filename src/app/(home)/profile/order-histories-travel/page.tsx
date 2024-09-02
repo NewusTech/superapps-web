@@ -1,8 +1,7 @@
 "use client";
 
-import stepper from "@/../../public/assets/icons/neededs/icon_donat_active.svg";
-import { Bus, Calendar, Notepad, Van } from "@phosphor-icons/react";
-import React from "react";
+import { Notepad } from "@phosphor-icons/react";
+import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Select,
@@ -11,10 +10,48 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { HistoryTravelInterface } from "@/types/interface";
+import { getOrderHistoryTravel } from "@/services/api";
+import OrderHistoryTravelCard from "@/components/pages/profile/card-history/travel";
+import { statusFilters } from "@/constants/main";
+import OrderHistoryTravelStatusCard from "@/components/pages/profile/card-history/travel/dalamProses";
 
 export default function MyTrevelOrderHistories() {
+  const [status, setStatus] = useState<string>("");
+  const [travel, setTravel] = useState<HistoryTravelInterface[]>();
+  const [waitingTravel, setWaitingTravel] =
+    useState<HistoryTravelInterface[]>();
+
+  const fetchGetTravelHistory = async (status: string) => {
+    try {
+      const response = await getOrderHistoryTravel(status);
+      setTravel(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGetTravelHistory(status);
+  }, [status]);
+
+  const fetchGetTravelHistoryStatus = async (status: string) => {
+    try {
+      const response = await getOrderHistoryTravel(status);
+      setWaitingTravel(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchGetTravelHistoryStatus("Menunggu Pembayaran");
+  }, []);
+
+  const handleStatusChange = (value: string) => {
+    setStatus(value);
+  };
+
   return (
     <section className="flex flex-col gap-y-5 md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
       <div className="w-full bg-white shadow-sm border px-5 py-3 border-grey-100 rounded-lg flex flex-row gap-x-3 mt-32">
@@ -39,208 +76,47 @@ export default function MyTrevelOrderHistories() {
               Dalam Proses
             </TabsTrigger>
             <div className="w-full">
-              <Select>
+              <Select onValueChange={handleStatusChange}>
                 <SelectTrigger className="w-full border-none py-6 outline-none text-[14px]">
                   <SelectValue placeholder="Filter Status" />
                 </SelectTrigger>
                 <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                  <SelectItem value="light">Light</SelectItem>
-                  <SelectItem value="dark">Dark</SelectItem>
-                  <SelectItem value="system">System</SelectItem>
+                  {statusFilters?.map(
+                    (item: { id: number; value: string }, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.value}>
+                          {item.value}
+                        </SelectItem>
+                      );
+                    }
+                  )}
                 </SelectContent>
               </Select>
             </div>
           </TabsList>
           <TabsContent value="riwayat-travel" className="w-full flex flex-col">
-            <div className="w-full flex flex-col gap-y-5 border border-grey-100 rounded-lg p-4">
-              <div className="w-full flex flex-row">
-                <div className="w-full flex flex-row gap-x-3">
-                  <div className="w-full flex flex-row items-center gap-x-2">
-                    <Notepad className="w-6 h-6 text-neutral-500" />
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      No Pemesan: 1314917131
-                    </p>
-                  </div>
-
-                  <div className="w-0.5 h-full bg-grey-100"></div>
-
-                  <div className="w-full flex flex-row items-center gap-x-2">
-                    <Calendar className="w-6 h-6 text-neutral-500" />
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Tanggal Pesan: 23 Januari 2024
-                    </p>
-                  </div>
-                </div>
-
-                <div className="w-4/12 rounded-lg flex items-center justify-center py-3 bg-success-300">
-                  <p className="text-success-700 text-center">
-                    Pembelian Sukses
-                  </p>
-                </div>
-              </div>
-
-              <div className="w-full h-[1px] bg-grey-100"></div>
-
-              <div className="w-full flex flex-col gap-y-4">
-                <div className="w-full flex flex-row items-center gap-x-3">
-                  <p className="text-primary-700 font-normal text-[20px]">
-                    Travel Rama Tranz
-                  </p>
-
-                  <Van className="w-6 h-6 text-primary-700" />
-                </div>
-
-                <div className="w-full flex flex-row">
-                  <div className="w-full flex flex-col gap-y-1">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      23 Februari 2024
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Bandar Lampung
-                    </p>
-                  </div>
-
-                  <div className="w-full flex flex-row items-center">
-                    <div className="flex flex-row items-center gap-2">
-                      <div className="w-3 h-3">
-                        <Image
-                          src={stepper}
-                          alt="Rute"
-                          width={100}
-                          height={100}
-                          className="w-full h-full"
-                        />
-                      </div>
-                      <div className="border-b border-dashed w-16" />
-                      <div className="w-3 h-3">
-                        <Image
-                          src={stepper}
-                          alt="Rute"
-                          width={100}
-                          height={100}
-                          className="w-full h-full"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="w-full flex flex-col gap-y-2">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      23 Februari 2024
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Palembang
-                    </p>
-                  </div>
-
-                  <div className="w-full">
-                    <Button className="w-full border border-primary-700 text-primary-700 py-6">
-                      Detail
-                    </Button>
-                  </div>
-                </div>
-              </div>
+            <div className="w-full h-screen overflow-y-auto scrollbar-hide flex flex-col gap-y-5">
+              {travel &&
+                travel
+                  ?.filter(
+                    (item: HistoryTravelInterface) =>
+                      item.status !== "Menunggu Pembayaran"
+                  )
+                  ?.map((item: HistoryTravelInterface, i: number) => {
+                    return <OrderHistoryTravelCard key={i} data={item} />;
+                  })}
             </div>
           </TabsContent>
           <TabsContent
             value="dalam-proses-travel"
             className="w-full flex flex-col">
-            <div className="w-full flex flex-col gap-y-5 border border-grey-100 rounded-lg p-4">
-              <div className="w-full flex flex-row">
-                <div className="w-full flex flex-row gap-x-3">
-                  <div className="w-full flex flex-row items-center gap-x-2">
-                    <Notepad className="w-6 h-6 text-neutral-500" />
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      No Pemesan: 1314917131
-                    </p>
-                  </div>
-
-                  <div className="w-0.5 h-full bg-grey-100"></div>
-
-                  <div className="w-full flex flex-row items-center gap-x-2">
-                    <Calendar className="w-6 h-6 text-neutral-500" />
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Tanggal Pesan: 23 Januari 2024
-                    </p>
-                  </div>
-                </div>
-
-                <div className="w-4/12 rounded-lg flex items-center justify-center py-3 bg-success-300">
-                  <p className="text-success-700 text-center">
-                    Pembelian Sukses
-                  </p>
-                </div>
-              </div>
-
-              <div className="w-full h-[1px] bg-grey-100"></div>
-
-              <div className="w-full flex flex-col gap-y-4">
-                <div className="w-full flex flex-row items-center gap-x-3">
-                  <p className="text-primary-700 font-normal text-[20px]">
-                    Travel Rama Tranz
-                  </p>
-
-                  <Van className="w-6 h-6 text-primary-700" />
-                </div>
-
-                <div className="w-full flex flex-row">
-                  <div className="w-full flex flex-col gap-y-1">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      23 Februari 2024
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Bandar Lampung
-                    </p>
-                  </div>
-
-                  <div className="w-full flex flex-row items-center">
-                    <div className="flex flex-row items-center gap-2">
-                      <div className="w-3 h-3">
-                        <Image
-                          src={stepper}
-                          alt="Rute"
-                          width={100}
-                          height={100}
-                          className="w-full h-full"
-                        />
-                      </div>
-                      <div className="border-b border-dashed w-16" />
-                      <div className="w-3 h-3">
-                        <Image
-                          src={stepper}
-                          alt="Rute"
-                          width={100}
-                          height={100}
-                          className="w-full h-full"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="w-full flex flex-col gap-y-2">
-                    <p className="text-neutral-500 font-normal text-[14px]">
-                      23 Februari 2024
-                    </p>
-
-                    <p className="text-neutral-500 font-normal text-[16px]">
-                      Palembang
-                    </p>
-                  </div>
-
-                  <div className="w-full">
-                    <Button className="w-full border border-primary-700 text-primary-700 py-6">
-                      Detail
-                    </Button>
-                  </div>
-                </div>
-              </div>
+            <div className="w-full h-screen overflow-y-auto scrollbar-hide flex flex-col gap-y-5">
+              {waitingTravel &&
+                waitingTravel?.map(
+                  (item: HistoryTravelInterface, i: number) => {
+                    return <OrderHistoryTravelStatusCard key={i} data={item} />;
+                  }
+                )}
             </div>
           </TabsContent>
         </Tabs>

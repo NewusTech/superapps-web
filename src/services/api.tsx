@@ -8,6 +8,7 @@ import {
   BodyRouteInterface,
   LoginUserInterface,
   RegistrationUserInterface,
+  UpdateProfileUser,
 } from "@/types/interface";
 
 // get
@@ -23,6 +24,45 @@ export function useCarousel() {
     isLoading,
   };
 }
+
+// get user profile
+export const profileUser = async () => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/user-profile`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// get user profile
+export const updateProfileUser = async (data: UpdateProfileUser) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/update-profile`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
 
 // register user
 export const registerUser = async (data: RegistrationUserInterface) => {
@@ -51,6 +91,44 @@ export const loginUser = async (data: LoginUserInterface) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// get histories order travel
+export const getOrderHistoryTravel = async (status: string) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/pesanan/riwayat?status=${status}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// get histories order Rental
+export const getOrderHistoryRental = async (status: string) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/rental/riwayat?status=${status}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       cache: "no-store",
     }
   );
