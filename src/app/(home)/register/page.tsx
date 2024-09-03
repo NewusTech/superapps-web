@@ -156,7 +156,7 @@ export default function RegisterScreen() {
         const response = await loginUser(formLogin);
 
         if (response.success === true) {
-          Cookies.set("Authorization", response?.data?.token);
+          Cookies.set("Authorization", response?.data?.token, { expires: 1 });
           setIsLoginPopupOpen(false);
           Swal.fire({
             icon: "success",

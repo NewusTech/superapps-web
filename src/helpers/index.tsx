@@ -1,3 +1,5 @@
+"use client";
+
 export const formatDate = (date: Date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -56,3 +58,40 @@ export const formatTanggalPanjang = (tanggalString: string) => {
 
   return `${hari} ${bulan} ${tahun}`;
 };
+
+export default function wrapText(str: string, maxLength: number = 10) {
+  let result = "";
+  let line = "";
+
+  for (let i = 0; i < str.length; i++) {
+    line += str[i];
+    if (line.length === maxLength) {
+      result += line + "\n";
+      line = "";
+    }
+  }
+
+  if (line.length > 0) {
+    result += line;
+  }
+
+  return result;
+}
+
+// export function truncateTitle(title: string, maxLength = 35) {
+//   if (title.length > maxLength) {
+//     return title.slice(0, maxLength) + "...";
+//   } else {
+//     return title;
+//   }
+// }
+
+export function truncateContent(title: string, maxLength = 35) {
+  const titleWithSpaces = title.replace(/\n/g, " ");
+
+  if (titleWithSpaces.length > maxLength) {
+    return titleWithSpaces.slice(0, maxLength) + "...";
+  } else {
+    return titleWithSpaces;
+  }
+}
