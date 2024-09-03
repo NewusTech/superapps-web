@@ -1,19 +1,19 @@
 import Modal from "@/components/modal/Modal";
 import Image from "next/image";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
 import { Dot, Minus } from "lucide-react";
 import CarSeat10 from "@/components/carSeat/CarSeat10";
 import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
+import { useTravelActions, useTravelbookingPayload, useTravelPassenger } from "@/store/useTravelStore";
+import { PassengerSeat } from "@/types/travel";
 
 export type ModalSelectSeatProps = {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-  handleAfterSelectSeat: () => void;
-  index: number;
-  sheats: number;
+  handleAfterSelectSeat?: () => void;
   selectAllSheats: boolean;
-  passengerIndex:number
+  passengerIndex: number;
 };
 
 export default function ModalSelectSeat(props: ModalSelectSeatProps) {
@@ -22,24 +22,74 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
     setVisible,
     handleAfterSelectSeat,
     passengerIndex,
-    sheats,
     selectAllSheats,
   } = props;
 
+  const bookingPayload = useTravelbookingPayload()
+  const {setPassenger} = useTravelActions()
 
-  // const getSeatTaken = useMemo(() => {
-  //   let seatTakenTemp = traveSchedule?.seatTaken || [];
+  const seats = bookingPayload?.seats
+  
+  console.log({seats})
 
-  //   passengerList.forEach((passenger, index) => {
-  //     if (index !== passengerIndex) {
-  //       seatTakenTemp = seatTakenTemp.concat(passenger.no_kursi);
-  //     }
-  //   });
 
-  //   console.log(seatTakenTemp);
+  const [selectedSeats, setSelectedSeat] = useState<string[]>([]);
+  const passengerList = useTravelPassenger();
 
-  //   return seatTakenTemp;
-  // }, [passengerIndex, passengerList, traveSchedule?.seatTaken]);
+  const getSeatTaken = useMemo(() => {
+    // let seatTakenTemp = traveSchedule?.seatTaken || [];
+    let seatTakenTemp = [""];
+
+    passengerList.forEach((passenger, index) => {
+      if (index !== passengerIndex) {
+        seatTakenTemp = seatTakenTemp.concat(passenger.no_kursi);
+      }
+    });
+
+    console.log(seatTakenTemp);
+
+    return seatTakenTemp;
+  }, [passengerIndex, passengerList]);
+
+  const handleSelectSeat = (seatNumber: string) => {
+    const limit = seats || 100;
+    if (selectedSeats.find((seats) => seats === seatNumber)) {
+      setSelectedSeat(selectedSeats.filter((seats) => seats !== seatNumber));
+    } else {
+      if (selectedSeats.length < limit) {
+        setSelectedSeat([...selectedSeats, seatNumber]);
+      }
+    }
+    console.log("log click ",seatNumber)
+  };
+
+  const handleAfterPilihKursi = ()=>{
+    const passengerListTemp: PassengerSeat[] = passengerList;
+    if (!selectAllSheats) {
+      if (passengerListTemp?.[passengerIndex]) {
+        passengerListTemp[passengerIndex].no_kursi = selectedSeats[0];
+      }
+    } else {
+      selectedSeats
+        .sort((a, b) => parseFloat(a) - parseFloat(b))
+        .map((numberSheat, index) => {
+          passengerListTemp[index] = {
+            nama: "Penumpang " + (index + 1),
+            no_telp: "",
+            no_kursi: numberSheat,
+            nik: "",
+            email: "",
+          };
+        });
+    }
+
+    setPassenger(passengerListTemp);
+    handleAfterSelectSeat!()
+  }
+
+  useEffect(()=>{
+    setSelectedSeat([])
+  },[seats])
 
   return (
     <Modal
@@ -80,8 +130,12 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
         <div className="bg-dange_light text-danger_base p-2">
           WAJIB BELI UNTUK ANAK DIATAS USIA 7 TAHUN{" "}
         </div>
-        <CarSeat10 />
-        <ButtonCustom className="h-1/2" onClick={handleAfterSelectSeat}>
+        <CarSeat10
+          filled={getSeatTaken}
+          selected={selectedSeats.map((item) => item)}
+          onSeatPress={handleSelectSeat}
+        />
+        <ButtonCustom className="h-1/2" onClick={handleAfterPilihKursi}>
           Pilih Kursi
         </ButtonCustom>
       </div>

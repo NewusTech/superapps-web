@@ -112,10 +112,8 @@ export default function CardTravelScheduleOrder({
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
         handleAfterSelectSeat={handleNextStep}
-        index={1}
         passengerIndex={1}
         selectAllSheats={true}
-        sheats={1}
       />
     </>
   );
