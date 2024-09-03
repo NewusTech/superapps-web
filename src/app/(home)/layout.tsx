@@ -6,6 +6,7 @@ import HamburgerMenu from "@/components/layouts/hamburger_menu";
 import HomeNavigationBar from "@/components/layouts/home_navbar";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Nunito } from "next/font/google";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Toaster } from "sonner";
 
@@ -19,6 +20,7 @@ export default function HomeLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
   const [isScrolledPast, setIsScrolledPast] = useState(false);
   const [isDelayComplete, setIsDelayComplete] = useState(false);
 
@@ -48,6 +50,20 @@ export default function HomeLayout({
 
   const isMobile = useMediaQuery("(max-width: 767px)");
 
+  const path = [
+    "/profile",
+    "/profile/change-user-password",
+    "/profile/user-update-profile",
+    "/profile/order-histories-rental",
+    "/profile/order-histories-travel",
+    "/profile/order-histories-hotel",
+    "profile/order-histories-paket",
+  ];
+
+  const isProfile = () => {
+    return path.some((p) => pathname.startsWith(p));
+  };
+
   return (
     <main
       className={`${nunito.className} w-full relative flex flex-col min-h-screen`}>
@@ -66,7 +82,8 @@ export default function HomeLayout({
       ) : (
         // </div>
         <div className="w-full relative flex flex-col min-h-screen">
-          <HamburgerMenu />
+          {!isProfile() && <HamburgerMenu />}
+
           {children}
           <Toaster position="bottom-right" />
           {/* <div className="w-full absolute bottom-0 bg-primary-50">

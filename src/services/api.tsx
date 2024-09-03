@@ -7,6 +7,7 @@ import { LoginType } from "@/types/types";
 import {
   BodyRouteInterface,
   LoginUserInterface,
+  ProfileImageUpdateInterface,
   RegistrationUserInterface,
   UpdateProfileUser,
 } from "@/types/interface";
@@ -57,6 +58,25 @@ export const updateProfileUser = async (data: UpdateProfileUser) => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// get profile Foto
+export const updateProfileImage = async (data: FormData) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/profile-photo/update`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: data,
       cache: "no-store",
     }
   );
@@ -175,7 +195,11 @@ export const getAllBranches = async () => {
 };
 
 // api get all Titik Jemput
-export const getAllPointMasterJemput = async ({cabang}:{cabang:string}) => {
+export const getAllPointMasterJemput = async ({
+  cabang,
+}: {
+  cabang: string;
+}) => {
   const token = Cookies.get("Authorization");
 
   const response = await fetch(
@@ -186,7 +210,7 @@ export const getAllPointMasterJemput = async ({cabang}:{cabang:string}) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      cache: "no-store",
+      // cache: "no-store",
     }
   );
 
@@ -274,7 +298,7 @@ export const getAllPariwisata = async () => {
 };
 
 // post rental
-export const createNewRent = async (data: any) => {
+export const createNewRent = async (data: FormData) => {
   const token = Cookies.get("Authorization");
 
   const response = await fetch(
@@ -282,10 +306,29 @@ export const createNewRent = async (data: any) => {
     {
       method: "POST",
       headers: {
-        "Content-Type": "multipart/form-data",
         Authorization: `Bearer ${token}`,
       },
       body: data,
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// get articles blog
+
+export const getAllArticles = async (limit: number) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/artikel/artikel?limit=${limit}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       cache: "no-store",
     }
   );

@@ -65,10 +65,10 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
   };
 
   useEffect(() => {
-    fetchUserProfile();
-  }, []);
-
-  console.log(profile, "ini profile");
+    if (token) {
+      fetchUserProfile();
+    }
+  }, [token]);
 
   const path = [
     "/travel/available-schedule",
@@ -124,7 +124,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
 
         if (response.success === true) {
           Cookies.set("Authorization", response?.data?.token);
-          setIsLoginPopupOpen(false);
+
           Swal.fire({
             icon: "success",
             title: "Login berhasil!",
@@ -132,6 +132,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
             showConfirmButton: false,
             position: "center",
           });
+          setIsLoginPopupOpen(true);
           if (response?.data?.alamat !== null) {
             return router.push("/");
           } else {
@@ -539,7 +540,9 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                       {/* </div> */}
 
                       <div className="w-full flex flex-col">
-                        <form className="w-full flex flex-col gap-y-3">
+                        <form
+                          onSubmit={handleSubmitLogin}
+                          className="w-full flex flex-col gap-y-3">
                           <div className="w-full flex flex-col gap-y-5">
                             <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                               <Label
@@ -549,13 +552,27 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                               </Label>
 
                               <Input
-                                id="name"
-                                name="name"
-                                type="text"
+                                id="email"
+                                name="email"
+                                value={formLogin.email}
+                                onChange={(
+                                  e: React.ChangeEvent<HTMLInputElement>
+                                ) =>
+                                  setFormLogin({
+                                    ...formLogin,
+                                    email: e.target.value,
+                                  })
+                                }
+                                type="email"
                                 className="w-full focus-visible:text-neutral-700 focus-visible:border focus-visible:border-primary-700"
-                                placeholder="Masukkan Nama Lengkap"
+                                placeholder="Masukkan Email Anda"
                               />
                             </div>
+                            {hasSubmitted && errors?.email?._errors && (
+                              <div className="text-error-700 text-[12px] md:text-[14px]">
+                                {errors.email._errors[0]}
+                              </div>
+                            )}
 
                             <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
                               <Label
@@ -568,6 +585,15 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                                 <Input
                                   id="password"
                                   name="password"
+                                  value={formLogin.password}
+                                  onChange={(
+                                    e: React.ChangeEvent<HTMLInputElement>
+                                  ) =>
+                                    setFormLogin({
+                                      ...formLogin,
+                                      password: e.target.value,
+                                    })
+                                  }
                                   type={!seen ? "text" : "password"}
                                   className="w-full focus-visible:text-neutral-700 border-none outline-none bg-transparent"
                                   placeholder="Masukkan Kata Sandi"
@@ -584,6 +610,11 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                                 </div>
                               </div>
                             </div>
+                            {hasSubmitted && errors?.password?._errors && (
+                              <div className="text-error-700 text-[12px] md:text-[14px]">
+                                {errors.password._errors[0]}
+                              </div>
+                            )}
                           </div>
 
                           <div className="w-full flex flex-col gap-y-6">
@@ -592,8 +623,15 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                             </p>
 
                             <div className="w-full flex flex-row">
-                              <Button className="w-full bg-primary-700 text-neutral-50 text-[18px] py-6">
-                                Masuk
+                              <Button
+                                type="submit"
+                                disabled={firstLoading ? true : false}
+                                className="w-full bg-primary-700 text-neutral-50 text-[18px] py-6">
+                                {firstLoading ? (
+                                  <Loader className="animate-spin" />
+                                ) : (
+                                  "Masuk"
+                                )}
                               </Button>
                             </div>
 

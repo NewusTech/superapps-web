@@ -20,7 +20,7 @@ export default function UserUpdateProfilePage() {
 
   return (
     <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
-      <div className="w-full bg-neutral-50 border px-5 py-5 border-grey-100 rounded-lg flex flex-col mt-32 gap-y-20 pb-12">
+      <div className="w-full bg-neutral-50 border px-5 py-5 border-grey-100 rounded-lg flex flex-col mt-5 md:mt-32 gap-y-20 pb-12">
         <form>
           <div className="w-full flex flex-col gap-y-3">
             <div className="w-full flex flex-col gap-y-2">

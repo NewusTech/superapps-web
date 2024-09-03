@@ -15,10 +15,15 @@ export interface LoginUserInterface {
   password: string;
 }
 
+export interface ProfileImageUpdateInterface {
+  image_url: string;
+}
+
 export interface ProfileUserInterface {
   id: number;
   nama: string;
   email: string;
+  kota: string;
   no_telp: string;
   image_url: string;
   master_cabang_id: string;
@@ -171,4 +176,12 @@ export interface PaymentMenthodsInterface {
   payment_gateway: PaymentDetailInterface[];
   bank_transfer: PaymentDetailInterface[];
   cash: PaymentDetailInterface[];
+}
+
+export interface ArticleBlogInterface {
+  id: number;
+  judul: string;
+  image_url: string;
+  konten: string;
+  created_at: string;
 }

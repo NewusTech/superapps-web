@@ -32,7 +32,7 @@ import Link from "next/link";
 
 export default function FormRental() {
   const router = useRouter();
-  const dropRef = useRef<HTMLDivElement>(null);
+  // const dropRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [imageKTP, setImageKTP] = useState<File | null>(null);
   const [imageSwafoto, setImageSwafoto] = useState<File | null>(null);
@@ -54,10 +54,20 @@ export default function FormRental() {
     username_fb: "",
     username_ig: "",
     catatan_sopir: "",
-    image_ktp: "",
-    image_swafoto: "",
     jam_keberangkatan: "",
   } as { [key: string]: any });
+  const [dataKtp, setDataKtp] = useState({
+    lastModified: 0,
+    name: "",
+    size: 0,
+    type: "",
+  });
+  const [dataSwafoto, setDataSwafoto] = useState({
+    lastModified: 0,
+    name: "",
+    size: 0,
+    type: "",
+  });
   const [payments, setPayments] = useState<PaymentMenthodsInterface>();
   const [detailImageActive, setDetailImageActive] = useState(
     "/assets/images/neededs/travel/travel-1.png"
@@ -93,81 +103,96 @@ export default function FormRental() {
     setData({ ...data, all_in: updateChecked });
   };
 
-  const handleImageKTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImageKTP(file);
-      setData({
-        ...data,
-        image_ktp: file.name,
-      });
-      const fileUrl = URL.createObjectURL(file);
-      setPreviewImageKTP(fileUrl);
-    }
-  };
+  // const handleImageKTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
 
-  const handleImageSwafotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setImageSwafoto(file);
-      setData({
-        ...data,
-        image_swafoto: file.name,
-      });
-      const fileUrl = URL.createObjectURL(file);
-      setPreviewImageSwafoto(fileUrl);
-    }
-  };
+  //   if (file) {
+  //     setImageKTP(file);
+  //     const fileInfo = {
+  //       lastModified: file.lastModified,
+  //       name: file.name,
+  //       size: file.size,
+  //       type: file.type,
+  //     };
+  //     setDataKtp(fileInfo);
+  //     setData({
+  //       ...data,
+  //       image_ktp: JSON.stringify(fileInfo),
+  //     });
+  //     const fileUrl = URL.createObjectURL(file);
+  //     setPreviewImageKTP(fileUrl);
+  //   }
+  // };
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
+  // const handleImageSwafotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     setImageSwafoto(file);
+  //     const fileInfo = {
+  //       lastModified: file.lastModified,
+  //       name: file.name,
+  //       size: file.size,
+  //       type: file.type,
+  //     };
+  //     setDataSwafoto(fileInfo);
+  //     setData({
+  //       ...data,
+  //       image_swafoto: JSON.stringify(fileInfo),
+  //     });
+  //     const fileUrl = URL.createObjectURL(file);
+  //     setPreviewImageSwafoto(fileUrl);
+  //   }
+  // };
 
-  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
+  // const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault();
+  // };
 
-  const handleDropImageKTP = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
+  // const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault();
+  // };
 
-    const file = e.dataTransfer.files?.[0];
-    if (file) {
-      setImageKTP(file);
-      setData({
-        ...data,
-        image_ktp: file.name,
-      });
-      const fileUrl = URL.createObjectURL(file);
-      setPreviewImageKTP(fileUrl);
-    }
-  };
+  // const handleDropImageKTP = (e: React.DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault();
 
-  const handleDropImageSwafoto = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
+  //   const file = e.dataTransfer.files?.[0];
+  //   if (file) {
+  //     setImageKTP(file);
+  //     setData({
+  //       ...data,
+  //       image_ktp: file.name,
+  //     });
+  //     const fileUrl = URL.createObjectURL(file);
+  //     setPreviewImageKTP(fileUrl);
+  //   }
+  // };
 
-    const file = e.dataTransfer.files?.[0];
-    if (file) {
-      setImageSwafoto(file);
-      setData({
-        ...data,
-        image_swafoto: file.name,
-      });
-      const fileUrl = URL.createObjectURL(file);
-      setPreviewImageSwafoto(fileUrl);
-    }
-  };
+  // const handleDropImageSwafoto = (e: React.DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault();
 
-  const handleRemoveImageKTP = () => {
-    setImageKTP(null);
-    setPreviewImageKTP("");
-    setData({ ...data, image_ktp: "" });
-  };
+  //   const file = e.dataTransfer.files?.[0];
+  //   if (file) {
+  //     setImageSwafoto(file);
+  //     setData({
+  //       ...data,
+  //       image_swafoto: file.name,
+  //     });
+  //     const fileUrl = URL.createObjectURL(file);
+  //     setPreviewImageSwafoto(fileUrl);
+  //   }
+  // };
 
-  const handleRemoveImageSwafoto = () => {
-    setImageSwafoto(null);
-    setPreviewImageSwafoto("");
-    setData({ ...data, image_swafoto: "" });
-  };
+  // const handleRemoveImageKTP = () => {
+  //   setImageKTP(null);
+  //   setPreviewImageKTP("");
+  //   setData({ ...data, image_ktp: "" });
+  // };
+
+  // const handleRemoveImageSwafoto = () => {
+  //   setImageSwafoto(null);
+  //   setPreviewImageSwafoto("");
+  //   setData({ ...data, image_swafoto: "" });
+  // };
 
   const handleNewRent = () => {
     Object.keys(data)?.forEach((key: string) => {
@@ -389,7 +414,7 @@ export default function FormRental() {
               </div>
             </div>
 
-            <div className="flex flex-col w-full h-full">
+            {/* <div className="flex flex-col w-full h-full">
               <Label className="w-full">Upload Kartu Tanda Penduduk</Label>
 
               <div className="w-full flex flex-row">
@@ -495,7 +520,7 @@ export default function FormRental() {
                   </div>
                 )}
               </div>
-            </div>
+            </div> */}
           </div>
         </Card>
         {/* form Detail Sewa & Rental Mobil */}
@@ -678,7 +703,7 @@ export default function FormRental() {
                 Rp.200.000
               </p>
             </div>
-            <ButtonCustom className="mt-4 w-full">
+            <ButtonCustom onClick={handleNewRent} className="mt-4 w-full">
               Lanjut Pembayaran
             </ButtonCustom>
           </div>
