@@ -914,3 +914,24 @@ export const statusFilters = [
     value: "Gagal",
   },
 ];
+
+export const profileSelects = [
+  {
+    value: "Profile",
+  },
+  {
+    value: "Ubah Password",
+  },
+  {
+    value: "Travel",
+  },
+  {
+    value: "Rental",
+  },
+  {
+    value: "Hotel",
+  },
+  {
+    value: "Paket",
+  },
+];

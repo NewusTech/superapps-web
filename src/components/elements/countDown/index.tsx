@@ -30,7 +30,7 @@ const Countdown: React.FC<CountdownProps> = ({ expiredAt }) => {
   }, [expiredAt]);
 
   return (
-    <div className="w-4/12 rounded-lg flex items-center justify-center py-3 bg-profile_route-100 bg-opacity-20">
+    <div className="w-full md:w-4/12 rounded-lg flex items-center justify-center py-3 bg-profile_route-100 bg-opacity-20">
       <p className="text-profile_route-100 text-center">
         {timeLeft.minutes}m {timeLeft.seconds}s
       </p>

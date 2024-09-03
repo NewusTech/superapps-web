@@ -53,8 +53,8 @@ export default function MyTrevelOrderHistories() {
   };
 
   return (
-    <section className="flex flex-col gap-y-5 md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
-      <div className="w-full bg-white shadow-sm border px-5 py-3 border-grey-100 rounded-lg flex flex-row gap-x-3 mt-32">
+    <section className="flex flex-col gap-y-5 w-full md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
+      <div className="w-full bg-white shadow-sm border px-5 py-3 border-grey-100 rounded-lg flex flex-row gap-x-3 mt-5 md:mt-32">
         <Notepad className="w-6 h-6 text-neutral-500" />
 
         <h5>Pesanan Saya</h5>
@@ -77,7 +77,7 @@ export default function MyTrevelOrderHistories() {
             </TabsTrigger>
             <div className="w-full">
               <Select onValueChange={handleStatusChange}>
-                <SelectTrigger className="w-full border-none py-6 outline-none text-[14px]">
+                <SelectTrigger className="w-full border-none px-2 md:px-4  py-6 outline-none text-[14px]">
                   <SelectValue placeholder="Filter Status" />
                 </SelectTrigger>
                 <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">

@@ -15,7 +15,7 @@ export default function UserUpdateProfilePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({
     nama: "",
-    // kota: "",
+    kota: "",
     email: "",
     nik: "",
     no_telp: "",
@@ -48,6 +48,7 @@ export default function UserUpdateProfilePage() {
         setForm({
           nama: "",
           email: "",
+          kota: "",
           no_telp: "",
           alamat: "",
           nik: "",
@@ -115,7 +116,7 @@ export default function UserUpdateProfilePage() {
                   />
                 </div>
 
-                {/* <div className="w-full flex flex-col">
+                <div className="w-full flex flex-col">
                   <FormInput
                     name="kota"
                     value={form.kota}
@@ -128,7 +129,7 @@ export default function UserUpdateProfilePage() {
                     className="w-full"
                     classLabel="text-neutral-700"
                   />
-                </div> */}
+                </div>
 
                 <div className="w-full flex flex-col">
                   <FormInput
