@@ -298,10 +298,8 @@ export default function DetailTravel() {
 
       {/* modal pilih kursi */}
       <ModalSelectSeat
-        index={1}
         passengerIndex={1}
         selectAllSheats={false}
-        sheats={1}
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
         handleAfterSelectSeat={handleNextStep}

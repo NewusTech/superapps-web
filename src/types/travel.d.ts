@@ -30,3 +30,12 @@ export type TravelScheduleResponseSuccess = {
     seats: z.number(),
   });
   export type TravelScheduleQuery = z.infer<typeof travelScheduleQuerySchema>;
+
+  export const passengerSeatSchema = z.object({
+    nama: z.string(),
+    nik: z.string(),
+    email: z.string().email(),
+    no_telp: z.string(),
+    no_kursi: z.string(),
+  });
+  export type PassengerSeat = z.infer<typeof passengerSeatSchema>;

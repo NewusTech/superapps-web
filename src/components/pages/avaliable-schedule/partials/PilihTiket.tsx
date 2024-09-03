@@ -43,7 +43,9 @@ import { seatsTotal } from "@/constants/main";
 
 export default function PilihTiket() {
   const [schedules, setSchedules] = useState<TravelScheduleInterface[]>([]);
-  const [pointsJempuput, setPointsJempuut] = useState<TitikJemputInterface[]>([]);
+  const [pointsJempuput, setPointsJempuut] = useState<TitikJemputInterface[]>(
+    []
+  );
   const [pointsAntar, setPointsAntar] = useState<TitikJemputInterface[]>([]);
   const [branches, setBranches] = useState<BranchesInterface[]>();
 
@@ -65,26 +67,31 @@ export default function PilihTiket() {
 
   const maxChair = 8;
 
+
   const fetchTitikJemput = useMemo(async () => {
     try {
-    const response = await getAllPointMasterJemput({cabang:bookingPayload?.from||""});
+      const response = await getAllPointMasterJemput({
+        cabang: bookingPayload?.from || "",
+      });
 
-    setPointsJempuut(response.data);
+      setPointsJempuut(response.data);
     } catch (error) {
       setPointsJempuut([]);
       console.log(error);
     }
-  },[bookingPayload?.from])
+  }, [bookingPayload?.from]);
   const fetchTitikAntar = useMemo(async () => {
     try {
-    const response = await getAllPointMasterJemput({cabang:bookingPayload?.to||""});
-    setPointsAntar(response.data);
-    console.log("Titik Antar ",response.data)
+      const response = await getAllPointMasterJemput({
+        cabang: bookingPayload?.to || "",
+      });
+      setPointsAntar(response.data);
+      console.log("Titik Antar ", response.data);
     } catch (error) {
       setPointsAntar([]);
       console.log(error);
     }
-  },[bookingPayload?.to]);
+  }, [bookingPayload?.to]);
 
   const fetchAllBranches = async () => {
     try {
@@ -153,6 +160,10 @@ export default function PilihTiket() {
     });
   };
 
+  const handleNextStep = ()=>{
+    setStepTravelPayload(2)
+  }
+
   useEffect(() => {
     if (
       bookingPayload &&
@@ -168,6 +179,7 @@ export default function PilihTiket() {
         bookingPayload?.seats
       );
     }
+    console.log(bookingPayload?.seats)
   }, [bookingPayload]);
 
   // if(schedules?.length < 1 || points.length < 1 ) return router.push("/travel")
@@ -178,10 +190,11 @@ export default function PilihTiket() {
         <div className="flex flex-row font-manrope justify-between">
           <div className="flex flex-col gap-2">
             <p className="flex flex-row items-center justify-start gap-2 font-semibold">
-          {bookingPayload?.from || "Pilih Kota Asal"} <FaArrowRight /> {bookingPayload?.to || "Pilih Kota Tujuan"}
+              {bookingPayload?.from || "Pilih Kota Asal"} <FaArrowRight />{" "}
+              {bookingPayload?.to || "Pilih Kota Tujuan"}
             </p>
             <p className="text-[12px] text-gray-500 ">
-              Senin, 23 Februari 2024 - 1 kursi
+              Senin, 23 Februari 2024 - {bookingPayload?.seats} kursi
             </p>
           </div>
           <Button
@@ -323,9 +336,11 @@ export default function PilihTiket() {
             schedules?.map((item: TravelScheduleInterface, i: number) => {
               return <CardTravelScheduleOrder key={i} data={item} />;
             })}
-            {!schedules && schedules < 1 && (
-              <p className="w-full p-2 font-bold">Belum Ada Jadwal Yang Tersedia</p>
-            )}
+          {!schedules && schedules < 1 && (
+            <p className="w-full p-2 font-bold">
+              Belum Ada Jadwal Yang Tersedia
+            </p>
+          )}
         </div>
         {/* right */}
         <div className="w-[100%] md:w-[30%] pr-2 md:px-0 bg-white z-[2] md:relative md:bottom-auto md:block fixed bottom-[6.5rem] md:right-auto ">
@@ -351,13 +366,15 @@ export default function PilihTiket() {
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
                     {pointsAntar &&
-                      pointsAntar?.map((item: TitikJemputInterface, i: number) => {
-                        return (
-                          <SelectItem key={i} value={item.id.toString()}>
-                            {item.nama}
-                          </SelectItem>
-                        );
-                      })}
+                      pointsAntar?.map(
+                        (item: TitikJemputInterface, i: number) => {
+                          return (
+                            <SelectItem key={i} value={item.id.toString()}>
+                              {item.nama}
+                            </SelectItem>
+                          );
+                        }
+                      )}
                   </SelectContent>
                 </Select>
               </div>
@@ -379,13 +396,15 @@ export default function PilihTiket() {
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
                     {pointsJempuput &&
-                      pointsJempuput?.map((item: TitikJemputInterface, i: number) => {
-                        return (
-                          <SelectItem key={i} value={item.id.toString()}>
-                            {item.nama}
-                          </SelectItem>
-                        );
-                      })}
+                      pointsJempuput?.map(
+                        (item: TitikJemputInterface, i: number) => {
+                          return (
+                            <SelectItem key={i} value={item.id.toString()}>
+                              {item.nama}
+                            </SelectItem>
+                          );
+                        }
+                      )}
                   </SelectContent>
                 </Select>
               </div>
@@ -394,11 +413,13 @@ export default function PilihTiket() {
         </div>
       </div>
       {/* Modal Select Seat */}
-      {/* <ModalSelectSeat
+      <ModalSelectSeat
+        passengerIndex={0}
+        selectAllSheats
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
         handleAfterSelectSeat={handleNextStep}
-      /> */}
+      />
     </section>
   );
 }

@@ -23,11 +23,9 @@ export default function DataDiriPenumpang() {
 
   const {setStepTravelPayload} = useTravelActions()
 
-  const useTravelStep = useTravelStepPayloadPayload()
 
     const handleNextStep = () => {
-        if (useTravelStep > stepItem.length) return;
-        setStepTravelPayload(useTravelStep + 1);
+        setStepTravelPayload(3);
         window.scrollTo(0, 0)
     };
 

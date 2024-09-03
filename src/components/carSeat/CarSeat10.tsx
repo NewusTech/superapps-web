@@ -4,52 +4,88 @@ import { cn } from "@/lib/utils";
 import Card from "../ui/card/Card";
 
 export type CarSeat10Props = {
-  //   filled: string[];
-  //   selected: string[];
-  //   onSeatPress: (seatNumber: string) => void;
+  filled: string[];
+  selected: string[];
+  onSeatPress: (seatNumber: string) => void;
 };
 
 export default function CarSeat10(props: CarSeat10Props) {
-  //   const { filled = [], selected = [], onSeatPress = () => {} } = props;
+  const { filled = [], selected = [], onSeatPress = () => {} } = props;
 
-  //   const getSeatStatus = (seatNumber: string): SeatItemProps["status"] => {
-  //     if (filled.find((item) => item.toString() === seatNumber)) return "filled";
+  const getSeatStatus = (seatNumber: string): SeatItemProps["status"] => {
+    if (filled.find((item) => item.toString() === seatNumber)) return "filled";
 
-  //     if (selected.find((item) => item.toString() === seatNumber))
-  //       return "selected";
+    if (selected.find((item) => item.toString() === seatNumber))
+      return "selected";
 
-  //     return "available";
-  //   };
+    return "available";
+  };
 
   return (
     <Card className="w-fit">
       <div className="flex flex-row gap-2">
-        <div className="py-2 px-3 border h-[7rem] w-1 my-auto border-black">
-          
-        </div>
+        <div className="py-2 px-3 border h-[7rem] w-1 my-auto border-black"></div>
         <div className="flex flex-col gap-2">
           <div className="flex flex-row items-center justify-between">
-            <SeatItem seatNumber="1" status="available" />
+            <SeatItem
+              seatNumber="1"
+              status={getSeatStatus("1")}
+              onClick={() => onSeatPress("1")}
+            />
             <SeatItem seatNumber="driver" status="driver" />
           </div>
           <div className="flex flex-row items-center justify-end">
-            <SeatItem seatNumber="4" status="available" />
-            <SeatItem seatNumber="3" status="available" />
-            <SeatItem seatNumber="2" status="available" />
+            <SeatItem
+              seatNumber="4"
+              status={getSeatStatus("4")}
+              onClick={() => onSeatPress("4")}
+            />
+            <SeatItem
+              seatNumber="3"
+              status={getSeatStatus("3")}
+              onClick={() => onSeatPress("3")}
+            />
+            <SeatItem
+              seatNumber="2"
+              status={getSeatStatus("2")}
+              onClick={() => onSeatPress("2")}
+            />
           </div>
           <div className="flex flex-row items-center">
-            <SeatItem seatNumber="7" status="available" className="mr-[2rem]" />
-            <SeatItem seatNumber="6" status="available" />
-            <SeatItem seatNumber="5" status="available" />
+            <SeatItem
+              seatNumber="7"
+              status={getSeatStatus("7")}
+              className="mr-[2rem]"
+              onClick={() => onSeatPress("7")}
+            />
+            <SeatItem
+              seatNumber="6"
+              status={getSeatStatus("6")}
+              onClick={() => onSeatPress("6")}
+            />
+            <SeatItem
+              seatNumber="5"
+              status={getSeatStatus("5")}
+              onClick={() => onSeatPress("5")}
+            />
           </div>
           <div className="flex flex-row items-center">
             <SeatItem
               seatNumber="10"
-              status="available"
+              status={getSeatStatus("10")}
               className="mr-[2rem]"
+              onClick={() => onSeatPress("10")}
             />
-            <SeatItem seatNumber="9" status="available" />
-            <SeatItem seatNumber="8" status="available" />
+            <SeatItem
+              seatNumber="9"
+              status={getSeatStatus("9")}
+              onClick={() => onSeatPress("9")}
+            />
+            <SeatItem
+              seatNumber="8"
+              status={getSeatStatus("8")}
+              onClick={() => onSeatPress("8")}
+            />
           </div>
         </div>
       </div>
@@ -70,6 +106,13 @@ function SeatItem(props: SeatItemProps) {
       className={cn([
         "h-[4rem] w-[4rem] flex items-center justify-center border roundedn-md text-black",
         className,
+        status === "driver"
+          ? "bg-transparent"
+          : status === "filled"
+            ? "bg-gray-500"
+            : status === "available"
+              ? "bg-transparent"
+              : "bg-primary-700 text-white",
       ])}
       {...rest}
     >
