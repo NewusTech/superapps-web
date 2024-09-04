@@ -236,6 +236,63 @@ export const getAllTravelCar = async () => {
   return await response.json();
 };
 
+// api get detail rental car
+export const getDetailTravelCarId = async (id: number) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/rental/mobil/${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// api get syarat ketentuan
+export const getSyaratKetentuan = async (id: number) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/syarat-ketentuan/syarat-ketentuan/${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// api get date disbaled
+export const getDisabledDate = async (id: number) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/rental/booked-dates?mobil_id=${id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
 // get all paymentMethods
 
 export const getAllPaymentMethods = async () => {
@@ -297,12 +354,53 @@ export const getAllPariwisata = async () => {
   return await response.json();
 };
 
+// get histories order Rental detail
+export const getOrderHistoryRentalDetail = async (kodePembayaran: string) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/rental/riwayat/${kodePembayaran}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
 // post rental
 export const createNewRent = async (data: FormData) => {
   const token = Cookies.get("Authorization");
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/rental/process-payment`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: data,
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// post bukti pembayaran
+export const createPaymentSProof = async (
+  kode_pembayaran: string,
+  data: FormData
+) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/rental/pembayaran/upload-bukti/${kode_pembayaran}`,
     {
       method: "POST",
       headers: {

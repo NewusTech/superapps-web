@@ -1,7 +1,6 @@
 "use client";
 
-import stepper from "@/../../public/assets/icons/neededs/icon_donat_active.svg";
-import { Bus, Calendar, Notepad, Van } from "@phosphor-icons/react";
+import { Notepad } from "@phosphor-icons/react";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -11,18 +10,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { HistoryRentalInterface } from "@/types/interface";
 import { getOrderHistoryRental } from "@/services/api";
 import { statusFilters } from "@/constants/main";
 import OrderHistoryRentalCard from "@/components/pages/profile/card-history/rental";
 import OrderHistoryRentalStatusCard from "@/components/pages/profile/card-history/rental/dalamProses";
+// import { useSearchParams } from "next/navigation";
 
 export default function MyRentOrderHistories() {
+  // const searchParams = useSearchParams();
+  // const [isTabs, setIsTabs] = useState<string>("riwayat-travel");
   const [status, setStatus] = useState<string>("");
   const [rental, setRental] = useState<HistoryRentalInterface[]>();
   const [waitingRent, setWaitingRent] = useState<HistoryRentalInterface[]>();
+
+  // const searchTabs = searchParams.get("tabs");
+
+  // useEffect(() => {
+  //   if (searchTabs == "riwayat-travel") {
+  //     setIsTabs("riwayat-travel");
+  //   } else if (searchTabs == "dalam-proses-travel") {
+  //     setIsTabs("dalam-proses-travel");
+  //   }
+  // }, [isTabs]);
 
   const fetchGetRentalHistory = async (status: string) => {
     try {
@@ -64,6 +74,8 @@ export default function MyRentOrderHistories() {
 
       <div className="w-full flex flex-row">
         <Tabs
+          // value={isTabs ? isTabs : "riwayat-travel"}
+          // onValueChange={(value) => setIsTabs(value)}
           defaultValue="riwayat-travel"
           className="w-full flex flex-col gap-y-4">
           <TabsList className="w-full px-0 py-6 flex flex-row border border-grey-100">

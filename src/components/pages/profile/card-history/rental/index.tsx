@@ -1,16 +1,12 @@
 "use client";
 
-import stepper from "@/../../public/assets/icons/neededs/icon_donat_active.svg";
 import CopyButton from "@/components/elements/copyToClip";
 import { Button } from "@/components/ui/button";
-import { formatDate, formatTanggalPanjang } from "@/helpers";
+import { formatTanggalPanjang } from "@/helpers";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import {
-  HistoryRentalInterface,
-  HistoryTravelInterface,
-} from "@/types/interface";
-import { Calendar, Clipboard, Copy, Notepad, Van } from "@phosphor-icons/react";
-import Image from "next/image";
+import { HistoryRentalInterface } from "@/types/interface";
+import { Calendar, Notepad, Van } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function OrderHistoryRentalCard({
@@ -19,6 +15,7 @@ export default function OrderHistoryRentalCard({
   data: HistoryRentalInterface;
 }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const router = useRouter();
 
   let status;
   if (data?.status === "Sukses") {
@@ -160,7 +157,13 @@ export default function OrderHistoryRentalCard({
           )}
 
           <div className="w-full md:w-5/12">
-            <Button className="w-full border border-primary-700 text-primary-700 py-6">
+            <Button
+              onClick={() =>
+                router.push(
+                  `/profile/order-histories-rental/histories-rental-detail/${data?.kode_pembayaran}`
+                )
+              }
+              className="w-full border border-primary-700 text-primary-700 py-6">
               Detail
             </Button>
           </div>

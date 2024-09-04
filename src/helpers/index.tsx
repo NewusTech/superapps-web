@@ -118,6 +118,48 @@ export function calculateDaysBetweenDates(
   return daysDifference;
 }
 
+export function formatIndonesianDate(dateString: string): string {
+  const days: string[] = [
+    "Minggu",
+    "Senin",
+    "Selasa",
+    "Rabu",
+    "Kamis",
+    "Jumat",
+    "Sabtu",
+  ];
+  const months: string[] = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+
+  const date: Date = new Date(dateString);
+  const dayName: string = days[date.getDay()];
+  const day: string = String(date.getDate()).padStart(2, "0");
+  const monthName: string = months[date.getMonth()];
+  const year: number = date.getFullYear();
+
+  return `${dayName}, ${day} ${monthName} ${year}`;
+}
+
+export function formatIndonesianTime(dateString: string): string {
+  const date: Date = new Date(dateString);
+  const hours: string = String(date.getHours()).padStart(2, "0");
+  const minutes: string = String(date.getMinutes()).padStart(2, "0");
+
+  return `${hours}.${minutes} WIB`;
+}
+
 export const formatDateToTime = (date?: number | Date | undefined): string => {
   return new Intl.DateTimeFormat("id-ID", {
     hour: "2-digit",

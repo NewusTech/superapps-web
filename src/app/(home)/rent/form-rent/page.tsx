@@ -15,6 +15,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import Card from "@/components/ui/card/Card";
 import FormInput from "@/components/formInput";
 import { Label } from "@/components/ui/label";
@@ -25,13 +32,30 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import DateFormInput from "@/components/dateFormInput/dateFormInput";
 import { formRentalSchema } from "@/validations";
-import { calculateDaysBetweenDates } from "@/helpers";
-import { Input } from "@/components/ui/input";
+import { calculateDaysBetweenDates, formatCurrency } from "@/helpers";
+import {
+  getDetailTravelCarId,
+  getDisabledDate,
+  getSyaratKetentuan,
+} from "@/services/api";
+import {
+  DetailCarInterface,
+  SyaratKetentuanInterface,
+} from "@/types/interface";
+import CardSpesificationScreen from "@/components/pages/rentals/cardSpesification";
+import { RichTextDisplay } from "@/components/richTextDisplay";
+import { Loader } from "lucide-react";
 
 export default function FormRental() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [isCheckedSyarat, setIsCheckedSyarat] = useState(false);
+  const [disaledDates, setDisabledDates] = useState<string[]>([]);
+  const [syarat, setSyarat] = useState<SyaratKetentuanInterface>();
+  const [detailCar, setDetailCar] = useState<DetailCarInterface>();
+  const [idCar, setIdCar] = useState<string>("");
   const [data, setData] = useState({
     nama: "",
     nik: "",
@@ -79,6 +103,45 @@ export default function FormRental() {
     },
   ];
 
+  const fetchDisabledDates = async (id: number) => {
+    try {
+      const response = await getDisabledDate(id);
+      setDisabledDates(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchDetailCarRent = async (id: number) => {
+    try {
+      const response = await getDetailTravelCarId(id);
+
+      setDetailCar(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (idCar) {
+      fetchDetailCarRent(Number(idCar));
+      fetchDisabledDates(Number(idCar));
+    }
+  }, [idCar]);
+
+  const fetchSyaratKetentuan = async (id: number) => {
+    try {
+      const response = await getSyaratKetentuan(id);
+      setSyarat(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSyaratKetentuan(1);
+  }, []);
+
   useEffect(() => {
     if (
       localStorage.getItem("nama") ||
@@ -95,7 +158,8 @@ export default function FormRental() {
       localStorage.getItem("username_ig") ||
       localStorage.getItem("catatan_sopir") ||
       localStorage.getItem("jam_keberangkatan") ||
-      localStorage.getItem("all_in")
+      localStorage.getItem("all_in") ||
+      localStorage.getItem("travel_car_id")
     ) {
       let value = localStorage.getItem("all_in");
       let value_all_in;
@@ -112,6 +176,11 @@ export default function FormRental() {
       }
       if (tanggalAkhirSewa) {
         setReturnDate(new Date(tanggalAkhirSewa));
+      }
+
+      const id = localStorage.getItem("travel_car_id");
+      if (id) {
+        setIdCar(id);
       }
 
       setData({
@@ -181,6 +250,20 @@ export default function FormRental() {
     }, 2000);
   };
 
+  const handleCheckboxSyaratChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const checked = event.target.checked;
+    setIsCheckedSyarat(checked);
+    if (checked) {
+      setIsDialogOpen(true);
+    }
+  };
+
+  const handleAgree = () => {
+    setIsDialogOpen(false);
+  };
+
   return (
     <section className="flex flex-col gap-5 w-full md:w-full h-full md:mb-0 pb-32 md:pb-80 md:px-[2rem]">
       <div className="md:mt-32 w-full h-full min-h-svh md:p-2 flex flex-col gap-4">
@@ -221,56 +304,18 @@ export default function FormRental() {
           <div className="flex flex-col gap-4 justify-between w-full lg:w-1/2 h-full px-2">
             <Card className="flex flex-col gap-4 text-lg">
               <p className="text-xl font-bold p-2 border-b mb-7">
-                Toyota Hiace Premio
+                {detailCar && detailCar.type}
               </p>
               <p className="text-gray-500">
-                Nikmati berbagai fitur andalan Rama Trans dengan fasilitas
-                modern, seperti kursi yang nyaman, AC, dan hiburan di dalam bus,
-                yang membuka jalan bagi petualangan tak terlupakan dan solusi
-                mobilitas yang lancar.
+                {detailCar && detailCar.deskripsi}
               </p>
             </Card>
             <Card className="flex flex-col gap-4">
               <p className="text-xl font-bold p-2 border-b mb-7">
-                Spesifikasi - Toyota Hiace Premio:
+                Spesifikasi - {detailCar && detailCar.type}:
               </p>
               <div className="flex flex-row gap-2">
-                {/* left */}
-                <div className="flex flex-col w-1/2 gap-3">
-                  <div className="flex flex-row border-b p-1 justify-between">
-                    <span className="text-gray-500">Body</span>
-                    <span className="font-bold">:</span>
-                    <span>Mini Bus</span>
-                  </div>
-                  <div className="flex flex-row border-b p-1 justify-between">
-                    <span className="text-gray-500">Body</span>
-                    <span className="font-bold">:</span>
-                    <span>Mini Bus</span>
-                  </div>
-                  <div className="flex flex-row border-b p-1 justify-between">
-                    <span className="text-gray-500">Body</span>
-                    <span className="font-bold">:</span>
-                    <span>Mini Bus</span>
-                  </div>
-                </div>
-                {/* right */}
-                <div className="flex flex-col w-1/2 gap-3">
-                  <div className="flex flex-row border-b p-1 justify-between">
-                    <span className="text-gray-500">Body</span>
-                    <span className="font-bold">:</span>
-                    <span>Mini Bus</span>
-                  </div>
-                  <div className="flex flex-row border-b p-1 justify-between">
-                    <span className="text-gray-500">Body</span>
-                    <span className="font-bold">:</span>
-                    <span>Mini Bus</span>
-                  </div>
-                  <div className="flex flex-row border-b p-1 justify-between">
-                    <span className="text-gray-500">Body</span>
-                    <span className="font-bold">:</span>
-                    <span>Mini Bus</span>
-                  </div>
-                </div>
+                {detailCar && <CardSpesificationScreen item={detailCar} />}
               </div>
             </Card>
           </div>
@@ -282,7 +327,7 @@ export default function FormRental() {
               <div className="w-full flex flex-col">
                 <FormInput
                   name="nama"
-                  value={data.nama}
+                  value={data.nama || ""}
                   onChange={(e) => setData({ ...data, nama: e.target.value })}
                   id="name"
                   htmlFor="name"
@@ -300,7 +345,7 @@ export default function FormRental() {
               <div className="w-full flex flex-col">
                 <FormInput
                   name="nik"
-                  value={data.nik}
+                  value={data.nik || ""}
                   onChange={(e) => setData({ ...data, nik: e.target.value })}
                   id="nik"
                   htmlFor="nik"
@@ -318,7 +363,7 @@ export default function FormRental() {
               <div className="w-full flex flex-col">
                 <FormInput
                   name="email"
-                  value={data.email}
+                  value={data.email || ""}
                   onChange={(e) => setData({ ...data, email: e.target.value })}
                   id="email"
                   htmlFor="email"
@@ -336,7 +381,7 @@ export default function FormRental() {
               <div className="w-full flex flex-col">
                 <FormInput
                   name="no_telp"
-                  value={data.no_telp}
+                  value={data.no_telp || ""}
                   onChange={(e) =>
                     setData({ ...data, no_telp: e.target.value })
                   }
@@ -357,7 +402,7 @@ export default function FormRental() {
                 <div className="w-full flex flex-col">
                   <FormInput
                     name="username_ig"
-                    value={data.username_ig}
+                    value={data.username_ig || ""}
                     onChange={(e) =>
                       setData({ ...data, username_ig: e.target.value })
                     }
@@ -379,7 +424,7 @@ export default function FormRental() {
                 <div className="w-full flex flex-col">
                   <FormInput
                     name="username_fb"
-                    value={data.username_fb}
+                    value={data.username_fb || ""}
                     onChange={(e) =>
                       setData({ ...data, username_fb: e.target.value })
                     }
@@ -408,7 +453,7 @@ export default function FormRental() {
                   <Textarea
                     id="alamat"
                     name="alamat"
-                    value={data.alamat}
+                    value={data.alamat || ""}
                     onChange={(e) =>
                       setData({ ...data, alamat: e.target.value })
                     }
@@ -430,29 +475,17 @@ export default function FormRental() {
               <div className="w-full flex flex-col gap-y-4 md:grid grid-cols-2 gap-x-5">
                 <div className="w-full flex flex-col">
                   <div className="flex flex-col gap-y-3">
-                    <Label className="text-neutral-700" htmlFor="durasi sewa">
-                      Durasi Sewa
-                    </Label>
-
-                    <Input
-                      className={`${errors.durasi_sewa ? "border border-error-700" : "border bg-grey-100"} bg-transparent w-full h-12`}
-                      type="number"
-                      placeholder="Durasi Sewa"
-                      id="durasi sewa"
-                      name="durasi_sewa"
-                      onChange={(e) =>
-                        setData({ ...data, durasi_sewa: e.target.value })
-                      }
-                      value={durationRent}
-                      disabled
-                    />
+                    <Label className="text-neutral-700">Durasi Sewa</Label>
+                    <div className="w-full flex items-center pl-3 bg-transparent border border-grey-100 h-12 rounded-lg border-opacity-50">
+                      <p className="text-neutral-300">{durationRent}</p>
+                    </div>
                   </div>
                 </div>
 
                 <div className="w-full flex flex-col">
                   <FormInput
                     name="jam_keberangkatan"
-                    value={data.jam_keberangkatan}
+                    value={data.jam_keberangkatan || ""}
                     onChange={(e) =>
                       setData({ ...data, jam_keberangkatan: e.target.value })
                     }
@@ -505,6 +538,7 @@ export default function FormRental() {
                     value={departureDate}
                     setValue={setDepartureDate}
                     label="Tanggal Mulai Sewa"
+                    disabledDates={disaledDates}
                     className={`${errors.tanggal_mulai_sewa ? "text-error-700" : ""} bg-transparent w-full rounded-lg`}
                     onChange={(value) =>
                       setData({ ...data, tanggal_mulai_sewa: value })
@@ -522,6 +556,7 @@ export default function FormRental() {
                     value={returnDate}
                     setValue={setReturnDate}
                     label="Tanggal Akhir Sewa"
+                    disabledDates={disaledDates}
                     className={`${errors.tanggal_akhir_sewa ? "text-error-700" : ""} bg-transparent w-full rounded-lg`}
                     onChange={(value) =>
                       setData({ ...data, tanggal_akhir_sewa: value })
@@ -545,7 +580,7 @@ export default function FormRental() {
                     <Textarea
                       id="alamat-keberangkatan"
                       name="alamat_keberangkatan"
-                      value={data.alamat_keberangkatan}
+                      value={data.alamat_keberangkatan || ""}
                       onChange={(e) =>
                         setData({
                           ...data,
@@ -572,7 +607,7 @@ export default function FormRental() {
                     <Textarea
                       id="catatan-sopir"
                       name="catatan_sopir"
-                      value={data.catatan_sopir}
+                      value={data.catatan_sopir || ""}
                       onChange={(e) =>
                         setData({ ...data, catatan_sopir: e.target.value })
                       }
@@ -642,14 +677,47 @@ export default function FormRental() {
         <div className="w-full flex flex-col px-2">
           <Card className="" header="Rincian Harga">
             <div className="flex flex-col gap-4">
-              <label className="flex flex-row items-center gap-2">
-                <input type="checkbox" className="rounded-full" />
-                <span>
-                  Saya Menyetujui{" "}
-                  <span className="text-primary-700">Syarat & Ketentuan</span>{" "}
-                  Rama Tranz
-                </span>
-              </label>
+              <div className="mt-4 flex flex-row gap-x-2">
+                <Dialog open={isDialogOpen}>
+                  <DialogTrigger className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="term"
+                      className="w-4 h-4"
+                      checked={isCheckedSyarat}
+                      onChange={handleCheckboxSyaratChange}
+                    />
+                  </DialogTrigger>
+                  <DialogContent className="flex flex-col bg-neutral-50 rounded-xl p-1 justify-center items-center w-10/12 md:w-6/12 max-h-[700px]">
+                    <DialogHeader className="mt-4">
+                      <DialogTitle className="text-[26px] text-neutral-700">
+                        Syarat dan Ketentuan
+                      </DialogTitle>
+                    </DialogHeader>
+                    <div className="m-3 px-4 flex flex-col items-center w-full verticalScroll gap-y-6">
+                      <div>
+                        {syarat && (
+                          <RichTextDisplay content={syarat.description} />
+                        )}
+                      </div>
+
+                      <div
+                        onClick={handleAgree}
+                        className="bg-primary-700 text-center cursor-pointer w-4/12 rounded-full text-neutral-50 py-1 px-5">
+                        Setuju
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                <div className="text-neutral-700 font-normal md:text-[16px]">
+                  Saya menyetujui{" "}
+                  <span className="font-semibold text-primary-700">
+                    Syarat & Ketentuan
+                  </span>{" "}
+                  kami Rama Tarnz
+                </div>
+              </div>
               <div className="p-3 bg-dange_light rounded-md flex flex-col w-full text-danger_base">
                 <p>Catatan:</p>
                 <p className="text-sm">
@@ -658,15 +726,26 @@ export default function FormRental() {
                 </p>
               </div>
               <div className="flex flex-row items-center justify-between py-3 border-b">
-                <p>Total Harga</p>
-                <p className="text-primary-700 text-xl font-semibold">
-                  Rp.200.000
+                <p className="text-14px] md:text-[16px]">Total Harga</p>
+                <p className="text-primary-700 md:text-xl font-semibold">
+                  {data?.all_in === true
+                    ? formatCurrency(
+                        Number(detailCar?.biaya_all_in) * Number(durationRent)
+                      )
+                    : formatCurrency(
+                        Number(detailCar?.biaya_sewa) * Number(durationRent)
+                      )}
                 </p>
               </div>
               <Button
+                disabled={isLoading ? true : false}
                 onClick={handleNewRent}
                 className="mt-4 w-full bg-primary-700 hover:bg-primary-600 text-neutral-50">
-                Lanjut Pembayaran
+                {isLoading ? (
+                  <Loader className="text-neutral-50 animate-spin" />
+                ) : (
+                  "Lanjutkan Pembayaran"
+                )}
               </Button>
             </div>
           </Card>

@@ -6,7 +6,7 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { Button } from "../ui/button";
 import { ChevronDown } from "lucide-react";
 import { twMerge } from "tailwind-merge";
@@ -18,10 +18,12 @@ export type DateInputProps = {
   disabled?: boolean;
   className?: string;
   onChange?: (value: Date) => void;
+  disabledDates?: string[];
 };
 
 export default function DateFormInput(props: DateInputProps) {
-  const { value, setValue, label, disabled, onChange, ...rest } = props;
+  const { value, setValue, label, disabled, onChange, disabledDates, ...rest } =
+    props;
 
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
@@ -31,6 +33,8 @@ export default function DateFormInput(props: DateInputProps) {
       }
     }
   };
+
+  const disabledDatesAsDate = disabledDates?.map((date) => parseISO(date));
 
   return (
     <div className={twMerge(["flex flex-col w-full gap-y-2", rest.className])}>
@@ -63,6 +67,11 @@ export default function DateFormInput(props: DateInputProps) {
               selected={value}
               onSelect={(v) => handleDateSelect(v || new Date())}
               initialFocus
+              disabled={(date) =>
+                disabledDatesAsDate?.some(
+                  (disabledDate) => date.getTime() === disabledDate.getTime()
+                ) ?? false
+              }
             />
           </PopoverContent>
         </Popover>

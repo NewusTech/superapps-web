@@ -57,10 +57,6 @@ export const formRentalSchema = z.object({
   alamat: z
     .string({ message: "Alamat tidak boleh kosong" })
     .min(5, { message: "Alamat harus memiliki minimal 5 karakter" }),
-  // durasi_sewa: z
-  //   .string({ message: "Durasi sewa tidak boleh kosong" })
-  //   .regex(/^\d+$/, { message: "Durasi sewa harus berupa angka" })
-  //   .min(1, { message: "Durasi sewa minimal 1 hari" }),
   area: z.enum(["Dalam Kota", "Luar Kota"], {
     message: "Area sewa harus dipilih",
   }),
@@ -72,12 +68,12 @@ export const formRentalSchema = z.object({
   }),
   username_ig: z
     .string({ message: "Username Instagram minimal 3 karakter" })
-    .optional()
-    .or(z.literal("")),
+    .min(3, {
+      message: "Username Instagram harus memiliki minimal 5 karakter",
+    }),
   username_fb: z
     .string({ message: "Username Facebook minimal 3 karakter" })
-    .optional()
-    .or(z.literal("")),
+    .min(3, { message: "Username Facebook harus memiliki minimal 5 karakter" }),
   alamat_keberangkatan: z
     .string({
       message: "Alamat penjemputan tidak boleh kosong",
@@ -85,7 +81,9 @@ export const formRentalSchema = z.object({
     .min(5, {
       message: "Alamat penjemputan harus memiliki minimal 5 karakter",
     }),
-  jam_keberangkatan: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
-    message: "Jam keberangkatan harus dalam format HH:mm",
-  }),
+  jam_keberangkatan: z
+    .string({ message: "Jam keberangkatan tidak boleh kosong" })
+    .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
+      message: "Jam keberangkatan harus dalam format HH:mm",
+    }),
 });
