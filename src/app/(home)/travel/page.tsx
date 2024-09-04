@@ -13,7 +13,7 @@ import {
   travel_tickets,
 } from "@/constants/main";
 import { getAllBranches, getAllRute } from "@/services/api";
-import { BranchesInterface, RouteInterface } from "@/types/interface";
+import { BranchesInterface } from "@/types/interface";
 import React, { useEffect, useState } from "react";
 
 export default function TravelPage() {

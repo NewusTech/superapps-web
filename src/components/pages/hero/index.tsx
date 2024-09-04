@@ -33,6 +33,11 @@ import { useRouter } from "next/navigation";
 import { BranchesInterface, RouteInterface } from "@/types/interface";
 import { seatsTotal } from "@/constants/main";
 import { formatDate } from "@/helpers";
+import {
+  useTravelActions,
+  useTravelbookingPayload,
+} from "@/store/useTravelStore";
+import DateInput from "@/components/dateInnput/DateInput";
 
 export default function HeroScreen({
   data,
@@ -41,13 +46,18 @@ export default function HeroScreen({
   branches: BranchesInterface[];
   data: any;
 }) {
-  const [form, setForm] = useState({
-    from: "",
-    to: "",
-    jumlah_kursi: "",
-    departureDate: "",
-    returnDate: "",
-  });
+  // const [form, setForm] = useState({
+  //   from: "",
+  //   to: "",
+  //   jumlah_kursi: "",
+  //   departureDate: "",
+  //   returnDate: "",
+  // });
+
+  const bookingPayload = useTravelbookingPayload();
+
+  const { setBookingPayload } = useTravelActions();
+
   const [returnDateEnabled, setReturnDateEnabled] = useState(false);
   const [departureDate, setDepartureDate] = useState<Date | undefined>(
     undefined
@@ -64,18 +74,51 @@ export default function HeroScreen({
     ? formatDate(new Date(departureDate))
     : undefined;
 
+  const handleChangeKeberangkatan = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      to: bookingPayload?.to || "",
+      seats: bookingPayload?.seats || 1,
+      from: value,
+    });
+  };
+  const handleChangeJutuan = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      from: bookingPayload?.from || "",
+      to: value,
+      seats: bookingPayload?.seats || 1,
+    });
+  };
+  const handleChangeDate = (value: Date) => {
+    setBookingPayload({
+      date: value,
+      from: bookingPayload?.from || "",
+      to: bookingPayload?.to || "",
+      seats: bookingPayload?.seats || 1,
+    });
+  };
+  const handleChangeKursi = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      from: bookingPayload?.from || "",
+      to: bookingPayload?.to || "",
+      seats: Number.parseInt(value),
+    });
+  };
+
   const handleToSearchTravel = () => {
-    saveToLocalStorage("from", form.from);
-    saveToLocalStorage("to", form.to);
-    saveToLocalStorage("jumlah_kursi", form.jumlah_kursi);
-    saveToLocalStorage(
-      "departureDate",
-      form.departureDate ? formatDate(new Date(form.departureDate)) : ""
-    );
-    saveToLocalStorage(
-      "returnDate",
-      form.returnDate ? formatDate(new Date(form.returnDate)) : ""
-    );
+    // saveToLocalStorage("from", form.from);
+    // saveToLocalStorage("to", form.to);
+    // saveToLocalStorage("jumlah_kursi", form.jumlah_kursi);
+    // saveToLocalStorage(
+    //   "departureDate",
+    //   form.departureDate ? formatDate(new Date(form.departureDate)) : ""
+    // );
+    // saveToLocalStorage(
+    //   "returnDate",
+    //   form.returnDate ? formatDate(new Date(form.returnDate)) : ""
+    // );
 
     router.push("/travel/available-schedule");
   };
@@ -136,11 +179,13 @@ export default function HeroScreen({
             return (
               <div
                 key={i}
-                className="grid grid-rows-1 md:justify-center w-full gap-y-3">
+                className="grid grid-rows-1 md:justify-center w-full gap-y-3"
+              >
                 {item?.soon === false ? (
                   <Link
                     href={link}
-                    className={`flex flex-col items-center gap-y-2`}>
+                    className={`flex flex-col items-center gap-y-2`}
+                  >
                     <div className="bg-neutral-50 group hover:bg-black hover:bg-opacity-20 rounded-full w-12 h-12 flex flex-row justify-center items-center">
                       {icon}
                     </div>
@@ -183,7 +228,9 @@ export default function HeroScreen({
                 <Bus className="w-6 h-6 text-primary-700" />
 
                 <Select
-                  onValueChange={(value) => setForm({ ...form, from: value })}>
+                  onValueChange={handleChangeKeberangkatan}
+                  value={bookingPayload?.from}
+                >
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
@@ -210,7 +257,9 @@ export default function HeroScreen({
                 <Bus className="w-6 h-6 text-primary-700" />
 
                 <Select
-                  onValueChange={(value) => setForm({ ...form, to: value })}>
+                  onValueChange={handleChangeJutuan}
+                  value={bookingPayload?.to}
+                >
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
@@ -236,9 +285,9 @@ export default function HeroScreen({
                 <Seat className="w-6 h-6 text-primary-700" />
 
                 <Select
-                  onValueChange={(value) =>
-                    setForm({ ...form, jumlah_kursi: value })
-                  }>
+                  onValueChange={handleChangeKursi}
+                  value={bookingPayload?.seats.toString() || "1"}
+                >
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
@@ -273,8 +322,8 @@ export default function HeroScreen({
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button className="w-full justify-start text-left text-[14px]">
-                      {departureDate
-                        ? format(departureDate, "PPP")
+                      {bookingPayload?.date
+                        ? format(bookingPayload?.date, "PPP")
                         : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
@@ -290,14 +339,8 @@ export default function HeroScreen({
                         day_today: "bg-primary-700 text-neutral-50",
                       }}
                       mode="single"
-                      selected={departureDate}
-                      onSelect={(date) => {
-                        setDepartureDate(date || undefined);
-                        setForm({
-                          ...form,
-                          departureDate: date ? format(date, "yyyy-MM-dd") : "",
-                        });
-                      }}
+                      selected={bookingPayload?.date || new Date()}
+                      onSelect={(date) => handleChangeDate(date||new Date())}
                       initialFocus
                     />
                   </PopoverContent>
@@ -319,7 +362,8 @@ export default function HeroScreen({
               </div>
 
               <div
-                className={`flex flex-row items-center w-full bg-neutral-50 border-r border-y border-outline_border-100 rounded-r-full py-2 px-3 ${!returnDateEnabled ? "opacity-50" : ""}`}>
+                className={`flex flex-row items-center w-full bg-neutral-50 border-r border-y border-outline_border-100 rounded-r-full py-2 px-3 ${!returnDateEnabled ? "opacity-50" : ""}`}
+              >
                 <CalendarIcons
                   className={`w-6 h-6 ${returnDateEnabled ? "text-primary-700" : "text-outline_border-100"}`}
                 />
@@ -328,7 +372,8 @@ export default function HeroScreen({
                   <PopoverTrigger asChild>
                     <Button
                       className="w-full justify-start text-left text-[14px]"
-                      disabled={!returnDateEnabled}>
+                      disabled={!returnDateEnabled}
+                    >
                       {returnDate ? format(returnDate, "PPP") : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
@@ -345,13 +390,7 @@ export default function HeroScreen({
                       }}
                       mode="single"
                       selected={returnDate}
-                      onSelect={(date) => {
-                        setReturnDate(date || undefined);
-                        setForm({
-                          ...form,
-                          returnDate: date ? format(date, "yyyy-MM-dd") : "",
-                        });
-                      }}
+                      onSelect={(date) => handleChangeDate(data)}
                       initialFocus
                     />
                   </PopoverContent>
@@ -363,7 +402,8 @@ export default function HeroScreen({
           <div className="flex flex-row items-end">
             <Button
               onClick={handleToSearchTravel}
-              className="rounded-2xl bg-neutral-50 px-6 py-7 border border-outline_border-100">
+              className="rounded-2xl bg-neutral-50 px-6 py-7 border border-outline_border-100"
+            >
               <Search className="text-primary-700" />
             </Button>
           </div>

@@ -3,7 +3,7 @@
 import ticket from "@/../../public/assets/images/neededs/ticket-round.png";
 import mobileFooter from "@/../../public/assets/images/neededs/mobile-footer.png";
 import { Play } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { formatDate } from "@/helpers/index";
 import Image from "next/image";
 import Link from "next/link";
@@ -45,8 +45,9 @@ import Footer from "@/components/layouts/footer";
 import MobileRouteTravelCar from "@/components/mobile_pages/mobile_route_travel_car";
 import ApartementScreen from "@/components/pages/apartements";
 import MobileApartementScreen from "@/components/mobile_pages/mobile_apartement";
-import { BranchesInterface } from "@/types/interface";
-import { getAllBranches } from "@/services/api";
+import { BranchesInterface, TitikJemputInterface } from "@/types/interface";
+import { getAllBranches, getAllPointMasterJemput } from "@/services/api";
+import { useTravelbookingPayload } from "@/store/useTravelStore";
 
 export default function Home() {
   const now = new Date();
@@ -55,6 +56,13 @@ export default function Home() {
   const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const [startDate, setStartDate] = useState<Date | undefined>(firstDayOfMonth);
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const [pointsJempuput, setPointsJempuut] = useState<TitikJemputInterface[]>(
+    []
+  );
+  const [pointsAntar, setPointsAntar] = useState<TitikJemputInterface[]>([]);
+
+  const bookingPayload = useTravelbookingPayload()
 
   const fetchAllBranches = async () => {
     try {
@@ -65,6 +73,32 @@ export default function Home() {
       console.log(error);
     }
   };
+
+  const fetchTitikJemput = useMemo(async () => {
+    try {
+      const response = await getAllPointMasterJemput({
+        cabang: bookingPayload?.from || "",
+      });
+
+      setPointsJempuut(response.data);
+    } catch (error) {
+      setPointsJempuut([]);
+      console.log(error);
+    }
+  }, [bookingPayload?.from]);
+
+  const fetchTitikAntar = useMemo(async () => {
+    try {
+      const response = await getAllPointMasterJemput({
+        cabang: bookingPayload?.to || "",
+      });
+      setPointsAntar(response.data);
+      console.log("Titik Antar ", response.data);
+    } catch (error) {
+      setPointsAntar([]);
+      console.log(error);
+    }
+  }, [bookingPayload?.to]);
 
   useEffect(() => {
     fetchAllBranches();
@@ -107,7 +141,7 @@ export default function Home() {
       </div>
 
       <div className="w-full flex flex-col md:hidden items-center justify-center relative">
-        <RoundTripForm />
+        <RoundTripForm branch={branches||[]} pointsAntar={pointsAntar}  pointsJempuput={pointsJempuput}/>
       </div>
 
       <div className="w-full flex gap-8 md:hidden mt-[480px]">

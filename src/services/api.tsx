@@ -433,3 +433,64 @@ export const getAllArticles = async (limit: number) => {
 
   return await response.json();
 };
+
+// post pesanan Travel
+export const createPostPesananTravel = async (data: any) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/pesanan/pesanan`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json', // Ensure the server knows the content type
+      },
+      body: JSON.stringify(data), // Convert the data to JSON string
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// post pembayaran Travel
+export const createPostPembayaranTravel = async (data: any) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/pembayaran/proses_pembayaran`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json', // Ensure the server knows the content type
+      },
+      body: JSON.stringify(data), // Convert the data to JSON string
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// get detail travel
+export const getOrderTravelDetail = async (
+kode_pesanan:string
+) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/pesanan/riwayat/${kode_pesanan}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};

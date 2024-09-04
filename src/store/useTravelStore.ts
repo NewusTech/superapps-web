@@ -10,8 +10,14 @@ type TravelStore = {
   stepTravel: number;
   travelSchedule?: TravelScheduleResponseSuccess["data"][number];
   pointToPointPayload?: {
-    from?: string;
-    to?: string;
+    from?: {
+      point: string;
+      id: string;
+    };
+    to?: {
+      point: string;
+      id: string;
+    };
   };
   bookingPayload?: TravelScheduleQuery;
   passenger: PassengerSeat[];
@@ -28,8 +34,14 @@ type TravelStore = {
       bookinPayload?: TravelScheduleResponseSuccess["data"][number]
     ) => void;
     setPointToPointPayload: (bookinPayload?: {
-      from?: string;
-      to?: string;
+      from?: {
+        point: string;
+        id: string;
+      };
+      to?: {
+        point: string;
+        id: string;
+      };
     }) => void;
     setBookingPayload: (bookinPayload?: TravelScheduleQuery) => void;
     setPassenger: (passengerSeatPayload: PassengerSeat[]) => void;
@@ -47,11 +59,11 @@ const travelStore = create<TravelStore>((set) => ({
   travelSchedule: undefined,
   bookingPayload: undefined,
   passenger: [],
-  pemesan:{
-    email:"",
-    nama:"",
-    nik:"",
-    no_telp:""
+  pemesan: {
+    email: "",
+    nama: "",
+    nik: "",
+    no_telp: "",
   },
   actions: {
     setStepTravelPayload: (stepTravelPayload: number) =>
@@ -61,7 +73,7 @@ const travelStore = create<TravelStore>((set) => ({
     setTravelSchedule: (travelSchedule) => set({ travelSchedule }),
     setBookingPayload: (bookingPayload) => set({ bookingPayload }),
     setPassenger: (passenger) => set({ passenger }),
-    setPemesan: (pemesan)=>set({pemesan})
+    setPemesan: (pemesan) => set({ pemesan }),
   },
 }));
 

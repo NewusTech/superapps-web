@@ -32,14 +32,17 @@ export default function CardTravelScheduleOrder({
     setOpenModalKursi(false);
     setTravelSchedule(data)
     setStepTravelPayload(2);
-    window.scrollTo(0, 0);
+    router.push("/travel/available-schedule/data-penumpang/")
   };
 
   const handleDetailTravel = () => {
+    setTravelSchedule(data)
+    setOpenModalKursi(false);
     router.push("/travel/detail-travel");
   };
 
   const handlePilihKursi = () => {
+    setTravelSchedule(data)
     setOpenModalKursi(true);
   };
 
