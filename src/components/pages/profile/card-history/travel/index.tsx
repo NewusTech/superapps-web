@@ -3,11 +3,12 @@
 import stepper from "@/../../public/assets/icons/neededs/icon_donat_active.svg";
 import CopyButton from "@/components/elements/copyToClip";
 import { Button } from "@/components/ui/button";
-import { formatDate, formatTanggalPanjang } from "@/helpers";
+import { formatTanggalPanjang } from "@/helpers";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { HistoryTravelInterface } from "@/types/interface";
 import { Calendar, Notepad, Van } from "@phosphor-icons/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function OrderHistoryTravelCard({
@@ -16,6 +17,7 @@ export default function OrderHistoryTravelCard({
   data: HistoryTravelInterface;
 }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const router = useRouter();
 
   let status;
   if (data?.status === "Sukses") {
@@ -154,7 +156,13 @@ export default function OrderHistoryTravelCard({
           </div>
 
           <div className="w-full md:w-5/12">
-            <Button className="w-full border border-primary-700 text-primary-700 py-6">
+            <Button
+              onClick={() =>
+                router.push(
+                  `/profile/order-histories-travel/histories-travel-detail/${data?.kode_pesanan}`
+                )
+              }
+              className="w-full border border-primary-700 text-primary-700 py-6">
               Detail
             </Button>
           </div>

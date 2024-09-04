@@ -9,6 +9,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { HistoryTravelInterface } from "@/types/interface";
 import { Calendar, Notepad, Van } from "@phosphor-icons/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function OrderHistoryTravelStatusCard({
@@ -17,6 +18,7 @@ export default function OrderHistoryTravelStatusCard({
   data: HistoryTravelInterface;
 }) {
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const router = useRouter();
 
   return (
     <div className="w-full flex flex-col gap-y-5 border border-grey-100 shadow-md rounded-lg p-4">
@@ -134,7 +136,13 @@ export default function OrderHistoryTravelStatusCard({
           </div>
 
           <div className="w-full md:w-5/12">
-            <Button className="w-full border border-primary-700 text-primary-700 py-6">
+            <Button
+              onClick={() =>
+                router.push(
+                  `/profile/order-histories-travel/histories-travel-detail/${data?.kode_pesanan}`
+                )
+              }
+              className="w-full border border-primary-700 text-primary-700 py-6">
               Detail
             </Button>
           </div>

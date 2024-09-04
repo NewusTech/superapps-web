@@ -392,7 +392,7 @@ export const createNewRent = async (data: FormData) => {
   return await response.json();
 };
 
-// post bukti pembayaran
+// post bukti pembayaran Rental
 export const createPaymentSProof = async (
   kode_pembayaran: string,
   data: FormData
@@ -401,6 +401,47 @@ export const createPaymentSProof = async (
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/rental/pembayaran/upload-bukti/${kode_pembayaran}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: data,
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// get histories order Travel detail
+export const getOrderHistoryTravelDetail = async (kodePesanan: string) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/pesanan/riwayat/${kodePesanan}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// post bukti pembayaran Travel
+export const createTravelPaymentSProof = async (
+  kode_pembayaran: string,
+  data: FormData
+) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/pembayaran/upload-bukti/${kode_pembayaran}`,
     {
       method: "POST",
       headers: {
@@ -444,7 +485,7 @@ export const createPostPesananTravel = async (data: any) => {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json', // Ensure the server knows the content type
+        "Content-Type": "application/json", // Ensure the server knows the content type
       },
       body: JSON.stringify(data), // Convert the data to JSON string
       cache: "no-store",
@@ -464,7 +505,7 @@ export const createPostPembayaranTravel = async (data: any) => {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json', // Ensure the server knows the content type
+        "Content-Type": "application/json", // Ensure the server knows the content type
       },
       body: JSON.stringify(data), // Convert the data to JSON string
       cache: "no-store",
@@ -475,9 +516,7 @@ export const createPostPembayaranTravel = async (data: any) => {
 };
 
 // get detail travel
-export const getOrderTravelDetail = async (
-kode_pesanan:string
-) => {
+export const getOrderTravelDetail = async (kode_pesanan: string) => {
   const token = Cookies.get("Authorization");
 
   const response = await fetch(
