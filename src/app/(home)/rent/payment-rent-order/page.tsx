@@ -156,8 +156,6 @@ export default function PaymentRentOrderPage() {
     fetchSyaratKetentuan(1);
   }, []);
 
-  console.log(syarat, "ini syarat");
-
   const handleImageKTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
@@ -286,7 +284,7 @@ export default function PaymentRentOrderPage() {
     try {
       const response = await createNewRent(formData);
 
-      // console.log(response, "ini response");
+      console.log(response, "ini response");
 
       if (response.success === true) {
         Swal.fire({
@@ -300,7 +298,13 @@ export default function PaymentRentOrderPage() {
         if (response?.data?.kode === 1) {
           window.location.href = response?.data?.payment_url;
         } else if (response?.data?.kode === 2) {
-          return router.push("/profile/order-histories-rental?tabs=menunggu");
+          router.push("/rent/transfer-payment");
+          localStorage.setItem("payment_code", response?.data?.kode_pembayaran);
+          localStorage.setItem("bank_method", response?.data?.metode);
+          localStorage.setItem(
+            "rekening_number",
+            response?.data?.nomor_rekening
+          );
         }
       } else {
         Swal.fire({
@@ -334,10 +338,10 @@ export default function PaymentRentOrderPage() {
 
   return (
     <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
-      <div className="w-full flex flex-col mt-32 px-20">
+      <div className="w-full flex flex-col mt-32 px-5 md:px-20">
         <section className="flex flex-col gap-4 text-sm md:text-base">
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Ringkasan Pesanan</p>
+            <p className="text-[16px] md:text-xl">Ringkasan Pesanan</p>
             <Card className="">
               <div className="flex flex-row items-center gap-x-2">
                 <FaCheckCircle className="text-primary-700" size={24} />
@@ -350,7 +354,7 @@ export default function PaymentRentOrderPage() {
           </div>
           {/* 2 */}
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Detail Informasi Penyewa</p>
+            <p className="text-[16px] md:text-xl">Detail Informasi Penyewa</p>
             <Card className="">
               <div className="flex flex-col items-center gap-4 w-full">
                 <div className="flex flex-row w-full items-center">
@@ -389,7 +393,7 @@ export default function PaymentRentOrderPage() {
           </div>
           {/* 3 */}
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Detail Sewa Mobil</p>
+            <p className="text-[16px] md:text-xl">Detail Sewa Mobil</p>
             <Card className="">
               <div className="flex flex-col items-center gap-4 w-full">
                 <div className="flex flex-row w-full items-center">
@@ -441,9 +445,9 @@ export default function PaymentRentOrderPage() {
               </div>
             </Card>
           </div>
-          <div className="w-full">
+          <div className="w-full flex flex-col gap-y-4 md:gap-y-0">
             <div className="flex flex-col w-full h-full">
-              <Label className="w-full text-xl">
+              <Label className="w-full text-[16px] md:text-xl">
                 Upload Kartu Tanda Penduduk
               </Label>
 
@@ -500,7 +504,7 @@ export default function PaymentRentOrderPage() {
             </div>
 
             <div className="flex flex-col w-full h-full">
-              <Label className="w-full text-xl">
+              <Label className="w-full text-[16px] md:text-xl">
                 Upload Swafoto atau Foto Selfie
               </Label>
 
@@ -558,7 +562,7 @@ export default function PaymentRentOrderPage() {
           </div>
           {/* 4 */}
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Metode Pembayaran</p>
+            <p className="text-[16px] md:text-xl">Metode Pembayaran</p>
             <PaymentMethods
               payments={
                 payments as {
@@ -573,7 +577,7 @@ export default function PaymentRentOrderPage() {
           </div>
           {/* 5 */}
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Rincian Harga</p>
+            <p className="text-[16px] md:text-xl">Rincian Harga</p>
             <Card className="">
               <div className="mt-4 flex flex-row gap-x-2">
                 <Dialog open={isDialogOpen}>
@@ -608,7 +612,7 @@ export default function PaymentRentOrderPage() {
                   </DialogContent>
                 </Dialog>
 
-                <div className="text-neutral-700 font-normal text-[16px]">
+                <div className="text-neutral-700 font-normal md:text-[16px]">
                   Saya menyetujui{" "}
                   <span className="font-semibold text-primary-700">
                     Syarat & Ketentuan
@@ -624,17 +628,23 @@ export default function PaymentRentOrderPage() {
                 </p>
               </div>
               <div className="flex flex-row items-center justify-between py-3 border-b">
-                <p>Total Harga</p>
-                <p className="text-primary-700 text-xl font-semibold">
+                <p className="text-[14px] md:text-[16px]">Total Harga</p>
+                <p className="text-primary-700 md:text-xl font-semibold">
                   {detail?.all_in === "true"
-                    ? formatCurrency(Number(detailCar?.biaya_all_in))
-                    : formatCurrency(Number(detailCar?.biaya_sewa))}
+                    ? formatCurrency(
+                        Number(detailCar?.biaya_all_in) *
+                          Number(detail?.durasi_sewa)
+                      )
+                    : formatCurrency(
+                        Number(detailCar?.biaya_sewa) *
+                          Number(detail?.durasi_sewa)
+                      )}
                 </p>
               </div>
               <form onSubmit={handleNewRent}>
                 <Button
                   disabled={isLoading ? true : false}
-                  className="mt-4 w-full">
+                  className="mt-4 w-full flex items-center justify-center">
                   {isLoading ? (
                     <Loader className="w-5 h-5 animate-spin" />
                   ) : (

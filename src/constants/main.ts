@@ -63,6 +63,7 @@ import secondDetailImageHotel from "../../public/assets/images/neededs/detail-ho
 import thirdDetailImageHotel from "../../public/assets/images/neededs/detail-hotel-image-3.png";
 import fourthDetailImageHotel from "../../public/assets/images/neededs/detail-hotel-image-4.png";
 import firstIconsImageApatement from "../../public/assets/images/neededs/hotel-icon-image-apartement-1.png";
+import { title } from "process";
 
 export const heroIcons = [
   {
@@ -933,5 +934,113 @@ export const profileSelects = [
   },
   {
     value: "Paket",
+  },
+];
+
+export const paymentTransferSteps = [
+  {
+    id: 1,
+    title: "Cara Bayar via ATM",
+    value: [
+      {
+        nilai: "Masukkan kartu ATM dan PIN kamu",
+      },
+      {
+        nilai: "Pilih Menu Transaksi Lain",
+      },
+      {
+        nilai: "Pilih Menu Pembayaran",
+      },
+      {
+        nilai: "Pilih Menu Lain-lain",
+      },
+      {
+        nilai: "Pilih Menu BRIVA",
+      },
+      {
+        nilai: "Masukkan Nomor Virtual Account, (contoh: 10339XXXXXXXXXXX)",
+      },
+      {
+        nilai: "Pilih Ya",
+      },
+      {
+        nilai: "Ambil struk pembayaran kamu",
+      },
+      {
+        nilai: "Pembayaran selesai",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Cara Bayar via Mobile Banking",
+    value: [
+      {
+        nilai: "Login Mobile Banking BRI",
+      },
+      {
+        nilai: "Pilih Mobile Banking BRI",
+      },
+      {
+        nilai: "Pilih Menu Pembayaran",
+      },
+      {
+        nilai: "Pilih Menu BRIVA",
+      },
+      {
+        nilai: "Masukkan Nomor Virtual Account, (contoh: 10339XXXXXXXXXXX)",
+      },
+      {
+        nilai: "Klik Kirim",
+      },
+      {
+        nilai: "Masukkan PIN Mobile",
+      },
+      {
+        nilai: "Klik Kirim",
+      },
+      {
+        nilai: "Struk pembayaran akan ditampilkan",
+      },
+      {
+        nilai: "Pembayaran selesai",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Cara Bayar via Internet Banking",
+    value: [
+      {
+        nilai: "Login Internet Banking",
+      },
+      {
+        nilai: "Pilih Pembayaran",
+      },
+      {
+        nilai: "Pilih BRIVA",
+      },
+      {
+        nilai: "Masukkan Nomor Virtual Account, (contoh: 10339XXXXXXXXXXX)",
+      },
+      {
+        nilai: "Klik Kirim",
+      },
+      {
+        nilai: "Masukkan Kata Sandi",
+      },
+      {
+        nilai: "Masukkan mToken",
+      },
+      {
+        nilai: "Klik Kirim",
+      },
+      {
+        nilai: "Struk pembayaran akan ditampilkan",
+      },
+      {
+        nilai: "Pembayaran selesai",
+      },
+    ],
   },
 ];

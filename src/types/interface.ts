@@ -66,6 +66,26 @@ export interface HistoryRentalInterface {
   status: string;
 }
 
+export interface HistoryRentalDetailInterface {
+  created_at: string;
+  kode_pembayaran: string;
+  mobil_type: string;
+  metode: string;
+  no_rek: string;
+  link_tiket: string;
+  link_invoice: string;
+  nominal: string;
+  payment_link: string;
+  bukti_url: string;
+  expired_at: string;
+  area: string;
+  tanggal_awal_sewa: string;
+  tanggal_akhir_sewa: string;
+  status: string;
+  durasi_sewa: number;
+  alamat_keberangkatan: string;
+}
+
 export interface DataPariwisataInterface {
   success: boolean;
   message: string;

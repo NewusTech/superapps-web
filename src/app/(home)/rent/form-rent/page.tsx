@@ -710,7 +710,7 @@ export default function FormRental() {
                   </DialogContent>
                 </Dialog>
 
-                <div className="text-neutral-700 font-normal text-[16px]">
+                <div className="text-neutral-700 font-normal md:text-[16px]">
                   Saya menyetujui{" "}
                   <span className="font-semibold text-primary-700">
                     Syarat & Ketentuan
@@ -726,11 +726,15 @@ export default function FormRental() {
                 </p>
               </div>
               <div className="flex flex-row items-center justify-between py-3 border-b">
-                <p>Total Harga</p>
-                <p className="text-primary-700 text-xl font-semibold">
+                <p className="text-14px] md:text-[16px]">Total Harga</p>
+                <p className="text-primary-700 md:text-xl font-semibold">
                   {data?.all_in === true
-                    ? formatCurrency(Number(detailCar?.biaya_all_in))
-                    : formatCurrency(Number(detailCar?.biaya_sewa))}
+                    ? formatCurrency(
+                        Number(detailCar?.biaya_all_in) * Number(durationRent)
+                      )
+                    : formatCurrency(
+                        Number(detailCar?.biaya_sewa) * Number(durationRent)
+                      )}
                 </p>
               </div>
               <Button
