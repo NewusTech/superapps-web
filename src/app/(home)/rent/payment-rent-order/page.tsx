@@ -5,30 +5,47 @@ import { FaCheckCircle } from "react-icons/fa";
 import React, { useEffect, useRef, useState } from "react";
 import Button from "@/components/buttonCustom/ButtonCustom";
 import {
-  useTravelActions,
-  useTravelStepPayloadPayload,
-} from "@/store/useTravelStore";
-import {
+  DetailCarInterface,
   PaymentDetailInterface,
   PaymentMenthodsInterface,
+  SyaratKetentuanInterface,
 } from "@/types/interface";
-import { createNewRent, getAllPaymentMethods } from "@/services/api";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  createNewRent,
+  getAllPaymentMethods,
+  getDetailTravelCarId,
+  getSyaratKetentuan,
+} from "@/services/api";
 import PaymentMethods from "@/components/paymentMethod";
-import { formatTanggalPanjang, formattedDate } from "@/helpers";
+import { formatCurrency, formatTanggalPanjang, formattedDate } from "@/helpers";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import { Trash } from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Swal from "sweetalert2";
+import { RichTextDisplay } from "@/components/richTextDisplay";
+import { Loader } from "lucide-react";
 
 export default function PaymentRentOrderPage() {
   const router = useRouter();
   const dropRef = useRef<HTMLDivElement>(null);
+  const [syarat, setSyarat] = useState<SyaratKetentuanInterface>();
+  const [detailCar, setDetailCar] = useState<DetailCarInterface>();
+  const [idCar, setIdCar] = useState<string>("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [imageKTP, setImageKTP] = useState<File | null>(null);
   const [imageSwafoto, setImageSwafoto] = useState<File | null>(null);
   const [previewImageKTP, setPreviewImageKTP] = useState<string>("");
   const [previewImageSwafoto, setPreviewImageSwafoto] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCheckedSyarat, setIsCheckedSyarat] = useState(false);
   const [payments, setPayments] = useState<PaymentMenthodsInterface>();
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<string>("");
@@ -71,6 +88,11 @@ export default function PaymentRentOrderPage() {
       );
     }
 
+    const id = localStorage.getItem("travel_car_id");
+    if (id) {
+      setIdCar(id);
+    }
+
     setDetail({
       nama: localStorage.getItem("nama"),
       email: localStorage.getItem("email"),
@@ -91,6 +113,22 @@ export default function PaymentRentOrderPage() {
     });
   }, []);
 
+  const fetchDetailCarRent = async (id: number) => {
+    try {
+      const response = await getDetailTravelCarId(id);
+
+      setDetailCar(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (idCar) {
+      fetchDetailCarRent(Number(idCar));
+    }
+  }, [idCar]);
+
   const fetchPaymentMethods = async () => {
     try {
       const response = await getAllPaymentMethods();
@@ -103,6 +141,19 @@ export default function PaymentRentOrderPage() {
 
   useEffect(() => {
     fetchPaymentMethods();
+  }, []);
+
+  const fetchSyaratKetentuan = async (id: number) => {
+    try {
+      const response = await getSyaratKetentuan(id);
+      setSyarat(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSyaratKetentuan(1);
   }, []);
 
   const handleImageKTPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -233,7 +284,7 @@ export default function PaymentRentOrderPage() {
     try {
       const response = await createNewRent(formData);
 
-      // console.log(response, "ini response");
+      console.log(response, "ini response");
 
       if (response.success === true) {
         Swal.fire({
@@ -247,7 +298,13 @@ export default function PaymentRentOrderPage() {
         if (response?.data?.kode === 1) {
           window.location.href = response?.data?.payment_url;
         } else if (response?.data?.kode === 2) {
-          return router.push("/profile");
+          router.push("/rent/transfer-payment");
+          localStorage.setItem("payment_code", response?.data?.kode_pembayaran);
+          localStorage.setItem("bank_method", response?.data?.metode);
+          localStorage.setItem(
+            "rekening_number",
+            response?.data?.nomor_rekening
+          );
         }
       } else {
         Swal.fire({
@@ -265,12 +322,26 @@ export default function PaymentRentOrderPage() {
     }
   };
 
+  const handleCheckboxSyaratChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const checked = event.target.checked;
+    setIsCheckedSyarat(checked);
+    if (checked) {
+      setIsDialogOpen(true);
+    }
+  };
+
+  const handleAgree = () => {
+    setIsDialogOpen(false);
+  };
+
   return (
     <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
-      <div className="w-full flex flex-col mt-32 px-20">
+      <div className="w-full flex flex-col mt-32 px-5 md:px-20">
         <section className="flex flex-col gap-4 text-sm md:text-base">
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Ringkasan Pesanan</p>
+            <p className="text-[16px] md:text-xl">Ringkasan Pesanan</p>
             <Card className="">
               <div className="flex flex-row items-center gap-x-2">
                 <FaCheckCircle className="text-primary-700" size={24} />
@@ -283,7 +354,7 @@ export default function PaymentRentOrderPage() {
           </div>
           {/* 2 */}
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Detail Informasi Penyewa</p>
+            <p className="text-[16px] md:text-xl">Detail Informasi Penyewa</p>
             <Card className="">
               <div className="flex flex-col items-center gap-4 w-full">
                 <div className="flex flex-row w-full items-center">
@@ -322,7 +393,7 @@ export default function PaymentRentOrderPage() {
           </div>
           {/* 3 */}
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Detail Sewa Mobil</p>
+            <p className="text-[16px] md:text-xl">Detail Sewa Mobil</p>
             <Card className="">
               <div className="flex flex-col items-center gap-4 w-full">
                 <div className="flex flex-row w-full items-center">
@@ -374,9 +445,9 @@ export default function PaymentRentOrderPage() {
               </div>
             </Card>
           </div>
-          <div className="w-full">
+          <div className="w-full flex flex-col gap-y-4 md:gap-y-0">
             <div className="flex flex-col w-full h-full">
-              <Label className="w-full text-xl">
+              <Label className="w-full text-[16px] md:text-xl">
                 Upload Kartu Tanda Penduduk
               </Label>
 
@@ -433,7 +504,7 @@ export default function PaymentRentOrderPage() {
             </div>
 
             <div className="flex flex-col w-full h-full">
-              <Label className="w-full text-xl">
+              <Label className="w-full text-[16px] md:text-xl">
                 Upload Swafoto atau Foto Selfie
               </Label>
 
@@ -491,7 +562,7 @@ export default function PaymentRentOrderPage() {
           </div>
           {/* 4 */}
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Metode Pembayaran</p>
+            <p className="text-[16px] md:text-xl">Metode Pembayaran</p>
             <PaymentMethods
               payments={
                 payments as {
@@ -506,24 +577,80 @@ export default function PaymentRentOrderPage() {
           </div>
           {/* 5 */}
           <div className="flex flex-col gap-y-2">
-            <p className="text-xl">Rincian Harga</p>
+            <p className="text-[16px] md:text-xl">Rincian Harga</p>
             <Card className="">
-              <label className="flex flex-row items-center gap-2">
-                <input type="checkbox" className="rounded-full" />
-                <span>
-                  Saya Menyetujui{" "}
-                  <span className="text-primary-700">Syarat & Ketentuan</span>{" "}
-                  Rama Tranz
-                </span>
-              </label>
+              <div className="mt-4 flex flex-row gap-x-2">
+                <Dialog open={isDialogOpen}>
+                  <DialogTrigger className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="term"
+                      className="w-4 h-4"
+                      checked={isCheckedSyarat}
+                      onChange={handleCheckboxSyaratChange}
+                    />
+                  </DialogTrigger>
+                  <DialogContent className="flex flex-col bg-neutral-50 rounded-xl p-1 justify-center items-center w-10/12 md:w-6/12 max-h-[700px]">
+                    <DialogHeader className="mt-4">
+                      <DialogTitle className="text-[26px] text-neutral-700">
+                        Syarat dan Ketentuan
+                      </DialogTitle>
+                    </DialogHeader>
+                    <div className="m-3 px-4 flex flex-col items-center w-full verticalScroll gap-y-6">
+                      <div>
+                        {syarat && (
+                          <RichTextDisplay content={syarat.description} />
+                        )}
+                      </div>
+
+                      <div
+                        onClick={handleAgree}
+                        className="bg-primary-700 text-center cursor-pointer w-4/12 rounded-full text-neutral-50 py-1 px-5">
+                        Setuju
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
+                <div className="text-neutral-700 font-normal md:text-[16px]">
+                  Saya menyetujui{" "}
+                  <span className="font-semibold text-primary-700">
+                    Syarat & Ketentuan
+                  </span>{" "}
+                  kami Rama Tarnz
+                </div>
+              </div>
+              <div className="p-3 mt-3 bg-dange_light rounded-md flex flex-col w-full text-danger_base">
+                <p>Catatan:</p>
+                <p className="text-sm">
+                  Penyewa bertanggung jawab atas biaya makan dan akomodasi untuk
+                  pengemudi.
+                </p>
+              </div>
               <div className="flex flex-row items-center justify-between py-3 border-b">
-                <p>Total Harga</p>
-                <p className="text-primary-700 text-xl font-semibold">
-                  Rp.200.000
+                <p className="text-[14px] md:text-[16px]">Total Harga</p>
+                <p className="text-primary-700 md:text-xl font-semibold">
+                  {detail?.all_in === "true"
+                    ? formatCurrency(
+                        Number(detailCar?.biaya_all_in) *
+                          Number(detail?.durasi_sewa)
+                      )
+                    : formatCurrency(
+                        Number(detailCar?.biaya_sewa) *
+                          Number(detail?.durasi_sewa)
+                      )}
                 </p>
               </div>
               <form onSubmit={handleNewRent}>
-                <Button className="mt-4 w-full">Lanjut Pembayaran</Button>
+                <Button
+                  disabled={isLoading ? true : false}
+                  className="mt-4 w-full flex items-center justify-center">
+                  {isLoading ? (
+                    <Loader className="w-5 h-5 animate-spin" />
+                  ) : (
+                    " Lanjut Pembayaran"
+                  )}
+                </Button>
               </form>
             </Card>
           </div>

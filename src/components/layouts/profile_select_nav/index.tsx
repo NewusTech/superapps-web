@@ -34,7 +34,7 @@ export default function SelectProfileNav() {
   return (
     <section className="w-full flex flex-col bg-neutral-50 border-b border-grey-100">
       <Select onValueChange={handleSelectChange}>
-        <SelectTrigger className="w-full border-none outline-none rounded-none px-8 py-8">
+        <SelectTrigger className="w-full text-[16px] font-semibold border-none outline-none rounded-none px-8 py-8">
           <SelectValue placeholder="Profile" />
         </SelectTrigger>
         <SelectContent className="w-11/12 bg-neutral-50 border border-grey-100 shadow-md">
