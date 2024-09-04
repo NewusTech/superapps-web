@@ -39,30 +39,35 @@ export default function PageBayar() {
   const [tncCheck, setTncCheck] = useState(false);
 
   const { setStepTravelPayload } = useTravelActions();
-  const [kodePesanan,setKodePesanan]= useState("")
-  
+  const [kodePesanan, setKodePesanan] = useState("");
+
   const [detailOrder, setDetailOrder] =
-  useState<OrderDetailResponseSuccess["data"]>();
+    useState<OrderDetailResponseSuccess["data"]>();
 
-    
-  
-  useEffect(()=>{
-    const kode = localStorage.getItem("kode_pesanan")
-    if(kode){
-      setKodePesanan(kode)
+  useEffect(() => {
+    const kode = localStorage.getItem("kode_pesanan");
+    if (kode) {
+      setKodePesanan(kode);
     }
-  },[kodePesanan])
+  }, [kodePesanan]);
 
-  const getDetailOrder = useMemo(async () => {
-    const response = await getOrderTravelDetail(kodePesanan);
-
-    if (!response.data) {
-      router.replace("/");
-      return;
+  const fetchDetailOrderTravel = async (orderCode: string) => {
+    try {
+      const response = await getOrderTravelDetail(orderCode);
+      setDetailOrder(response.data);
+    } catch (error) {
+      console.log(error);
     }
+  };
+
+  useEffect(() => {
     setStepTravelPayload(3);
-    setDetailOrder(response.data);
-  }, [router, setStepTravelPayload, kodePesanan]);
+    if (kodePesanan) {
+      fetchDetailOrderTravel(kodePesanan);
+    }
+  }, [kodePesanan, setStepTravelPayload]);
+
+  console.log(detailOrder, "ini detail");
 
   const handlePaymentMethodChange = (metode_id: number) => {
     setSelectedPaymentMethod(metode_id.toString());
@@ -92,20 +97,34 @@ export default function PageBayar() {
 
       console.log("Response :", response.data);
 
-      if (!response.data) {
-        console.error("Response Error :", response.message);
+      if (response.success === true) {
+        Swal.fire({
+          icon: "success",
+          title: "Berhasil membuat pesanan, silahkan upload bukti pembayaran!",
+          timer: 2000,
+          showConfirmButton: false,
+          position: "center",
+        });
+        localStorage.clear();
+        if (response?.data?.kode === 1) {
+          window.location.href = response?.data?.payment_url;
+        } else if (response?.data?.kode === 2) {
+          router.push("/travel/transfer-payment");
+          localStorage.setItem("order_code", kodePesanan);
+          localStorage.setItem("bank_method", response?.data?.metode);
+          localStorage.setItem(
+            "rekening_number",
+            response?.data?.nomor_rekening
+          );
+        }
+      } else {
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: response.message,
+          title: response.message,
+          timer: 2000,
+          showConfirmButton: false,
+          position: "center",
         });
-        return;
-      }
-      if (response.data.payment_url) {
-        router.replace(
-          `/profile/order-histories-travel`
-        );
-        window.open(response.data.payment_url, "_blank");
       }
     } catch (error) {
       console.error("error m ", error);
@@ -117,7 +136,6 @@ export default function PageBayar() {
   useEffect(() => {
     fetchPaymentMethods();
   }, []);
-
 
   return (
     <div className="flex flex-col gap-5">
@@ -143,7 +161,7 @@ export default function PageBayar() {
               <div className="w-[50%]">
                 <p className="text-sm text-gray-500">Keberangkatan : </p>
                 <p className="font-semibold">
-                  {detailOrder?.pesanan.kota_asal}
+                  {detailOrder?.pesanan?.kota_asal}
                 </p>
               </div>
               <div className="w-[50%]">
@@ -250,19 +268,18 @@ export default function PageBayar() {
               )}
             </p>
           </div>
-          <ButtonCustom
-            className="w-full justify-start items-center flex"
+          <Button
+            className="w-full bg-primary-700 hover:bg-primary-600 text-neutral-50 rounded-lg justify-center items-center flex"
             onClick={handleNextStep}
             disabled={
               !tncCheck || selectedPaymentMethod.trim() === "" || isLoading
-            }
-          >
+            }>
             {isLoading ? (
               <Loader className="animate-spin" />
             ) : (
               "Lanjut Pembayaran"
             )}
-          </ButtonCustom>
+          </Button>
         </Card>
       </div>
     </div>

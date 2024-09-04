@@ -16,7 +16,6 @@ import {
   useTravelSchedule,
   useTravelStepPayloadPayload,
 } from "@/store/useTravelStore";
-import { ResponseSucsessPostTravel } from "@/types/travel";
 import { Loader, Minus } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -71,12 +70,10 @@ export default function PageDataPenumpang() {
         return;
       }
       // ?kode_pesanan=${response.data.kode_pesanan}
-      
+
       setStepTravelPayload(3);
-      localStorage.setItem("kode_pesanan",response.data.kode_pesanan)
-      router.push(
-        `/travel/available-schedule/bayar`
-      );
+      localStorage.setItem("kode_pesanan", response.data.kode_pesanan);
+      router.push(`/travel/available-schedule/bayar`);
     } catch (error) {
       console.error("error m ", error);
     } finally {
@@ -109,7 +106,10 @@ export default function PageDataPenumpang() {
               inputMode="numeric"
               value={pemesan.nik}
               onChange={(e) => {
-                setPemesan({ ...pemesan, nik: handleOnlyNumbers(e.target.value) });
+                setPemesan({
+                  ...pemesan,
+                  nik: handleOnlyNumbers(e.target.value),
+                });
               }}
               maxLength={16}
             />
@@ -127,7 +127,10 @@ export default function PageDataPenumpang() {
               placeholder="+628"
               value={pemesan.no_telp}
               onChange={(e) => {
-                setPemesan({ ...pemesan, no_telp: handleOnlyNumbers(e.target.value) });
+                setPemesan({
+                  ...pemesan,
+                  no_telp: handleOnlyNumbers(e.target.value),
+                });
               }}
               maxLength={13}
             />
@@ -243,8 +246,7 @@ export default function PageDataPenumpang() {
               <p className="px-6 py-3 bg-primary-700 text-white">
                 Data Penumpang {index + 1}
               </p>
-            }
-          >
+            }>
             <div className="flex flex-col gap-4 mt-4">
               <InputText
                 label="Nama"
@@ -285,7 +287,9 @@ export default function PageDataPenumpang() {
                 value={data.no_telp}
                 onChange={(e) => {
                   const newPassengers = [...passenger];
-                  newPassengers[index].no_telp = handleOnlyNumbers(e.target.value);
+                  newPassengers[index].no_telp = handleOnlyNumbers(
+                    e.target.value
+                  );
                   setPassenger(newPassengers);
                 }}
                 maxLength={13}
@@ -295,8 +299,7 @@ export default function PageDataPenumpang() {
                   onClick={() => {
                     setPassengerIndex(index);
                     setOpenModalKursi(true);
-                  }}
-                >
+                  }}>
                   Kursi {data.no_kursi}
                 </ButtonCustom>
               </div>
@@ -308,8 +311,7 @@ export default function PageDataPenumpang() {
       <Button
         className="mt-4 w-[50%] mx-auto text-center justify-start items-center flex"
         onClick={handleNextStep}
-        disabled={isLoading}
-      >
+        disabled={isLoading}>
         {isLoading ? <Loader className="animate-spin" /> : "Lanjut Pembayaran"}
       </Button>
 
