@@ -58,6 +58,7 @@ export default function HomeLayout({
     "/profile/order-histories-travel",
     "/profile/order-histories-hotel",
     "profile/order-histories-paket",
+    "/rent/form-rent",
   ];
 
   const isProfile = () => {

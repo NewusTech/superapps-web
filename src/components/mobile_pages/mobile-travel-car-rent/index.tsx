@@ -67,7 +67,14 @@ export default function MobileTravelCarRentScreen() {
 
                 <div className="w-full px-3 md:px-0">
                   <Link href={"/rent/form-rent"}>
-                    <Button className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
+                    <Button
+                      onClick={() =>
+                        localStorage.setItem(
+                          "travel_car_id",
+                          item?.id.toString()
+                        )
+                      }
+                      className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
                       Rental Mobil Sekarang
                     </Button>
                   </Link>

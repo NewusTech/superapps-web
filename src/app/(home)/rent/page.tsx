@@ -4,7 +4,7 @@ import MobileTravelCarRentScreen from "@/components/mobile_pages/mobile-travel-c
 import RentalScreen from "@/components/pages/rentals";
 import MobileSecondRentalScreen from "@/components/pages/rentals/secondRentalCard";
 import TravelCarRentScreen from "@/components/pages/travel-car-rents";
-import { rentals, travelCars } from "@/constants/main";
+import { rentals } from "@/constants/main";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { getAllTravelCar } from "@/services/api";
 import { TravelCarInterface } from "@/types/interface";
@@ -43,7 +43,7 @@ export default function RentPage() {
           <div className="w-full flex flex-col items-center gap-y-1">
             <div className="bg-neutral-200 rounded-md py-2 px-2 md:w-3/12 mb-10 mt-5">
               <p className="text-neutral-700 text-center text-[18px]">
-              Mengapa Memilih Kami
+                Mengapa Memilih Kami
               </p>
             </div>
 
@@ -68,13 +68,15 @@ export default function RentPage() {
           </div>
 
           <div className="w-full h-full">
-            <Image
-              src={rents?.banner}
-              alt="Banner"
-              width={100}
-              height={100}
-              className="w-full h-full object-contain"
-            />
+            {rents && (
+              <Image
+                src={rents?.banner}
+                alt="Banner"
+                width={100}
+                height={100}
+                className="w-full h-full object-contain"
+              />
+            )}
           </div>
 
           {!isMobile ? (
