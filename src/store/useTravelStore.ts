@@ -1,5 +1,9 @@
 import { ExtractState } from "@/lib/zustand";
-import { PassengerSeat, TravelScheduleQuery, TravelScheduleResponseSuccess } from "@/types/travel";
+import {
+  PassengerSeat,
+  TravelScheduleQuery,
+  TravelScheduleResponseSuccess,
+} from "@/types/travel";
 import { create, useStore } from "zustand";
 
 type TravelStore = {
@@ -11,6 +15,12 @@ type TravelStore = {
   };
   bookingPayload?: TravelScheduleQuery;
   passenger: PassengerSeat[];
+  pemesan: {
+    nama: string;
+    nik: string;
+    email: string;
+    no_telp: string;
+  };
 
   actions: {
     setStepTravelPayload: (stepTravelPayload: number) => void;
@@ -22,7 +32,13 @@ type TravelStore = {
       to?: string;
     }) => void;
     setBookingPayload: (bookinPayload?: TravelScheduleQuery) => void;
-    setPassenger: (bookinPayload: PassengerSeat[]) => void;
+    setPassenger: (passengerSeatPayload: PassengerSeat[]) => void;
+    setPemesan: (pemesanPayload: {
+      nama: string;
+      nik: string;
+      email: string;
+      no_telp: string;
+    }) => void;
   };
 };
 
@@ -31,6 +47,12 @@ const travelStore = create<TravelStore>((set) => ({
   travelSchedule: undefined,
   bookingPayload: undefined,
   passenger: [],
+  pemesan:{
+    email:"",
+    nama:"",
+    nik:"",
+    no_telp:""
+  },
   actions: {
     setStepTravelPayload: (stepTravelPayload: number) =>
       set({ stepTravel: stepTravelPayload }),
@@ -39,6 +61,7 @@ const travelStore = create<TravelStore>((set) => ({
     setTravelSchedule: (travelSchedule) => set({ travelSchedule }),
     setBookingPayload: (bookingPayload) => set({ bookingPayload }),
     setPassenger: (passenger) => set({ passenger }),
+    setPemesan: (pemesan)=>set({pemesan})
   },
 }));
 
@@ -52,11 +75,13 @@ const actionsSelector = (state: ExtractState<typeof travelStore>) =>
 const travelScheduleSelector = (state: ExtractState<typeof travelStore>) =>
   state.travelSchedule;
 const pointToPointPayloadSelector = (state: ExtractState<typeof travelStore>) =>
-    state.pointToPointPayload;
+  state.pointToPointPayload;
 const bookingPayloadSelector = (state: ExtractState<typeof travelStore>) =>
-    state.bookingPayload;
+  state.bookingPayload;
 const travelPassengerSelector = (state: ExtractState<typeof travelStore>) =>
   state.passenger;
+const travelPemesanSelector = (state: ExtractState<typeof travelStore>) =>
+  state.pemesan;
 
 // getters
 export const stepTravelPayload = () =>
@@ -64,11 +89,13 @@ export const stepTravelPayload = () =>
 export const getTravelSchedule = () =>
   travelScheduleSelector(travelStore.getState());
 export const getPointToPointPayload = () =>
-    pointToPointPayloadSelector(travelStore.getState());
+  pointToPointPayloadSelector(travelStore.getState());
 export const getbookingPayload = () =>
-    bookingPayloadSelector(travelStore.getState());
+  bookingPayloadSelector(travelStore.getState());
 export const getTravelPassenger = () =>
   travelPassengerSelector(travelStore.getState());
+export const getTravelPemesan = () =>
+  travelPemesanSelector(travelStore.getState());
 //
 export const getTravelActions = () => actionsSelector(travelStore.getState());
 
@@ -83,9 +110,10 @@ export const useTravelStepPayloadPayload = () =>
   useTravelStore(stepTravelPayload);
 export const useTravelSchedule = () => useTravelStore(travelScheduleSelector);
 export const useTravelPointToPointPayload = () =>
-    useTravelStore(pointToPointPayloadSelector);
+  useTravelStore(pointToPointPayloadSelector);
 export const useTravelbookingPayload = () =>
-    useTravelStore(bookingPayloadSelector);
+  useTravelStore(bookingPayloadSelector);
 export const useTravelPassenger = () => useTravelStore(travelPassengerSelector);
+export const useTravelPemesan = () => useTravelStore(travelPemesanSelector);
 //
 export const useTravelActions = () => useTravelStore(actionsSelector);

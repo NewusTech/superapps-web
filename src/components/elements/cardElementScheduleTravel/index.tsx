@@ -4,7 +4,7 @@ import Button from "@/components/buttonCustom/ButtonCustom";
 import ModalSelectSeat from "@/components/pages/avaliable-schedule/ModalSelectSeat";
 import Card from "@/components/ui/card/Card";
 import { formatCurrency, formatTime } from "@/helpers";
-import { useTravelActions } from "@/store/useTravelStore";
+import { useTravelActions, useTravelbookingPayload } from "@/store/useTravelStore";
 import { TravelScheduleInterface } from "@/types/interface";
 import { Dot, Minus } from "@phosphor-icons/react";
 import Image from "next/image";
@@ -22,10 +22,15 @@ export default function CardTravelScheduleOrder({
 
   const router = useRouter();
   const [openModalKursi, setOpenModalKursi] = useState(false);
-  const { setStepTravelPayload } = useTravelActions();
+
+  
+  const bookingPayload = useTravelbookingPayload()
+  const { setStepTravelPayload,setTravelSchedule } = useTravelActions();
+  const seats = bookingPayload?.seats ||1
 
   const handleNextStep = () => {
     setOpenModalKursi(false);
+    setTravelSchedule(data)
     setStepTravelPayload(2);
     window.scrollTo(0, 0);
   };
@@ -52,6 +57,7 @@ export default function CardTravelScheduleOrder({
               </span>
             </div>
             <Button
+            disabled={disable}
               className="h-fit"
               variant="secondary"
               onClick={handleDetailTravel}>
@@ -101,7 +107,7 @@ export default function CardTravelScheduleOrder({
                 {formatCurrency(data.price)}
                 <span className="font-normal text-black">/kursi</span>
               </p>
-              <Button className="h-fit" onClick={handlePilihKursi}>
+              <Button className="h-fit" onClick={handlePilihKursi} disabled={disable}>
                 Pilih Kursi
               </Button>
             </div>
@@ -109,6 +115,7 @@ export default function CardTravelScheduleOrder({
         </div>
       </Card>
       <ModalSelectSeat
+      seats={seats}
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
         handleAfterSelectSeat={handleNextStep}
