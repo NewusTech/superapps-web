@@ -13,14 +13,19 @@ export default function Card(props: CardProps) {
         "w-full border rounded-xl overflow-hidden bg-white",
         className,
       ])}
-      {...rest}
-    >
+      {...rest}>
       {typeof header !== "string" ? (
         header
       ) : (
-        <div className="px-6 py-4 border-b font-semibold">{header}</div>
+        <div
+          className={`${header === "Data Pemesan" || header === "Detail Sewa & Rental Mobil" || header === "Rincian Harga" ? "px-2 py-4" : "px-6 py-4"} border-b font-semibold`}>
+          {header}
+        </div>
       )}
-      <div className="p-6 w-full">{children}</div>
+      <div
+        className={`${header === "Data Pemesan" || header === "Detail Sewa & Rental Mobil" || header === "Rincian Harga" ? "px-2 py-2" : "p-6"} w-full`}>
+        {children}
+      </div>
     </div>
   );
 }

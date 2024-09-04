@@ -38,3 +38,54 @@ export const formRegistrationSchema = z
     message: "Kata sandi dan konfirmasi kata sandi harus sama",
     path: ["confirmPassword"],
   });
+
+export const formRentalSchema = z.object({
+  nama: z
+    .string({ message: "Nama tidak boleh kosong" })
+    .min(3, { message: "Nama harus memiliki minimal 3 karakter" }),
+  nik: z
+    .string({ message: "NIK tidak boleh kosong" })
+    .regex(/^\d+$/, { message: "NIK harus berupa angka" })
+    .min(16, { message: "NIK harus minimal 16 digit" }),
+  email: z
+    .string({ message: "Email tidak boleh kosong" })
+    .email({ message: "Format email tidak valid" }),
+  no_telp: z
+    .string({ message: "Nomor telepon tidak boleh kosong" })
+    .regex(/^\d+$/, { message: "Nomor telepon harus berupa angka" })
+    .min(10, { message: "Nomor telepon harus minimal 10 digit" }),
+  alamat: z
+    .string({ message: "Alamat tidak boleh kosong" })
+    .min(5, { message: "Alamat harus memiliki minimal 5 karakter" }),
+  // durasi_sewa: z
+  //   .string({ message: "Durasi sewa tidak boleh kosong" })
+  //   .regex(/^\d+$/, { message: "Durasi sewa harus berupa angka" })
+  //   .min(1, { message: "Durasi sewa minimal 1 hari" }),
+  area: z.enum(["Dalam Kota", "Luar Kota"], {
+    message: "Area sewa harus dipilih",
+  }),
+  tanggal_mulai_sewa: z.date({
+    message: "Tanggal mulai sewa harus berupa tanggal valid",
+  }),
+  tanggal_akhir_sewa: z.date({
+    message: "Tanggal akhir sewa harus berupa tanggal valid",
+  }),
+  username_ig: z
+    .string({ message: "Username Instagram minimal 3 karakter" })
+    .optional()
+    .or(z.literal("")),
+  username_fb: z
+    .string({ message: "Username Facebook minimal 3 karakter" })
+    .optional()
+    .or(z.literal("")),
+  alamat_keberangkatan: z
+    .string({
+      message: "Alamat penjemputan tidak boleh kosong",
+    })
+    .min(5, {
+      message: "Alamat penjemputan harus memiliki minimal 5 karakter",
+    }),
+  jam_keberangkatan: z.string().regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
+    message: "Jam keberangkatan harus dalam format HH:mm",
+  }),
+});

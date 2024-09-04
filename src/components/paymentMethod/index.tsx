@@ -1,6 +1,7 @@
 "use client";
 
 import { PaymentDetailInterface } from "@/types/interface";
+import Image from "next/image";
 import React from "react";
 
 // Define the types for the props
@@ -35,11 +36,11 @@ const PaymentMethods: React.FC<PackagePaymentMethodsProps> = ({
       name: "Transfer Bank",
       options: payments?.bank_transfer,
     },
-    {
-      id: 3,
-      name: "Cash",
-      options: payments?.cash,
-    },
+    // {
+    //   id: 3,
+    //   name: "Cash",
+    //   options: payments?.cash,
+    // },
   ];
 
   return (
@@ -61,11 +62,13 @@ const PaymentMethods: React.FC<PackagePaymentMethodsProps> = ({
             <span className="flex-1">{method.name}</span>
             <div className="flex items-center space-x-2">
               {method.options?.map((option) => (
-                <img
+                <Image
                   key={option.id}
                   src={option.img}
                   alt={option.keterangan}
                   className="h-6 w-6"
+                  width={300}
+                  height={300}
                 />
               ))}
             </div>

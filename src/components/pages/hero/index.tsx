@@ -89,19 +89,29 @@ export default function HeroScreen({
             let link;
             if (item?.soon === false) {
               if (item?.title === "Travel") {
-                icon = <Bus className="w-5 h-5 text-primary-700" />;
+                icon = (
+                  <Bus className="w-5 h-5 text-primary-700 group-hover:text-neutral-50" />
+                );
                 link = "/travel";
               } else if (item?.title === "Paket") {
-                icon = <Package className="w-5 h-5 text-primary-700" />;
+                icon = (
+                  <Package className="w-5 h-5 text-primary-700 group-hover:text-neutral-50" />
+                );
                 link = "/package";
               } else if (item?.title === "Rental") {
-                icon = <Bus className="w-5 h-5 text-primary-700" />;
+                icon = (
+                  <Bus className="w-5 h-5 text-primary-700 group-hover:text-neutral-50" />
+                );
                 link = "/rent";
               } else if (item?.title === "Hotel") {
-                icon = <Hotel className="w-5 h-5 text-primary-700" />;
+                icon = (
+                  <Hotel className="w-5 h-5 text-primary-700 group-hover:text-neutral-50" />
+                );
                 link = "/hotel";
               } else {
-                icon = <Handbag className="w-5 h-5 text-primary-700" />;
+                icon = (
+                  <Handbag className="w-5 h-5 text-primary-700 group-hover:text-neutral-50" />
+                );
                 link = "/oleh-oleh";
               }
             } else {
@@ -131,7 +141,7 @@ export default function HeroScreen({
                   <Link
                     href={link}
                     className={`flex flex-col items-center gap-y-2`}>
-                    <div className="bg-neutral-50 rounded-full w-12 h-12 flex flex-row justify-center items-center">
+                    <div className="bg-neutral-50 group hover:bg-black hover:bg-opacity-20 rounded-full w-12 h-12 flex flex-row justify-center items-center">
                       {icon}
                     </div>
 

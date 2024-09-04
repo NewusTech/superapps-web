@@ -175,7 +175,7 @@ export interface PaymentDetailInterface {
 export interface PaymentMenthodsInterface {
   payment_gateway: PaymentDetailInterface[];
   bank_transfer: PaymentDetailInterface[];
-  cash: PaymentDetailInterface[];
+  // cash: PaymentDetailInterface[];
 }
 
 export interface ArticleBlogInterface {

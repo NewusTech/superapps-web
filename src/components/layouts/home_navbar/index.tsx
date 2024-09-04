@@ -1,21 +1,11 @@
 "use client";
 
-import fotoProfile from "@/../../public/assets/images/neededs/foto-profile.jpg";
 import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
@@ -23,7 +13,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Eye, EyeOff, Loader, X } from "lucide-react";
+import { Eye, EyeOff, Loader, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -173,40 +163,40 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
             </Link>
 
             <div className="w-full flex flex-row justify-end gap-x-6">
-              <div className="w-full flex flex-row justify-end items-center gap-x-8">
+              <div className="w-full flex flex-row justify-end items-center gap-x-5">
                 <Link
                   href="/about-us"
-                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-700 font-normal text-[16px] px-2 hover:bg-black hover:py-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Tentang Kami
                 </Link>
 
                 <Link
                   href="/travel"
-                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-700 font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Travel
                 </Link>
 
                 <Link
                   href="/rent"
-                  className={`text-neutral-600 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-600 font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Rental
                 </Link>
 
                 <Link
                   href="/hotel"
-                  className={`text-neutral-600 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-600 font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Hotel
                 </Link>
 
                 <Link
                   href="/package"
-                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-700 font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Paket
                 </Link>
 
                 <Link
                   href="/article"
-                  className={`text-neutral-700 font-normal text-[16px] hover:underline`}>
+                  className={`text-neutral-700 font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Artikel
                 </Link>
               </div>
@@ -243,7 +233,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                         isScrolledPast
                           ? "bg-primary-700 text-neutral-50"
                           : "bg-primary-700 border border-neutral-50 text-neutral-50"
-                      }  px-8 py-4 w-full rounded-md`}>
+                      }  px-8 py-4 w-full rounded-md hover:bg-primary-600`}>
                       Daftar
                     </Button>
                   </Link>
@@ -253,13 +243,12 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                     onOpenChange={setIsLoginPopupOpen}>
                     <AlertDialogTrigger>
                       <div
-                        className={`border border-primary-700 text-primary-700 px-8 py-1.5 w-full rounded-md`}>
+                        className={`hover:bg-primary-600 border border-primary-700 text-primary-700 px-8 py-1.5 w-full rounded-md`}>
                         Masuk
                       </div>
                     </AlertDialogTrigger>
 
                     <AlertDialogContent className="bg-white w-4/12 px-5 py-5 gap-y-5">
-                      {/* <div className="w-full flex flex-col py-3"> */}
                       <div className="w-full flex flex-row justify-end items-center">
                         <AlertDialogFooter className="border-none h-0 outline-none">
                           <AlertDialogCancel className="border-none h-0 outline-none">
@@ -431,7 +420,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/about-us"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Tentang Kami
                 </Link>
 
@@ -439,7 +428,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/travel"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Travel
                 </Link>
 
@@ -447,7 +436,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/rent"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Rental
                 </Link>
 
@@ -455,7 +444,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/hotel"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Hotel
                 </Link>
 
@@ -463,7 +452,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/package"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Paket
                 </Link>
 
@@ -471,7 +460,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   href="/article"
                   className={`${
                     isScrolledPast ? "text-neutral-600" : "text-neutral-50"
-                  } font-normal text-[16px] hover:underline`}>
+                  } font-normal text-[16px] hover:bg-black hover:py-2 px-2 hover:bg-opacity-30 hover:rounded-md`}>
                   Artikel
                 </Link>
               </div>
@@ -509,7 +498,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                         isScrolledPast
                           ? "bg-primary-700 text-neutral-50"
                           : "bg-primary-700 border border-neutral-50 text-neutral-50"
-                      }  px-8 py-4 w-full rounded-md`}>
+                      }  px-8 py-4 w-full rounded-md hover:bg-primary-600`}>
                       Daftar
                     </Button>
                   </Link>
@@ -517,7 +506,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                   <AlertDialog>
                     <AlertDialogTrigger>
                       <div
-                        className={`${isScrolledPast ? "border border-primary-700 text-primary-700" : "border border-neutral-50 text-neutral-50"} px-8 py-1.5 w-full rounded-md`}>
+                        className={`${isScrolledPast ? "border border-primary-700 text-primary-700" : "border border-neutral-50 text-neutral-50"} px-8 py-1.5 w-full hover:bg-primary-600 rounded-md`}>
                         Masuk
                       </div>
                     </AlertDialogTrigger>

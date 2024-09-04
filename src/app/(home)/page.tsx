@@ -45,14 +45,8 @@ import Footer from "@/components/layouts/footer";
 import MobileRouteTravelCar from "@/components/mobile_pages/mobile_route_travel_car";
 import ApartementScreen from "@/components/pages/apartements";
 import MobileApartementScreen from "@/components/mobile_pages/mobile_apartement";
-import {
-  BranchesInterface,
-  DataPariwisataInterface,
-  DataRouteInterface,
-  PariwitasaInterface,
-  RouteInterface,
-} from "@/types/interface";
-import { getAllBranches, getAllPariwisata, getAllRute } from "@/services/api";
+import { BranchesInterface } from "@/types/interface";
+import { getAllBranches } from "@/services/api";
 
 export default function Home() {
   const now = new Date();
