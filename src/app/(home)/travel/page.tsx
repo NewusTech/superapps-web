@@ -41,27 +41,27 @@ export default function TravelPage() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-16 background-travel-route gap-y-6 py-10">
+      <div className="w-full flex flex-col px-4 md:px-16 background-travel-route gap-y-6 py-10">
         <h3 className="text-neutral-700 font-semibold text-[26px]">
           Banyak keungulan yang didapatkan pesan tiket di Rama Tranz
         </h3>
 
-        <div className="grid grid-cols-2 gap-y-8 w-full">
+        <div className="grid grid-cols-2 gap-8 w-full">
           {profits?.map((item: any, i: number) => {
             return <ProfitScreen key={i} item={item} />;
           })}
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-16 gap-y-6 py-10">
-        <div className="grid grid-cols-2 gap-x-10 w-full">
+      <div className="w-full flex flex-col px-4 md:px-16 gap-6 py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full">
           {requirements?.map((item: any, i: number) => {
             return <BookingAndRequirementScreen key={i} item={item} />;
           })}
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-16 gap-y-3 py-10">
+      <div className="w-full flex flex-col px-4 md:px-16 gap-y-3 py-10">
         <h3 className="text-neutral-700 font-semibold text-[26px]">
           Keunggulan pesan tiket Online di Rama Tranz
         </h3>
@@ -73,7 +73,7 @@ export default function TravelPage() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-16 gap-y-3">
+      <div className="w-full flex flex-col px-4 md:px-16 gap-y-3">
         <h3 className="text-neutral-700 font-semibold text-[26px]">
           Kenali Lebih Jauh Kelas Travel di Rama Tranz
         </h3>

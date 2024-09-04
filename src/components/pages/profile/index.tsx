@@ -11,8 +11,8 @@ export default function ProfileScreen() {
       <div className="w-full h-full">
         <Image
           src={profileImage}
-          width={200}
-          height={200}
+          width={600}
+          height={600}
           alt="Rama Tranz"
           className="w-full h-full object-cover rounded-xl"
         />
@@ -31,6 +31,33 @@ export default function ProfileScreen() {
           Kami berkomitmen untuk memberikan pengalaman perjalanan yang nyaman
           dan aman bagi setiap penumpang.
         </p>
+
+        <h3 className="font-semibold text-[24px] text-neutral-700">
+          Visi Kami
+        </h3>
+        <p className="text-[16px] font-normal text-neutral-700 leading-8">
+          Menjadi perusahaan multi-dimensional yang eksis, inovatif, dan
+          antisipatif.
+        </p>
+
+        <h3 className="font-semibold text-[24px] text-neutral-700">
+          Misi Kami
+        </h3>
+        <ol className="list-decimal ml-4">
+          <li>
+            Memberikan pelayanan prima dan hadir sebagai solusi yang bernilai
+            untuk seluruh konsumen.
+          </li>
+          <li>
+            Mengoptimalkan nilai perusahaan melalui bisnis yang berkembang
+            dengan sumber daya terbaik dan mengakomodir gagasan – gagasan yang
+            kekinian.
+          </li>
+          <li>
+            Menjamin kepuasan konsumen dengan standar solusi yang berkelanjutan.
+          </li>
+        </ol>
+
 
         <div className="w-4/12">
           <Button className="bg-primary-700 w-full text-neutral-50">

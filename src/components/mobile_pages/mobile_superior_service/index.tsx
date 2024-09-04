@@ -34,7 +34,7 @@ export default function MobileSuperiorServiceScreen() {
       >
         {unggulans.map((item: any, i: number) => {
           return (
-            <SwiperSlide key={i}>
+            <SwiperSlide key={i} className="w-full h-full">
               <div className="w-full h-full relative flex flex-col bg-neutral-50 rounded-xl shadow-md gap-y-8">
                 <div className="w-full max-h-[230px]">
                   <Image
@@ -57,7 +57,7 @@ export default function MobileSuperiorServiceScreen() {
                   </div>
                 </div>
 
-                <div className="flex flex-col w-full gap-y-5 items-center mb-6 px-8">
+                <div className="flex flex-col w-full gap-y-5 items-center mb-6 px-8 h-full overflow-hidden">
                   <h5 className="text-neutral-700 font-semibold text-[26px]">
                     {item?.title}
                   </h5>
@@ -66,8 +66,8 @@ export default function MobileSuperiorServiceScreen() {
                     {item?.desc}
                   </p>
 
-                  <div className="w-full flex flex-row justify-center">
-                    <Button className="bg-primary-700 py-6 px-16 gap-x-5">
+                  <div className="w-full flex flex-row justify-center mt-auto">
+                    <Button className="bg-primary-700 py-6 px-16 gap-x-5 w-[80%]">
                       <p className="text-neutral-50 text-normal text-[14px]">
                         Selengkapnya
                       </p>

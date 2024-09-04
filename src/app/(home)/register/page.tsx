@@ -206,7 +206,7 @@ export default function RegisterScreen() {
             Daftar akun Rama Tranz
           </h4>
 
-          <div className="w-5/12 bg-white border border-grey-100 rounded-lg shadow-lg p-4 flex flex-col gap-y-5">
+          <div className="w-full md:w-5/12 bg-white border border-grey-100 rounded-lg shadow-lg p-4 flex flex-col gap-y-5">
             <div className="w-full flex flex-col">
               <form
                 onSubmit={handleSubmitRegistration}

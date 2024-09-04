@@ -212,14 +212,14 @@ export default function PageDataPenumpang() {
                 <div className="flex flex-col items-center justify-between">
                   <div className="flex flex-col gap-2">
                     <p>{travelSchedule?.originCity}</p>
-                    <p className="text-gray-500">{bookingPayload?.from}</p>
+                    <p className="text-gray-500">{pointToPoint?.from?.point}</p>
                     {/* <a href="#" className="font-semibold text-primary-700">
                           LIHAT MAPS
                         </a> */}
                   </div>
                   <div className="flex flex-col gap-2">
                     <p>{travelSchedule?.destinationCity}</p>
-                    <p className="text-gray-500">{bookingPayload?.to}</p>
+                    <p className="text-gray-500">{pointToPoint?.to?.point}</p>
                     {/* <a href="#" className="font-semibold text-primary-700">
                           LIHAT MAPS
                         </a> */}

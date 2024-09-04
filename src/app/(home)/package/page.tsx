@@ -2,7 +2,9 @@
 
 import PackageScreen from "@/components/pages/packages";
 import { pakets } from "@/constants/main";
+import { PhoneCall } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function PackagePage() {
@@ -32,6 +34,18 @@ export default function PackagePage() {
 
           <PackageScreen item={packages?.secondContent} />
         </div>
+      </div>
+      <div className="bg-white gap-y-2 flex flex-col p-3 w-11/12 md:w-5/12 mt-4 pb-8 border border-grey-50 shadow-md rounded-lg justify-center items-center">
+        <p className="font-bold text-center w-full">
+          Silahkan hubungi admin kami
+        </p>
+        <Link
+          href="https://wa.me/081315395019"
+          target="_blank"
+          className="flex flex-row gap-3"
+        >
+          <PhoneCall /> 081315395019
+        </Link>
       </div>
     </section>
   );

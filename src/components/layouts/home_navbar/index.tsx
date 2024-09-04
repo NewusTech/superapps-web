@@ -116,6 +116,8 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
         if (response.success === true) {
           Cookies.set("Authorization", response?.data?.token);
 
+          setToken(response?.data?.token)
+
           Swal.fire({
             icon: "success",
             title: "Login berhasil!",
@@ -418,7 +420,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
               />
             </Link>
 
-            <div className="w-full flex flex-row gap-x-8">
+            <div className="w-full flex flex-row gap-x-8" key={token}>
               <div className="w-full flex flex-row justify-end items-center gap-x-8">
                 <Link
                   href="/about-us"
