@@ -16,7 +16,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Seat, Van } from "@phosphor-icons/react";
+import { Seat } from "@phosphor-icons/react";
 import { Bus, Search } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";

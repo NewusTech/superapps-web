@@ -24,7 +24,6 @@ import {
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
-import { useSearchParams } from "next/navigation";
 import { OrderDetailResponseSuccess } from "@/types/travel";
 import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
 import Countdown from "@/components/elements/countDown";
@@ -36,19 +35,26 @@ export default function PageBayar() {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<string>("");
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [isLoading, setIsLoading] = useState(false);
   const [tncCheck, setTncCheck] = useState(false);
 
   const { setStepTravelPayload } = useTravelActions();
-
-  const KodePesanan = searchParams.get("kode_pesanan") || "";
-
+  const [kodePesanan,setKodePesanan]= useState("")
+  
   const [detailOrder, setDetailOrder] =
-    useState<OrderDetailResponseSuccess["data"]>();
+  useState<OrderDetailResponseSuccess["data"]>();
+
+    
+  
+  useEffect(()=>{
+    const kode = localStorage.getItem("kode_pesanan")
+    if(kode){
+      setKodePesanan(kode)
+    }
+  },[kodePesanan])
 
   const getDetailOrder = useMemo(async () => {
-    const response = await getOrderTravelDetail(KodePesanan);
+    const response = await getOrderTravelDetail(kodePesanan);
 
     if (!response.data) {
       router.replace("/");
@@ -56,7 +62,7 @@ export default function PageBayar() {
     }
     setStepTravelPayload(3);
     setDetailOrder(response.data);
-  }, [KodePesanan, router, setStepTravelPayload]);
+  }, [router, setStepTravelPayload, kodePesanan]);
 
   const handlePaymentMethodChange = (metode_id: number) => {
     setSelectedPaymentMethod(metode_id.toString());
@@ -76,7 +82,7 @@ export default function PageBayar() {
     try {
       setIsLoading(true);
       const payload: any = {
-        orderCode: KodePesanan,
+        orderCode: kodePesanan,
         metode_id: selectedPaymentMethod,
       };
 
@@ -97,7 +103,7 @@ export default function PageBayar() {
       }
       if (response.data.payment_url) {
         router.replace(
-          `/status-pesanan?kode_pesanan=${KodePesanan}&tipe=travel`
+          `/profile/order-histories-travel`
         );
         window.open(response.data.payment_url, "_blank");
       }
@@ -111,6 +117,7 @@ export default function PageBayar() {
   useEffect(() => {
     fetchPaymentMethods();
   }, []);
+
 
   return (
     <div className="flex flex-col gap-5">

@@ -70,9 +70,12 @@ export default function PageDataPenumpang() {
         });
         return;
       }
+      // ?kode_pesanan=${response.data.kode_pesanan}
+      
       setStepTravelPayload(3);
+      localStorage.setItem("kode_pesanan",response.data.kode_pesanan)
       router.push(
-        `/travel/available-schedule/bayar?kode_pesanan=${response.data.kode_pesanan}`
+        `/travel/available-schedule/bayar`
       );
     } catch (error) {
       console.error("error m ", error);
