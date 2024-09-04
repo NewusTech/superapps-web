@@ -95,3 +95,11 @@ export function truncateContent(title: string, maxLength = 35) {
     return titleWithSpaces;
   }
 }
+
+export function formatTimeString(timeString: string) {
+  // Memisahkan jam dan menit dari string waktu
+  const [hours, minutes] = timeString.split(":");
+
+  // Menggabungkan jam dan menit dengan format yang diinginkan
+  return `${hours}.${minutes}`;
+}

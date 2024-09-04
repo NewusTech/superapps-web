@@ -40,6 +40,7 @@ import {
 } from "@/services/api";
 import { formatDate } from "@/helpers";
 import { seatsTotal } from "@/constants/main";
+import { TravelScheduleResponseSuccess } from "@/types/travel";
 
 export default function PilihTiket() {
   const [schedules, setSchedules] = useState<TravelScheduleInterface[]>([]);
@@ -52,7 +53,7 @@ export default function PilihTiket() {
   const [ubahPencarian, setUbahPencarian] = useState(false);
   const [returnDateEnabled, setReturnDateEnabled] = useState(false);
 
-  const [openModalKursi, setOpenModalKursi] = useState(false);
+  // const [openModalKursi, setOpenModalKursi] = useState(false);
 
   const [departureDate, setDepartureDate] = useState<Date>(new Date());
 
@@ -66,7 +67,6 @@ export default function PilihTiket() {
   const router = useRouter();
 
   const maxChair = 8;
-
 
   const fetchTitikJemput = useMemo(async () => {
     try {
@@ -160,9 +160,9 @@ export default function PilihTiket() {
     });
   };
 
-  const handleNextStep = ()=>{
-    setStepTravelPayload(2)
-  }
+  // const handleNextStep = () => {
+  //   setStepTravelPayload(2);
+  // };
 
   useEffect(() => {
     if (
@@ -179,7 +179,7 @@ export default function PilihTiket() {
         bookingPayload?.seats
       );
     }
-    console.log(bookingPayload?.seats)
+    console.log(bookingPayload?.seats);
   }, [bookingPayload]);
 
   // if(schedules?.length < 1 || points.length < 1 ) return router.push("/travel")
@@ -292,7 +292,7 @@ export default function PilihTiket() {
                   <div className="flex flex-row items-center w-2/3 bg-neutral-50 border border-outline_border-100 rounded-full py-2 px-3">
                     <Seat className="w-6 h-6 text-primary-700" />
 
-                    <Select onValueChange={handleChangeKursi}>
+                    <Select onValueChange={handleChangeKursi} value={bookingPayload?.seats.toString()||"1"}>
                       <SelectTrigger className="w-full border-none outline-none text-[14px]">
                         <SelectValue placeholder="Pilih..." />
                       </SelectTrigger>
@@ -334,7 +334,7 @@ export default function PilihTiket() {
         <div className="flex flex-col w-full md:w-[70%] gap-4">
           {schedules &&
             schedules?.map((item: TravelScheduleInterface, i: number) => {
-              return <CardTravelScheduleOrder key={i} data={item} />;
+              return <CardTravelScheduleOrder key={i} data={item} disable={!pointToPoint?.from || !pointToPoint.to}/>;
             })}
           {!schedules && schedules < 1 && (
             <p className="w-full p-2 font-bold">
@@ -413,13 +413,13 @@ export default function PilihTiket() {
         </div>
       </div>
       {/* Modal Select Seat */}
-      <ModalSelectSeat
+      {/* <ModalSelectSeat
         passengerIndex={0}
         selectAllSheats
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
         handleAfterSelectSeat={handleNextStep}
-      />
+      /> */}
     </section>
   );
 }

@@ -5,7 +5,7 @@ import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
 import { Dot, Minus } from "lucide-react";
 import CarSeat10 from "@/components/carSeat/CarSeat10";
 import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
-import { useTravelActions, useTravelbookingPayload, useTravelPassenger } from "@/store/useTravelStore";
+import { useTravelActions, useTravelPassenger, useTravelSchedule } from "@/store/useTravelStore";
 import { PassengerSeat } from "@/types/travel";
 
 export type ModalSelectSeatProps = {
@@ -14,6 +14,7 @@ export type ModalSelectSeatProps = {
   handleAfterSelectSeat?: () => void;
   selectAllSheats: boolean;
   passengerIndex: number;
+  seats?:number
 };
 
 export default function ModalSelectSeat(props: ModalSelectSeatProps) {
@@ -22,23 +23,22 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
     setVisible,
     handleAfterSelectSeat,
     passengerIndex,
-    selectAllSheats,
+    selectAllSheats=false,
+    seats=1
   } = props;
 
-  const bookingPayload = useTravelbookingPayload()
   const {setPassenger} = useTravelActions()
 
-  const seats = bookingPayload?.seats
   
-  console.log({seats})
+  console.log({seats,passengerIndex})
 
 
   const [selectedSeats, setSelectedSeat] = useState<string[]>([]);
   const passengerList = useTravelPassenger();
+  const traveSchedule = useTravelSchedule();
 
   const getSeatTaken = useMemo(() => {
-    // let seatTakenTemp = traveSchedule?.seatTaken || [];
-    let seatTakenTemp = [""];
+    let seatTakenTemp = traveSchedule?.seatTaken || [];
 
     passengerList.forEach((passenger, index) => {
       if (index !== passengerIndex) {
@@ -49,10 +49,10 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
     console.log(seatTakenTemp);
 
     return seatTakenTemp;
-  }, [passengerIndex, passengerList]);
+  }, [passengerIndex, passengerList,traveSchedule]);
 
   const handleSelectSeat = (seatNumber: string) => {
-    const limit = seats || 100;
+    const limit = seats;
     if (selectedSeats.find((seats) => seats === seatNumber)) {
       setSelectedSeat(selectedSeats.filter((seats) => seats !== seatNumber));
     } else {
@@ -60,7 +60,7 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
         setSelectedSeat([...selectedSeats, seatNumber]);
       }
     }
-    console.log("log click ",seatNumber)
+    console.log("log click ",selectedSeats.length)
   };
 
   const handleAfterPilihKursi = ()=>{
@@ -68,6 +68,7 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
     if (!selectAllSheats) {
       if (passengerListTemp?.[passengerIndex]) {
         passengerListTemp[passengerIndex].no_kursi = selectedSeats[0];
+        console.log("pilih 1 kursi")
       }
     } else {
       selectedSeats
@@ -81,6 +82,7 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
             email: "",
           };
         });
+        console.log("pilih banyak kursi")
     }
 
     setPassenger(passengerListTemp);
@@ -135,7 +137,7 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
           selected={selectedSeats.map((item) => item)}
           onSeatPress={handleSelectSeat}
         />
-        <ButtonCustom className="h-1/2" onClick={handleAfterPilihKursi}>
+        <ButtonCustom className="h-1/2" onClick={handleAfterPilihKursi} disabled={selectedSeats.length!==seats}>
           Pilih Kursi
         </ButtonCustom>
       </div>
