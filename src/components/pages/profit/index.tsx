@@ -3,13 +3,13 @@ import React from "react";
 
 export default function ProfitScreen({ item }: any) {
   return (
-    <div className="w-full flex flex-row gap-x-4">
-      <div className="max-w-[200px]">
+    <div className="w-full flex flex-col md:flex-row gap-4">
+      <div className="max-w-[32px]">
         <Image
           src={item?.image}
           alt={item?.title}
-          width={200}
-          height={200}
+          width={400}
+          height={400}
           className="w-full h-full object-contain rounded-full"
         />
       </div>
