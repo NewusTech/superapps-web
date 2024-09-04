@@ -1,5 +1,7 @@
 "use client";
 
+import { differenceInDays } from "date-fns";
+
 export const formatDate = (date: Date) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -102,4 +104,16 @@ export function formatTimeString(timeString: string) {
 
   // Menggabungkan jam dan menit dengan format yang diinginkan
   return `${hours}.${minutes}`;
+}
+
+export function calculateDaysBetweenDates(
+  startDate: Date,
+  endDate: Date
+): number {
+  // if (endDate < startDate) {
+  //   throw new Error("End date must be after start date");
+  // }
+
+  const daysDifference = differenceInDays(endDate, startDate);
+  return daysDifference;
 }
