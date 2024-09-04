@@ -38,13 +38,13 @@ export default function PromotionScreen() {
           {promos.map((image: any, i: number) => {
             return (
               <SwiperSlide key={i}>
-                <div className="w-full flex flex-row items-center justify-center h-full">
+                <div className="w-full flex flex-row items-center justify-center h-[25rem] rounded-lg overflow-hidden">
                   <Image
                     src={image?.image}
                     alt="Carousel"
-                    width={200}
-                    height={200}
-                    className="w-full h-full object-cover rounded-lg"
+                    width={600}
+                    height={600}
+                    className="w-full h-full object-cover "
                   />
                 </div>
               </SwiperSlide>

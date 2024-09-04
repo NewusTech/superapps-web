@@ -8,7 +8,7 @@ import React from "react";
 export default function SuperiorServiceScreen({ item }: any) {
   return (
     <div className="w-full h-full relative flex flex-col bg-neutral-50 rounded-xl shadow-md gap-y-8">
-      <div className="w-full h-full">
+      <div className="w-full h-[20rem]">
         <Image
           src={item?.image}
           alt="Superior Service"
@@ -29,7 +29,7 @@ export default function SuperiorServiceScreen({ item }: any) {
         </div>
       </div>
 
-      <div className="flex flex-col w-full gap-y-5 items-center mb-6 px-8">
+      <div className="flex flex-col w-full h-full gap-y-5 items-center mb-6 px-8">
         <h5 className="text-neutral-700 font-semibold text-[26px]">
           {item?.title}
         </h5>
@@ -38,7 +38,7 @@ export default function SuperiorServiceScreen({ item }: any) {
           {item?.desc}
         </p>
 
-        <div className="w-full flex flex-row justify-center">
+        <div className="w-full flex flex-row justify-center mt-auto">
           <Button className="bg-primary-700 py-6 px-16 gap-x-5">
             <p className="text-neutral-50 text-normal text-[14px]">
               Selengkapnya

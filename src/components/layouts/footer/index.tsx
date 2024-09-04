@@ -21,9 +21,10 @@ export default function Footer() {
           </div>
 
           <p className="text-neutral-700 text-center md:text-start">
-            Rama Trans adalah perusahaan transportasi yang menyediakan layanan
-            bus travel berkualitas. Kami menawarkan kenyamanan dan keamanan
-            dalam setiap perjalanan Anda.
+            Rama Tranz telah menjadi mitra perjalanan terbaik di Lampung sejak
+            2012, menyediakan layanan travel, pengiriman paket cepat, dan rental
+            mobil dengan armada modern. Kami hadir 24/7 untuk memastikan
+            perjalanan Anda aman, nyaman, dan tepat waktu.
           </p>
 
           <div className="md:hidden w-full flex flex-col items-center md:items-start gap-y-6 md:gap-y-2">

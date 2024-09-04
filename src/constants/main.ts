@@ -1,7 +1,11 @@
-import firstPromo from "../../public/assets/images/neededs/banner-promo-1.png";
-import firstUnggulan from "../../public/assets/images/neededs/service-unggulan-1.png";
-import secondUnggulan from "../../public/assets/images/neededs/service-unggulan-2.png";
-import thirdUnggulan from "../../public/assets/images/neededs/service-unggulan-3.png";
+import firstPromo from "../../public/assets/images/neededs/promo/1.jpg";
+import secondPromo from "../../public/assets/images/neededs/promo/2.jpg";
+import thirdPromo from "../../public/assets/images/neededs/promo/3.jpg";
+import fourthPromo from "../../public/assets/images/neededs/promo/4.jpg";
+import fifthPromo from "../../public/assets/images/neededs/promo/5.jpg";
+import firstUnggulan from "../../public/assets/images/neededs/unggulan/layanan_travel.png";
+import secondUnggulan from "../../public/assets/images/neededs/unggulan/layanan_paket.png";
+import thirdUnggulan from "../../public/assets/images/neededs/unggulan/layanan_rental.png";
 import firstIconUnggulan from "../../public/assets/icons/neededs/icon-electric-bus-2.svg";
 import secondIconUnggulan from "../../public/assets/icons/neededs/icon-logistics-delivery-1.svg";
 import firstFasility from "../../public/assets/images/neededs/facility-1.png";
@@ -100,27 +104,19 @@ export const promos = [
   },
   {
     id: 2,
-    image: firstPromo,
+    image: secondPromo,
   },
   {
     id: 3,
-    image: firstPromo,
+    image: thirdPromo,
   },
   {
     id: 4,
-    image: firstPromo,
+    image: fourthPromo,
   },
   {
     id: 5,
-    image: firstPromo,
-  },
-  {
-    id: 6,
-    image: firstPromo,
-  },
-  {
-    id: 7,
-    image: firstPromo,
+    image: fifthPromo,
   },
 ];
 
@@ -129,22 +125,22 @@ export const unggulans = [
     id: 1,
     image: firstUnggulan,
     icon: firstIconUnggulan,
-    title: "Travel Rama Tranz",
-    desc: "Rama Tranz menyediakan berbagai layanan profesional untuk memenuhi kebutuhan perjalanan Anda. Layanan door-to-door kami menjemput dan mengantarkan Anda langsung ke depan rumah",
+    title: "Layanan Travel",
+    desc: "Layanan travel di Rama Tranz menyediakan kemudahan dengan opsi layanan door to door dan point to point. Kami menawarkan harga yang kompetitif dan fasilitas lengkap untuk memastikan perjalanan Anda aman dan nyaman.",
   },
   {
     id: 2,
     image: secondUnggulan,
     icon: secondIconUnggulan,
-    title: "Paket Rama Tranz",
-    desc: "Rama Tranz menyediakan berbagai layanan profesional untuk memenuhi kebutuhan perjalanan Anda. Layanan door-to-door kami menjemput dan mengantarkan Anda langsung ke depan rumah",
+    title: "Layanan Paket",
+    desc: "Layanan paket di Rama Tranz menawarkan solusi pengiriman yang efisien dan terpercaya dengan rute dari Lampung ke Jakarta dan dari Lampung ke Palembang. Kami memastikan setiap pengiriman barang Anda tiba tepat waktu, dengan tingkat keamanan tinggi dan proses yang mudah, untuk memenuhi kebutuhan logistik Anda dengan standar profesional.",
   },
   {
     id: 3,
     image: thirdUnggulan,
     icon: firstIconUnggulan,
-    title: "Rental Rama Tranz",
-    desc: "Rama Tranz menyediakan berbagai layanan profesional untuk memenuhi kebutuhan perjalanan Anda. Layanan door-to-door kami menjemput dan mengantarkan Anda langsung ke depan rumah",
+    title: "Layanan Rental",
+    desc: "Layanan rental di Rama Tranz menyediakan armada mobil mewah untuk memenuhi kebutuhan perjalanan Anda. Kami menawarkan Toyota Hiace Commuter dan Toyota Hiace Premio, yang dirancang untuk memberikan kenyamanan dan pengalaman berkendara premium. Ideal untuk acara keluarga, perjalanan bisnis, atau kebutuhan transportasi lainnya, armada kami memastikan perjalanan Anda berjalan lancar dengan standar layanan yang tinggi.",
   },
 ];
 
