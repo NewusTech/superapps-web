@@ -18,11 +18,24 @@ import { getOrderHistoryRental } from "@/services/api";
 import { statusFilters } from "@/constants/main";
 import OrderHistoryRentalCard from "@/components/pages/profile/card-history/rental";
 import OrderHistoryRentalStatusCard from "@/components/pages/profile/card-history/rental/dalamProses";
+import { useSearchParams } from "next/navigation";
 
 export default function MyRentOrderHistories() {
+  const searchParams = useSearchParams();
+  const [isTabs, setIsTabs] = useState<string>("riwayat-travel");
   const [status, setStatus] = useState<string>("");
   const [rental, setRental] = useState<HistoryRentalInterface[]>();
   const [waitingRent, setWaitingRent] = useState<HistoryRentalInterface[]>();
+
+  const searchTabs = searchParams.get("tabs");
+
+  useEffect(() => {
+    if (searchTabs == "selesai") {
+      setIsTabs("riwayat-travel");
+    } else if (searchTabs == "menunggu") {
+      setIsTabs("dalam-proses-travel");
+    }
+  }, [searchTabs]);
 
   const fetchGetRentalHistory = async (status: string) => {
     try {
@@ -64,7 +77,8 @@ export default function MyRentOrderHistories() {
 
       <div className="w-full flex flex-row">
         <Tabs
-          defaultValue="riwayat-travel"
+          value={isTabs ? isTabs : "riwayat-travel"}
+          onValueChange={(value) => setIsTabs(value)}
           className="w-full flex flex-col gap-y-4">
           <TabsList className="w-full px-0 py-6 flex flex-row border border-grey-100">
             <TabsTrigger

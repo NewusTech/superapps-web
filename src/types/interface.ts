@@ -185,3 +185,25 @@ export interface ArticleBlogInterface {
   konten: string;
   created_at: string;
 }
+
+export interface DetailCarInterface {
+  id: number;
+  bahan_bakar: string;
+  biaya_all_in: string;
+  biaya_sewa: string;
+  created_at: string;
+  deskripsi: string;
+  fasilitas: string;
+  image_url: string;
+  jumlah_kursi: string;
+  kapasitas_bagasi: string;
+  mesin: string;
+  nopol: string;
+  transmisi: string;
+  type: string;
+}
+
+export interface SyaratKetentuanInterface {
+  id: number;
+  description: string;
+}
