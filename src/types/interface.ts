@@ -227,3 +227,48 @@ export interface SyaratKetentuanInterface {
   id: number;
   description: string;
 }
+
+export interface PaymentTravelInterface {
+  bukti_url: string;
+  created_at: string;
+  expired_at: string;
+  kode_pembayaran: string;
+  link_invoice: string;
+  link_tiket: string;
+  metode: string;
+  no_rek: string;
+  nominal: string;
+  payment_link: string;
+  status: string;
+}
+
+export interface PassengerTravelInterface {
+  email: string;
+  kursi: number;
+  nama: string;
+  nik: string;
+  no_telp: string;
+}
+
+export interface OrderTravelInterface {
+  estimasi: number;
+  jam_berangkat: string;
+  jam_tiba: string;
+  kode_pesanan: string;
+  kota_asal: string;
+  kota_tujuan: string;
+  kursi: number[];
+  mobil: string;
+  nama: string;
+  no_telp: string;
+  supir: string;
+  tanggal: string;
+  titik_antar: string;
+  titik_jemput: string;
+}
+
+export interface TravelDetailInterface {
+  pembayaran: PaymentTravelInterface;
+  penumpang: PassengerTravelInterface[];
+  pesanan: OrderTravelInterface;
+}
