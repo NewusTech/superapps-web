@@ -117,3 +117,29 @@ export function calculateDaysBetweenDates(
   const daysDifference = differenceInDays(endDate, startDate);
   return daysDifference;
 }
+
+export const formatDateToTime = (date?: number | Date | undefined): string => {
+  return new Intl.DateTimeFormat("id-ID", {
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+};
+
+
+export function handleOnlyNumbers(input:string) {
+  // Gunakan regex untuk menghapus semua karakter yang bukan angka
+  const numbersOnly = input.replace(/\D/g, '');
+  return numbersOnly;
+}
+
+export const formatDateOption = (
+  date?: number | Date | undefined,
+  options: Intl.DateTimeFormatOptions | undefined = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }
+): string => {
+  return new Intl.DateTimeFormat("id-ID", options).format(date);
+};

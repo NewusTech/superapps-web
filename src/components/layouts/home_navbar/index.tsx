@@ -39,6 +39,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
   const [errors, setErrors] = useState<any>({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
   const [profile, setProfile] = useState<ProfileUserInterface>();
 
   useEffect(() => {
@@ -137,11 +138,14 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
             position: "center",
           });
         }
+
       } catch (error) {
         console.log(error);
       } finally {
         setFirstLoading(false);
         setHasSubmitted(false);
+        setIsLoginPopupOpen(false)
+        setLoginModal(false)
       }
     }
   };
@@ -503,7 +507,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                     </Button>
                   </Link>
 
-                  <AlertDialog>
+                  <AlertDialog open={loginModal} onOpenChange={setLoginModal}>
                     <AlertDialogTrigger>
                       <div
                         className={`${isScrolledPast ? "border border-primary-700 text-primary-700" : "border border-neutral-50 text-neutral-50"} px-8 py-1.5 w-full hover:bg-primary-600 rounded-md`}>

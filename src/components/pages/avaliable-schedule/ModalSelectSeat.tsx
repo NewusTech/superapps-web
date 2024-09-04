@@ -38,7 +38,7 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
   const traveSchedule = useTravelSchedule();
 
   const getSeatTaken = useMemo(() => {
-    let seatTakenTemp = traveSchedule?.seatTaken || [];
+    let seatTakenTemp = traveSchedule?.seatTaken||[];
 
     passengerList.forEach((passenger, index) => {
       if (index !== passengerIndex) {

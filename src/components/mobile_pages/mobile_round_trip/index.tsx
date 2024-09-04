@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -16,11 +18,68 @@ import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { Seat, Van, Calendar as CalendarIcons } from "@phosphor-icons/react";
+import { BranchesInterface, TitikJemputInterface } from "@/types/interface";
+import { useTravelActions, useTravelbookingPayload } from "@/store/useTravelStore";
+import { seatsTotal } from "@/constants/main";
+import { useRouter } from "next/navigation";
 
-export default function RoundTripForm() {
+
+export type RoundTripFormProps = {
+  branch : BranchesInterface[]
+  pointsJempuput: TitikJemputInterface[],
+  pointsAntar:TitikJemputInterface[]
+}
+
+export default function RoundTripForm(props:RoundTripFormProps) {
+  const {branch, pointsAntar,pointsJempuput} = props
+
+  const { setBookingPayload,setPointToPointPayload } = useTravelActions();
+  const bookingPayload = useTravelbookingPayload();
+
   const [departureDate, setDepartureDate] = useState<Date | undefined>(
     undefined
   );
+
+  const router = useRouter()
+
+
+
+  const handleChangeKeberangkatan = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      to: bookingPayload?.to || "",
+      seats: bookingPayload?.seats || 1,
+      from: value,
+    });
+  };
+  const handleChangeJutuan = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      from: bookingPayload?.from || "",
+      to: value,
+      seats: bookingPayload?.seats || 1,
+    });
+  };
+  const handleChangeDate = (value: Date) => {
+    setBookingPayload({
+      date: value,
+      from: bookingPayload?.from || "",
+      to: bookingPayload?.to || "",
+      seats: bookingPayload?.seats || 1,
+    });
+  };
+  const handleChangeKursi = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      from: bookingPayload?.from || "",
+      to: bookingPayload?.to || "",
+      seats: Number.parseInt(value),
+    });
+  };
+
+  const handleCariTiket = ()=>{
+    router.push("/travel/available-schedule")
+  }
 
   return (
     <div className="bg-neutral-50 flex flex-col w-11/12 min-h-[520px] rounded-3xl border border-grey-100 absolute -top-1">
@@ -39,6 +98,7 @@ export default function RoundTripForm() {
             <TabsTrigger
               className="data-[state=active]:bg-primary-700 data-[state=active]:text-neutral-50 w-full py-3"
               value="Pulang Pergi"
+              disabled
             >
               Pulang Pergi
             </TabsTrigger>
@@ -55,14 +115,21 @@ export default function RoundTripForm() {
                 <div className="w-full flex flex-row items-center gap-x-2">
                   <Van className="w-6 h-6 text-primary-700" />
 
-                  <Select>
+                  <Select
+                                    onValueChange={handleChangeKeberangkatan}
+                                    value={bookingPayload?.from}
+                  >
                     <SelectTrigger className="w-full border-none outline-none text-[14px]">
                       <SelectValue placeholder="Pilih..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                      <SelectItem value="light">Light</SelectItem>
-                      <SelectItem value="dark">Dark</SelectItem>
-                      <SelectItem value="system">System</SelectItem>
+                    {branch.map((item: BranchesInterface, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.nama}>
+                          {item.nama}
+                        </SelectItem>
+                      );
+                    })}
                     </SelectContent>
                   </Select>
 
@@ -76,14 +143,21 @@ export default function RoundTripForm() {
                 <div className="w-full flex flex-row items-center gap-x-2">
                   <Van className="w-6 h-6 text-primary-700" />
 
-                  <Select>
+                  <Select
+                   onValueChange={handleChangeJutuan}
+                   value={bookingPayload?.to}
+                  >
                     <SelectTrigger className="w-full border-none outline-none text-[14px]">
                       <SelectValue placeholder="Pilih..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                      <SelectItem value="light">Light</SelectItem>
-                      <SelectItem value="dark">Dark</SelectItem>
-                      <SelectItem value="system">System</SelectItem>
+                    {branch.map((item: BranchesInterface, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.nama}>
+                          {item.nama}
+                        </SelectItem>
+                      );
+                    })}
                     </SelectContent>
                   </Select>
 
@@ -97,14 +171,26 @@ export default function RoundTripForm() {
                 <div className="w-full flex flex-row items-center gap-x-2">
                   <Seat className="w-6 h-6 text-primary-700" />
 
-                  <Select>
+                  <Select
+                    onValueChange={handleChangeKursi}
+                    value={bookingPayload?.seats.toString() || "1"}
+                  >
                     <SelectTrigger className="w-full border-none outline-none text-[14px]">
                       <SelectValue placeholder="Pilih..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                      <SelectItem value="light">Light</SelectItem>
-                      <SelectItem value="dark">Dark</SelectItem>
-                      <SelectItem value="system">System</SelectItem>
+                    {seatsTotal.map(
+                      (
+                        item: { id: number; seat: string; jumlah: number },
+                        i: number
+                      ) => {
+                        return (
+                          <SelectItem key={i} value={item.jumlah.toString()}>
+                            {item.seat}
+                          </SelectItem>
+                        );
+                      }
+                    )}
                     </SelectContent>
                   </Select>
 
@@ -121,9 +207,9 @@ export default function RoundTripForm() {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button className="w-full justify-start text-left text-[14px]">
-                        {departureDate
-                          ? format(departureDate, "PPP")
-                          : "Pilih Tanggal"}
+                      {bookingPayload?.date
+                        ? format(bookingPayload.date, "PPP")
+                        : "Pilih Tanggal"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
@@ -138,8 +224,8 @@ export default function RoundTripForm() {
                           day_today: "bg-primary-700 text-neutral-50",
                         }}
                         mode="single"
-                        selected={departureDate}
-                        onSelect={setDepartureDate}
+                        selected={bookingPayload?.date}
+                        onSelect={(date)=>handleChangeDate(date||new Date())}
                         initialFocus
                       />
                     </PopoverContent>
@@ -151,7 +237,7 @@ export default function RoundTripForm() {
             </div>
 
             <div className="w-full">
-              <Button className="bg-primary-700 py-6 text-[18px] w-full text-neutral-50">
+              <Button className="bg-primary-700 py-6 text-[18px] w-full text-neutral-50" onClick={handleCariTiket}>
                 Cari Tiket
               </Button>
             </div>
@@ -234,9 +320,9 @@ export default function RoundTripForm() {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button className="w-full justify-start text-left text-[14px]">
-                        {departureDate
-                          ? format(departureDate, "PPP")
-                          : "Pilih Tanggal"}
+                      {bookingPayload?.date
+                        ? format(bookingPayload.date, "PPP")
+                        : "Pilih Tanggal"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
@@ -251,8 +337,8 @@ export default function RoundTripForm() {
                           day_today: "bg-primary-700 text-neutral-50",
                         }}
                         mode="single"
-                        selected={departureDate}
-                        onSelect={setDepartureDate}
+                        selected={bookingPayload?.date}
+                        onSelect={(date)=>handleChangeDate(date||new Date())}
                         initialFocus
                       />
                     </PopoverContent>

@@ -6,7 +6,12 @@ import { Seat } from "@phosphor-icons/react";
 import { ChevronDown, Dot, Minus } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { useTravelActions } from "@/store/useTravelStore";
+import {
+  useTravelActions,
+  useTravelbookingPayload,
+  useTravelPointToPointPayload,
+  useTravelSchedule,
+} from "@/store/useTravelStore";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { CgMenuGridO } from "react-icons/cg";
@@ -18,6 +23,8 @@ import {
 } from "@/components/ui/accordion";
 import ModalSelectSeat from "@/components/pages/avaliable-schedule/ModalSelectSeat";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { formatCurrency, formatTimeString } from "@/helpers";
+import parse from "html-react-parser";
 
 export default function DetailTravel() {
   const dummyImage = [
@@ -78,11 +85,14 @@ export default function DetailTravel() {
 
   const { setStepTravelPayload } = useTravelActions();
 
+  const travelSchedule = useTravelSchedule();
+  const pointToPoint = useTravelPointToPointPayload();
+  const bookingPayload = useTravelbookingPayload();
+
   const handleNextStep = () => {
     setOpenModalKursi(false);
-    router.push("/travel/available-schedule");
     setStepTravelPayload(2);
-    window.scrollTo(0, 0);
+    router.push("/travel/available-schedule/data-penumpang/");
   };
 
   const handleOnClickIamge = (img: string) => {
@@ -149,7 +159,7 @@ export default function DetailTravel() {
         </Card>
 
         <span className="flex flex-row items-center gap-2 text-sm md:text-base mt-10">
-          Rama Tranz Type A <Minus className="" /> HIACE
+          Rama Tranz Type A <Minus className="" /> {travelSchedule?.carModel}
         </span>
         <div className="flex flex-col lg:flex-row gap-6 mt-3">
           {/* left */}
@@ -170,7 +180,7 @@ export default function DetailTravel() {
                 <span className="flex flex-row items-center gap-2 text-sm md:text-base">
                   Rama Tranz Type A <Minus className="" /> HIACE
                 </span>
-                <p>15:00</p>
+                <p>{formatTimeString(travelSchedule?.departureTime||"00:00:00")}</p>
                 <div className="flex flex-row gap-4">
                   {/* left */}
                   <div className="flex flex-col items-center">
@@ -193,29 +203,27 @@ export default function DetailTravel() {
                   {/* right */}
                   <div className="flex flex-col items-center justify-between">
                     <div className="flex flex-col gap-2">
-                      <p>Jalan Jendral Sudirman</p>
+                      <p>{travelSchedule?.originCity}</p>
                       <p className="text-gray-500">
-                        l. Blora No.23, RT.2/RW.6, RT.2/RW.6, Dukuh Atas,
-                        Menteng, Central Jakarta City, Jakarta 10310
+                        {pointToPoint?.from?.point}
                       </p>
-                      <a href="#" className="font-semibold text-primary-700">
+                      {/* <a href="#" className="font-semibold text-primary-700">
                         LIHAT MAPS
-                      </a>
+                      </a> */}
                     </div>
                     <div className="flex flex-col gap-2">
-                      <p>Jalan Soekarno Hatta</p>
+                      <p>{travelSchedule?.destinationCity}</p>
                       <p className="text-gray-500">
-                        ll. Blora No.23, RT.2/RW.6, RT.2/RW.6, Dukuh Atas,
-                        Menteng, Central Jakarta City, Jakarta 10310
+                      {pointToPoint?.to?.point}
                       </p>
-                      <a href="#" className="font-semibold text-primary-700">
+                      {/* <a href="#" className="font-semibold text-primary-700">
                         LIHAT MAPS
-                      </a>
+                      </a> */}
                     </div>
                   </div>
                 </div>
-                <p>23:00</p>
-                <p>Palembang</p>
+                <p>{formatTimeString(travelSchedule?.departureTime||"00:00:00")}</p>
+                <p>{travelSchedule?.destinationCity}</p>
               </div>
             </Card>
           )}
@@ -232,12 +240,7 @@ export default function DetailTravel() {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="md:text-start text-justify w-full h-full border border-grey-100 p-4 rounded-lg">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Quibusdam magnam impedit porro id esse expedita earum
-                    consequuntur beatae dolore a sequi reiciendis, iste
-                    eligendi. Tenetur cum nesciunt distinctio sed maiores nisi,
-                    voluptatibus soluta iste eum veniam atque harum rem, error
-                    saepe hic culpa magnam, doloremque et! Asperiores saepe,
+                    {parse(travelSchedule?.syarat_dan_ketentuan || "")}
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem
@@ -282,7 +285,7 @@ export default function DetailTravel() {
           {/* right */}
           <Card className="w-full lg:w-[30%] h-fit flex flex-col gap-4 items-center justify-center">
             <span className="font-semibold text-lg w-full text-center">
-              Rp. 200.000
+              {formatCurrency(travelSchedule?.price || 0)}
             </span>
             <button
               className="flex flex-row gap-4 px-2 py-4 w-full items-center justify-center bg-white border border-gray-500 rounded-md"
@@ -299,7 +302,8 @@ export default function DetailTravel() {
       {/* modal pilih kursi */}
       <ModalSelectSeat
         passengerIndex={1}
-        selectAllSheats={false}
+        selectAllSheats={true}
+        seats={bookingPayload?.seats}
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
         handleAfterSelectSeat={handleNextStep}

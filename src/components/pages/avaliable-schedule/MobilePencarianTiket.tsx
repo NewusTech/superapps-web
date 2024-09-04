@@ -17,11 +17,60 @@ import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { Seat, Van, Calendar as CalendarIcons } from "@phosphor-icons/react";
 import Card from "@/components/ui/card/Card";
+import { BranchesInterface } from "@/types/interface";
+import {
+  useTravelActions,
+  useTravelbookingPayload,
+} from "@/store/useTravelStore";
 
-export default function MobilePencarianTiket() {
+export type MobilePencarianProps = {
+  branches: BranchesInterface[];
+  seatsTotal: { id: number; seat: string; jumlah: number }[];
+};
+
+export default function MobilePencarianTiket(props: MobilePencarianProps) {
+  const { branches, seatsTotal } = props;
+
   const [departureDate, setDepartureDate] = useState<Date | undefined>(
     undefined
   );
+
+  const bookingPayload = useTravelbookingPayload();
+
+  const { setBookingPayload } = useTravelActions();
+
+  const handleChangeKeberangkatan = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      to: bookingPayload?.to || "",
+      seats: bookingPayload?.seats || 1,
+      from: value,
+    });
+  };
+  const handleChangeJutuan = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      from: bookingPayload?.from || "",
+      to: value,
+      seats: bookingPayload?.seats || 1,
+    });
+  };
+  const handleChangeDate = (value: Date) => {
+    setBookingPayload({
+      date: value,
+      from: bookingPayload?.from || "",
+      to: bookingPayload?.to || "",
+      seats: bookingPayload?.seats || 1,
+    });
+  };
+  const handleChangeKursi = (value: string) => {
+    setBookingPayload({
+      date: bookingPayload?.date || new Date(),
+      from: bookingPayload?.from || "",
+      to: bookingPayload?.to || "",
+      seats: Number.parseInt(value),
+    });
+  };
 
   return (
     <Card>
@@ -39,6 +88,7 @@ export default function MobilePencarianTiket() {
           <TabsTrigger
             className="data-[state=active]:bg-primary-700 data-[state=active]:text-neutral-50 w-full py-3"
             value="Pulang Pergi"
+            disabled
           >
             Pulang Pergi
           </TabsTrigger>
@@ -55,14 +105,21 @@ export default function MobilePencarianTiket() {
               <div className="w-full flex flex-row items-center gap-x-2">
                 <Van className="w-6 h-6 text-primary-700" />
 
-                <Select>
+                <Select
+                  onValueChange={handleChangeKeberangkatan}
+                  value={bookingPayload?.from}
+                >
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    {branches.map((item: BranchesInterface, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.nama}>
+                          {item.nama}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
 
@@ -76,14 +133,21 @@ export default function MobilePencarianTiket() {
               <div className="w-full flex flex-row items-center gap-x-2">
                 <Van className="w-6 h-6 text-primary-700" />
 
-                <Select>
+                <Select
+                  onValueChange={handleChangeJutuan}
+                  value={bookingPayload?.to}
+                >
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    {branches.map((item: BranchesInterface, i: number) => {
+                      return (
+                        <SelectItem key={i} value={item.nama}>
+                          {item.nama}
+                        </SelectItem>
+                      );
+                    })}
                   </SelectContent>
                 </Select>
 
@@ -97,14 +161,26 @@ export default function MobilePencarianTiket() {
               <div className="w-full flex flex-row items-center gap-x-2">
                 <Seat className="w-6 h-6 text-primary-700" />
 
-                <Select>
+                <Select
+                  onValueChange={handleChangeKursi}
+                  value={bookingPayload?.seats.toString() || "1"}
+                >
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
                   <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
+                    {seatsTotal.map(
+                      (
+                        item: { id: number; seat: string; jumlah: number },
+                        i: number
+                      ) => {
+                        return (
+                          <SelectItem key={i} value={item.jumlah.toString()}>
+                            {item.seat}
+                          </SelectItem>
+                        );
+                      }
+                    )}
                   </SelectContent>
                 </Select>
 
@@ -121,8 +197,8 @@ export default function MobilePencarianTiket() {
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button className="w-full justify-start text-left text-[14px]">
-                      {departureDate
-                        ? format(departureDate, "PPP")
+                      {bookingPayload?.date
+                        ? format(bookingPayload.date, "PPP")
                         : "Pilih Tanggal"}
                     </Button>
                   </PopoverTrigger>
@@ -138,8 +214,8 @@ export default function MobilePencarianTiket() {
                         day_today: "bg-primary-700 text-neutral-50",
                       }}
                       mode="single"
-                      selected={departureDate}
-                      onSelect={setDepartureDate}
+                      selected={bookingPayload?.date}
+                      onSelect={(date)=>handleChangeDate(date||new Date())}
                       initialFocus
                     />
                   </PopoverContent>
