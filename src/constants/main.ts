@@ -920,16 +920,16 @@ export const profileSelects = [
     value: "Ubah Password",
   },
   {
-    value: "Travel",
+    value: "Riwayat Travel",
   },
   {
-    value: "Rental",
+    value: "Riwayat Rental",
   },
   {
-    value: "Hotel",
+    value: "Riwayat Hotel",
   },
   {
-    value: "Paket",
+    value: "Riwayat Paket",
   },
 ];
 
