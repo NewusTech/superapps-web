@@ -877,12 +877,12 @@ export const seatsTotal = [
 export const areas = [
   {
     id: 1,
-    name: "dalam kota",
+    name: "Dalam Kota",
     value: "Dalam Kota",
   },
   {
     id: 2,
-    name: "luar kota",
+    name: "Luar Kota",
     value: "Luar Kota",
   },
 ];

@@ -60,7 +60,7 @@ export const formRentalSchema = z.object({
   alamat: z
     .string({ message: "Alamat tidak boleh kosong" })
     .min(5, { message: "Alamat harus memiliki minimal 5 karakter" }),
-  durasi_sewa: z.string({ message: "Durasi sewa harus dipilih" }),
+  // durasi_sewa: z.string({ message: "Durasi sewa harus dipilih" }),
   area: z.enum(["Dalam Kota", "Luar Kota"], {
     message: "Area sewa harus dipilih",
   }),
