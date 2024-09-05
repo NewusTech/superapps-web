@@ -716,7 +716,7 @@ export default function FormRental() {
                   <span className="font-semibold text-primary-700">
                     Syarat & Ketentuan
                   </span>{" "}
-                  kami Rama Tarnz
+                  kami Rama Tranz
                 </div>
               </div>
               <div className="p-3 bg-dange_light rounded-md flex flex-col w-full text-danger_base">
@@ -739,7 +739,7 @@ export default function FormRental() {
                 </p>
               </div>
               <Button
-                disabled={isLoading || !errors}
+                disabled={isLoading ? true : false}
                 onClick={handleNewRent}
                 className="mt-4 w-full bg-primary-700 hover:bg-primary-600 text-neutral-50">
                 {isLoading ? (
