@@ -21,8 +21,6 @@ export default function CardTravelScheduleOrder({
   data: TravelScheduleInterface;
   disable?: boolean;
 }) {
-  console.log(data, "ini data ");
-
   const router = useRouter();
   const [openModalKursi, setOpenModalKursi] = useState(false);
 

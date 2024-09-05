@@ -77,7 +77,7 @@ export default function OrderHistoryTravelCard({
 
             {!isMobile && (
               <p className="text-neutral-500 font-normal text-[16px]">
-                Tanggal Pesan: {formatTanggalPanjang(data?.tanggal)}
+                Tanggal Pesan: {formatTanggalPanjang(data?.created_at)}
               </p>
             )}
             {isMobile && (
@@ -87,7 +87,7 @@ export default function OrderHistoryTravelCard({
                 </p>
 
                 <p className="text-neutral-500 font-normal text-[14px] md:text-[16px]">
-                  : {formatTanggalPanjang(data?.tanggal)}
+                  : {formatTanggalPanjang(data?.created_at)}
                 </p>
               </>
             )}
@@ -146,7 +146,7 @@ export default function OrderHistoryTravelCard({
 
             <div className="w-full flex flex-col gap-y-2">
               <p className="text-neutral-500 font-normal text-[14px]">
-                23 Februari 2024
+                {formatTanggalPanjang(data?.tanggal)}
               </p>
 
               <p className="text-neutral-500 font-normal text-[16px]">

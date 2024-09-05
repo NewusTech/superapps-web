@@ -125,9 +125,9 @@ export default function HistoriesTravelDetailPage({
       formData.append("bukti", imageProof);
     }
 
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    // formData.forEach((value, key) => {
+    //   console.log(key, value);
+    // });
 
     try {
       const response = await createTravelPaymentSProof(
@@ -170,76 +170,82 @@ export default function HistoriesTravelDetailPage({
   return (
     <section className="flex flex-col gap-y-5 md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
       <div className="w-full flex flex-col mt-5 md:mt-32 gap-y-5">
-        {detail && detail?.pembayaran?.kode_pembayaran !== null && (
-          <form onSubmit={handleUploadImageProof}>
-            <div className="w-full flex flex-col gap-y-3 border border-grey-100 rounded-lg shadow-md p-4">
-              <div className="flex flex-col w-full h-full">
-                <Label className="w-full text-xl">Upload Bukti Transfer</Label>
+        {detail &&
+          detail?.pembayaran?.status === "Menunggu Pembayaran" &&
+          detail?.pembayaran?.kode_pembayaran !== null && (
+            <form onSubmit={handleUploadImageProof}>
+              <div className="w-full flex flex-col gap-y-3 border border-grey-100 rounded-lg shadow-md p-4">
+                <div className="flex flex-col w-full h-full">
+                  <Label className="w-full text-xl">
+                    Upload Bukti Transfer
+                  </Label>
 
-                <div className="w-full flex flex-col md:flex-row">
-                  <div
-                    ref={dropRef}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDropImageProof}
-                    className={`w-full ${
-                      data?.bukti || previewImageProof ? "md:w-8/12" : "w-full"
-                    }  h-[100px] border-2 border-dashed rounded-xl mt-1 flex flex-col items-center justify-center`}>
-                    <>
-                      <input
-                        type="file"
-                        id="file-input-foto"
-                        name="bukti"
-                        accept="image/*"
-                        onChange={handleImageProofChange}
-                        className="hidden"
-                      />
-                      <label
-                        htmlFor="file-input-foto"
-                        className="text-[16px] text-center text-neutral-600 p-2 md:p-4 font-light cursor-pointer">
-                        Drag and drop file here or click to select file
-                      </label>
-                    </>
-                  </div>
-
-                  {(previewImageProof || data?.bukti) && (
-                    <div className="relative md:ml-4 w-full mt-1">
-                      <div className="border-2 border-dashed flex justify-center rounded-xl p-2">
-                        <div className="w-full h-full">
-                          <Image
-                            src={previewImageProof || data?.bukti}
-                            alt="Preview"
-                            width={300}
-                            height={300}
-                            className="h-full rounded-xl p-4 md:p-4 w-full object-contain"
-                          />
-                        </div>
-                        <button
-                          type="button"
-                          onClick={handleRemoveImageProof}
-                          className="absolute bg-none -top-0 -right-0 md:-top-0 md:-right-0 text-neutral-800 p-1">
-                          <Trash />
-                        </button>
-                      </div>
+                  <div className="w-full flex flex-col md:flex-row">
+                    <div
+                      ref={dropRef}
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDropImageProof}
+                      className={`w-full ${
+                        data?.bukti || previewImageProof
+                          ? "md:w-8/12"
+                          : "w-full"
+                      }  h-[100px] border-2 border-dashed rounded-xl mt-1 flex flex-col items-center justify-center`}>
+                      <>
+                        <input
+                          type="file"
+                          id="file-input-foto"
+                          name="bukti"
+                          accept="image/*"
+                          onChange={handleImageProofChange}
+                          className="hidden"
+                        />
+                        <label
+                          htmlFor="file-input-foto"
+                          className="text-[16px] text-center text-neutral-600 p-2 md:p-4 font-light cursor-pointer">
+                          Drag and drop file here or click to select file
+                        </label>
+                      </>
                     </div>
-                  )}
+
+                    {(previewImageProof || data?.bukti) && (
+                      <div className="relative md:ml-4 w-full mt-1">
+                        <div className="border-2 border-dashed flex justify-center rounded-xl p-2">
+                          <div className="w-full h-full">
+                            <Image
+                              src={previewImageProof || data?.bukti}
+                              alt="Preview"
+                              width={300}
+                              height={300}
+                              className="h-full rounded-xl p-4 md:p-4 w-full object-contain"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={handleRemoveImageProof}
+                            className="absolute bg-none -top-0 -right-0 md:-top-0 md:-right-0 text-neutral-800 p-1">
+                            <Trash />
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="w-full">
+                  <Button
+                    type="submit"
+                    disabled={isLoading ? true : false}
+                    className="w-full bg-primary-700 hover:bg-primary-600 rounded-lg text-neutral-50">
+                    {isLoading ? (
+                      <Loader className="w-4 h-4 animate-spin" />
+                    ) : (
+                      "Upload"
+                    )}
+                  </Button>
                 </div>
               </div>
-              <div className="w-full">
-                <Button
-                  type="submit"
-                  disabled={isLoading ? true : false}
-                  className="w-full bg-primary-700 hover:bg-primary-600 rounded-lg text-neutral-50">
-                  {isLoading ? (
-                    <Loader className="w-4 h-4 animate-spin" />
-                  ) : (
-                    "Upload"
-                  )}
-                </Button>
-              </div>
-            </div>
-          </form>
-        )}
+            </form>
+          )}
 
         {detail &&
           detail?.pembayaran?.status === "Menunggu Pembayaran" &&

@@ -104,8 +104,6 @@ export default function RegisterScreen() {
       try {
         const response = await registerUser(dataToSubmit);
 
-        console.log(response, "ini response");
-
         if (response.success === true) {
           setFormRegister({
             nama: "",

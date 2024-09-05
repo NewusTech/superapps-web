@@ -237,6 +237,7 @@ export default function FormRental() {
     const formData: { [key: string]: string } = {
       ...data,
       durasi_sewa: durationRent,
+      all_in: isChecked.toString(),
     };
 
     Object.keys(formData)?.forEach((key: string) => {
@@ -738,7 +739,7 @@ export default function FormRental() {
                 </p>
               </div>
               <Button
-                disabled={isLoading ? true : false}
+                disabled={isLoading || !errors}
                 onClick={handleNewRent}
                 className="mt-4 w-full bg-primary-700 hover:bg-primary-600 text-neutral-50">
                 {isLoading ? (

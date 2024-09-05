@@ -102,9 +102,9 @@ export default function DataDiriPenumpang() {
                     passengerListTemp[0].nik = "";
                     passengerListTemp[0].no_telp = "";
                   }
-                  console.log(e.target.checked);
+
                   setPassenger(passengerListTemp);
-                  setSimpanPenumpangPertama((prev)=>prev+1)
+                  setSimpanPenumpangPertama((prev) => prev + 1);
                 }}
               />
               <p>Simpan sebagai Penumpang 1</p>
@@ -197,8 +197,7 @@ export default function DataDiriPenumpang() {
               <p className="px-6 py-3 bg-primary-700 text-white">
                 Data Penumpang 1
               </p>
-            }
-          >
+            }>
             <div className="flex flex-col gap-4 mt-4">
               <InputText
                 label="Nama"
@@ -247,8 +246,7 @@ export default function DataDiriPenumpang() {
                   onClick={() => {
                     setPassengerIndex(index);
                     setOpenModalKursi(true);
-                  }}
-                >
+                  }}>
                   Kursi {data.no_kursi}
                 </ButtonCustom>
               </div>

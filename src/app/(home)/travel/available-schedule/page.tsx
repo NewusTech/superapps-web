@@ -32,7 +32,7 @@ import {
   getAllPointMasterJemput,
   getScheduleByRoute,
 } from "@/services/api";
-import { formatDate,formatDateOption, isBeforeToday } from "@/helpers";
+import { formatDate, formatDateOption, isBeforeToday } from "@/helpers";
 import { seatsTotal } from "@/constants/main";
 
 export default function PilihTiket() {
@@ -54,7 +54,8 @@ export default function PilihTiket() {
 
   const bookingPayload = useTravelbookingPayload();
 
-  const { setBookingPayload, setStepTravelPayload,setPointToPointPayload,setPassenger } = useTravelActions();
+  const { setBookingPayload, setStepTravelPayload, setPointToPointPayload,setPassenger } =
+    useTravelActions();
 
   const router = useRouter();
 
@@ -93,7 +94,7 @@ export default function PilihTiket() {
   useEffect(() => {
     fetchAllBranches();
     setStepTravelPayload(1);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchScheduleByRoute = async (
@@ -172,13 +173,13 @@ export default function PilihTiket() {
               {bookingPayload?.to || "Pilih Kota Tujuan"}
             </p>
             <p className="text-[12px] text-gray-500 ">
-             {formatDateOption(bookingPayload?.date)} - {bookingPayload?.seats} kursi
+              {formatDateOption(bookingPayload?.date)} - {bookingPayload?.seats}{" "}
+              kursi
             </p>
           </div>
           <Button
             className="bg-primary-700 hover:bg-primary-600 duration-300 text-white"
-            onClick={() => setUbahPencarian(!ubahPencarian)}
-          >
+            onClick={() => setUbahPencarian(!ubahPencarian)}>
             Ubah Pencarian
           </Button>
         </div>
@@ -197,8 +198,7 @@ export default function PilihTiket() {
 
                     <Select
                       onValueChange={handleChangeKeberangkatan}
-                      value={bookingPayload?.from}
-                    >
+                      value={bookingPayload?.from}>
                       <SelectTrigger className="border-none outline-none text-[14px]">
                         <SelectValue placeholder="Pilih..." />
                       </SelectTrigger>
@@ -222,8 +222,7 @@ export default function PilihTiket() {
 
                     <Select
                       onValueChange={handleChangeJutuan}
-                      value={bookingPayload?.to}
-                    >
+                      value={bookingPayload?.to}>
                       <SelectTrigger className="border-none outline-none text-[14px]">
                         <SelectValue placeholder="Pilih..." />
                       </SelectTrigger>
@@ -273,8 +272,7 @@ export default function PilihTiket() {
 
                     <Select
                       onValueChange={handleChangeKursi}
-                      value={bookingPayload?.seats.toString() || "1"}
-                    >
+                      value={bookingPayload?.seats.toString() || "1"}>
                       <SelectTrigger className="w-full border-none outline-none text-[14px]">
                         <SelectValue placeholder="Pilih..." />
                       </SelectTrigger>
@@ -287,8 +285,7 @@ export default function PilihTiket() {
                             return (
                               <SelectItem
                                 key={i}
-                                value={item.jumlah.toString()}
-                              >
+                                value={item.jumlah.toString()}>
                                 {item.seat}
                               </SelectItem>
                             );
@@ -309,7 +306,12 @@ export default function PilihTiket() {
       </div>
       {/* Mobile ubah pencarian */}
       <div className="block lg:hidden mt-5">
-        {ubahPencarian && <MobilePencarianTiket branches={branches||[]} seatsTotal={seatsTotal} />}
+        {ubahPencarian && (
+          <MobilePencarianTiket
+            branches={branches || []}
+            seatsTotal={seatsTotal}
+          />
+        )}
       </div>
       <div className="flex flex-row mt-10 gap-5">
         {/* left */}
@@ -339,8 +341,7 @@ export default function PilihTiket() {
             className="bg-no-repeat bg-cover bg-left-bottom"
             style={{
               backgroundImage: `url('/assets/images/neededs/splash.jpg')`,
-            }}
-          >
+            }}>
             <div className="flex flex-col gap-4">
               <p className="font-semibold">Mau naik dan turun dari mana</p>
               <div className="flex flex-row items-center w-full rounded-lg bg-neutral-50 py-2 px-3">
@@ -361,8 +362,7 @@ export default function PilihTiket() {
                       });
                     }
                   }}
-                  value={pointToPoint?.from?.id?.toString() || ""}
-                >
+                  value={pointToPoint?.from?.id?.toString() || ""}>
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Naik Dari Mana?" />
                   </SelectTrigger>
@@ -399,8 +399,7 @@ export default function PilihTiket() {
                       });
                     }
                   }}
-                  value={pointToPoint?.to?.id?.toString() || ""}
-                >
+                  value={pointToPoint?.to?.id?.toString() || ""}>
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Turun Dimana?" />
                   </SelectTrigger>

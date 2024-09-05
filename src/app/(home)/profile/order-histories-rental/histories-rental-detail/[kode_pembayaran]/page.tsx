@@ -109,9 +109,9 @@ export default function HistoriesRentalDetailPage({
       formData.append("bukti", imageProof);
     }
 
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    // formData.forEach((value, key) => {
+    //   console.log(key, value);
+    // });
 
     try {
       const response = await createPaymentSProof(

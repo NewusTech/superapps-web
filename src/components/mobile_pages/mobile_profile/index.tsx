@@ -23,7 +23,7 @@ export default function MobileProfileScreen() {
           Profile Rama Tranz
         </h3>
 
-        <p className="md:text-[16px] font-normal text-center md:text-start text-neutral-700 leading-8">
+        <p className="md:text-[16px] font-normal text-justify md:text-start text-neutral-700 leading-8">
           Sebagai mitra perjalanan terpercaya di Lampung sejak 2012, Rama Tranz
           berkomitmen untuk menyediakan layanan berkualitas tinggi. Kami
           menyediakan layanan travel dengan rute seperti travel

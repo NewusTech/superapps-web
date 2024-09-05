@@ -87,8 +87,6 @@ export default function PageBayar() {
     }
   }, [kodePesanan, setStepTravelPayload]);
 
-  console.log(detailOrder, "ini detail");
-
   const handlePaymentMethodChange = (metode_id: number) => {
     setSelectedPaymentMethod(metode_id.toString());
   };
@@ -111,11 +109,7 @@ export default function PageBayar() {
         metode_id: selectedPaymentMethod,
       };
 
-      console.log(payload);
-
       const response = await createPostPembayaranTravel(payload);
-
-      console.log("Response :", response.data);
 
       if (response.success === true) {
         Swal.fire({

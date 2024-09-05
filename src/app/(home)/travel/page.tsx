@@ -14,7 +14,11 @@ import {
   requirements,
   travel_tickets,
 } from "@/constants/main";
-import { getAllBranches, getAllPointMasterJemput, getAllRute } from "@/services/api";
+import {
+  getAllBranches,
+  getAllPointMasterJemput,
+  getAllRute,
+} from "@/services/api";
 import { useTravelbookingPayload } from "@/store/useTravelStore";
 import { BranchesInterface, TitikJemputInterface } from "@/types/interface";
 import Image from "next/image";
@@ -39,7 +43,6 @@ export default function TravelPage() {
     }
   };
 
-
   const fetchTitikJemput = useMemo(async () => {
     try {
       const response = await getAllPointMasterJemput({
@@ -61,7 +64,7 @@ export default function TravelPage() {
       setPointsAntar(response.data);
     } catch (error) {
       setPointsAntar([]);
-      console.error(error);
+      console.log(error);
     }
   }, [bookingPayload?.to]);
 
@@ -69,8 +72,13 @@ export default function TravelPage() {
     fetchAllBranches();
   }, []);
 
+
+  useEffect(() => {
+    fetchAllBranches();
+  }, []);
+
   return (
-    <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-80">
+    <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-32 md:pb-80">
       <div className="flex flex-col items-center justify-between relative background-blend w-screen min-h-96 md:min-h-screen">
         <div className="md:w-full relative flex self-center justify-center items-center">
           {branches && <HeroScreen data={heroIcons} branches={branches} />}
@@ -123,12 +131,12 @@ export default function TravelPage() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-4 md:px-16 gap-y-3 py-10">
+      <div className="w-full flex flex-col px-4 md:px-16 gap-y-3 md:py-10">
         <h3 className="text-neutral-700 font-semibold text-[26px]">
           Keunggulan pesan tiket Online di Rama Tranz
         </h3>
 
-        <div className="w-full flex flex-col gap-y-6 py-10">
+        <div className="w-full flex flex-col gap-y-6 py-5 md:py-10">
           {travel_tickets?.map((item: any, i: number) => {
             return <TravelTicketingScreen key={i} item={item} index={i} />;
           })}
@@ -140,7 +148,7 @@ export default function TravelPage() {
           Kenali Lebih Jauh Kelas Travel di Rama Tranz
         </h3>
 
-        <div className="w-full flex flex-col gap-y-6 py-10">
+        <div className="w-full flex flex-col gap-y-6 py-5 md:py-10">
           {introductions?.map((item: any, i: number) => {
             return <IntroductionScreen key={i} item={item} index={i} />;
           })}

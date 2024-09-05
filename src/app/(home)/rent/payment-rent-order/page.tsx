@@ -295,8 +295,6 @@ export default function PaymentRentOrderPage() {
     try {
       const response = await createNewRent(formData);
 
-      console.log(response, "ini response");
-
       if (response.success === true) {
         Swal.fire({
           icon: "success",
@@ -458,11 +456,17 @@ export default function PaymentRentOrderPage() {
           </div>
           <div className="w-full flex flex-col gap-y-4 md:gap-y-0">
             <div className="flex flex-col w-full h-full">
-              <Label className="w-full text-[16px] md:text-xl">
-                Upload Kartu Tanda Penduduk
-              </Label>
+              <div className="w-full flex flex-col">
+                <Label className="w-full text-[16px] md:text-xl flex items-center">
+                  <span className="">Upload Kartu Tanda Penduduk</span>
+                  <span className="text-error-700">*</span>
+                </Label>
+                <p className="text-sm text-gray-500 mt-1">
+                  File harus berupa gambar dan tidak boleh lebih dari 1 MB.
+                </p>
+              </div>
 
-              <div className="w-full flex flex-row">
+              <div className="w-full flex flex-col gap-y-3 md:flex-row">
                 <div
                   ref={dropRef}
                   onDragOver={handleDragOver}
@@ -515,11 +519,17 @@ export default function PaymentRentOrderPage() {
             </div>
 
             <div className="flex flex-col w-full h-full">
-              <Label className="w-full text-[16px] md:text-xl">
-                Upload Swafoto atau Foto Selfie
-              </Label>
+              <div className="w-full flex flex-col">
+                <Label className="w-full text-[16px] md:text-xl flex items-center">
+                  <span className=""> Upload Swafoto atau Foto Selfie</span>
+                  <span className="text-error-700">*</span>
+                </Label>
+                <p className="text-sm text-gray-500 mt-1">
+                  File harus berupa gambar dan tidak boleh lebih dari 1 MB.
+                </p>
+              </div>
 
-              <div className="w-full flex flex-row">
+              <div className="w-full flex flex-col gap-y-3 md:flex-row">
                 <div
                   ref={dropRef}
                   onDragOver={handleDragOver}

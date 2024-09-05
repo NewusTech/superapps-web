@@ -14,7 +14,7 @@ import { Bus, ExclamationMark, Suitcase } from "@phosphor-icons/react";
 
 export default function TravelConditionScreen() {
   return (
-    <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-80">
+    <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-32 md:pb-80">
       <div className="w-full h-full">
         <Image
           src={banner}
@@ -25,8 +25,8 @@ export default function TravelConditionScreen() {
         />
       </div>
 
-      <div className="w-full flex flex-col items-center gap-y-10 mt-10 px-16">
-        <h2 className="text-neutral-700 font-semibold text-[26px]">
+      <div className="w-full flex flex-col items-center gap-y-10 mt-10 px-5 md:px-16">
+        <h2 className="text-neutral-700 text-center font-semibold text-[22px] md:text-[26px]">
           Persyaratan Perjalanan
         </h2>
 
