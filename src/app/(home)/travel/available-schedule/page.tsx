@@ -32,7 +32,7 @@ import {
   getAllPointMasterJemput,
   getScheduleByRoute,
 } from "@/services/api";
-import { formatDate,formatDateOption } from "@/helpers";
+import { formatDate,formatDateOption, isBeforeToday } from "@/helpers";
 import { seatsTotal } from "@/constants/main";
 
 export default function PilihTiket() {
@@ -54,7 +54,7 @@ export default function PilihTiket() {
 
   const bookingPayload = useTravelbookingPayload();
 
-  const { setBookingPayload, setStepTravelPayload,setPointToPointPayload } = useTravelActions();
+  const { setBookingPayload, setStepTravelPayload,setPointToPointPayload,setPassenger } = useTravelActions();
 
   const router = useRouter();
 
@@ -67,7 +67,6 @@ export default function PilihTiket() {
       setPointsJempuut(response.data);
     } catch (error) {
       setPointsJempuut([]);
-      console.log(error);
     }
   }, [bookingPayload?.from]);
   const fetchTitikAntar = useMemo(async () => {
@@ -76,7 +75,6 @@ export default function PilihTiket() {
         cabang: bookingPayload?.to || "",
       });
       setPointsAntar(response.data);
-      console.log("Titik Antar ", response.data);
     } catch (error) {
       setPointsAntar([]);
       console.log(error);
@@ -86,7 +84,6 @@ export default function PilihTiket() {
   const fetchAllBranches = async () => {
     try {
       const response = await getAllBranches();
-      console.log(response.data);
       setBranches(response.data);
     } catch (error) {
       console.log(error);
@@ -107,11 +104,10 @@ export default function PilihTiket() {
   ) => {
     try {
       const response = await getScheduleByRoute(from, to, date, seats);
-      console.log(response.data);
       setSchedules(response.data);
     } catch (error) {
       setSchedules([]);
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -146,6 +142,7 @@ export default function PilihTiket() {
       to: bookingPayload?.to || "",
       seats: Number.parseInt(value),
     });
+    setPassenger([])
   };
 
   useEffect(() => {
@@ -163,7 +160,6 @@ export default function PilihTiket() {
         bookingPayload?.seats
       );
     }
-    console.log(bookingPayload?.seats);
   }, [bookingPayload]);
 
   return (
@@ -251,6 +247,7 @@ export default function PilihTiket() {
                   setValue={handleChangeDate}
                   label="Tanggal Berangkat"
                   className="w-full"
+                  disableDate={(date) => isBeforeToday(date)} // Disable tanggal sebelum hari ini
                 />
                 <DateInput
                   value={departureDate}

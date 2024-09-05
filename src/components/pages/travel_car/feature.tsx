@@ -32,7 +32,7 @@ export default function FeatureTravelCar({ item }: any) {
   } else if (item?.trim() == "Bluetooth") {
     icon = <Bluetooth className="text-primary-700 w-6 h-6" />;
   } else {
-    icon = <Pointer className="text-primary-700 w-6 h-6" />;
+    icon = <CarSimple className="text-primary-700 w-6 h-6" />;
   }
 
   return (

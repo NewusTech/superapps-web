@@ -381,6 +381,14 @@ export default function HamburgerMenu() {
             <DropdownMenuItem onClick={() => router.push("/profile")}>
               <span>Rental</span>
             </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push("/article")}>
+              <span>Artikel</span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuLabel>Information</DropdownMenuLabel>
+            <DropdownMenuItem onClick={() => router.push("/about-us")}>
+              <span>Tentang Ramatranz</span>
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             {token && (
               <>

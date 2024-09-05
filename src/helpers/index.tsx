@@ -185,3 +185,9 @@ export const formatDateOption = (
 ): string => {
   return new Intl.DateTimeFormat("id-ID", options).format(date);
 };
+
+export const isBeforeToday = (date: Date) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set waktu ke 00:00:00 untuk perbandingan hanya tanggal
+  return date < today;
+};

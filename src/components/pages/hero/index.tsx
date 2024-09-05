@@ -32,7 +32,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BranchesInterface, RouteInterface } from "@/types/interface";
 import { seatsTotal } from "@/constants/main";
-import { formatDate } from "@/helpers";
+import { formatDate, isBeforeToday } from "@/helpers";
 import {
   useTravelActions,
   useTravelbookingPayload,
@@ -386,11 +386,14 @@ export default function HeroScreen({
                           "border border-primary-700 absolute left-1",
                         nav_button_next:
                           "border border-primary-700 absolute right-1",
-                        day_today: "bg-primary-700 text-neutral-50",
+                          day_today: `${bookingPayload?.date === new Date()?"bg-primary-700 text-neutral-50":"bg-primary-500 text-neutral-50"}`,
+                          day_selected:"bg-primary-700 text-neutral-50",
+                          day_disabled: "text-neutral-400 cursor-not-allowed bg-gray-200",
                       }}
                       mode="single"
                       selected={returnDate}
-                      onSelect={(date) => handleChangeDate(data)}
+                      onSelect={(date) => handleChangeDate(date|| new Date())}
+                      disabled={(date) => isBeforeToday(date)} // Disable tanggal sebelum hari ini
                       initialFocus
                     />
                   </PopoverContent>
