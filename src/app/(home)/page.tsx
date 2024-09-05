@@ -45,8 +45,8 @@ import Footer from "@/components/layouts/footer";
 import MobileRouteTravelCar from "@/components/mobile_pages/mobile_route_travel_car";
 import ApartementScreen from "@/components/pages/apartements";
 import MobileApartementScreen from "@/components/mobile_pages/mobile_apartement";
-import { BranchesInterface, TitikJemputInterface } from "@/types/interface";
-import { getAllBranches, getAllPointMasterJemput } from "@/services/api";
+import { BranchesInterface, TitikJemputInterface, TravelCarInterface } from "@/types/interface";
+import { getAllBranches, getAllPointMasterJemput, getAllTravelCar } from "@/services/api";
 import { useTravelbookingPayload } from "@/store/useTravelStore";
 
 export default function Home() {
@@ -56,6 +56,7 @@ export default function Home() {
   const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
   const [startDate, setStartDate] = useState<Date | undefined>(firstDayOfMonth);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [travelCar, setTravelCar] = useState<TravelCarInterface[]>();
 
   const [pointsJempuput, setPointsJempuut] = useState<TitikJemputInterface[]>(
     []
@@ -63,6 +64,15 @@ export default function Home() {
   const [pointsAntar, setPointsAntar] = useState<TitikJemputInterface[]>([]);
 
   const bookingPayload = useTravelbookingPayload();
+
+  const fetchAllTravelCars = async () => {
+    try {
+      const response = await getAllTravelCar();
+      setTravelCar(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const fetchAllBranches = async () => {
     try {
@@ -95,12 +105,18 @@ export default function Home() {
       setPointsAntar(response.data);
     } catch (error) {
       setPointsAntar([]);
-      console.log(error);
+      console.error(error);
     }
   }, [bookingPayload?.to]);
 
+  
+
   useEffect(() => {
     fetchAllBranches();
+  }, []);
+
+  useEffect(() => {
+    fetchAllTravelCars();
   }, []);
 
   const startDateFormatted = startDate
@@ -230,13 +246,13 @@ export default function Home() {
         </div>
 
         <div className="hidden md:grid md:grid-cols-2 gap-5 px-16">
-          {travelCars.map((item: any, i: number) => {
-            return <TravelCarScreen key={i} item={item} />;
+          {travelCar?.map((item, i: number) => {
+            return <TravelCarScreen key={item.id} item={item} />;
           })}
         </div>
 
         <div className="md:hidden grid grid-cols-1 gap-5">
-          <MobileTravelCarScreen />
+          <MobileTravelCarScreen/>
         </div>
       </div>
 

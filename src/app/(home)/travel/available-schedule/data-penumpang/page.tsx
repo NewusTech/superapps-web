@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { FaChevronUp } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import Cookies from "js-cookie";
 
 export default function PageDataPenumpang() {
   const [openDetailJadwal, setOpenDetailJadwal] = useState(true);
@@ -42,6 +43,17 @@ export default function PageDataPenumpang() {
 
   const handleNextStep = async () => {
     try {
+      const isLogin = Cookies.get("Authorization")
+      if(!isLogin){
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Silahkan Login Terlebih Dahulu",
+        });
+        return;
+      }
+
+
       setIsLoading(true);
       const payload: any = {
         jadwal_id: travelSchedule?.id,
@@ -195,7 +207,7 @@ export default function PageDataPenumpang() {
                     alt="donat"
                     className="z-[1]"
                   />
-                  <div className="h-[14rem] border-r border-primary-700 border-dashed" />
+                  <div className="h-[8rem] md:h-[12rem] border-r border-primary-700 border-dashed" />
                   <Image
                     src={`/assets/icons/neededs/icon_donat_active.svg`}
                     height={18}
@@ -222,9 +234,9 @@ export default function PageDataPenumpang() {
                   </div>
                 </div>
               </div>
-              <p>
+              {/* <p>
                 {formatTimeString(travelSchedule?.departureTime || "00:00:00")}
-              </p>
+              </p> */}
             </div>
           )}
         </Card>
@@ -281,6 +293,7 @@ export default function PageDataPenumpang() {
                 label="Nomor Telefon"
                 placeholder="+628"
                 value={data.no_telp}
+                inputMode="numeric"
                 onChange={(e) => {
                   const newPassengers = [...passenger];
                   newPassengers[index].no_telp = handleOnlyNumbers(
@@ -308,7 +321,7 @@ export default function PageDataPenumpang() {
         className="mt-4 w-[50%] mx-auto text-center justify-start items-center flex"
         onClick={handleNextStep}
         disabled={isLoading}>
-        {isLoading ? <Loader className="animate-spin" /> : "Lanjut Pembayaran"}
+        {isLoading ? <Loader className="animate-spin mx-auto" /> :<span className="mx-auto">Lanjut Pembayaran</span> }
       </Button>
 
       {/* Modals */}

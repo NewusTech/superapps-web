@@ -40,7 +40,7 @@ export default function PackagePage() {
           Silahkan hubungi admin kami
         </p>
         <Link
-          href="https://wa.me/081315395019"
+          href="https://wa.me/+6281315395019"
           target="_blank"
           className="flex flex-row gap-3"
         >

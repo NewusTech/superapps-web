@@ -22,6 +22,7 @@ import {
   useTravelActions,
   useTravelbookingPayload,
 } from "@/store/useTravelStore";
+import { isBeforeToday } from "@/helpers";
 
 export type MobilePencarianProps = {
   branches: BranchesInterface[];
@@ -37,7 +38,7 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
 
   const bookingPayload = useTravelbookingPayload();
 
-  const { setBookingPayload } = useTravelActions();
+  const { setBookingPayload, setPassenger } = useTravelActions();
 
   const handleChangeKeberangkatan = (value: string) => {
     setBookingPayload({
@@ -70,6 +71,7 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
       to: bookingPayload?.to || "",
       seats: Number.parseInt(value),
     });
+    setPassenger([])
   };
 
   return (
@@ -211,11 +213,14 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
                           "border border-primary-700 absolute left-1",
                         nav_button_next:
                           "border border-primary-700 absolute right-1",
-                        day_today: "bg-primary-700 text-neutral-50",
+                          day_today: `${bookingPayload?.date === new Date()?"bg-primary-700 text-neutral-50":"bg-primary-500 text-neutral-50"}`,
+                          day_selected:"bg-primary-700 text-neutral-50",
+                          day_disabled: "text-neutral-400 cursor-not-allowed bg-gray-200",
                       }}
                       mode="single"
                       selected={bookingPayload?.date}
                       onSelect={(date)=>handleChangeDate(date||new Date())}
+                      disabled={(date) => isBeforeToday(date)} // Disable tanggal sebelum hari ini
                       initialFocus
                     />
                   </PopoverContent>

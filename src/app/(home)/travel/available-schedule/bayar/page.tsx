@@ -8,6 +8,7 @@ import {
   createPostPembayaranTravel,
   getAllPaymentMethods,
   getOrderTravelDetail,
+  getSyaratKetentuan,
 } from "@/services/api";
 import {
   useTravelActions,
@@ -20,6 +21,7 @@ import {
 import {
   PaymentDetailInterface,
   PaymentMenthodsInterface,
+  SyaratKetentuanInterface,
 } from "@/types/interface";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
@@ -29,6 +31,9 @@ import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
 import Countdown from "@/components/elements/countDown";
 import Swal from "sweetalert2";
 import { Loader } from "lucide-react";
+import Modal from "@/components/modal/Modal";
+import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { RichTextDisplay } from "@/components/richTextDisplay";
 
 export default function PageBayar() {
   const [payments, setPayments] = useState<PaymentMenthodsInterface>();
@@ -37,6 +42,8 @@ export default function PageBayar() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [tncCheck, setTncCheck] = useState(false);
+  const [modalTnc, setModalTnc] = useState(false);
+  const [syarat, setSyarat] = useState<SyaratKetentuanInterface>();
 
   const { setStepTravelPayload } = useTravelActions();
   const [kodePesanan, setKodePesanan] = useState("");
@@ -59,6 +66,19 @@ export default function PageBayar() {
       console.log(error);
     }
   };
+
+  const fetchSyaratKetentuan = async (id: number) => {
+    try {
+      const response = await getSyaratKetentuan(id);
+      setSyarat(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSyaratKetentuan(1);
+  }, []);
 
   useEffect(() => {
     setStepTravelPayload(3);
@@ -130,6 +150,12 @@ export default function PageBayar() {
   useEffect(() => {
     fetchPaymentMethods();
   }, []);
+
+  useEffect(() => {
+    if(tncCheck){
+      setModalTnc(true)
+    }
+  }, [tncCheck]);
 
   return (
     <div className="flex flex-col gap-5">
@@ -250,8 +276,13 @@ export default function PageBayar() {
             />
             <span>
               Saya Menyetujui{" "}
-              <span className="text-primary-700">Syarat & Ketentuan</span> Rama
-              Tranz
+              <span
+                className="text-primary-700"
+                onClick={() => setModalTnc(true)}
+              >
+                Syarat & Ketentuan
+              </span>{" "}
+              Rama Tranz
             </span>
           </label>
           <div className="flex flex-row items-center justify-between py-3 border-b">
@@ -267,7 +298,8 @@ export default function PageBayar() {
             onClick={handleNextStep}
             disabled={
               !tncCheck || selectedPaymentMethod.trim() === "" || isLoading
-            }>
+            }
+          >
             {isLoading ? (
               <Loader className="animate-spin" />
             ) : (
@@ -276,6 +308,30 @@ export default function PageBayar() {
           </Button>
         </Card>
       </div>
+      <Modal visible={modalTnc} setVisible={setModalTnc}>
+        <div className="flex flex-col">
+        <DialogHeader className="mt-4">
+          <DialogTitle className="text-[26px] text-neutral-700">
+            Syarat dan Ketentuan
+          </DialogTitle>
+        </DialogHeader>
+        <div className="m-3 px-4 flex flex-col items-center w-full verticalScroll gap-y-6">
+          <div>
+            {syarat && <RichTextDisplay content={syarat.description} />}
+          </div>
+
+          <div
+            onClick={() => {
+              setModalTnc(false)
+              setTncCheck(true)
+            }}
+            className="bg-primary-700 text-center cursor-pointer w-4/12 rounded-full text-neutral-50 py-1 px-5"
+          >
+            Setuju
+          </div>
+        </div>
+        </div>
+      </Modal>
     </div>
   );
 }

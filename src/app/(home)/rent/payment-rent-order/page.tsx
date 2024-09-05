@@ -32,6 +32,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Swal from "sweetalert2";
 import { RichTextDisplay } from "@/components/richTextDisplay";
 import { Loader } from "lucide-react";
+import Cookies from "js-cookie";
 
 export default function PaymentRentOrderPage() {
   const router = useRouter();
@@ -241,6 +242,16 @@ export default function PaymentRentOrderPage() {
   const handleNewRent = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+
+    const isLogin = Cookies.get("Authorization")
+    if(!isLogin){
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Silahkan Login Terlebih Dahulu",
+      });
+      return;
+    }
 
     let isAllIn;
     if (detail.all_in === "true") {

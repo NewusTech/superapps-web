@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -19,30 +19,31 @@ import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { Seat, Van, Calendar as CalendarIcons } from "@phosphor-icons/react";
 import { BranchesInterface, TitikJemputInterface } from "@/types/interface";
-import { useTravelActions, useTravelbookingPayload } from "@/store/useTravelStore";
+import {
+  useTravelActions,
+  useTravelbookingPayload,
+} from "@/store/useTravelStore";
 import { seatsTotal } from "@/constants/main";
 import { useRouter } from "next/navigation";
-
+import { isBeforeToday } from "@/helpers";
 
 export type RoundTripFormProps = {
-  branch : BranchesInterface[]
-  pointsJempuput: TitikJemputInterface[],
-  pointsAntar:TitikJemputInterface[]
-}
+  branch: BranchesInterface[];
+  pointsJempuput: TitikJemputInterface[];
+  pointsAntar: TitikJemputInterface[];
+};
 
-export default function RoundTripForm(props:RoundTripFormProps) {
-  const {branch, pointsAntar,pointsJempuput} = props
+export default function RoundTripForm(props: RoundTripFormProps) {
+  const { branch, pointsAntar, pointsJempuput } = props;
 
-  const { setBookingPayload,setPointToPointPayload } = useTravelActions();
+  const { setBookingPayload, setPointToPointPayload } = useTravelActions();
   const bookingPayload = useTravelbookingPayload();
 
   const [departureDate, setDepartureDate] = useState<Date | undefined>(
     undefined
   );
 
-  const router = useRouter()
-
-
+  const router = useRouter();
 
   const handleChangeKeberangkatan = (value: string) => {
     setBookingPayload({
@@ -77,9 +78,9 @@ export default function RoundTripForm(props:RoundTripFormProps) {
     });
   };
 
-  const handleCariTiket = ()=>{
-    router.push("/travel/available-schedule")
-  }
+  const handleCariTiket = () => {
+    router.push("/travel/available-schedule");
+  };
 
   return (
     <div className="bg-neutral-50 flex flex-col w-11/12 min-h-[520px] rounded-3xl border border-grey-100 absolute -top-1">
@@ -116,20 +117,20 @@ export default function RoundTripForm(props:RoundTripFormProps) {
                   <Van className="w-6 h-6 text-primary-700" />
 
                   <Select
-                                    onValueChange={handleChangeKeberangkatan}
-                                    value={bookingPayload?.from}
+                    onValueChange={handleChangeKeberangkatan}
+                    value={bookingPayload?.from}
                   >
                     <SelectTrigger className="w-full border-none outline-none text-[14px]">
                       <SelectValue placeholder="Pilih..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    {branch.map((item: BranchesInterface, i: number) => {
-                      return (
-                        <SelectItem key={i} value={item.nama}>
-                          {item.nama}
-                        </SelectItem>
-                      );
-                    })}
+                      {branch.map((item: BranchesInterface, i: number) => {
+                        return (
+                          <SelectItem key={i} value={item.nama}>
+                            {item.nama}
+                          </SelectItem>
+                        );
+                      })}
                     </SelectContent>
                   </Select>
 
@@ -144,20 +145,20 @@ export default function RoundTripForm(props:RoundTripFormProps) {
                   <Van className="w-6 h-6 text-primary-700" />
 
                   <Select
-                   onValueChange={handleChangeJutuan}
-                   value={bookingPayload?.to}
+                    onValueChange={handleChangeJutuan}
+                    value={bookingPayload?.to}
                   >
                     <SelectTrigger className="w-full border-none outline-none text-[14px]">
                       <SelectValue placeholder="Pilih..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    {branch.map((item: BranchesInterface, i: number) => {
-                      return (
-                        <SelectItem key={i} value={item.nama}>
-                          {item.nama}
-                        </SelectItem>
-                      );
-                    })}
+                      {branch.map((item: BranchesInterface, i: number) => {
+                        return (
+                          <SelectItem key={i} value={item.nama}>
+                            {item.nama}
+                          </SelectItem>
+                        );
+                      })}
                     </SelectContent>
                   </Select>
 
@@ -179,18 +180,18 @@ export default function RoundTripForm(props:RoundTripFormProps) {
                       <SelectValue placeholder="Pilih..." />
                     </SelectTrigger>
                     <SelectContent className="bg-neutral-50 border border-outline_border-100 w-full">
-                    {seatsTotal.map(
-                      (
-                        item: { id: number; seat: string; jumlah: number },
-                        i: number
-                      ) => {
-                        return (
-                          <SelectItem key={i} value={item.jumlah.toString()}>
-                            {item.seat}
-                          </SelectItem>
-                        );
-                      }
-                    )}
+                      {seatsTotal.map(
+                        (
+                          item: { id: number; seat: string; jumlah: number },
+                          i: number
+                        ) => {
+                          return (
+                            <SelectItem key={i} value={item.jumlah.toString()}>
+                              {item.seat}
+                            </SelectItem>
+                          );
+                        }
+                      )}
                     </SelectContent>
                   </Select>
 
@@ -207,9 +208,9 @@ export default function RoundTripForm(props:RoundTripFormProps) {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button className="w-full justify-start text-left text-[14px]">
-                      {bookingPayload?.date
-                        ? format(bookingPayload.date, "PPP")
-                        : "Pilih Tanggal"}
+                        {bookingPayload?.date
+                          ? format(bookingPayload.date, "PPP")
+                          : "Pilih Tanggal"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
@@ -221,11 +222,16 @@ export default function RoundTripForm(props:RoundTripFormProps) {
                             "border border-primary-700 absolute left-1",
                           nav_button_next:
                             "border border-primary-700 absolute right-1",
-                          day_today: "bg-primary-700 text-neutral-50",
+                          day_today: `${bookingPayload?.date === new Date()?"bg-primary-700 text-neutral-50":"bg-primary-500 text-neutral-50"}`,
+                          day_selected:"bg-primary-700 text-neutral-50",
+                          day_disabled: "text-neutral-400 cursor-not-allowed bg-gray-200",
                         }}
                         mode="single"
                         selected={bookingPayload?.date}
-                        onSelect={(date)=>handleChangeDate(date||new Date())}
+                        onSelect={(date) =>
+                          handleChangeDate(date || new Date())
+                        }
+                        disabled={(date) => isBeforeToday(date)} // Disable tanggal sebelum hari ini
                         initialFocus
                       />
                     </PopoverContent>
@@ -237,7 +243,10 @@ export default function RoundTripForm(props:RoundTripFormProps) {
             </div>
 
             <div className="w-full">
-              <Button className="bg-primary-700 py-6 text-[18px] w-full text-neutral-50" onClick={handleCariTiket}>
+              <Button
+                className="bg-primary-700 py-6 text-[18px] w-full text-neutral-50"
+                onClick={handleCariTiket}
+              >
                 Cari Tiket
               </Button>
             </div>
@@ -312,7 +321,7 @@ export default function RoundTripForm(props:RoundTripFormProps) {
               </div>
 
               <div className="w-full flex flex-col border-b border-grey-100">
-                <h6>Tanggal Berangkat</h6>
+                <h6>Tanggal Berangkat oy</h6>
 
                 <div className="w-full flex flex-row items-center gap-x-2">
                   <CalendarIcons className="w-6 h-6 text-primary-700" />
@@ -320,9 +329,9 @@ export default function RoundTripForm(props:RoundTripFormProps) {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button className="w-full justify-start text-left text-[14px]">
-                      {bookingPayload?.date
-                        ? format(bookingPayload.date, "PPP")
-                        : "Pilih Tanggal"}
+                        {bookingPayload?.date
+                          ? format(bookingPayload.date, "PPP")
+                          : "Pilih Tanggal"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0">
@@ -338,7 +347,10 @@ export default function RoundTripForm(props:RoundTripFormProps) {
                         }}
                         mode="single"
                         selected={bookingPayload?.date}
-                        onSelect={(date)=>handleChangeDate(date||new Date())}
+                        onSelect={(date) =>
+                          handleChangeDate(date || new Date())
+                        }
+                        disabled={(date) => isBeforeToday(date)} // Disable tanggal sebelum hari ini
                         initialFocus
                       />
                     </PopoverContent>

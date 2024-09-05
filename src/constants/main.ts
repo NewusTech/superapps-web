@@ -1,8 +1,6 @@
 import firstPromo from "../../public/assets/images/neededs/promo/1.jpg";
 import secondPromo from "../../public/assets/images/neededs/promo/2.jpg";
 import thirdPromo from "../../public/assets/images/neededs/promo/3.jpg";
-import fourthPromo from "../../public/assets/images/neededs/promo/4.jpg";
-import fifthPromo from "../../public/assets/images/neededs/promo/5.jpg";
 import firstUnggulan from "../../public/assets/images/neededs/unggulan/layanan_travel.png";
 import secondUnggulan from "../../public/assets/images/neededs/unggulan/layanan_paket.png";
 import thirdUnggulan from "../../public/assets/images/neededs/unggulan/layanan_rental.png";
@@ -110,14 +108,6 @@ export const promos = [
     id: 3,
     image: thirdPromo,
   },
-  {
-    id: 4,
-    image: fourthPromo,
-  },
-  {
-    id: 5,
-    image: fifthPromo,
-  },
 ];
 
 export const unggulans = [
@@ -133,14 +123,14 @@ export const unggulans = [
     image: secondUnggulan,
     icon: secondIconUnggulan,
     title: "Layanan Paket",
-    desc: "Layanan paket di Rama Tranz menawarkan solusi pengiriman yang efisien dan terpercaya dengan rute dari Lampung ke Jakarta dan dari Lampung ke Palembang. Kami memastikan setiap pengiriman barang Anda tiba tepat waktu, dengan tingkat keamanan tinggi dan proses yang mudah, untuk memenuhi kebutuhan logistik Anda dengan standar profesional.",
+    desc: "Layanan paket di Rama Tranz menawarkan solusi pengiriman yang efisien dan terpercaya dengan rute dari Lampung ke Jakarta dan dari Lampung ke Palembang. Kami memastikan setiap pengiriman barang Anda tiba tepat waktu.",
   },
   {
     id: 3,
     image: thirdUnggulan,
     icon: firstIconUnggulan,
     title: "Layanan Rental",
-    desc: "Layanan rental di Rama Tranz menyediakan armada mobil mewah untuk memenuhi kebutuhan perjalanan Anda. Kami menawarkan Toyota Hiace Commuter dan Toyota Hiace Premio, yang dirancang untuk memberikan kenyamanan dan pengalaman berkendara premium. Ideal untuk acara keluarga, perjalanan bisnis, atau kebutuhan transportasi lainnya, armada kami memastikan perjalanan Anda berjalan lancar dengan standar layanan yang tinggi.",
+    desc: "Layanan rental di Rama Tranz menyediakan armada Hiace Commuter dan Hiace Premio, yang dirancang untuk memberikan kenyamanan berkendara premium. Ideal untuk acara keluarga, perjalanan bisnis, atau kebutuhan lainnya.",
   },
 ];
 

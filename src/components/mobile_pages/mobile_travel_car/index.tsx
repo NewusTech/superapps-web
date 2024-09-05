@@ -13,6 +13,9 @@ import Image from "next/image";
 import { travelCars, unggulans } from "@/constants/main";
 import { ChevronRight } from "lucide-react";
 import MobileFeatureTravelCar from "./feature";
+import premio from "../../../../public/assets/images/neededs/rental/premio.png";
+import commuter from "../../../../public/assets/images/neededs/rental/commuter.png";
+import Link from "next/link";
 
 export default function MobileTravelCarScreen() {
   const swiperRef = useRef<any>(null);
@@ -37,9 +40,11 @@ export default function MobileTravelCarScreen() {
           return (
             <SwiperSlide key={i}>
               <div className="w-full flex flex-col justify-center items-center gap-y-6 pb-5 md:pb-0 md:p-5 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
-                <div className="w-full h-full">
+                <div className="w-full h-[15rem]">
                   <Image
-                    src={item?.image}
+                    src={
+                      item.title === "Toyota Hiece Premio" ? premio : commuter
+                    }
                     alt="Travel Car"
                     width={200}
                     height={200}
@@ -66,9 +71,11 @@ export default function MobileTravelCarScreen() {
                 </div>
 
                 <div className="w-full px-3 md:px-0">
-                  <Button className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
-                    Lihat Detail Mobile
-                  </Button>
+
+                    <Button className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]"                    >
+                      Lihat Detail Mobile
+                    </Button>
+
                 </div>
               </div>
             </SwiperSlide>

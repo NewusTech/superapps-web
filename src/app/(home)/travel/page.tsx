@@ -17,7 +17,6 @@ import {
 import {
   getAllBranches,
   getAllPointMasterJemput,
-  getAllRute,
 } from "@/services/api";
 import { useTravelbookingPayload } from "@/store/useTravelStore";
 import { BranchesInterface, TitikJemputInterface } from "@/types/interface";
@@ -32,6 +31,7 @@ export default function TravelPage() {
   const [pointsAntar, setPointsAntar] = useState<TitikJemputInterface[]>([]);
 
   const bookingPayload = useTravelbookingPayload();
+
   const fetchAllBranches = async () => {
     try {
       const response = await getAllBranches();
@@ -71,6 +71,7 @@ export default function TravelPage() {
     fetchAllBranches();
   }, []);
 
+
   useEffect(() => {
     fetchAllBranches();
   }, []);
@@ -83,7 +84,33 @@ export default function TravelPage() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col px-4 md:px-16 background-travel-route gap-y-6 py-10">
+      <div className="w-full min-h-[320px] absolute top-[250px] rounded-t-xl flex flex-row md:hidden justify-center bg-gradient-to-r from-[#CA1D76] from-[-100%] to-[#082167] to-[100%]">
+        <div className="flex flex-row px-8 pt-6 items-start justify-start gap-x-5 ">
+          <div className="w-[5rem] h-[5rem]">
+            <Image
+              src={ticket}
+              alt="Ticket"
+              width={600}
+              height={600}
+              className="w-full h-full object-contain object-center"
+            />
+          </div>
+
+          <h4 className="font-semibold text-neutral-50 text-[16px] pt-3 align-text-top">
+            Partner Resmi dan Terpercaya. Tiket dijamin resmi, bebas khawatir!
+          </h4>
+        </div>
+      </div>
+
+      <div className="w-full flex flex-col md:hidden items-center justify-center relative">
+        <RoundTripForm
+          branch={branches || []}
+          pointsAntar={pointsAntar}
+          pointsJempuput={pointsJempuput}
+        />
+      </div>
+
+      <div className="w-full flex flex-col px-4 md:px-16 background-travel-route gap-y-6 py-10 mt-[35rem] md:mt-0">
         <h3 className="text-neutral-700 font-semibold text-[26px]">
           Banyak keungulan yang didapatkan pesan tiket di Rama Tranz
         </h3>

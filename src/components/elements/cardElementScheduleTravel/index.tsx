@@ -63,7 +63,8 @@ export default function CardTravelScheduleOrder({
               disabled={disable}
               className="h-fit"
               variant="secondary"
-              onClick={handleDetailTravel}>
+              onClick={handleDetailTravel}
+            >
               Detail Tiket
             </Button>
           </div>
@@ -113,7 +114,8 @@ export default function CardTravelScheduleOrder({
               <Button
                 className="h-fit"
                 onClick={handlePilihKursi}
-                disabled={disable}>
+                disabled={disable}
+              >
                 Pilih Kursi
               </Button>
             </div>

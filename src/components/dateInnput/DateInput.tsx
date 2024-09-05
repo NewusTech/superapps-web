@@ -10,6 +10,7 @@ import { format } from "date-fns";
 import { Button } from "../ui/button";
 import { ChevronDown } from "lucide-react";
 import { twMerge } from "tailwind-merge";
+import { Matcher } from "react-day-picker";
 
 export type DateInputProps = {
   value: Date;
@@ -17,10 +18,11 @@ export type DateInputProps = {
   label: React.ReactNode | string;
   disabled?: boolean;
   className?: string;
+  disableDate? : Matcher | Matcher[]
 };
 
 export default function DateInput(props: DateInputProps) {
-  const { value, setValue, label, disabled, ...rest } = props;
+  const { value, setValue, label, disabled, disableDate,...rest } = props;
   return (
     <div className={twMerge(["flex flex-col w-full gap-y-2", rest.className])}>
       {typeof label !== "string" ? label : <p className="">{label}</p>}
@@ -48,11 +50,14 @@ export default function DateInput(props: DateInputProps) {
                 nav_button_previous:
                   "border border-primary-700 absolute left-1",
                 nav_button_next: "border border-primary-700 absolute right-1",
-                day_today: "bg-primary-700 text-neutral-50",
+                day_today: `${value === new Date() ? "bg-primary-700 text-neutral-50" : "bg-primary-500 text-neutral-50"}`,
+                day_selected: "bg-primary-700 text-neutral-50",
+                day_disabled: "text-neutral-400 cursor-not-allowed bg-gray-200",
               }}
               mode="single"
               selected={value}
               onSelect={(v) => setValue(v || new Date())}
+              disabled={disableDate} // Disable tanggal sebelum hari ini
               initialFocus
             />
           </PopoverContent>
