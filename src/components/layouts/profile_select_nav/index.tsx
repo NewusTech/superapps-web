@@ -15,7 +15,6 @@ export default function SelectProfileNav() {
   const router = useRouter();
 
   const handleSelectChange = (value: string) => {
-    // Lakukan navigasi berdasarkan value yang dipilih
     const urlMap: { [key: string]: string } = {
       Profile: "/profile",
       "Ubah Password": "/profile/change-user-password",

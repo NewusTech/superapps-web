@@ -358,14 +358,12 @@ export default function Bayar({
     formData.append("metode_id", data.metode_id);
     formData.append("mobil_rental_id", "1");
 
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    // formData.forEach((value, key) => {
+    //   console.log(key, value);
+    // });
 
     try {
       const response = await createNewRent(formData);
-
-      console.log(response, "ini response");
 
       // if(response.success === true) {
 

@@ -46,17 +46,21 @@ export const formRentalSchema = z.object({
   nik: z
     .string({ message: "NIK tidak boleh kosong" })
     .regex(/^\d+$/, { message: "NIK harus berupa angka" })
-    .min(16, { message: "NIK harus minimal 16 digit" }),
+    .length(16, { message: "NIK harus tepat 16 digit" }),
   email: z
     .string({ message: "Email tidak boleh kosong" })
     .email({ message: "Format email tidak valid" }),
   no_telp: z
     .string({ message: "Nomor telepon tidak boleh kosong" })
     .regex(/^\d+$/, { message: "Nomor telepon harus berupa angka" })
-    .min(10, { message: "Nomor telepon harus minimal 10 digit" }),
+    .min(10, { message: "Nomor telepon harus minimal 10 digit" })
+    .max(13, {
+      message: "Nomor telepon harus maksimal 13 digit",
+    }),
   alamat: z
     .string({ message: "Alamat tidak boleh kosong" })
     .min(5, { message: "Alamat harus memiliki minimal 5 karakter" }),
+  durasi_sewa: z.string({ message: "Durasi sewa harus dipilih" }),
   area: z.enum(["Dalam Kota", "Luar Kota"], {
     message: "Area sewa harus dipilih",
   }),

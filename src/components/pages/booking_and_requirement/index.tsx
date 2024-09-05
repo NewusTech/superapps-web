@@ -8,13 +8,13 @@ export default function BookingAndRequirementScreen({ item }: any) {
       {item && item?.slug === "how-to-booking-travel-ticketing" ? (
         <Link href={"/travel/ticketing-steps"}>
           <div className="flex flex-row bg-neutral-50 border border-grey-100 p-3 rounded-lg gap-x-3">
-            <div className="w-[50%] xs:w-2/12">
+            <div className="min-w-[70px] md:min-w-[100px]">
               <Image
                 src={item?.image}
                 alt={item?.title}
-                width={500}
-                height={500}
-                className="w-full h-full object-cover"
+                width={100}
+                height={100}
+                className="w-full h-full object-contain"
               />
             </div>
 
@@ -30,13 +30,13 @@ export default function BookingAndRequirementScreen({ item }: any) {
       ) : (
         <Link href={"/travel/travel-conditions"}>
           <div className="flex flex-row bg-neutral-50 border border-grey-100 p-3 rounded-lg gap-x-3">
-            <div className="w-[50%] xs:w-2/12">
+            <div className="min-w-[70px] md:min-w-[100px]">
               <Image
                 src={item?.image}
                 alt={item?.title}
                 width={500}
                 height={500}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
 

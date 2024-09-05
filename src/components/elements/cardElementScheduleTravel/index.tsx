@@ -4,7 +4,10 @@ import Button from "@/components/buttonCustom/ButtonCustom";
 import ModalSelectSeat from "@/components/pages/avaliable-schedule/ModalSelectSeat";
 import Card from "@/components/ui/card/Card";
 import { formatCurrency, formatTime } from "@/helpers";
-import { useTravelActions, useTravelbookingPayload } from "@/store/useTravelStore";
+import {
+  useTravelActions,
+  useTravelbookingPayload,
+} from "@/store/useTravelStore";
 import { TravelScheduleInterface } from "@/types/interface";
 import { Dot, Minus } from "@phosphor-icons/react";
 import Image from "next/image";
@@ -13,36 +16,33 @@ import React, { useState } from "react";
 
 export default function CardTravelScheduleOrder({
   data,
-  disable
+  disable,
 }: {
   data: TravelScheduleInterface;
-  disable?:boolean
+  disable?: boolean;
 }) {
-  console.log(data, "ini data ");
-
   const router = useRouter();
   const [openModalKursi, setOpenModalKursi] = useState(false);
 
-  
-  const bookingPayload = useTravelbookingPayload()
-  const { setStepTravelPayload,setTravelSchedule } = useTravelActions();
-  const seats = bookingPayload?.seats ||1
+  const bookingPayload = useTravelbookingPayload();
+  const { setStepTravelPayload, setTravelSchedule } = useTravelActions();
+  const seats = bookingPayload?.seats || 1;
 
   const handleNextStep = () => {
     setOpenModalKursi(false);
-    setTravelSchedule(data)
+    setTravelSchedule(data);
     setStepTravelPayload(2);
-    router.push("/travel/available-schedule/data-penumpang/")
+    router.push("/travel/available-schedule/data-penumpang/");
   };
 
   const handleDetailTravel = () => {
-    setTravelSchedule(data)
+    setTravelSchedule(data);
     setOpenModalKursi(false);
     router.push("/travel/detail-travel");
   };
 
   const handlePilihKursi = () => {
-    setTravelSchedule(data)
+    setTravelSchedule(data);
     setOpenModalKursi(true);
   };
 
@@ -60,7 +60,7 @@ export default function CardTravelScheduleOrder({
               </span>
             </div>
             <Button
-            disabled={disable}
+              disabled={disable}
               className="h-fit"
               variant="secondary"
               onClick={handleDetailTravel}>
@@ -110,7 +110,10 @@ export default function CardTravelScheduleOrder({
                 {formatCurrency(data.price)}
                 <span className="font-normal text-black">/kursi</span>
               </p>
-              <Button className="h-fit" onClick={handlePilihKursi} disabled={disable}>
+              <Button
+                className="h-fit"
+                onClick={handlePilihKursi}
+                disabled={disable}>
                 Pilih Kursi
               </Button>
             </div>
@@ -118,7 +121,7 @@ export default function CardTravelScheduleOrder({
         </div>
       </Card>
       <ModalSelectSeat
-      seats={seats}
+        seats={seats}
         visible={openModalKursi}
         setVisible={setOpenModalKursi}
         handleAfterSelectSeat={handleNextStep}

@@ -54,11 +54,7 @@ export default function PageDataPenumpang() {
         penumpang: passenger,
       };
 
-      console.log(payload);
-
       const response = await createPostPesananTravel(payload);
-
-      console.log("Response :", response.data);
 
       if (!response.data) {
         console.error("Response Error :", response.message);
@@ -151,7 +147,7 @@ export default function PageDataPenumpang() {
                     passengerListTemp[0].nik = "";
                     passengerListTemp[0].no_telp = "";
                   }
-                  console.log(e.target.checked);
+
                   setPassenger(passengerListTemp);
                   setSimpanPenumpangPertama((prev) => prev + 1);
                 }}

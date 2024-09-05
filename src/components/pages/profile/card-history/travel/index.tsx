@@ -16,8 +16,6 @@ export default function OrderHistoryTravelCard({
 }: {
   data: HistoryTravelInterface;
 }) {
-  console.log(data, "ini data");
-
   const isMobile = useMediaQuery("(max-width: 768px)");
   const router = useRouter();
 

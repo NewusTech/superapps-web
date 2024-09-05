@@ -5,7 +5,11 @@ import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
 import { Dot, Minus } from "lucide-react";
 import CarSeat10 from "@/components/carSeat/CarSeat10";
 import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
-import { useTravelActions, useTravelPassenger, useTravelSchedule } from "@/store/useTravelStore";
+import {
+  useTravelActions,
+  useTravelPassenger,
+  useTravelSchedule,
+} from "@/store/useTravelStore";
 import { PassengerSeat } from "@/types/travel";
 
 export type ModalSelectSeatProps = {
@@ -14,7 +18,7 @@ export type ModalSelectSeatProps = {
   handleAfterSelectSeat?: () => void;
   selectAllSheats: boolean;
   passengerIndex: number;
-  seats?:number
+  seats?: number;
 };
 
 export default function ModalSelectSeat(props: ModalSelectSeatProps) {
@@ -23,22 +27,18 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
     setVisible,
     handleAfterSelectSeat,
     passengerIndex,
-    selectAllSheats=false,
-    seats=1
+    selectAllSheats = false,
+    seats = 1,
   } = props;
 
-  const {setPassenger} = useTravelActions()
-
-  
-  console.log({seats,passengerIndex})
-
+  const { setPassenger } = useTravelActions();
 
   const [selectedSeats, setSelectedSeat] = useState<string[]>([]);
   const passengerList = useTravelPassenger();
   const traveSchedule = useTravelSchedule();
 
   const getSeatTaken = useMemo(() => {
-    let seatTakenTemp = traveSchedule?.seatTaken||[];
+    let seatTakenTemp = traveSchedule?.seatTaken || [];
 
     passengerList.forEach((passenger, index) => {
       if (index !== passengerIndex) {
@@ -46,10 +46,8 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
       }
     });
 
-    console.log(seatTakenTemp);
-
     return seatTakenTemp;
-  }, [passengerIndex, passengerList,traveSchedule]);
+  }, [passengerIndex, passengerList, traveSchedule]);
 
   const handleSelectSeat = (seatNumber: string) => {
     const limit = seats;
@@ -60,15 +58,13 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
         setSelectedSeat([...selectedSeats, seatNumber]);
       }
     }
-    console.log("log click ",selectedSeats.length)
   };
 
-  const handleAfterPilihKursi = ()=>{
+  const handleAfterPilihKursi = () => {
     const passengerListTemp: PassengerSeat[] = passengerList;
     if (!selectAllSheats) {
       if (passengerListTemp?.[passengerIndex]) {
         passengerListTemp[passengerIndex].no_kursi = selectedSeats[0];
-        console.log("pilih 1 kursi")
       }
     } else {
       selectedSeats
@@ -82,23 +78,21 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
             email: "",
           };
         });
-        console.log("pilih banyak kursi")
     }
 
     setPassenger(passengerListTemp);
-    handleAfterSelectSeat!()
-  }
+    handleAfterSelectSeat!();
+  };
 
-  useEffect(()=>{
-    setSelectedSeat([])
-  },[seats])
+  useEffect(() => {
+    setSelectedSeat([]);
+  }, [seats]);
 
   return (
     <Modal
       className="w-full md:w-1/2"
       visible={visible}
-      setVisible={setVisible}
-    >
+      setVisible={setVisible}>
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="flex flex-col items-center justify-center gap-2">
           <Image
@@ -137,7 +131,10 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
           selected={selectedSeats.map((item) => item)}
           onSeatPress={handleSelectSeat}
         />
-        <ButtonCustom className="h-1/2" onClick={handleAfterPilihKursi} disabled={selectedSeats.length!==seats}>
+        <ButtonCustom
+          className="h-1/2"
+          onClick={handleAfterPilihKursi}
+          disabled={selectedSeats.length !== seats}>
           Pilih Kursi
         </ButtonCustom>
       </div>
