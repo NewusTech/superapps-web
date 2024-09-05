@@ -8,7 +8,7 @@ import React from "react";
 
 export default function TicketingStepsScreen() {
   return (
-    <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-80">
+    <section className="flex flex-col md:w-full h-full justify-center items-center relative md:mb-0 pb-32 md:pb-80">
       <div className="w-full h-full">
         <Image
           src={banner}
@@ -19,12 +19,12 @@ export default function TicketingStepsScreen() {
         />
       </div>
 
-      <div className="w-full flex flex-col items-center gap-y-10 mt-10 px-16">
-        <h2 className="text-neutral-700 font-semibold text-[26px]">
+      <div className="w-full flex flex-col items-center gap-y-10 mt-10 px-3 md:px-16">
+        <h2 className="text-neutral-700 font-semibold text-center text-[22px] md:text-[26px]">
           Bagaimana Cara Memesan Travel di Rama Tranz
         </h2>
 
-        <div className="w-full grid grid-cols-3 gap-x-5">
+        <div className="w-full flex flex-col gap-y-5 md:grid grid-cols-3 gap-x-5">
           {howBookingStepSteps?.map((item: any, i: number) => {
             return <TravelHowBookingSteps key={i} item={item} />;
           })}

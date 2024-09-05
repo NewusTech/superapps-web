@@ -125,9 +125,9 @@ export default function HistoriesTravelDetailPage({
       formData.append("bukti", imageProof);
     }
 
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    // formData.forEach((value, key) => {
+    //   console.log(key, value);
+    // });
 
     try {
       const response = await createTravelPaymentSProof(
@@ -166,8 +166,6 @@ export default function HistoriesTravelDetailPage({
     localStorage.setItem("kode_pesanan", params.kode_pesanan);
     router.push(`/travel/available-schedule/bayar`);
   };
-
-  console.log(detail, "ini detail");
 
   return (
     <section className="flex flex-col gap-y-5 md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">

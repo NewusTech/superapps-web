@@ -14,7 +14,7 @@ export default function TravelHowBookingSteps({ item }: any) {
         />
       </div>
 
-      <div className="w-full flex flex-col items-center pb-5">
+      <div className="w-full flex flex-col items-center pb-5 gap-y-2">
         <h4 className="font-semibold text-[18px] text-neutral-700">
           {item?.title}
         </h4>

@@ -44,8 +44,6 @@ export default function ArticlePage() {
   const totalItems = articles ? articles?.length : 0;
   const totalPages = Math.ceil(articles ? totalItems / itemsPerPage : 0);
 
-  console.log(articles, "articles");
-
   return (
     <section className="w-full flex flex-col pb-36 md:pb-96">
       <div className="w-full flex flex-col items-center gap-y-8 pt-32">

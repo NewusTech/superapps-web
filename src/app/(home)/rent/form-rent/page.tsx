@@ -739,7 +739,7 @@ export default function FormRental() {
                 </p>
               </div>
               <Button
-                disabled={isLoading ? true : false}
+                disabled={isLoading || !errors}
                 onClick={handleNewRent}
                 className="mt-4 w-full bg-primary-700 hover:bg-primary-600 text-neutral-50">
                 {isLoading ? (
