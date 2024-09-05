@@ -237,6 +237,7 @@ export default function FormRental() {
     const formData: { [key: string]: string } = {
       ...data,
       durasi_sewa: durationRent,
+      all_in: isChecked.toString(),
     };
 
     Object.keys(formData)?.forEach((key: string) => {
