@@ -17,7 +17,6 @@ import {
 import {
   getAllBranches,
   getAllPointMasterJemput,
-  getAllRute,
 } from "@/services/api";
 import { useTravelbookingPayload } from "@/store/useTravelStore";
 import { BranchesInterface, TitikJemputInterface } from "@/types/interface";
