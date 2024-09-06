@@ -41,9 +41,9 @@ import fourthProfit from "../../public/assets/images/neededs/driver-round.png";
 import firstRequirement from "../../public/assets/images/neededs/completed-task-1.png";
 import secondRequirement from "../../public/assets/images/neededs/compliant-1.png";
 import kiluan from "../../public/assets/images/neededs/background-hero-kiluan.jpg";
-import firstAbout from "../../public/assets/images/neededs/about-image-1.png";
-import secondAbout from "../../public/assets/images/neededs/about-image-2.png";
-import thirdAbout from "../../public/assets/images/neededs/about-image-3.png";
+import firstAbout from "../../public/assets/images/neededs/rental/commuter.png";
+import secondAbout from "../../public/assets/images/neededs/rental/premio.png";
+import thirdAbout from "../../public/assets/images/neededs/hero-background.png";
 import firstAboutNumber from "../../public/assets/images/neededs/about-one-1.png";
 import secondAboutNumber from "../../public/assets/images/neededs/about-one-2.png";
 import thirdAboutNumber from "../../public/assets/images/neededs/about-one-3.png";
@@ -379,23 +379,45 @@ export const travelMaps = [
 export const faqs = [
   {
     id: 1,
-    question: "Layanan apa yang ditawarkan oleh Rama Tranz?",
-    answer: "Tidak ada",
+    question: "Apa itu Rama Tranz?",
+    answer:
+      "Rama Tranz adalah perusahaan transportasi resmi dari PT. Rasya Mandiri Tranz yang telah beroperasi sejak 2012. Kami menyediakan fasilitas mewah dan layanan lengkap untuk memastikan kenyamanan penumpang.",
   },
   {
     id: 2,
-    question: "Apakah saya bisa membawa barang bawaan?",
-    answer: "Tidak ada",
+    question: "Mengapa Harus Memilih Rama Tranz?",
+    answer:
+      "Dengan pengalaman lebih dari 12 tahun, Rama Tranz menjamin keamanan dan kenyamanan terbaik. Kami juga memudahkan pemesanan tiket melalui SuperApp dengan layanan lengkap dan fasilitas premium.",
   },
   {
     id: 3,
-    question: "Bagaimana cara memesan tiket dengan online?",
-    answer: "Tidak ada",
+    question: "Layanan Apa yang Ditawarkan Rama Tranz?",
+    answer:
+      "Kami menawarkan tiga layanan utama: travel, pengiriman paket, dan rental mobil.",
   },
   {
     id: 4,
-    question: "Bagaimana cara menghubungi layanan pelanggan?",
-    answer: "Tidak ada",
+    question: "Fasilitas Apa yang Tersedia di Rama Tranz?",
+    answer:
+      "Kami menyediakan fasilitas mewah seperti armada full AC, captain seat, audio & TV, port USB, snack gratis, dan bagasi yang luas untuk kenyamanan Anda.",
+  },
+  {
+    id: 5,
+    question: "Bagaimana Cara Memesan Tiket Secara Online?",
+    answer:
+      "Memesan tiket di Rama Tranz sangat mudah. Cukup unduh aplikasi kami atau kunjungi website, pilih tujuan, dan lakukan pembayaran online.",
+  },
+  {
+    id: 6,
+    question: "Apakah Saya Bisa Membawa Barang Bawaan?",
+    answer:
+      "Tentu! Kami menyediakan bagasi yang luas untuk barang bawaan Anda selama perjalanan.",
+  },
+  {
+    id: 7,
+    question: "Bagaimana Cara Menghubungi Layanan Pelanggan?",
+    answer:
+      "Anda bisa menghubungi kami melalui WhatsApp. Kami siap melayani 24/7 untuk memastikan perjalanan Anda menyenangkan bersama Rama Tranz.",
   },
 ];
 
@@ -403,37 +425,37 @@ export const testimonies = [
   {
     id: 1,
     image: firstProfile,
-    name: "Tiara Safitri",
-    job: "Mahasiswa",
-    desc: "Perjalanan saya dengan Rama Tranz sangat menyenangkan! Kendaraan bersih dan nyaman, dan layanan pelanggan mereka luar biasa. Saya pasti akan menggunakan layanan mereka lagi!",
+    name: "Rina",
+    job: "Palembang",
+    desc: "Perjalanan super nyaman! Sopirnya ramah dan mobilnya bersih. Saya pasti pakai Rama Tranz lagi!",
   },
   {
     id: 2,
     image: firstProfile,
-    name: "Aldi Haheng",
-    job: "Software Engineer",
-    desc: "Perjalanan saya dengan Rama Tranz sangat menyenangkan! Kendaraan bersih dan nyaman, dan layanan pelanggan mereka luar biasa. Saya pasti akan menggunakan layanan mereka lagi!",
+    name: "Fahmi",
+    job: "Jakarta",
+    desc: "Booking gampang banget, mobil nyaman, dan perjalanan Lampung-Jakarta lancar tanpa kendala. Sopirnya juga baik dan tepat waktu. Saya puas banget dengan Rama Tranz dan pasti akan rekomendasikan ke teman-teman!",
   },
   {
     id: 3,
     image: firstProfile,
-    name: "Aldi Haheng",
-    job: "Software Engineer",
-    desc: "Perjalanan saya dengan Rama Tranz sangat menyenangkan! Kendaraan bersih dan nyaman, dan layanan pelanggan mereka luar biasa. Saya pasti akan menggunakan layanan mereka lagi!",
+    name: "Andri",
+    job: "Lampung",
+    desc: "Sopirnya ramah, mobilnya bersih, dan selalu tepat waktu. Rama Tranz udah jadi pilihan utama saya untuk travel!",
   },
   {
     id: 4,
     image: firstProfile,
-    name: "Aldi Haheng",
-    job: "Software Engineer",
-    desc: "Perjalanan saya dengan Rama Tranz sangat menyenangkan! Kendaraan bersih dan nyaman, dan layanan pelanggan mereka luar biasa. Saya pasti akan menggunakan layanan mereka lagi!",
+    name: "Siti",
+    job: "Lampung",
+    desc: "Pengiriman paket cepat dan aman sampai tujuan. Layanannya sangat profesional dan harganya bersahabat. Sangat recommended!",
   },
   {
     id: 5,
     image: firstProfile,
-    name: "Aldi Haheng",
-    job: "Software Engineer",
-    desc: "Perjalanan saya dengan Rama Tranz sangat menyenangkan! Kendaraan bersih dan nyaman, dan layanan pelanggan mereka luar biasa. Saya pasti akan menggunakan layanan mereka lagi!",
+    name: "Rahmat",
+    job: "Palembang",
+    desc: "Rental mobilnya oke banget! Nyaman, bersih, dan bikin perjalanan lebih menyenangkan. Terima kasih, Rama Tranz!",
   },
 ];
 

@@ -88,15 +88,15 @@ export default function wrapText(str: string, maxLength: number = 10) {
 //   }
 // }
 
-export function truncateContent(title: string, maxLength = 35) {
-  const titleWithSpaces = title.replace(/\n/g, " ");
+// export function truncateContent(title: string, maxLength = 35) {
+//   const titleWithSpaces = title.replace(/\n/g, " ");
 
-  if (titleWithSpaces.length > maxLength) {
-    return titleWithSpaces.slice(0, maxLength) + "...";
-  } else {
-    return titleWithSpaces;
-  }
-}
+//   if (titleWithSpaces.length > maxLength) {
+//     return titleWithSpaces.slice(0, maxLength) + "...";
+//   } else {
+//     return titleWithSpaces;
+//   }
+// }
 
 export function formatTimeString(timeString: string) {
   // Memisahkan jam dan menit dari string waktu
@@ -191,3 +191,15 @@ export const isBeforeToday = (date: Date) => {
   today.setHours(0, 0, 0, 0); // Set waktu ke 00:00:00 untuk perbandingan hanya tanggal
   return date < today;
 };
+
+export function truncateContent(html: string, maxLength = 200) {
+  // Membuat elemen DOM sementara untuk memproses HTML
+  const tempDiv = document.createElement('div');
+  tempDiv.innerHTML = html;
+  // Mengambil teks tanpa elemen HTML
+  const text = tempDiv.textContent || tempDiv.innerText || '';
+  // Mengganti newline dengan spasi dan memangkas teks sesuai batas
+  const textWithSpaces = text.replace(/\n/g, ' ');
+  // Membatasi teks hingga maxLength karakter dan menambahkan "...." di akhir jika melebihi batas
+  return textWithSpaces.length > maxLength ? textWithSpaces.slice(0, maxLength) + '....' : textWithSpaces;
+}

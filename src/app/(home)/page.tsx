@@ -47,15 +47,18 @@ import ApartementScreen from "@/components/pages/apartements";
 import MobileApartementScreen from "@/components/mobile_pages/mobile_apartement";
 import {
   BranchesInterface,
+  RouteInterface,
   TitikJemputInterface,
   TravelCarInterface,
 } from "@/types/interface";
 import {
   getAllBranches,
   getAllPointMasterJemput,
+  getAllRute,
   getAllTravelCar,
 } from "@/services/api";
 import { useTravelbookingPayload } from "@/store/useTravelStore";
+import { getAllWisata, wisataProps } from "@/services/wisata/api";
 
 export default function Home() {
   const now = new Date();
@@ -65,6 +68,9 @@ export default function Home() {
   const [startDate, setStartDate] = useState<Date | undefined>(firstDayOfMonth);
   const [activeIndex, setActiveIndex] = useState(0);
   const [travelCar, setTravelCar] = useState<TravelCarInterface[]>();
+  const [wisata, setWisata] = useState<wisataProps[]>();
+  const [travelRutes, setTravelRutes] = useState<RouteInterface[]>([]);
+  const [filterTravelRutes, setFilterTravelRutes] = useState<string>("lampunng");
 
   const [pointsJempuput, setPointsJempuut] = useState<TitikJemputInterface[]>(
     []
@@ -77,6 +83,24 @@ export default function Home() {
     try {
       const response = await getAllTravelCar();
       setTravelCar(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getWisata = async () => {
+    try {
+      const response = await getAllWisata();
+      setWisata(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getRute = async () => {
+    try {
+      const response = await getAllRute();
+      setTravelRutes(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -115,19 +139,23 @@ export default function Home() {
       setPointsAntar([]);
       console.error(error);
     }
-  };
+  }
 
   useEffect(() => {
-    fetchAllBranches();
     fetchAllTravelCars();
+    fetchAllBranches();
+    getWisata()
+    getRute()
   }, []);
 
   useEffect(() => {
     fetchTitikJemput();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingPayload?.from]);
 
   useEffect(() => {
     fetchTitikAntar();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingPayload?.to]);
 
   const startDateFormatted = startDate
@@ -257,13 +285,13 @@ export default function Home() {
         </div>
 
         <div className="hidden md:grid md:grid-cols-2 gap-5 px-16">
-          {travelCar?.map((item, i: number) => {
+          {travelCar?.slice(0,2).map((item, i: number) => {
             return <TravelCarScreen key={item.id} item={item} />;
           })}
         </div>
 
         <div className="md:hidden grid grid-cols-1 gap-5">
-          <MobileTravelCarScreen />
+          <MobileTravelCarScreen travelCars={travelCar||[]} />
         </div>
       </div>
 
@@ -278,22 +306,6 @@ export default function Home() {
             Rekomendasi pilihan rute favorit di Rama Tranz
           </p>
         </div>
-
-        {/* <div className="travel-car-rows">
-          <div className="destination-travel-car-lists">
-            {routes.map((item: any, i: number) => {
-              return (
-                <RouteTravelCar
-                  key={i}
-                  item={item}
-                  isActive={i === activeIndex}
-                  onClick={() => setActiveIndex(i)}
-                />
-              );
-            })}
-          </div>
-        </div> */}
-
         {isMobile ? (
           <div className="mobile-travel-car-rows">
             <div className="mobile-destination-travel-car-lists">
@@ -321,19 +333,6 @@ export default function Home() {
             </div>
           </div>
         )}
-
-        {/* <div className="grid grid-rows-3 md:grid-rows-1 md:grid-cols-3 place-items-center gap-y-4 md:gap-y-0 md:gap-x-4 px-8 md:px-16">
-          {routes.map((item: any, i: number) => {
-            return (
-              <RouteTravelCar
-                key={i}
-                item={item}
-                isActive={i === activeIndex}
-                onClick={() => setActiveIndex(i)}
-              />
-            );
-          })}
-        </div> */}
       </div>
 
       {/* Travel Route Section */}
@@ -349,7 +348,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16">
+        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16 overflow-x-scroll md:overflow-hidden">
           <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Bandar Lampung
           </Button>
@@ -361,14 +360,13 @@ export default function Home() {
           </Button>
         </div>
 
-        <div className="hidden md:grid md:grid-cols-3 mt-6 gap-5 px-16">
-          {travelRoutes.map((item: any, i: number) => {
+        {/* <div className="hidden md:grid md:grid-cols-3 mt-6 gap-5 px-16">
+          {travelRutes.map((item, i: number) => {
             return <TravelRoute key={i} item={item} />;
           })}
-        </div>
-
-        <div className="md:hidden grid grid-cols-1 md:mt-6 gap-5 pl-8 md:px-16">
-          <MobileTravelRoute />
+        </div> */}
+        <div className="grid grid-cols-1 md:mt-6 gap-5 pl-8 md:px-16">
+          <MobileTravelRoute travelRutes={travelRutes} />
         </div>
       </div>
 
@@ -386,7 +384,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16">
+        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16 overflow-x-scroll md:overflow-hidden">
           <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Bandar Lampung
           </Button>
@@ -399,13 +397,13 @@ export default function Home() {
         </div>
 
         <div className="hidden md:grid md:grid-cols-3 mt-6 gap-5 px-16">
-          {destinations.map((item: any, i: number) => {
+          {wisata?.map((item, i: number) => {
             return <DestinationScreen key={i} item={item} />;
           })}
         </div>
 
         <div className="md:hidden grid grid-cols-1 md:mt-6 gap-5 pl-8 md:px-16">
-          <MobileDestinationScreen />
+          <MobileDestinationScreen destinations={wisata||[]}/>
         </div>
 
         <div className="hidden w-full md:flex md:flex-row self-center justify-center">
@@ -498,7 +496,8 @@ export default function Home() {
 
           <Link
             href={"/"}
-            className="hidden w-4/12 md:flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5">
+            className="hidden w-4/12 md:flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5"
+          >
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">
@@ -520,7 +519,8 @@ export default function Home() {
         <div className="md:hidden">
           <Link
             href={"/"}
-            className="w-full flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-3 rounded-lg gap-x-5">
+            className="w-full flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-3 rounded-lg gap-x-5"
+          >
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">

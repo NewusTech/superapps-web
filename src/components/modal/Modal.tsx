@@ -28,22 +28,20 @@ export default function Modal(props: ModalProps) {
   if (isDesktop) {
     return (
       <Dialog open={visible} onOpenChange={setVisible}>
-        <DialogContent className={cn("sm:max-w-md bg-white", className)}>
-          <DialogHeader className={title ? "" : "hidden"}>
-            <DialogTitle>{title}</DialogTitle>
+        <DialogContent className={cn("bg-white", className)}>
+          <DialogHeader className={title?"":"hidden"}>
+             <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
-          <div className="flex items-center justify-center space-x-2">
             {children}
-          </div>
         </DialogContent>
       </Dialog>
     );
   }
   return (
     <Drawer open={visible} onOpenChange={setVisible}>
-      <DrawerContent className={cn("bg-white pb-10", className)}>
-        <DrawerHeader className={cn("text-left", title ? "" : "hidden")}>
-          <DrawerTitle>{title}</DrawerTitle>
+      <DrawerContent className={cn("bg-white pb-10 max-h-[70%]", className)}>
+        <DrawerHeader className={cn("text-left",title?"":"hidden")}>
+           <DrawerTitle>{title}</DrawerTitle>
         </DrawerHeader>
         {children}
       </DrawerContent>
