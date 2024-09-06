@@ -117,14 +117,14 @@ export default function RentPage() {
           </div>
         </div>
 
-        <div className="hidden md:grid md:grid-cols-2 gap-x-12 px-16">
+        <div className="hidden md:grid md:grid-cols-2 gap-x-12 gap-y-4 px-16">
           {travelCar?.map((item: TravelCarInterface, i: number) => {
             return <TravelCarRentScreen key={i} item={item} />;
           })}
         </div>
 
         <div className="md:hidden grid grid-cols-1 gap-5">
-          <MobileTravelCarRentScreen />
+          <MobileTravelCarRentScreen travelCars={travelCar||[]} />
         </div>
       </div>
     </section>

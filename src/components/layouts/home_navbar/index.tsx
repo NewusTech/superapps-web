@@ -249,7 +249,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                     onOpenChange={setIsLoginPopupOpen}>
                     <AlertDialogTrigger>
                       <div
-                        className={`hover:bg-primary-600 border border-primary-700 text-primary-700 px-8 py-1.5 w-full rounded-md`}>
+                        className={`hover:bg-primary-600 border border-primary-700 text-primary-700 px-8 py-4 w-full rounded-md`}>
                         Masuk
                       </div>
                     </AlertDialogTrigger>

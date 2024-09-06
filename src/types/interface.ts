@@ -182,6 +182,10 @@ export interface TravelCarInterface {
   created_at: string;
   biaya_all_in: string;
   bagasi: string;
+  updated_at: string;
+  images: {
+    image_url:string
+  }[];
 }
 
 export interface PaymentDetailInterface {

@@ -6,6 +6,7 @@ import { PhoneCall } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import iconWa from "@/assets/icon/logos_whatsapp-icon.svg"
 
 export default function PackagePage() {
   const [packages, setPackages] = useState<any>();
@@ -30,22 +31,22 @@ export default function PackagePage() {
         <div className="w-full flex flex-col px-5 md:px-8 gap-y-5">
           <PackageScreen item={packages?.firstContent} />
 
-          <div className="min-w-[300px] h-0.5 bg-grey-50"></div>
+          <div className="min-w-full h-0.5 bg-grey-50"></div>
 
           <PackageScreen item={packages?.secondContent} />
         </div>
-      </div>
-      <div className="bg-white gap-y-2 flex flex-col p-3 w-11/12 md:w-5/12 mt-4 pb-8 border border-grey-50 shadow-md rounded-lg justify-center items-center">
-        <p className="font-bold text-center w-full">
-          Silahkan hubungi admin kami
-        </p>
-        <Link
-          href="https://wa.me/+6281315395019"
-          target="_blank"
-          className="flex flex-row gap-3"
-        >
-          <PhoneCall /> 081315395019
-        </Link>
+        <div className="bg-sky-200/50 py-5 gap-y-2 flex flex-col rounded-lg justify-center items-center">
+          <p className="font-semibold text-lg text-center w-full">
+            Silahkan hubungi admin kami
+          </p>
+          <Link
+            href="https://wa.me/+6281315395019"
+            target="_blank"
+            className="flex flex-row gap-3 items-center"
+          >
+            <Image src={iconWa} height={24} width={24} alt="icon-wa"/> 081315395019
+          </Link>
+        </div>
       </div>
     </section>
   );

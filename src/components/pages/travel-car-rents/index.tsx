@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import FeatureTravelCar from "../travel_car/feature";
 import Link from "next/link";
 import { TravelCarInterface } from "@/types/interface";
+import { CarSimple, GasPump, GitBranch, Seat } from "@phosphor-icons/react";
 
 export default function TravelCarRentScreen({
   item,
@@ -18,7 +19,7 @@ export default function TravelCarRentScreen({
     <div className="w-full flex flex-col justify-center items-center gap-y-6 p-5 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
       <div className="w-full h-full">
         <Image
-          src={item?.image_url}
+           src={item.images.slice(0, 1)[0].image_url}
           alt="Travel Car"
           width={200}
           height={200}
@@ -39,9 +40,22 @@ export default function TravelCarRentScreen({
       </div>
 
       <div className="grid grid-cols-4 grid-rows-2 gap-y-5 w-full">
-        {icons?.map((item: any, i: number) => {
-          return <FeatureTravelCar key={i} item={item} />;
-        })}
+        <div className="flex flex-row md:items-center md:justify-center w-full gap-x-3">
+          <CarSimple className="text-primary-700 w-6 h-6" />
+          <p>{item.bagasi}</p>
+        </div>
+        <div className="flex flex-row md:items-center md:justify-center w-full gap-x-3">
+          <GasPump className="text-primary-700 w-6 h-6" />
+          <p>{item.bahan_bakar}</p>
+        </div>
+        <div className="flex flex-row md:items-center md:justify-center w-full gap-x-3">
+          <Seat className="text-primary-700 w-6 h-6" />
+          <p>Jumlah Kursi {item.jumlah_kursi}</p>
+        </div>
+        <div className="flex flex-row md:items-center md:justify-center w-full gap-x-3">
+          <GitBranch className="text-primary-700 w-6 h-6" />
+          <p>{item.transmisi}</p>
+        </div>
       </div>
 
       <div className="w-full">
@@ -50,7 +64,8 @@ export default function TravelCarRentScreen({
             onClick={() =>
               localStorage.setItem("travel_car_id", item?.id.toString())
             }
-            className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
+            className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]"
+          >
             Rental Mobil Sekarang
           </Button>
         </Link>

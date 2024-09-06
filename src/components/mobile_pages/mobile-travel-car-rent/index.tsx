@@ -10,12 +10,18 @@ import "swiper/css/grid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Grid, Autoplay } from "swiper/modules";
 import Image from "next/image";
-import { travelCars, unggulans } from "@/constants/main";
-import { ChevronRight } from "lucide-react";
 import MobileFeatureTravelCar from "../mobile_travel_car/feature";
 import Link from "next/link";
+import { TravelCarInterface } from "@/types/interface";
+import { CarSimple, GasPump, GitBranch, Seat } from "@phosphor-icons/react";
 
-export default function MobileTravelCarRentScreen() {
+type MobilTravelCarRent = {
+  travelCars: TravelCarInterface[];
+};
+
+export default function MobileTravelCarRentScreen({
+  travelCars,
+}: MobilTravelCarRent) {
   const swiperRef = useRef<any>(null);
 
   return (
@@ -32,14 +38,15 @@ export default function MobileTravelCarRentScreen() {
         className="mySwiper"
         loop={true}
         pagination={{ clickable: true }}
-        ref={swiperRef}>
+        ref={swiperRef}
+      >
         {travelCars.map((item: any, i: number) => {
           return (
             <SwiperSlide key={i}>
               <div className="w-full flex flex-col justify-center items-center gap-y-6 pb-5 md:pb-0 md:p-5 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
                 <div className="w-full h-full">
                   <Image
-                    src={item?.image}
+                    src={item.images.slice(0, 1)[0].image_url}
                     alt="Travel Car"
                     width={200}
                     height={200}
@@ -60,9 +67,22 @@ export default function MobileTravelCarRentScreen() {
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 px-5 md:px-0 gap-y-4 md:gap-y-0 w-full">
-                  {item?.icons?.map((car: any, i: number) => {
-                    return <MobileFeatureTravelCar key={i} car={car} />;
-                  })}
+                  <div className="flex flex-row md:items-center md:justify-center w-full gap-x-3">
+                    <CarSimple className="text-primary-700 w-6 h-6" />
+                    <p>{item.bagasi}</p>
+                  </div>
+                  <div className="flex flex-row md:items-center md:justify-center w-full gap-x-3">
+                    <GasPump className="text-primary-700 w-6 h-6" />
+                    <p>{item.bahan_bakar}</p>
+                  </div>
+                  <div className="flex flex-row md:items-center md:justify-center w-full gap-x-3">
+                    <Seat className="text-primary-700 w-6 h-6" />
+                    <p>Jumlah Kursi {item.jumlah_kursi}</p>
+                  </div>
+                  <div className="flex flex-row md:items-center md:justify-center w-full gap-x-3">
+                    <GitBranch className="text-primary-700 w-6 h-6" />
+                    <p>{item.transmisi}</p>
+                  </div>
                 </div>
 
                 <div className="w-full px-3 md:px-0">
@@ -74,7 +94,8 @@ export default function MobileTravelCarRentScreen() {
                           item?.id.toString()
                         )
                       }
-                      className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
+                      className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]"
+                    >
                       Rental Mobil Sekarang
                     </Button>
                   </Link>

@@ -1,7 +1,7 @@
-import { promos, testimonies } from "@/constants/main";
+import { testimonies } from "@/constants/main";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -56,11 +56,12 @@ export default function TestimoniScreen() {
                 spaceBetween: 30,
               },
             }}
-            ref={swiperRef}>
+            ref={swiperRef}
+          >
             {testimonies.map((item: any, i: number) => {
               return (
                 <SwiperSlide key={i}>
-                  <div className="flex flex-col bg-neutral-50 rounded-lg p-5 w-full gap-y-6 mx-4">
+                  <div className="flex flex-col bg-neutral-50 rounded-lg p-5 w-full gap-y-6 mx-4 h-auto">
                     <div className="flex flex-row w-full gap-x-5 border-b pb-6 border-grey-100">
                       <div className="min-w-[50px] flex flex-row items-center justify-center max-h-[50px]">
                         <Image

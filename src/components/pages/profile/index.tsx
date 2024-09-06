@@ -24,12 +24,14 @@ export default function ProfileScreen() {
         </h3>
 
         <p className="text-[16px] font-normal text-neutral-700 leading-8">
-          Rama Trans adalah perusahaan transportasi darat terkemuka yang
-          menyediakan layanan andal dan berkualitas tinggi. Dengan armada
-          kendaraan modern yang terawat, kami menawarkan perjalanan antar kota,
-          sewa kendaraan untuk acara khusus, dan transportasi untuk perusahaan.
-          Kami berkomitmen untuk memberikan pengalaman perjalanan yang nyaman
-          dan aman bagi setiap penumpang.
+          Sebagai mitra perjalanan terpercaya di Lampung sejak 2012, Rama Tranz
+          berkomitmen untuk menyediakan layanan berkualitas tinggi. Kami
+          menyediakan layanan travel dengan rute seperti travel
+          Lampung-Palembang, travel Lampung-Jakarta, dan travel Jakarta-Lampung.
+          Kami juga menawarkan pengiriman paket yang cepat dan aman, serta
+          rental mobil dengan armada mewah dan modern. Dengan pelayanan 24/7,
+          kami berdedikasi untuk memberikan pengalaman yang aman, nyaman bagi
+          setiap pelanggan.
         </p>
 
         <h3 className="font-semibold text-[24px] text-neutral-700">
@@ -57,7 +59,6 @@ export default function ProfileScreen() {
             Menjamin kepuasan konsumen dengan standar solusi yang berkelanjutan.
           </li>
         </ol>
-
 
         <div className="w-4/12">
           <Button className="bg-primary-700 w-full text-neutral-50">

@@ -14,140 +14,109 @@ import {
 } from "@/components/ui/alert-dialog";
 import { ArrowRight, X } from "lucide-react";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { wisataProps } from "@/services/wisata/api";
+import parser from "html-react-parser";
+import { truncateContent } from "@/helpers";
+import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
+import Modal from "@/components/modal/Modal";
 
-export default function DestinationScreen({ item }: any) {
+export type DetinationScreenProps = {
+  item: wisataProps;
+};
+
+export default function DestinationScreen(props: DetinationScreenProps) {
+  const { item } = props;
+  const [openModal, setOpenModal] = useState(false);
+
   return (
-    <div className="w-full flex flex-col justify-center items-center bg-neutral-50 shadow-md rounded-xl gap-y-4">
-      <div className="w-full h-full relative">
-        <Image
-          src={item?.image}
-          alt={item?.from}
-          width={400}
-          height={400}
-          className="w-full h-full rounded-t-xl"
-        />
-
-        <div className="absolute top-0 bg-primary-700 rounded-tl-xl rounded-br-xl px-5 py-3">
-          <p className="text-neutral-50 font-normal text-[14px]">
-            {item?.location}
-          </p>
+    <>
+      <div className="w-full h-[27rem] flex flex-col justify-center items-center bg-neutral-50 shadow-md rounded-xl gap-y-4 overflow-hidden pb-4 relative">
+        <div className="w-full h-[25rem] overflow-hidden mb-auto">
+          <Image
+            src={item?.image_url}
+            alt={item?.slug}
+            width={400}
+            height={400}
+            className="w-full h-full object-cover"
+          />
         </div>
-      </div>
-
-      <div className="w-full flex flex-col gap-y-1 px-2">
-        <div className="w-full flex flex-row justify-between">
-          <p className="font-normal text-neutral-700 text-[17px]">
-            {item?.title}
-          </p>
-
-          <Star className="w-6 h-6 text-neutral-700" />
-        </div>
-
-        <div className="w-full flex flex-row gap-x-3">
-          <p className="font-normal text-[14px] text-neutral-400">
-            {item?.subTitle}
+        <div className="absolute w-full h-fit top-0">
+          <p className="bg-primary-700 rounded-br-xl px-5 py-3 text-neutral-50 font-normal text-[14px] w-[10rem] text-center">
+            {item?.lokasi}
           </p>
         </div>
 
-        <p className="text-[14px] text-neutral-700 font-normal mt-4">
-          {item?.desc}
-        </p>
-      </div>
-
-      <div className="w-11/12 bg-primary-700 py-2 rounded-lg mb-6 mt-4">
-        <AlertDialog>
-          <AlertDialogTrigger className="w-full">
-            <p className="text-center text-neutral-50 font-normal text-[16px]">
-              Lihat Selengkapnya
+        <div className="w-full h-full flex flex-col gap-y-1 px-2">
+          <div className="w-full flex flex-row justify-between">
+            <p className="font-normal text-neutral-700 text-[17px]">
+              {item?.judul}
             </p>
-          </AlertDialogTrigger>
-          <AlertDialogContent className="w-8/12 p-0">
-            <div className="w-full flex flex-row">
-              <div className="w-full h-full">
-                <Image
-                  src={item?.image}
-                  alt={item?.from}
-                  width={600}
-                  height={600}
-                  className="w-full h-full object-cover rounded-s-lg"
-                />
-              </div>
 
-              <div className="w-full flex flex-col gap-y-5 bg-neutral-50 p-5">
-                <div className="w-full flex flex-col gap-y-5">
-                  <div className="w-full flex flex-row items-center border-b border-outline_border-100 justify-between">
-                    <h3 className="font-semibold text-[18px] text-neutral-700">
-                      Wisata Tegal Mas Island
-                    </h3>
+            <Star className="w-6 h-6 text-neutral-700" />
+          </div>
 
-                    <AlertDialogFooter className="w-1/12">
-                      <AlertDialogCancel className="border-none outline-none">
-                        <X className="w-6 h-6 text-neutral-700" />
-                      </AlertDialogCancel>
-                    </AlertDialogFooter>
-                  </div>
+          <div className="w-full flex flex-row gap-x-3">
+            <p className="font-normal text-[14px] text-neutral-400">
+              {item?.sub_judul}
+            </p>
+          </div>
 
-                  <p className="text-neutral-700 font-normal text-[14px]">
-                    Tegal Mas Island adalah pulau wisata di Teluk Lampung,
-                    Lampung, yang terkenal dengan pantai berpasir putih, air
-                    laut jernih, dan pemandangan alam indah. Pulau ini
-                    menawarkan aktivitas snorkeling, diving, serta penginapan
-                    unik, menjadikannya destinasi favorit untuk liburan eksotis
-                    yang mudah diakses dari Bandar Lampung
-                  </p>
-                </div>
+          <p className="text-[14px] text-neutral-700 font-normal mt-4 pb-4">
+            {truncateContent(item?.konten, 200)}
+          </p>
+          <div className="mt-auto">
+            <ButtonCustom
+              className="w-full hidden md:block"
+              onClick={() => setOpenModal((prev) => !prev)}
+            >
+              Lihat Selengkapnya
+            </ButtonCustom>
+            <ButtonCustom
+              className="w-full block md:hidden"
+            >
+              Lihat Selengkapnya
+            </ButtonCustom>
+          </div>
+        </div>
+      </div>
+      <AlertDialog open={openModal} onOpenChange={setOpenModal}>
+        <AlertDialogContent className="w-8/12 p-0">
+          <div className="w-full flex flex-row">
+            <div className="w-full h-full">
+              <Image
+                src={item?.image_url}
+                alt={item?.slug}
+                width={600}
+                height={600}
+                className="w-full h-full object-cover rounded-s-lg"
+              />
+            </div>
 
-                <div className="w-full flex flex-col">
-                  <h3 className="font-semibold text-[18px] text-neutral-700 border-b border-outline_border-100">
-                    Berikut kelebihan Tegal Mas Island
+            <div className="w-full flex flex-col gap-y-5 bg-neutral-50 p-5">
+              <div className="w-full flex flex-col gap-y-5">
+                <div className="w-full flex flex-row items-center border-b border-outline_border-100 justify-between">
+                  <h3 className="font-semibold text-[18px] text-neutral-700">
+                    {item.judul}
                   </h3>
+
+                  <AlertDialogFooter className="w-1/12">
+                    <AlertDialogCancel className="border-none outline-none">
+                      <X className="w-6 h-6 text-neutral-700" />
+                    </AlertDialogCancel>
+                  </AlertDialogFooter>
                 </div>
 
-                <ul className="w-full flex flex-col gap-y-5 pl-4">
-                  <div className="w-full flex flex-col">
-                    <li className="list-decimal">
-                      Pemandangan Alam yang Memesona
-                    </li>
+                <p className="text-neutral-700 font-normal text-[14px]">
+                  {item.sub_judul}
+                </p>
 
-                    <p className="text-neutral-700 font-normal text-[14px]">
-                      Tegal Mas Island menawarkan pemandangan alam yang luar
-                      biasa dengan hamparan pantai berpasir putih, air laut yang
-                      jernih, dan perbukitan hijau yang menambah keindahan
-                      pulau. Ini adalah tempat yang sempurna untuk menikmati
-                      keindahan alam.
-                    </p>
-                  </div>
-
-                  <div className="w-full flex flex-col">
-                    <li className="list-decimal">
-                      Aktivitas Snorkeling dan Diving yang Menarik
-                    </li>
-
-                    <p className="text-neutral-700 font-normal text-[14px]">
-                      Tegal Mas Island memiliki terumbu karang yang indah dan
-                      keanekaragaman biota laut yang memukau. Pengunjung dapat
-                      menikmati aktivitas snorkeling dan diving untuk melihat
-                      keindahan bawah laut yang menakjubkan.
-                    </p>
-                  </div>
-                </ul>
+                {parser(item.konten)}
               </div>
             </div>
-            {/* <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </AlertDialogDescription>
-            </AlertDialogHeader> */}
-            {/* <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction>Continue</AlertDialogAction>
-            </AlertDialogFooter> */}
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
-    </div>
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
