@@ -2,12 +2,11 @@
 
 import Cookies from "js-cookie";
 import useSWR from "swr";
-import { fetcher, fetcherWithoutAuth } from "@/constants/fetcher";
-import { LoginType } from "@/types/types";
+import { fetcher } from "@/constants/fetcher";
 import {
-  BodyRouteInterface,
+  EmailForgotPasswordInterface,
   LoginUserInterface,
-  ProfileImageUpdateInterface,
+  NewPasswordInterface,
   RegistrationUserInterface,
   UpdateProfileUser,
 } from "@/types/interface";
@@ -84,10 +83,27 @@ export const updateProfileImage = async (data: FormData) => {
   return await response.json();
 };
 
-// register user
+// register forgot password
 export const registerUser = async (data: RegistrationUserInterface) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// register new password
+export const newPassword = async (data: NewPasswordInterface) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/password/reset`,
     {
       method: "POST",
       headers: {
@@ -105,6 +121,25 @@ export const registerUser = async (data: RegistrationUserInterface) => {
 export const loginUser = async (data: LoginUserInterface) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// login user
+export const SubmitEmailForgotPassword = async (
+  data: EmailForgotPasswordInterface
+) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/lupa-password`,
     {
       method: "POST",
       headers: {

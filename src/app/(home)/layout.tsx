@@ -7,7 +7,7 @@ import HomeNavigationBar from "@/components/layouts/home_navbar";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Nunito } from "next/font/google";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useRef } from "react";
 import { Toaster } from "sonner";
 
 const nunito = Nunito({
@@ -24,28 +24,46 @@ export default function HomeLayout({
   const [isScrolledPast, setIsScrolledPast] = useState(false);
   const [isDelayComplete, setIsDelayComplete] = useState(false);
 
+  // Create a ref to track the mounted status
+  const isMountedRef = useRef(true);
+
   useEffect(() => {
+    // Set the ref to true when the component is mounted
+    isMountedRef.current = true;
+
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsScrolledPast(true);
-      } else {
-        setIsScrolledPast(false);
+      // Only update state if the component is still mounted
+      if (isMountedRef.current) {
+        if (window.scrollY > 100) {
+          setIsScrolledPast(true);
+        } else {
+          setIsScrolledPast(false);
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      // Set the ref to false when the component is unmounted
+      isMountedRef.current = false;
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   useEffect(() => {
+    // Start a timer and check if the component is mounted before updating the state
     const timer = setTimeout(() => {
-      setIsDelayComplete(true);
+      if (isMountedRef.current) {
+        setIsDelayComplete(true);
+      }
     }, 2000);
 
-    return () => clearTimeout(timer);
+    // Cleanup the timer when the component is unmounted
+    return () => {
+      isMountedRef.current = false;
+      clearTimeout(timer);
+    };
   }, []);
 
   const isMobile = useMediaQuery("(max-width: 767px)");
@@ -69,8 +87,7 @@ export default function HomeLayout({
     <main
       className={`${nunito.className} w-full relative flex flex-col min-h-screen`}>
       {!isMobile ? (
-        // <div className="w-full relative flex flex-col h-full">
-        <>
+        <Suspense fallback={<div>Loading...</div>}>
           <HomeNavigationBar
             isScrolledPast={isScrolledPast && isDelayComplete}
           />
@@ -79,20 +96,18 @@ export default function HomeLayout({
           <div className="w-full absolute bottom-0 bg-primary-50">
             <Footer />
           </div>
-        </>
+        </Suspense>
       ) : (
-        // </div>
         <div className="w-full relative flex flex-col min-h-screen">
-          {!isProfile() && <HamburgerMenu />}
+          <Suspense fallback={<div>Loading...</div>}>
+            {!isProfile() && <HamburgerMenu />}
 
-          {children}
-          <Toaster position="bottom-right" />
-          {/* <div className="w-full absolute bottom-0 bg-primary-50">
-            <Footer />
-          </div> */}
-          <div className="bottom-0 z-50 fixed w-full bg-neutral-50 rounded-t-xl shadow-md">
-            <BottomMenu />
-          </div>
+            {children}
+            <Toaster position="bottom-right" />
+            <div className="bottom-0 z-50 fixed w-full bg-neutral-50 rounded-t-xl shadow-md">
+              <BottomMenu />
+            </div>
+          </Suspense>
         </div>
       )}
     </main>

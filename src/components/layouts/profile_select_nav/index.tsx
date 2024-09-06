@@ -18,10 +18,10 @@ export default function SelectProfileNav() {
     const urlMap: { [key: string]: string } = {
       Profile: "/profile",
       "Ubah Password": "/profile/change-user-password",
-      Travel: "/profile/order-histories-travel",
-      Rental: "/profile/order-histories-rental",
-      Hotel: "/profile/order-histories-hotel",
-      Paket: "profile/order-histories-paket",
+      "Riwayat Travel": "/profile/order-histories-travel",
+      "Riwayat Rental": "/profile/order-histories-rental",
+      "Riwayat Hotel": "/profile/order-histories-hotel",
+      "Riwayat Paket": "profile/order-histories-paket",
     };
 
     const selectedUrl = urlMap[value];
@@ -33,7 +33,7 @@ export default function SelectProfileNav() {
   return (
     <section className="w-full flex flex-col bg-neutral-50 border-b border-grey-100">
       <Select onValueChange={handleSelectChange}>
-        <SelectTrigger className="w-full text-[16px] font-semibold border-none outline-none rounded-none px-8 py-8">
+        <SelectTrigger className="w-full text-[22px] font-semibold border-none outline-none rounded-none px-8 py-8">
           <SelectValue placeholder="Profile" />
         </SelectTrigger>
         <SelectContent className="w-11/12 bg-neutral-50 border border-grey-100 shadow-md">

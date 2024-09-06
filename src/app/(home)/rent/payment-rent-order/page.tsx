@@ -28,7 +28,7 @@ import { formatCurrency, formatTanggalPanjang, formattedDate } from "@/helpers";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
 import { Trash } from "@phosphor-icons/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import { RichTextDisplay } from "@/components/richTextDisplay";
 import { Loader } from "lucide-react";
@@ -243,8 +243,8 @@ export default function PaymentRentOrderPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    const isLogin = Cookies.get("Authorization")
-    if(!isLogin){
+    const isLogin = Cookies.get("Authorization");
+    if (!isLogin) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -366,12 +366,12 @@ export default function PaymentRentOrderPage() {
             <p className="text-[16px] md:text-xl">Detail Informasi Penyewa</p>
             <Card className="">
               <div className="flex flex-col items-center gap-4 w-full">
-                <div className="flex flex-row w-full items-center">
-                  <div className="w-[50%]">
+                <div className="grid grid-cols-2 md:flex flex-row w-full items-center">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">Nama Penyewa : </p>
                     <p className="font-semibold">{detail?.nama}</p>
                   </div>
-                  <div className="w-[50%]">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">
                       Nomor Induk Kependudukan :{" "}
                     </p>
@@ -379,12 +379,12 @@ export default function PaymentRentOrderPage() {
                   </div>
                 </div>
                 <div className="w-full border-b" />
-                <div className="flex flex-row w-full items-center">
-                  <div className="w-[50%]">
+                <div className="grid grid-cols-2 md:flex flex-row w-full items-center">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">Email</p>
                     <p className="font-semibold">{detail?.email}</p>
                   </div>
-                  <div className="w-[50%]">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">Nomor Telepon</p>
                     <p className="font-semibold">{detail?.no_telp}</p>
                   </div>
@@ -392,7 +392,7 @@ export default function PaymentRentOrderPage() {
 
                 <div className="w-full border-b" />
                 <div className="flex flex-row w-full items-center">
-                  <div className="w-[50%]">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">Alamat</p>
                     <p className="font-semibold">{detail?.alamat}</p>
                   </div>
@@ -405,19 +405,19 @@ export default function PaymentRentOrderPage() {
             <p className="text-[16px] md:text-xl">Detail Sewa Mobil</p>
             <Card className="">
               <div className="flex flex-col items-center gap-4 w-full">
-                <div className="flex flex-row w-full items-center">
-                  <div className="w-[50%]">
+                <div className="grid grid-cols-2 md:flex flex-row w-full items-center">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">Durasi Sewa</p>
                     <p className="font-semibold">{detail?.durasi_sewa}</p>
                   </div>
-                  <div className="w-[50%]">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">Area Sewa</p>
                     <p className="font-semibold">{detail?.area}</p>
                   </div>
                 </div>
                 <div className="w-full border-b" />
-                <div className="flex flex-row w-full items-center">
-                  <div className="w-[50%]">
+                <div className="grid grid-cols-2 md:flex flex-row w-full items-center">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">
                       Jam Keberangkatan Sewa
                     </p>
@@ -425,7 +425,7 @@ export default function PaymentRentOrderPage() {
                       {detail?.jam_keberangkatan} WIB
                     </p>
                   </div>
-                  <div className="w-[50%]">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">Alamat Penjemputan</p>
                     <p className="font-semibold">
                       {detail?.alamat_keberangkatan}
@@ -434,14 +434,14 @@ export default function PaymentRentOrderPage() {
                 </div>
 
                 <div className="w-full border-b" />
-                <div className="flex flex-row w-full items-center">
-                  <div className="w-[50%]">
+                <div className="grid grid-cols-2 md:flex flex-row w-full items-center">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">Tanggal Mulai Sewa</p>
                     <p className="font-semibold">
                       {formatTanggalPanjang(detail?.tanggal_mulai_sewa)}
                     </p>
                   </div>
-                  <div className="w-[50%]">
+                  <div className="w-full">
                     <p className="text-sm text-gray-500">
                       Tanggal Selesai Sewa
                     </p>

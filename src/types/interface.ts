@@ -15,6 +15,17 @@ export interface LoginUserInterface {
   password: string;
 }
 
+export interface EmailForgotPasswordInterface {
+  email: string;
+}
+
+export interface NewPasswordInterface {
+  password: string;
+  password_confirmation: string;
+  token: string;
+  email: string;
+}
+
 export interface ProfileImageUpdateInterface {
   image_url: string;
 }

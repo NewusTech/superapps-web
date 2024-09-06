@@ -1,3 +1,5 @@
+"use client";
+
 import { Bed, MapPin, Star } from "@phosphor-icons/react";
 import { DimensionsIcon } from "@radix-ui/react-icons";
 import Image from "next/image";

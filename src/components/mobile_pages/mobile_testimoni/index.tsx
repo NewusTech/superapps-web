@@ -1,3 +1,5 @@
+"use client";
+
 import { promos, testimonies } from "@/constants/main";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";

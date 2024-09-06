@@ -116,7 +116,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
         if (response.success === true) {
           Cookies.set("Authorization", response?.data?.token);
 
-          setToken(response?.data?.token)
+          setToken(response?.data?.token);
 
           Swal.fire({
             icon: "success",
@@ -140,14 +140,13 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
             position: "center",
           });
         }
-
       } catch (error) {
         console.log(error);
       } finally {
         setFirstLoading(false);
         setHasSubmitted(false);
-        setIsLoginPopupOpen(false)
-        setLoginModal(false)
+        setIsLoginPopupOpen(false);
+        setLoginModal(false);
       }
     }
   };
@@ -613,9 +612,11 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                           </div>
 
                           <div className="w-full flex flex-col gap-y-6">
-                            <p className="text-end text-primary-700 ">
+                            <Link
+                              href={"/forgot-password"}
+                              className="text-end hover:underline hover:text-primary-600 text-primary-700 ">
                               Lupa Kata Sandi
-                            </p>
+                            </Link>
 
                             <div className="w-full flex flex-row">
                               <Button

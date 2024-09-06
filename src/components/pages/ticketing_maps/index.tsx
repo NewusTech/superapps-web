@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import { Button } from "@/components/ui/button";
@@ -12,8 +14,7 @@ export default function TicketingMaps({ item }: any) {
           className="border-none w-full h-full"
           allowFullScreen
           loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+          referrerPolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
       <div className="flex flex-col w-full gap-y-4">

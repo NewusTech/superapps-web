@@ -116,7 +116,7 @@ export default function Home() {
     }
   };
 
-  const fetchTitikJemput = useMemo(async () => {
+  const fetchTitikJemput = async () => {
     try {
       const response = await getAllPointMasterJemput({
         cabang: bookingPayload?.from || "",
@@ -127,9 +127,9 @@ export default function Home() {
       setPointsJempuut([]);
       console.log(error);
     }
-  }, [bookingPayload?.from]);
+  };
 
-  const fetchTitikAntar = useMemo(async () => {
+  const fetchTitikAntar = async () => {
     try {
       const response = await getAllPointMasterJemput({
         cabang: bookingPayload?.to || "",
@@ -139,7 +139,7 @@ export default function Home() {
       setPointsAntar([]);
       console.error(error);
     }
-  }, [bookingPayload?.to]);
+  }
 
   useEffect(() => {
     fetchAllTravelCars();
@@ -147,6 +147,14 @@ export default function Home() {
     getWisata()
     getRute()
   }, []);
+
+  useEffect(() => {
+    fetchTitikJemput();
+  }, [bookingPayload?.from]);
+
+  useEffect(() => {
+    fetchTitikAntar();
+  }, [bookingPayload?.to]);
 
   const startDateFormatted = startDate
     ? formatDate(new Date(startDate))

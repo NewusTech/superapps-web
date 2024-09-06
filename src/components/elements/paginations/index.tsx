@@ -1,3 +1,5 @@
+"use client";
+
 interface PaginationProps {
   totalItems: number;
   itemsPerPage: number;

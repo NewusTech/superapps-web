@@ -1,3 +1,5 @@
+"use client";
+
 import { RouteInterface } from "@/types/interface";
 import { Calendar } from "@phosphor-icons/react";
 import { ArrowRight } from "lucide-react";

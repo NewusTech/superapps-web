@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { cn } from "@/lib/utils";
@@ -14,7 +16,14 @@ export type ModalProps = {
 };
 
 export default function Modal(props: ModalProps) {
-  const { children, className, visible, setVisible, title="", responsive } = props;
+  const {
+    children,
+    className,
+    visible,
+    setVisible,
+    title = "",
+    responsive,
+  } = props;
   const isDesktop = useMediaQuery("(min-width: 768px)");
   if (isDesktop) {
     return (

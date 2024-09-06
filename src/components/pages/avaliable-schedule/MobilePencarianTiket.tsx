@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -71,35 +73,31 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
       to: bookingPayload?.to || "",
       seats: Number.parseInt(value),
     });
-    setPassenger([])
+    setPassenger([]);
   };
 
   return (
     <Card>
       <Tabs
         defaultValue="Sekali Jalan"
-        className="w-full flex flex-col justify-center self-center items-center"
-      >
+        className="w-full flex flex-col justify-center self-center items-center">
         <TabsList className="w-11/12 flex flex-row px-5 py-6 mt-4 border-b border-grey-100 pb-10 rounded-none">
           <TabsTrigger
             className="data-[state=active]:bg-primary-700 data-[state=active]:text-neutral-50 w-full py-3"
-            value="Sekali Jalan"
-          >
+            value="Sekali Jalan">
             Sekali Jalan
           </TabsTrigger>
           <TabsTrigger
             className="data-[state=active]:bg-primary-700 data-[state=active]:text-neutral-50 w-full py-3"
             value="Pulang Pergi"
-            disabled
-          >
+            disabled>
             Pulang Pergi
           </TabsTrigger>
         </TabsList>
 
         <TabsContent
           className="flex flex-col w-full px-4 gap-y-10 mt-8"
-          value="Sekali Jalan"
-        >
+          value="Sekali Jalan">
           <div className="w-full flex flex-col gap-y-3">
             <div className="w-full flex flex-col border-b border-grey-100">
               <h6>Keberangkatan</h6>
@@ -109,8 +107,7 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
 
                 <Select
                   onValueChange={handleChangeKeberangkatan}
-                  value={bookingPayload?.from}
-                >
+                  value={bookingPayload?.from}>
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
@@ -137,8 +134,7 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
 
                 <Select
                   onValueChange={handleChangeJutuan}
-                  value={bookingPayload?.to}
-                >
+                  value={bookingPayload?.to}>
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
@@ -165,8 +161,7 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
 
                 <Select
                   onValueChange={handleChangeKursi}
-                  value={bookingPayload?.seats.toString() || "1"}
-                >
+                  value={bookingPayload?.seats.toString() || "1"}>
                   <SelectTrigger className="w-full border-none outline-none text-[14px]">
                     <SelectValue placeholder="Pilih..." />
                   </SelectTrigger>
@@ -213,13 +208,14 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
                           "border border-primary-700 absolute left-1",
                         nav_button_next:
                           "border border-primary-700 absolute right-1",
-                          day_today: `${bookingPayload?.date === new Date()?"bg-primary-700 text-neutral-50":"bg-primary-500 text-neutral-50"}`,
-                          day_selected:"bg-primary-700 text-neutral-50",
-                          day_disabled: "text-neutral-400 cursor-not-allowed bg-gray-200",
+                        day_today: `${bookingPayload?.date === new Date() ? "bg-primary-700 text-neutral-50" : "bg-primary-500 text-neutral-50"}`,
+                        day_selected: "bg-primary-700 text-neutral-50",
+                        day_disabled:
+                          "text-neutral-400 cursor-not-allowed bg-gray-200",
                       }}
                       mode="single"
                       selected={bookingPayload?.date}
-                      onSelect={(date)=>handleChangeDate(date||new Date())}
+                      onSelect={(date) => handleChangeDate(date || new Date())}
                       disabled={(date) => isBeforeToday(date)} // Disable tanggal sebelum hari ini
                       initialFocus
                     />
@@ -240,8 +236,7 @@ export default function MobilePencarianTiket(props: MobilePencarianProps) {
 
         <TabsContent
           value="Pulang Pergi"
-          className="flex flex-col w-full px-4 gap-y-10 mt-0"
-        >
+          className="flex flex-col w-full px-4 gap-y-10 mt-0">
           <div className="w-full flex flex-col gap-y-3">
             <div className="w-full flex flex-col border-b border-grey-100 mt-5">
               <h6>Keberangkatan</h6>

@@ -60,7 +60,7 @@ export const formRentalSchema = z.object({
   alamat: z
     .string({ message: "Alamat tidak boleh kosong" })
     .min(5, { message: "Alamat harus memiliki minimal 5 karakter" }),
-  durasi_sewa: z.string({ message: "Durasi sewa harus dipilih" }),
+  // durasi_sewa: z.string({ message: "Durasi sewa harus dipilih" }),
   area: z.enum(["Dalam Kota", "Luar Kota"], {
     message: "Area sewa harus dipilih",
   }),
@@ -90,4 +90,23 @@ export const formRentalSchema = z.object({
     .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
       message: "Jam keberangkatan harus dalam format HH:mm",
     }),
+});
+
+export const formEmailSubmitForgotPasswordSchema = z.object({
+  email: z
+    .string({ message: "Email tidak boleh kosong" })
+    .email({ message: "Format email tidak valid" }),
+});
+
+export const formSubmitNewPasswordSchema = z.object({
+  password: z
+    .string({
+      message: "Kata sandi tidak boleh kosong",
+    })
+    .min(6, { message: "Kata Sandi harus lebih dari 6 karakter!" })
+    .max(15, { message: "Kata Sandi tidak boleh lebih dari 15 karakter!" }),
+  password_confirmation: z.string({
+    message:
+      "Konfirmasi kata sandi tidak boleh kosong dan harus sama dengan kata sandi!",
+  }),
 });

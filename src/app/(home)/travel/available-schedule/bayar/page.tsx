@@ -114,7 +114,7 @@ export default function PageBayar() {
       if (response.success === true) {
         Swal.fire({
           icon: "success",
-          title: "Berhasil membuat pesanan, silahkan upload bukti pembayaran!",
+          title: "Berhasil membuat pesanan travel!",
           timer: 2000,
           showConfirmButton: false,
           position: "center",
@@ -152,8 +152,8 @@ export default function PageBayar() {
   }, []);
 
   useEffect(() => {
-    if(tncCheck){
-      setModalTnc(true)
+    if (tncCheck) {
+      setModalTnc(true);
     }
   }, [tncCheck]);
 
@@ -278,8 +278,7 @@ export default function PageBayar() {
               Saya Menyetujui{" "}
               <span
                 className="text-primary-700"
-                onClick={() => setModalTnc(true)}
-              >
+                onClick={() => setModalTnc(true)}>
                 Syarat & Ketentuan
               </span>{" "}
               Rama Tranz
@@ -298,8 +297,7 @@ export default function PageBayar() {
             onClick={handleNextStep}
             disabled={
               !tncCheck || selectedPaymentMethod.trim() === "" || isLoading
-            }
-          >
+            }>
             {isLoading ? (
               <Loader className="animate-spin" />
             ) : (
@@ -310,26 +308,25 @@ export default function PageBayar() {
       </div>
       <Modal visible={modalTnc} setVisible={setModalTnc}>
         <div className="flex flex-col">
-        <DialogHeader className="mt-4">
-          <DialogTitle className="text-[26px] text-neutral-700">
-            Syarat dan Ketentuan
-          </DialogTitle>
-        </DialogHeader>
-        <div className="m-3 px-4 flex flex-col items-center w-full verticalScroll gap-y-6">
-          <div>
-            {syarat && <RichTextDisplay content={syarat.description} />}
-          </div>
+          <DialogHeader className="mt-4">
+            <DialogTitle className="text-[26px] text-neutral-700">
+              Syarat dan Ketentuan
+            </DialogTitle>
+          </DialogHeader>
+          <div className="m-3 px-4 flex flex-col items-center w-full verticalScroll gap-y-6">
+            <div>
+              {syarat && <RichTextDisplay content={syarat.description} />}
+            </div>
 
-          <div
-            onClick={() => {
-              setModalTnc(false)
-              setTncCheck(true)
-            }}
-            className="bg-primary-700 text-center cursor-pointer w-4/12 rounded-full text-neutral-50 py-1 px-5"
-          >
-            Setuju
+            <div
+              onClick={() => {
+                setModalTnc(false);
+                setTncCheck(true);
+              }}
+              className="bg-primary-700 text-center cursor-pointer w-4/12 rounded-full text-neutral-50 py-1 px-5">
+              Setuju
+            </div>
           </div>
-        </div>
         </div>
       </Modal>
     </div>
