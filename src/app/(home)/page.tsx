@@ -150,10 +150,12 @@ export default function Home() {
 
   useEffect(() => {
     fetchTitikJemput();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingPayload?.from]);
 
   useEffect(() => {
     fetchTitikAntar();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingPayload?.to]);
 
   const startDateFormatted = startDate
