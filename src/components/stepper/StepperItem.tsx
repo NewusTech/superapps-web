@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 
@@ -34,8 +36,7 @@ const StepperItem = ({
       className={twMerge([
         "font-manrope font-medium w-20 text-center line-clamp-1",
         `${isActive ? "text-primary-700" : "text-black"}`,
-      ])}
-    >
+      ])}>
       {label}
     </p>
   </div>

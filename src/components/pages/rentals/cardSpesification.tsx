@@ -1,3 +1,5 @@
+"use client";
+
 import { DetailCarInterface } from "@/types/interface";
 import React from "react";
 

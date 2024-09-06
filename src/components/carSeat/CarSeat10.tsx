@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { GiSteeringWheel } from "react-icons/gi";
 import { cn } from "@/lib/utils";
@@ -114,8 +116,7 @@ function SeatItem(props: SeatItemProps) {
               ? "bg-transparent"
               : "bg-primary-700 text-white",
       ])}
-      {...rest}
-    >
+      {...rest}>
       {status === "driver" ? (
         <GiSteeringWheel size={32} />
       ) : (

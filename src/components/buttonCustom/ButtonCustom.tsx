@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -7,7 +9,7 @@ export type myButtonProps = {
 } & React.ButtonHTMLAttributes<any>;
 
 export default function ButtonCustom(props: myButtonProps) {
-  const { children, variant = "primary",...rest } = props;
+  const { children, variant = "primary", ...rest } = props;
   const getVariant = () => {};
   return (
     <button
@@ -15,9 +17,9 @@ export default function ButtonCustom(props: myButtonProps) {
       className={twMerge([
         "py-2 px-2 sm:py-3 sm:px-5 rounded-md duration-300 text-white text-xs sm:text-base",
         rest.className,
-        `${variant === "primary" ? "bg-primary-700 hover:bg-primary-600" : "text-primary-700 border border-primary-700 hover:border-primary-600 hover:bg-primary-700 hover:text-white"}`, rest.disabled?"bg-gray-500 text-white cursor-not-allowed":""
-      ])}
-    >
+        `${variant === "primary" ? "bg-primary-700 hover:bg-primary-600" : "text-primary-700 border border-primary-700 hover:border-primary-600 hover:bg-primary-700 hover:text-white"}`,
+        rest.disabled ? "bg-gray-500 text-white cursor-not-allowed" : "",
+      ])}>
       {children}
     </button>
   );

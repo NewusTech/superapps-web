@@ -1,3 +1,5 @@
+"use client";
+
 import { PassengerTravelInterface } from "@/types/interface";
 import { Seat } from "@phosphor-icons/react";
 import React from "react";

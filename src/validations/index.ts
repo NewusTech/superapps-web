@@ -91,3 +91,22 @@ export const formRentalSchema = z.object({
       message: "Jam keberangkatan harus dalam format HH:mm",
     }),
 });
+
+export const formEmailSubmitForgotPasswordSchema = z.object({
+  email: z
+    .string({ message: "Email tidak boleh kosong" })
+    .email({ message: "Format email tidak valid" }),
+});
+
+export const formSubmitNewPasswordSchema = z.object({
+  password: z
+    .string({
+      message: "Kata sandi tidak boleh kosong",
+    })
+    .min(6, { message: "Kata Sandi harus lebih dari 6 karakter!" })
+    .max(15, { message: "Kata Sandi tidak boleh lebih dari 15 karakter!" }),
+  password_confirmation: z.string({
+    message:
+      "Konfirmasi kata sandi tidak boleh kosong dan harus sama dengan kata sandi!",
+  }),
+});

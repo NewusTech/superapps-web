@@ -1,3 +1,5 @@
+"use client";
+
 import { Calendar } from "@phosphor-icons/react";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";

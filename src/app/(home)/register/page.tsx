@@ -390,8 +390,6 @@ export default function RegisterScreen() {
                 </div>
 
                 <div className="w-full flex flex-col gap-y-6">
-                  <p className="text-end text-primary-700 ">Lupa Kata Sandi</p>
-
                   <div className="w-full flex flex-row">
                     <Button
                       type="submit"
@@ -532,9 +530,11 @@ export default function RegisterScreen() {
                         </div>
 
                         <div className="w-full flex flex-col gap-y-6">
-                          <p className="text-end text-primary-700 ">
+                          <Link
+                            href={"/forgot-password"}
+                            className="text-end hover:underline hover:text-primary-600 text-primary-700 ">
                             Lupa Kata Sandi
-                          </p>
+                          </Link>
 
                           <div className="w-full flex flex-row">
                             <Button

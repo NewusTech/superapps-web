@@ -1,3 +1,4 @@
+"use client";
 import ButtonCustom from "@/components/buttonCustom/ButtonCustom";
 import Button from "@/components/buttonCustom/ButtonCustom";
 import Card from "@/components/ui/card/Card";
