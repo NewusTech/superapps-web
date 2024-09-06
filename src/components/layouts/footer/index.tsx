@@ -1,3 +1,5 @@
+"use client";
+
 import ramatranz from "@/../../public/assets/images/neededs/ramatranz.png";
 import playStore from "@/../../public/assets/images/neededs/goolgle-play.png";
 import FollowFooter from "@/components/pages/footer";

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 export default function IntroductionScreen({ item, index }: any) {

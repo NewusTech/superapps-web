@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/components/buttonCustom/ButtonCustom";
 import Card from "@/components/ui/card/Card";
 import { Download } from "lucide-react";
@@ -54,15 +56,13 @@ export default function StatusPembayaran() {
           <div className="flex flex-row items-center justify-center gap-4 text-sm md:text-base">
             <Button
               className="flex flex-row gap-2 items-center justify-center rounded-full px-6"
-              variant="primary"
-            >
+              variant="primary">
               <Download />
               Invoice
             </Button>
             <Button
               className="flex flex-row gap-2 items-center justify-center rounded-full px-6"
-              variant="secondary"
-            >
+              variant="secondary">
               <Download />
               E-Tiket
             </Button>

@@ -1,3 +1,5 @@
+"use client";
+
 import Modal from "@/components/modal/Modal";
 import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";

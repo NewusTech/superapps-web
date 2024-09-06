@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { cn } from "@/lib/utils";
@@ -14,14 +16,21 @@ export type ModalProps = {
 };
 
 export default function Modal(props: ModalProps) {
-  const { children, className, visible, setVisible, title="", responsive } = props;
+  const {
+    children,
+    className,
+    visible,
+    setVisible,
+    title = "",
+    responsive,
+  } = props;
   const isDesktop = useMediaQuery("(min-width: 768px)");
   if (isDesktop) {
     return (
       <Dialog open={visible} onOpenChange={setVisible}>
         <DialogContent className={cn("sm:max-w-md bg-white", className)}>
-          <DialogHeader className={title?"":"hidden"}>
-             <DialogTitle>{title}</DialogTitle>
+          <DialogHeader className={title ? "" : "hidden"}>
+            <DialogTitle>{title}</DialogTitle>
           </DialogHeader>
           <div className="flex items-center justify-center space-x-2">
             {children}
@@ -33,8 +42,8 @@ export default function Modal(props: ModalProps) {
   return (
     <Drawer open={visible} onOpenChange={setVisible}>
       <DrawerContent className={cn("bg-white pb-10", className)}>
-        <DrawerHeader className={cn("text-left",title?"":"hidden")}>
-           <DrawerTitle>{title}</DrawerTitle>
+        <DrawerHeader className={cn("text-left", title ? "" : "hidden")}>
+          <DrawerTitle>{title}</DrawerTitle>
         </DrawerHeader>
         {children}
       </DrawerContent>

@@ -1,3 +1,5 @@
+"use client";
+
 import StepperItem from "./StepperItem";
 
 const Stepper = ({

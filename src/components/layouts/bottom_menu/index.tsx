@@ -1,3 +1,5 @@
+"use client";
+
 import { House, Package, UserCircle, Van } from "@phosphor-icons/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -34,17 +36,13 @@ export default function BottomMenu() {
         } grid grid-rows-2 place-items-center gap-y-2 w-full p-2`}>
         <Van
           className={`w-5 h-5 ${
-            pathName === "/travel"
-              ? "text-neutral-50"
-              : "text-primary-700"
+            pathName === "/travel" ? "text-neutral-50" : "text-primary-700"
           }`}
         />
 
         <p
           className={`${
-            pathName === "/travel"
-              ? "text-neutral-50"
-              : "text-primary-700"
+            pathName === "/travel" ? "text-neutral-50" : "text-primary-700"
           } font-normal text-[12px]`}>
           Travel
         </p>
