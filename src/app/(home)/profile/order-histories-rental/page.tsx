@@ -65,7 +65,7 @@ export default function MyRentOrderHistories() {
   };
 
   return (
-    <section className="flex flex-col gap-y-5 md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
+    <section className="flex flex-col gap-y-5 w-full md:w-full h-full justify-center items-center relative md:mb-0 pb-36 md:pb-80">
       <div className="w-full bg-white shadow-sm border px-5 py-3 border-grey-100 rounded-lg flex flex-row gap-x-3 mt-5 md:mt-32">
         <Notepad className="w-6 h-6 text-neutral-500" />
 

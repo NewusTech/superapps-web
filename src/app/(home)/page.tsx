@@ -108,7 +108,7 @@ export default function Home() {
     try {
       const response = await getAllRute();
       setTravelRutes(response.data);
-      setFilterTravelRutes(response.data[0].kota_asal)
+      setFilterTravelRutes(response.data[0].kota_asal);
     } catch (error) {
       console.log(error);
     }
@@ -305,12 +305,12 @@ export default function Home() {
 
       {/* Travel Route Car Section */}
       <div className="w-full flex flex-col gap-y-8 pb-24">
-        <div className="w-full flex flex-col items-center px-8 md:px-56 gap-y-6">
+        <div className="w-full flex flex-col items-center px-8 md:px-56 gap-y-3">
           <h2 className="text-neutral-700 font-semibold text-[26px] md:text-[36px]">
             Rute Armada Kami
           </h2>
 
-          <p className="font-normal text-center text-neutral-700 text-[14px]">
+          <p className="font-normal text-center text-neutral-700 md:text-[18px]">
             Rekomendasi pilihan rute favorit di Rama Tranz
           </p>
         </div>
@@ -356,13 +356,17 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16 overflow-x-auto">
+        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16 verticalScroll overflow-x-auto">
           {uniqueTravelRoutes.map((item) => (
             <Button
               key={item.id}
-              className={cn("bg-neutral-50 border border-neutral-700 py-4 md:py-6",filterTravelRutes===item.kota_asal?"bg-primary-700 text-white border-primary-700":"")}
-              onClick={()=>setFilterTravelRutes(item.kota_asal)}
-            >
+              className={cn(
+                "bg-neutral-50 border border-neutral-700 py-4 md:py-6",
+                filterTravelRutes === item.kota_asal
+                  ? "bg-primary-700 text-white border-primary-700"
+                  : ""
+              )}
+              onClick={() => setFilterTravelRutes(item.kota_asal)}>
               {item.kota_asal}
             </Button>
           ))}
@@ -373,9 +377,16 @@ export default function Home() {
             return <TravelRoute key={i} item={item} />;
           })}
         </div> */}
+
+        {/* {isMobile && ( */}
         <div className="grid grid-cols-1 md:mt-6 gap-5 pl-8 md:px-16">
-          <MobileTravelRoute travelRutes={travelRutes.filter((item)=>item.kota_asal===filterTravelRutes)} />
+          <MobileTravelRoute
+            travelRutes={travelRutes.filter(
+              (item) => item.kota_asal === filterTravelRutes
+            )}
+          />
         </div>
+        {/* )} */}
       </div>
 
       {/* Destination Section */}
@@ -392,7 +403,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16 overflow-x-scroll md:overflow-hidden">
+        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16 verticalScrool overflow-x-auto md:overflow-hidden">
           <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
             Bandar Lampung
           </Button>
@@ -504,8 +515,7 @@ export default function Home() {
 
           <Link
             href={"/"}
-            className="hidden w-4/12 md:flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5"
-          >
+            className="hidden w-4/12 md:flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-4 rounded-lg gap-x-5">
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">
@@ -527,8 +537,7 @@ export default function Home() {
         <div className="md:hidden">
           <Link
             href={"/"}
-            className="w-full flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-3 rounded-lg gap-x-5"
-          >
+            className="w-full flex flex-row justify-center items-center bg-primary-700 hover:bg-primary-600 px-5 py-3 rounded-lg gap-x-5">
             <Play className="w-5 h-5 text-neutral-50" />
 
             <p className="text-neutral-50 font-normal text-[16px]">

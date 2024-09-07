@@ -23,18 +23,18 @@ export default function TestimoniScreen() {
           Testimoni Penumpang Kami
         </h2>
 
-        <p className="font-normal text-center text-neutral-700 text-[14px]">
+        <p className="font-normal text-center text-neutral-700 text-[18px]">
           Apa yang mereka katakan pada Rama Tranz
         </p>
       </div>
 
-      <div className="w-full px-16 flex flex-row items-center justify-center self-center gap-x-5 mt-20">
-        <div className="absolute left-14 z-10">
+      <div className="w-full px-12 flex flex-row items-center justify-center self-center gap-x-5 mt-20">
+        {/* <div className="absolute left-14 z-10">
           <ChevronLeft className="text-neutral-50 swiper-button-prev border border-outline_border-100 rounded-full w-10 h-10" />
         </div>
         <div className="absolute right-14 z-10">
           <ChevronRight className="text-neutral-50 swiper-button-next border border-outline_border-100 rounded-full w-10 h-10" />
-        </div>
+        </div> */}
         <div className="w-11/12 flex flex-row">
           <Swiper
             modules={[Navigation, Pagination, Grid, Autoplay]}
@@ -58,12 +58,11 @@ export default function TestimoniScreen() {
                 spaceBetween: 30,
               },
             }}
-            ref={swiperRef}
-          >
+            ref={swiperRef}>
             {testimonies.map((item: any, i: number) => {
               return (
                 <SwiperSlide key={i}>
-                  <div className="flex flex-col bg-neutral-50 rounded-lg p-5 w-full gap-y-6 mx-4 h-auto">
+                  <div className="flex flex-col min-h-[230px] bg-neutral-50 rounded-lg p-5 w-full gap-y-6 mx-4 h-auto">
                     <div className="flex flex-row w-full gap-x-5 border-b pb-6 border-grey-100">
                       <div className="min-w-[50px] flex flex-row items-center justify-center max-h-[50px]">
                         <Image

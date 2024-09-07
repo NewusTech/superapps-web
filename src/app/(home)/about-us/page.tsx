@@ -15,14 +15,14 @@ import { Navigation, Pagination, Grid, Autoplay } from "swiper/modules";
 
 export default function AboutUsScreen() {
   return (
-    <section className="w-full flex flex-col mt-[10rem] md:mt-[6rem] items-center pb-36 md:mb-[350px]">
-      <div className="w-full flex flex-col items-center justify-center bg-[#06597E] h-fit min-h-0 md:min-h-[25rem] gap-y-10 pt-20 pb:10 md:pb-40">
-        <div className="w-full flex flex-col items-center justify-center gap-y-10">
+    <section className="w-full flex flex-col mt-28 md:mt-[6rem] items-center pb-36 md:mb-[300px]">
+      <div className="w-full flex flex-col items-center justify-center bg-[#06597E] h-fit min-h-0 md:min-h-[25rem] pb-24 gap-y-10 pt-10 pb:10 md:pb-40">
+        <div className="w-full flex flex-col items-center justify-center gap-y-5 md:gap-y-10">
           <h2 className="text-neutral-50 font-bold text-[26px] md:text-[32px] text-center">
             TENTANG RAMA TRANZ
           </h2>
 
-          <p className="text-neutral-50 text-center font-normal text-[18px] mx-4 md:mx-48">
+          <p className="text-neutral-50 text-center font-normal text-[14px] md:text-[18px] mx-4 md:mx-48">
             Rama Trans adalah perusahaan transportasi darat terkemuka yang
             menyediakan layanan andal dan berkualitas tinggi. Dengan armada
             kendaraan modern yang terawat, kami menawarkan perjalanan antar
@@ -31,8 +31,8 @@ export default function AboutUsScreen() {
             yang nyaman dan aman bagi setiap penumpang.
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center relative md:absolute w-full h-fit">
-          <div className="relative top-0 md:top-[15rem] flex flex-col md:flex-row gap-4 md:gap-10 h-fit w-full p-4 items-center justify-center">
+        <div className="flex flex-col items-center justify-center absolute w-full h-fit">
+          <div className="relative top-[13rem] md:top-[15rem] flex flex-row gap-x-2 md:gap-10 h-fit w-full px-2 items-center justify-center">
             {AboutImages?.map((item: any, i: number) => {
               return <AboutUsImageCard key={i} item={item} />;
             })}
@@ -41,7 +41,7 @@ export default function AboutUsScreen() {
       </div>
 
       <div className="w-11/12 flex flex-col justify-center items-center border border-grey-100 rounded-xl shadow-lg mt-[5rem] md:mt-40 py-8 gap-y-8 overflow-hidden">
-        <div className="w-6/12 flex flex-col items-center justify-center border border-grey-100 rounded-lg gap-y-4 py-4">
+        <div className="w-11/12 md:w-7/12 flex flex-col items-center justify-center border border-grey-100 rounded-lg gap-y-4 py-4">
           <h5 className="font-semibold text-neutral-700 text-[18px]">
             Visi Kami
           </h5>
@@ -57,12 +57,12 @@ export default function AboutUsScreen() {
             Misi Kami
           </h5>
 
-          <div className="w-11/12 hidden md:flex flex-row gap-x-4">
+          <div className="w-11/12 flex flex-col gap-y-4 md:flex-row gap-x-4">
             {AboutNumbers?.map((item: any, i: number) => {
               return <AboutUsNumberCard key={i} item={item} />;
             })}
           </div>
-          <div className="w-11/12 flex md:hidden flex-row gap-x-4">
+          {/* <div className="w-11/12 flex md:hidden flex-row gap-x-4">
             <Swiper
               modules={[Navigation, Pagination, Grid, Autoplay]}
               autoplay={{ delay: 3000 }}
@@ -83,7 +83,7 @@ export default function AboutUsScreen() {
                 );
               })}
             </Swiper>
-          </div>
+          </div> */}
         </div>
       </div>
 

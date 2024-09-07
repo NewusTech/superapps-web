@@ -10,8 +10,6 @@ import "swiper/css/grid";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Grid, Autoplay } from "swiper/modules";
 import Image from "next/image";
-import premio from "../../../../public/assets/images/neededs/rental/premio.png";
-import commuter from "../../../../public/assets/images/neededs/rental/commuter.png";
 import { CarSimple, GasPump, GitBranch, Seat } from "@phosphor-icons/react";
 import { TravelCarInterface } from "@/types/interface";
 import Link from "next/link";
@@ -40,15 +38,14 @@ export default function MobileTravelCarScreen(
         className="mySwiper"
         loop={true}
         pagination={{ clickable: true }}
-        ref={swiperRef}
-      >
+        ref={swiperRef}>
         {travelCars.map((item, i: number) => {
           return (
             <SwiperSlide key={i}>
-              <div className="w-full flex flex-col justify-center items-center gap-y-6 pb-5 md:pb-0 md:p-5 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
-                <div className="w-full h-[15rem]">
+              <div className="w-full flex flex-col min-h-[500px] items-center gap-y-6 pb-5 md:pb-0 md:p-5 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
+                <div className="w-full h-full">
                   <Image
-                    src={item.images.slice(0,1)[0].image_url}
+                    src={item.images.slice(0, 1)[0].image_url}
                     alt="Travel Car"
                     width={200}
                     height={200}
@@ -61,9 +58,11 @@ export default function MobileTravelCarScreen(
                     {item?.type}
                   </h5>
 
-                  <p className="text-neutral-700 text-[14px] font-normal">
-                    {item?.deskripsi}
-                  </p>
+                  <div className="w-full min-h-[80px]">
+                    <p className="text-neutral-700 text-[14px] font-normal">
+                      {item?.deskripsi}
+                    </p>
+                  </div>
 
                   <div className="h-0.5 w-full border border-neutral-700 border-opacity-30"></div>
                 </div>
@@ -96,8 +95,7 @@ export default function MobileTravelCarScreen(
                           item?.id.toString()
                         )
                       }
-                      className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]"
-                    >
+                      className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
                       Rental Mobil Sekarang
                     </Button>
                   </Link>

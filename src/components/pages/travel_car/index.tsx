@@ -28,13 +28,15 @@ export default function TravelCarScreen(props: MobilTravelCarScreenProps) {
       </div>
 
       <div className="flex flex-col w-full gap-y-4">
-        <h5 className="font-semibold text-neutral-700 text-[18px]">
+        <h5 className="font-semibold text-neutral-700 text-[26px]">
           {item?.type}
         </h5>
 
-        <p className="text-neutral-700 text-[14px] font-normal">
-          {item?.deskripsi}
-        </p>
+        <div className="w-full min-h-[60px]">
+          <p className="text-neutral-700 text-[14px] font-normal">
+            {item?.deskripsi}
+          </p>
+        </div>
 
         <div className="h-0.5 w-full border border-neutral-700 border-opacity-30"></div>
       </div>
@@ -64,8 +66,7 @@ export default function TravelCarScreen(props: MobilTravelCarScreenProps) {
             onClick={() =>
               localStorage.setItem("travel_car_id", item?.id.toString())
             }
-            className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]"
-          >
+            className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
             Rental Mobil Sekarang
           </Button>
         </Link>

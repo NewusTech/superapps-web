@@ -118,15 +118,12 @@ export default function NewPasswordScreen() {
           <h2 className="font-semibold text-neutral-700 text-[26px]">
             Selamat Datang di Website Rama Tranz
           </h2>
-          <p className="text-center">
-            Login untuk melanjutkan dan mendapatkan pengalaman terbaik <br />{" "}
-            dari layanan kami.
-          </p>
+          <p className="text-center">Silahkan ganti kata sandi baru anda.</p>
         </div>
 
         <div className="w-full flex flex-col justify-center items-center gap-y-5">
           <h4 className="font-semibold text-neutral-700 text-[24px]">
-            Daftar akun Rama Tranz
+            Halaman Reset Kata Sandi
           </h4>
 
           <div className="w-full md:w-5/12 bg-white border border-grey-100 rounded-lg shadow-lg p-4 flex flex-col gap-y-5">

@@ -38,8 +38,7 @@ export default function MobileTravelCarRentScreen({
         className="mySwiper"
         loop={true}
         pagination={{ clickable: true }}
-        ref={swiperRef}
-      >
+        ref={swiperRef}>
         {travelCars.map((item: any, i: number) => {
           return (
             <SwiperSlide key={i}>
@@ -56,12 +55,14 @@ export default function MobileTravelCarRentScreen({
 
                 <div className="flex flex-col w-full gap-y-4 px-5 md:px-0">
                   <h5 className="font-semibold text-neutral-700 text-[18px]">
-                    {item?.title}
+                    {item?.type}
                   </h5>
 
-                  <p className="text-neutral-700 text-[14px] font-normal">
-                    {item?.desc}
-                  </p>
+                  <div className="w-full min-h-[80px]">
+                    <p className="text-neutral-700 text-[14px] font-normal">
+                      {item?.deskripsi}
+                    </p>
+                  </div>
 
                   <div className="h-0.5 w-full border border-neutral-700 border-opacity-30"></div>
                 </div>
@@ -94,8 +95,7 @@ export default function MobileTravelCarRentScreen({
                           item?.id.toString()
                         )
                       }
-                      className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]"
-                    >
+                      className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
                       Rental Mobil Sekarang
                     </Button>
                   </Link>

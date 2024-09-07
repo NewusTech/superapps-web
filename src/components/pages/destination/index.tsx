@@ -68,27 +68,24 @@ export default function DestinationScreen(props: DetinationScreenProps) {
           <div className="mt-auto">
             <ButtonCustom
               className="w-full hidden md:block"
-              onClick={() => setOpenModal((prev) => !prev)}
-            >
+              onClick={() => setOpenModal((prev) => !prev)}>
               Lihat Selengkapnya
             </ButtonCustom>
-            <ButtonCustom
-              className="w-full block md:hidden"
-            >
+            <ButtonCustom className="w-full block md:hidden">
               Lihat Selengkapnya
             </ButtonCustom>
           </div>
         </div>
       </div>
       <AlertDialog open={openModal} onOpenChange={setOpenModal}>
-        <AlertDialogContent className="w-8/12 p-0">
+        <AlertDialogContent className="w-10/12 p-0">
           <div className="w-full flex flex-row">
             <div className="w-full h-full">
               <Image
                 src={item?.image_url}
                 alt={item?.slug}
-                width={600}
-                height={600}
+                width={200}
+                height={200}
                 className="w-full h-full object-cover rounded-s-lg"
               />
             </div>
