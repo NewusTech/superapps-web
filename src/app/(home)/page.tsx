@@ -59,6 +59,7 @@ import {
 } from "@/services/api";
 import { useTravelbookingPayload } from "@/store/useTravelStore";
 import { getAllWisata, wisataProps } from "@/services/wisata/api";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   const now = new Date();
@@ -70,7 +71,8 @@ export default function Home() {
   const [travelCar, setTravelCar] = useState<TravelCarInterface[]>();
   const [wisata, setWisata] = useState<wisataProps[]>();
   const [travelRutes, setTravelRutes] = useState<RouteInterface[]>([]);
-  const [filterTravelRutes, setFilterTravelRutes] = useState<string>("lampunng");
+  const [filterTravelRutes, setFilterTravelRutes] =
+    useState<string>("Lampunng");
 
   const [pointsJempuput, setPointsJempuut] = useState<TitikJemputInterface[]>(
     []
@@ -78,6 +80,11 @@ export default function Home() {
   const [pointsAntar, setPointsAntar] = useState<TitikJemputInterface[]>([]);
 
   const bookingPayload = useTravelbookingPayload();
+
+  // Menghilangkan duplikat berdasarkan 'kota_asal'
+  const uniqueTravelRoutes = Array.from(
+    new Map(travelRutes.map((item) => [item.kota_asal, item])).values()
+  );
 
   const fetchAllTravelCars = async () => {
     try {
@@ -101,6 +108,7 @@ export default function Home() {
     try {
       const response = await getAllRute();
       setTravelRutes(response.data);
+      setFilterTravelRutes(response.data[0].kota_asal)
     } catch (error) {
       console.log(error);
     }
@@ -139,23 +147,23 @@ export default function Home() {
       setPointsAntar([]);
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchAllTravelCars();
     fetchAllBranches();
-    getWisata()
-    getRute()
+    getWisata();
+    getRute();
   }, []);
 
   useEffect(() => {
     fetchTitikJemput();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingPayload?.from]);
 
   useEffect(() => {
     fetchTitikAntar();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingPayload?.to]);
 
   const startDateFormatted = startDate
@@ -285,13 +293,13 @@ export default function Home() {
         </div>
 
         <div className="hidden md:grid md:grid-cols-2 gap-5 px-16">
-          {travelCar?.slice(0,2).map((item, i: number) => {
+          {travelCar?.slice(0, 2).map((item, i: number) => {
             return <TravelCarScreen key={item.id} item={item} />;
           })}
         </div>
 
         <div className="md:hidden grid grid-cols-1 gap-5">
-          <MobileTravelCarScreen travelCars={travelCar||[]} />
+          <MobileTravelCarScreen travelCars={travelCar || []} />
         </div>
       </div>
 
@@ -348,16 +356,16 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16 overflow-x-scroll md:overflow-hidden">
-          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
-            Bandar Lampung
-          </Button>
-          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
-            Palembang
-          </Button>
-          <Button className="bg-neutral-50 border border-neutral-700 py-4 md:py-6">
-            Jakarta
-          </Button>
+        <div className="flex flex-row w-full md:mt-4 gap-x-2 md:gap-x-8 px-8 md:px-16 overflow-x-auto">
+          {uniqueTravelRoutes.map((item) => (
+            <Button
+              key={item.id}
+              className={cn("bg-neutral-50 border border-neutral-700 py-4 md:py-6",filterTravelRutes===item.kota_asal?"bg-primary-700 text-white border-primary-700":"")}
+              onClick={()=>setFilterTravelRutes(item.kota_asal)}
+            >
+              {item.kota_asal}
+            </Button>
+          ))}
         </div>
 
         {/* <div className="hidden md:grid md:grid-cols-3 mt-6 gap-5 px-16">
@@ -366,7 +374,7 @@ export default function Home() {
           })}
         </div> */}
         <div className="grid grid-cols-1 md:mt-6 gap-5 pl-8 md:px-16">
-          <MobileTravelRoute travelRutes={travelRutes} />
+          <MobileTravelRoute travelRutes={travelRutes.filter((item)=>item.kota_asal===filterTravelRutes)} />
         </div>
       </div>
 
@@ -403,7 +411,7 @@ export default function Home() {
         </div>
 
         <div className="md:hidden grid grid-cols-1 md:mt-6 gap-5 pl-8 md:px-16">
-          <MobileDestinationScreen destinations={wisata||[]}/>
+          <MobileDestinationScreen destinations={wisata || []} />
         </div>
 
         <div className="hidden w-full md:flex md:flex-row self-center justify-center">

@@ -17,7 +17,7 @@ export default function TravelCarScreen(props: MobilTravelCarScreenProps) {
   // const icons = item?.fasilitas.split(",");
   return (
     <div className="w-full h-auto flex flex-col justify-center items-center gap-y-6 p-5 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
-      <div className="w-full h-full">
+      <div className="w-full h-[15rem]">
         <Image
           src={item.images.slice(0, 1)[0].image_url}
           alt="Travel Car"

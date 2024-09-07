@@ -14,19 +14,23 @@ import { Navigation, Pagination, Grid, Autoplay } from "swiper/modules";
 import Image from "next/image";
 import { RouteInterface } from "@/types/interface";
 import { formatCurrency } from "@/helpers";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export type MobileTravelRouteProps = {
   travelRutes: RouteInterface[];
 };
 
-export default function MobileTravelRoute({ travelRutes }: MobileTravelRouteProps) {
+export default function MobileTravelRoute({
+  travelRutes,
+}: MobileTravelRouteProps) {
   const swiperRef = useRef<any>(null);
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   return (
     <div className="w-full md:pl-6 flex flex-row items-center justify-center self-center gap-x-5">
       <Swiper
         modules={[Navigation, Pagination, Grid]}
-        slidesPerView={1}
+        slidesPerView={!isMobile ? 1.2 : 3.5}
         spaceBetween={20}
         navigation={{
           nextEl: ".swiper-button-next",
@@ -45,37 +49,52 @@ export default function MobileTravelRoute({ travelRutes }: MobileTravelRouteProp
       >
         {travelRutes.map((item, i: number) => {
           return (
-            <SwiperSlide key={i} className="max-w-[25rem] w-full mx-auto">
+            <SwiperSlide
+              key={i}
+              className="min-w-[7rem] md:min-w-[20rem] max-w-[25rem] w-[7rem]  md:w-full mx-auto"
+            >
               <div className="w-full flex flex-col justify-center items-center bg-neutral-50 shadow-md rounded-xl gap-y-4">
-                <div className="w-full h-full relative">
+                <div className="w-full h-[15rem] relative">
                   <Image
-                    src={item?.image_url || "/assets/images/neededs/destination-2.png"}
+                    src={
+                      item?.image_url ||
+                      "/assets/images/neededs/destination-2.png"
+                    }
                     alt={item?.kota_asal}
                     width={200}
                     height={200}
-                    className="w-full h-full rounded-xl"
+                    className="w-full h-full object-cover rounded-xl"
                   />
 
                   <div className="absolute top-0 bg-warning-700 rounded-tl-xl rounded-br-xl px-5 py-3">
-                    <p className="text-neutral-50 font-normal text-[14px]">Hot Promo</p>
+                    <p className="text-neutral-50 font-normal text-[14px]">
+                      Hot Promo
+                    </p>
                   </div>
                 </div>
 
                 <div className="w-full flex flex-col gap-y-5 px-3 md:px-6">
                   <div className="w-full flex flex-row justify-between">
-                    <p className="font-normal text-neutral-700 text-[17px]">{item?.kota_asal}</p>
+                    <p className="font-normal text-neutral-700 text-[17px]">
+                      {item?.kota_asal}
+                    </p>
 
                     <ArrowRight className="w-6 h-6 text-neutral-700" />
 
-                    <p className="font-normal text-neutral-700 text-[17px]">{item?.kota_tujuan}</p>
+                    <p className="font-normal text-neutral-700 text-[17px]">
+                      {item?.kota_tujuan}
+                    </p>
                   </div>
                   <p className="text-[14px] text-neutral-700 font-normal">
-                    {item?.deskripsi || "Nikmati perjalanan nyaman dari Bandar Lampung ke Jakarta dengan pemandangan indah sepanjang jalan."}
+                    {item?.deskripsi ||
+                      "Nikmati perjalanan nyaman dari Bandar Lampung ke Jakarta dengan pemandangan indah sepanjang jalan."}
                   </p>
                 </div>
 
                 <div className="w-full bg-primary-700 py-4 rounded-b-xl">
-                  <p className="text-center text-neutral-50 font-normal text-[18px]">{formatCurrency(item?.harga)}</p>
+                  <p className="text-center text-neutral-50 font-normal text-[18px]">
+                    {formatCurrency(item?.harga)}
+                  </p>
                 </div>
               </div>
             </SwiperSlide>

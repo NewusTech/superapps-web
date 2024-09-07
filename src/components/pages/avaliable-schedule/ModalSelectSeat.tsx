@@ -92,7 +92,7 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
 
   return (
     <Modal
-      className="w-full md:w-1/2"
+      className="max-h-full w-full md:w-1/2"
       visible={visible}
       setVisible={setVisible}>
       <div className="flex flex-col items-center justify-center gap-4">
@@ -134,7 +134,6 @@ export default function ModalSelectSeat(props: ModalSelectSeatProps) {
           onSeatPress={handleSelectSeat}
         />
         <ButtonCustom
-          className="h-1/2"
           onClick={handleAfterPilihKursi}
           disabled={selectedSeats.length !== seats}>
           Pilih Kursi
