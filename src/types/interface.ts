@@ -26,6 +26,12 @@ export interface NewPasswordInterface {
   email: string;
 }
 
+export interface ChangePasswordUserInterface {
+  password: string;
+  new_password: string;
+  confirm_password: string;
+}
+
 export interface ProfileImageUpdateInterface {
   image_url: string;
 }
@@ -195,7 +201,7 @@ export interface TravelCarInterface {
   bagasi: string;
   updated_at: string;
   images: {
-    image_url:string
+    image_url: string;
   }[];
 }
 
