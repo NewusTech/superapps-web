@@ -201,166 +201,162 @@ export default function HamburgerMenu() {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-56 bg-white"
-            key={token || "no-token"}
-          >
+            key={token || "no-token"}>
             {!token && (
               <>
                 <DropdownMenuLabel>Auth</DropdownMenuLabel>
                 <DropdownMenuItem asChild>
-                  <AlertDialog open={loginModal} onOpenChange={setLoginModal}>
-                    <AlertDialogTrigger className="text-sm pl-2">
-                      Masuk
-                    </AlertDialogTrigger>
+                  <>
+                    <AlertDialog open={loginModal} onOpenChange={setLoginModal}>
+                      <AlertDialogTrigger className="text-sm pl-2">
+                        Masuk
+                      </AlertDialogTrigger>
 
-                    <AlertDialogContent className="bg-white w-[80%] md:w-4/12 px-5 py-5 gap-y-5 overflow-hidden rounded-xl">
-                      {/* <div className="w-full flex flex-col py-3"> */}
-                      <div className="w-full flex flex-row justify-end items-center">
-                        <AlertDialogFooter className="border-none h-0 outline-none">
-                          <AlertDialogCancel className="border-none h-0 outline-none">
-                            <X className="w-6 h-6" />
-                          </AlertDialogCancel>
-                        </AlertDialogFooter>
-                      </div>
+                      <AlertDialogContent className="bg-white w-11/12 md:w-4/12 px-5 py-5 gap-y-5 overflow-hidden rounded-xl">
+                        <div className="w-full flex flex-row justify-end py-3 md:py-0 items-center">
+                          <AlertDialogFooter className="border-none h-0 outline-none">
+                            <AlertDialogCancel className="border-none h-0 outline-none">
+                              <X className="w-6 h-6" />
+                            </AlertDialogCancel>
+                          </AlertDialogFooter>
+                        </div>
 
-                      <AlertDialogTitle className="text-center border-b border-grey-100">
-                        <h3 className="font-semibold text-[22px] text-neutral-700 pb-2">
-                          Masuk akun Rama Tranz
-                        </h3>
-                      </AlertDialogTitle>
-                      {/* </div> */}
+                        <AlertDialogTitle className="text-center border-b border-grey-100">
+                          <p className="font-semibold text-[22px] text-neutral-700 pb-2">
+                            Masuk akun Rama Tranz
+                          </p>
+                        </AlertDialogTitle>
 
-                      <div className="w-full flex flex-col">
-                        <form
-                          onSubmit={handleSubmitLogin}
-                          className="w-full flex flex-col gap-y-3"
-                        >
-                          <div className="w-full flex flex-col gap-y-5">
-                            <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
-                              <Label
-                                htmlFor="name"
-                                className="focus-within:text-primary-700"
-                              >
-                                Nama Lengkap
-                              </Label>
+                        <div className="w-full flex flex-col">
+                          <form
+                            onSubmit={handleSubmitLogin}
+                            className="w-full flex flex-col gap-y-3">
+                            <div className="w-full flex flex-col gap-y-5">
+                              <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
+                                <Label
+                                  htmlFor="name"
+                                  className="focus-within:text-primary-700">
+                                  Nama Lengkap
+                                </Label>
 
-                              <Input
-                                id="email"
-                                name="email"
-                                value={formLogin.email}
-                                onChange={(
-                                  e: React.ChangeEvent<HTMLInputElement>
-                                ) =>
-                                  setFormLogin({
-                                    ...formLogin,
-                                    email: e.target.value,
-                                  })
-                                }
-                                type="email"
-                                className="w-full focus-visible:text-neutral-700 focus-visible:border focus-visible:border-primary-700"
-                                placeholder="Masukkan Email Anda"
-                              />
-                            </div>
-                            {hasSubmitted && errors?.email?._errors && (
-                              <div className="text-error-700 text-[12px] md:text-[14px]">
-                                {errors.email._errors[0]}
-                              </div>
-                            )}
-
-                            <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
-                              <Label
-                                htmlFor="password"
-                                className="focus-within:text-primary-700"
-                              >
-                                Kata Sandi
-                              </Label>
-
-                              <div className="focus-within:border focus-within:border-primary-700 flex items-center mt-1 justify-between rounded-lg bg-transparent text-[14px] w-full h-[40px] font-normal border border-grey-50 placeholder:text-[14px] placeholder:text-neutral-700">
                                 <Input
-                                  id="password"
-                                  name="password"
-                                  value={formLogin.password}
+                                  id="email"
+                                  name="email"
+                                  value={formLogin.email}
                                   onChange={(
                                     e: React.ChangeEvent<HTMLInputElement>
                                   ) =>
                                     setFormLogin({
                                       ...formLogin,
-                                      password: e.target.value,
+                                      email: e.target.value,
                                     })
                                   }
-                                  type={!seen ? "text" : "password"}
-                                  className="w-full focus-visible:text-neutral-700 border-none outline-none bg-transparent"
-                                  placeholder="Masukkan Kata Sandi"
+                                  type="email"
+                                  className="w-full focus-visible:text-neutral-700 focus-visible:border focus-visible:border-primary-700"
+                                  placeholder="Masukkan Email Anda"
                                 />
+                              </div>
+                              {hasSubmitted && errors?.email?._errors && (
+                                <div className="text-error-700 text-[12px] md:text-[14px]">
+                                  {errors.email._errors[0]}
+                                </div>
+                              )}
 
-                                <div
-                                  onClick={() => setSeen(!seen)}
-                                  className="p-2 cursor-pointer"
-                                >
-                                  {seen ? (
-                                    <EyeOff className="text-neutral-400 w-[20px] h-[20px]" />
-                                  ) : (
-                                    <Eye className="text-neutral-400 w-[20px] h-[20px]" />
-                                  )}
+                              <div className="w-full focus-within:text-primary-700 flex flex-col gap-y-2">
+                                <Label
+                                  htmlFor="password"
+                                  className="focus-within:text-primary-700">
+                                  Kata Sandi
+                                </Label>
+
+                                <div className="focus-within:border focus-within:border-primary-700 flex items-center mt-1 justify-between rounded-lg bg-transparent text-[14px] w-full h-[40px] font-normal border border-grey-50 placeholder:text-[14px] placeholder:text-neutral-700">
+                                  <Input
+                                    id="password"
+                                    name="password"
+                                    value={formLogin.password}
+                                    onChange={(
+                                      e: React.ChangeEvent<HTMLInputElement>
+                                    ) =>
+                                      setFormLogin({
+                                        ...formLogin,
+                                        password: e.target.value,
+                                      })
+                                    }
+                                    type={!seen ? "text" : "password"}
+                                    className="w-full focus-visible:text-neutral-700 border-none outline-none bg-transparent"
+                                    placeholder="Masukkan Kata Sandi"
+                                  />
+
+                                  <div
+                                    onClick={() => setSeen(!seen)}
+                                    className="p-2 cursor-pointer">
+                                    {seen ? (
+                                      <EyeOff className="text-neutral-400 w-[20px] h-[20px]" />
+                                    ) : (
+                                      <Eye className="text-neutral-400 w-[20px] h-[20px]" />
+                                    )}
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            {hasSubmitted && errors?.password?._errors && (
-                              <div className="text-error-700 text-[12px] md:text-[14px]">
-                                {errors.password._errors[0]}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="w-full flex flex-col gap-y-6">
-                            <p className="text-end text-primary-700 ">
-                              Lupa Kata Sandi
-                            </p>
-
-                            <div className="w-full flex flex-row">
-                              <Button
-                                type="submit"
-                                disabled={firstLoading ? true : false}
-                                className="w-full bg-primary-700 text-neutral-50 text-[18px] py-6"
-                              >
-                                {firstLoading ? (
-                                  <Loader className="animate-spin" />
-                                ) : (
-                                  "Masuk"
-                                )}
-                              </Button>
+                              {hasSubmitted && errors?.password?._errors && (
+                                <div className="text-error-700 text-[12px] md:text-[14px]">
+                                  {errors.password._errors[0]}
+                                </div>
+                              )}
                             </div>
 
-                            <div className="w-full flex flex-row items-center gap-x-1">
-                              <div className="w-full h-0.5 bg-neutral-400"></div>
+                            <div className="w-full flex flex-col gap-y-6">
+                              <Link
+                                href={"/forgot-password"}
+                                className="text-end hover:underline hover:text-primary-600 text-primary-700 ">
+                                Lupa Kata Sandi
+                              </Link>
 
-                              <div className="w-full">
-                                <p className="text-neutral-400 text-center text-[12px]">
-                                  Atau masuk dengan
-                                </p>
+                              <div className="w-full flex flex-row">
+                                <Button
+                                  type="submit"
+                                  disabled={firstLoading ? true : false}
+                                  className="w-full bg-primary-700 text-neutral-50 text-[18px] py-6">
+                                  {firstLoading ? (
+                                    <Loader className="animate-spin" />
+                                  ) : (
+                                    "Masuk"
+                                  )}
+                                </Button>
                               </div>
 
-                              <div className="w-full h-0.5 bg-neutral-400"></div>
-                            </div>
-                          </div>
-                        </form>
-                      </div>
+                              <div className="w-full flex flex-row items-center gap-x-1">
+                                <div className="w-full h-0.5 bg-neutral-400"></div>
 
-                      <div className="w-full flex flex-col gap-y-4">
-                        <div className="w-full flex flex-row gap-x-3 justify-center">
-                          {followes?.map((item: any, i: number) => {
-                            return <FollowFooter key={i} item={item} />;
-                          })}
+                                <div className="w-full">
+                                  <p className="text-neutral-400 text-center text-[12px]">
+                                    Atau masuk dengan
+                                  </p>
+                                </div>
+
+                                <div className="w-full h-0.5 bg-neutral-400"></div>
+                              </div>
+                            </div>
+                          </form>
                         </div>
 
-                        <p className="text-neutral-700 text-center">
-                          Kamu belum punya akun?{" "}
-                          <Link href={"/register"} className="text-primary-700">
-                            Daftar
-                          </Link>
-                        </p>
-                      </div>
-                    </AlertDialogContent>
-                  </AlertDialog>
+                        <div className="w-full flex flex-col gap-y-4">
+                          <div className="w-full flex flex-row gap-x-3 justify-center">
+                            {followes?.map((item: any, i: number) => {
+                              return <FollowFooter key={i} item={item} />;
+                            })}
+                          </div>
+
+                          <div className="text-neutral-700 flex flex-row gap-x-2 text-center">
+                            Kamu belum punya akun?
+                            <Link href="/register" className="text-primary-700">
+                              Daftar
+                            </Link>
+                          </div>
+                        </div>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleRegister}>
                   Register

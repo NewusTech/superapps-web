@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import AboutUsImageCard from "@/components/elements/aboutUs/cardImages";
 import AboutUsNumberCard from "@/components/elements/aboutUs/cardNumbers";
@@ -14,9 +14,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Grid, Autoplay } from "swiper/modules";
 
 export default function AboutUsScreen() {
-
   return (
-    <section className="w-full flex flex-col mt-[10rem] md:mt-[6rem] items-center mb-[350px]">
+    <section className="w-full flex flex-col mt-[10rem] md:mt-[6rem] items-center pb-36 md:mb-[350px]">
       <div className="w-full flex flex-col items-center justify-center bg-[#06597E] h-fit min-h-0 md:min-h-[25rem] gap-y-10 pt-20 pb:10 md:pb-40">
         <div className="w-full flex flex-col items-center justify-center gap-y-10">
           <h2 className="text-neutral-50 font-bold text-[26px] md:text-[32px] text-center">
@@ -75,8 +74,7 @@ export default function AboutUsScreen() {
               }}
               className="mySwiper"
               loop={true}
-              pagination={{ clickable: true }}
-            >
+              pagination={{ clickable: true }}>
               {AboutNumbers.map((item, i: number) => {
                 return (
                   <SwiperSlide key={i}>
@@ -96,7 +94,7 @@ export default function AboutUsScreen() {
         </h2>
 
         {/* letak if else condition */}
-        <RenderContent/>
+        <RenderContent />
       </div>
     </section>
   );

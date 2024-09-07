@@ -110,3 +110,22 @@ export const formSubmitNewPasswordSchema = z.object({
       "Konfirmasi kata sandi tidak boleh kosong dan harus sama dengan kata sandi!",
   }),
 });
+
+export const formSubmitChangePasswordSchema = z.object({
+  password: z
+    .string({
+      message: "Kata sandi tidak boleh kosong",
+    })
+    .min(6, { message: "Kata Sandi harus lebih dari 6 karakter!" })
+    .max(15, { message: "Kata Sandi tidak boleh lebih dari 15 karakter!" }),
+  new_password: z
+    .string({
+      message: "Kata sandi tidak boleh kosong",
+    })
+    .min(6, { message: "Kata Sandi harus lebih dari 6 karakter!" })
+    .max(15, { message: "Kata Sandi tidak boleh lebih dari 15 karakter!" }),
+  confirm_password: z.string({
+    message:
+      "Konfirmasi kata sandi tidak boleh kosong dan harus sama dengan kata sandi!",
+  }),
+});
