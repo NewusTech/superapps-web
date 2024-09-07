@@ -46,27 +46,13 @@ export default function PromotionScreen() {
                     alt="Carousel"
                     width={600}
                     height={600}
-                    className="w-full h-full object-cover "
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </SwiperSlide>
             );
           })}
         </Swiper>
-      </div>
-
-      <div className="w-full pr-16 flex flex-row justify-end mt-8">
-        <div className="flex flex-row w-full justify-end gap-x-16">
-          <ChevronLeft
-            onClick={() => swiperRef?.current?.swiper?.slidePrev()}
-            className="text-neutral-700 border border-outline_border-100 rounded-full swiper-button-prev w-10 h-10"
-          />
-
-          <ChevronRight
-            onClick={() => swiperRef.current?.swiper.slideNext()}
-            className="text-neutral-700 border border-outline_border-100 rounded-full swiper-button-next w-10 h-10"
-          />
-        </div>
       </div>
     </div>
   );

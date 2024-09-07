@@ -14,12 +14,13 @@ export default function TravelCarRentScreen({
   item: TravelCarInterface;
 }) {
   const icons = item?.fasilitas.split(",");
+  console.log(item, "ini item");
 
   return (
     <div className="w-full flex flex-col justify-center items-center gap-y-6 p-5 bg-neutral-50 rounded-xl shadow-md border border-grey-100">
       <div className="w-full h-full">
         <Image
-           src={item.images.slice(0, 1)[0].image_url}
+          src={item.images.slice(0, 1)[0].image_url}
           alt="Travel Car"
           width={200}
           height={200}
@@ -64,8 +65,7 @@ export default function TravelCarRentScreen({
             onClick={() =>
               localStorage.setItem("travel_car_id", item?.id.toString())
             }
-            className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]"
-          >
+            className="bg-primary-700 text-neutral-50 w-full py-6 text-[16px]">
             Rental Mobil Sekarang
           </Button>
         </Link>

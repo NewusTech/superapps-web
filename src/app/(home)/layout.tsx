@@ -77,6 +77,7 @@ export default function HomeLayout({
     "/profile/order-histories-hotel",
     "profile/order-histories-paket",
     "/rent/form-rent",
+    "/reset-password",
   ];
 
   const isProfile = () => {

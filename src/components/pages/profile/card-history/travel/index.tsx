@@ -16,6 +16,8 @@ export default function OrderHistoryTravelCard({
 }: {
   data: HistoryTravelInterface;
 }) {
+  console.log(data, "ini data");
+
   const isMobile = useMediaQuery("(max-width: 768px)");
   const router = useRouter();
 
@@ -30,6 +32,12 @@ export default function OrderHistoryTravelCard({
     status = (
       <div className="w-full md:w-4/12 rounded-lg flex items-center justify-center py-3 bg-neutral-300">
         <p className="text-neutral-500 text-center">Menunggu</p>
+      </div>
+    );
+  } else if (data?.status === "Menunggu Verifikasi") {
+    status = (
+      <div className="w-full md:w-4/12 rounded-lg flex items-center justify-center py-3 bg-thirtiary-300">
+        <p className="text-thirtiary-600 text-center">Menunggu Verifikasi</p>
       </div>
     );
   } else if (data?.status === "Gagal") {

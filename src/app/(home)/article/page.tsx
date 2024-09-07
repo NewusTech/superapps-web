@@ -51,7 +51,7 @@ export default function ArticlePage() {
           Artikel Dari Rama Tranz
         </h2>
 
-        <div className="flex flex-col md:grid grid-cols-3 gap-x-4 gap-y-10 px-10 md:px-20">
+        <div className="flex flex-col md:grid grid-cols-3 gap-x-4 gap-y-10 px-5 md:px-20">
           {articles &&
             displayedArticles?.map((item: any, i: number) => {
               return <ArticleScreen key={i} item={item} />;

@@ -45,14 +45,12 @@ export default function MobileTravelRoute({
           640: {
             slidesPerView: 1.2,
           },
-        }}
-      >
+        }}>
         {travelRutes.map((item, i: number) => {
           return (
             <SwiperSlide
               key={i}
-              className="min-w-[7rem] md:min-w-[20rem] max-w-[25rem] w-[7rem]  md:w-full mx-auto"
-            >
+              className="min-w-[18rem] md:min-w-[20rem] max-w-[25rem]  md:w-full mx-auto">
               <div className="w-full flex flex-col justify-center items-center bg-neutral-50 shadow-md rounded-xl gap-y-4">
                 <div className="w-full h-[15rem] relative">
                   <Image
@@ -63,7 +61,7 @@ export default function MobileTravelRoute({
                     alt={item?.kota_asal}
                     width={200}
                     height={200}
-                    className="w-full h-full object-cover rounded-xl"
+                    className="w-full h-full object-cover rounded-t-xl"
                   />
 
                   <div className="absolute top-0 bg-warning-700 rounded-tl-xl rounded-br-xl px-5 py-3">
