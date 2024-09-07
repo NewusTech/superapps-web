@@ -191,7 +191,7 @@ export default function DetailTravel() {
                       alt="donat"
                       className="z-[1]"
                     />
-                    <div className="h-[14rem] border-r border-primary-700 border-dashed" />
+                    <div className="h-[8rem] md:h-[12rem] border-r border-primary-700 border-dashed" />
                     <Image
                       src={`/assets/icons/neededs/icon_donat_active.svg`}
                       height={18}
