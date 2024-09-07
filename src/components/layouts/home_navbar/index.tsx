@@ -74,6 +74,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
     "/hotel/payment-status",
     "/travel/detail-travel",
     "/profile",
+    "/forgot-password",
   ];
 
   const navWhite = () => {
@@ -248,7 +249,7 @@ export default function HomeNavigationBar({ isScrolledPast }: any) {
                     onOpenChange={setIsLoginPopupOpen}>
                     <AlertDialogTrigger>
                       <div
-                        className={`hover:bg-primary-600 border border-primary-700 text-primary-700 px-8 py-4 w-full rounded-md`}>
+                        className={`hover:bg-primary-600 border border-primary-700 text-primary-700 px-8 py-[6px] w-full rounded-md`}>
                         Masuk
                       </div>
                     </AlertDialogTrigger>

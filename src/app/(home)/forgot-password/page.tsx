@@ -53,8 +53,6 @@ export default function ForgotPasswordScreen() {
       try {
         const response = await SubmitEmailForgotPassword(form);
 
-        console.log(response, "ini res");
-
         if (response.success === true) {
           setForm({
             email: "",
@@ -88,7 +86,7 @@ export default function ForgotPasswordScreen() {
     <section className="w-full flex flex-col items-center bg-white h-full pt-32 pb-96">
       <div className="w-10/12 flex flex-col gap-y-5">
         <div className="w-full flex flex-col justify-center items-center">
-          <h2 className="font-semibold text-neutral-700 text-[26px]">
+          <h2 className="font-semibold text-center text-neutral-700 text-[26px]">
             Selamat Datang di Website Rama Tranz
           </h2>
           <p className="text-center">

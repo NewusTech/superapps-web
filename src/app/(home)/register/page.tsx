@@ -187,10 +187,10 @@ export default function RegisterScreen() {
     formRegister.password === formRegister.confirmPassword;
 
   return (
-    <section className="w-full flex flex-col items-center bg-white h-full pt-32 pb-96">
+    <section className="w-full flex flex-col items-center bg-white h-full pt-32 pb-36 md:pb-96">
       <div className="w-10/12 flex flex-col gap-y-5">
         <div className="w-full flex flex-col justify-center items-center">
-          <h2 className="font-semibold text-neutral-700 text-[26px]">
+          <h2 className="font-semibold md:text-start text-center text-neutral-700 text-[26px]">
             Selamat Datang di Website Rama Tranz
           </h2>
           <p className="text-center">
@@ -434,9 +434,9 @@ export default function RegisterScreen() {
                     <p className={`text-primary-700`}>Masuk</p>
                   </AlertDialogTrigger>
 
-                  <AlertDialogContent className="bg-white w-4/12 px-5 py-5 gap-y-5">
+                  <AlertDialogContent className="bg-white w-10/12 rounded-lg md:w-4/12 px-5 py-5 gap-y-5">
                     {/* <div className="w-full flex flex-col py-3"> */}
-                    <div className="w-full flex flex-row justify-end items-center">
+                    <div className="w-full flex flex-row justify-end py-3 md:py-0 items-center">
                       <AlertDialogFooter className="border-none h-0 outline-none">
                         <AlertDialogCancel className="border-none h-0 outline-none">
                           <X className="w-6 h-6" />
@@ -531,7 +531,7 @@ export default function RegisterScreen() {
 
                         <div className="w-full flex flex-col gap-y-6">
                           <Link
-                            href={"/forgot-password"}
+                            href={`/forgot-password`}
                             className="text-end hover:underline hover:text-primary-600 text-primary-700 ">
                             Lupa Kata Sandi
                           </Link>

@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import useSWR from "swr";
 import { fetcher } from "@/constants/fetcher";
 import {
+  ChangePasswordUserInterface,
   EmailForgotPasswordInterface,
   LoginUserInterface,
   NewPasswordInterface,
@@ -562,6 +563,29 @@ export const getOrderTravelDetail = async (kode_pesanan: string) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
+      cache: "no-store",
+    }
+  );
+
+  return await response.json();
+};
+
+// patch change password
+
+export const patchPasswordUserChange = async (
+  data: ChangePasswordUserInterface
+) => {
+  const token = Cookies.get("Authorization");
+
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/change-password`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
       cache: "no-store",
     }
   );
